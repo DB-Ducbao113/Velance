@@ -1,0 +1,13 @@
+{
+  "name": "velance-perf",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Vercel-Speed-Insights-style lab harness: cold-load Web Vitals + frame-cadence P50/P95/P99.",
+  "scripts": {
+    "perf": "node speed_insights.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

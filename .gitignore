@@ -1,0 +1,8 @@
+# Source-only assets (kept locally, not published)
+assets/models_original/
+assets/images/**/*.png
+
+# Dependencies & scratch
+node_modules/
+*.log
+.DS_Store

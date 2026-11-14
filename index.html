@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1014">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230b1014'/><path d='M16 20h8l10 17 10-17h8L37 44h-8z' fill='%23e8cd9f'/></svg>">
+  <meta name="description" content="VÉLANCE — The Art of Performance. A luxury cinematic hypercar showroom: real 3D machines in a private motor gallery.">
+  <title>VÉLANCE — The Art of Performance · Luxury Cinematic Hypercar Showroom</title>
+  <link rel="stylesheet" href="./styles/main.css?v=10.3-hall">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="./assets/environment/private_garage_1920x1080.webp" fetchpriority="high">
+  <!-- Vendored official bundles: the experience runs fully offline. -->
+  <script defer src="./vendor/motion/gsap.min.js"></script>
+  <script defer src="./vendor/motion/ScrollTrigger.min.js"></script>
+  <script defer src="./vendor/motion/lenis.min.js"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+</head>
+<body data-build="NOIR_GARAGE_V8_MOTION_INTEGRATED">
+  <div class="grain" aria-hidden="true"></div>
+  <!-- Luxurious entrance gate: shown before the garage; ENTER reveals the showroom. -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="VÉLANCE entrance">
+    <div class="gate-bg" aria-hidden="true"><img src="./assets/environment/private_garage_1920x1080.webp" alt=""></div>
+    <div class="gate-veil" aria-hidden="true"></div>
+    <div class="gate-sweep" aria-hidden="true"></div>
+    <div class="gate-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="gate-inner">
+      <span class="eyebrow gate-eyebrow">Private Motor Gallery · Est. MMXXVI</span>
+      <h1 class="gate-logo wordmark">VÉLANCE</h1>
+      <div class="gate-tagline"><i></i><span>The Art of Performance</span><i></i></div>
+      <p class="gate-sub">Eight machines. Sixteen bays. One private gallery.</p>
+      <p class="gate-marques">Bugatti · Koenigsegg · Pagani · Ferrari · McLaren · Mercedes-AMG</p>
+      <button type="button" id="gateEnter" class="gate-cta">Enter the gallery <span aria-hidden="true">↗</span></button>
+      <span class="gate-meta">Level 01 / 16 bays · Native GLB</span>
+    </div>
+    <div class="gate-foot" aria-hidden="true"><span>Vélance</span><i></i><span>The Art of Performance</span></div>
+  </div>
+  <header class="topbar" id="topbar">
+    <a class="identity" href="#showroom" id="brandLink" aria-label="Return to showroom"><strong class="wordmark">VÉLANCE</strong><span>THE ART OF PERFORMANCE</span></a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#review" id="navReview" hidden>THE EXPERIENCE</a>
+      <a href="#board" id="navBoard" hidden>VISUAL ARCHIVE</a>
+    </nav>
+    <span class="edition">PRIVATE MOTOR GALLERY / MMXXVI</span>
+  </header>
+  <main>
+    <!-- A: REAL GLB MODELS INSIDE INDIVIDUAL PARKING BAYS -->
+    <section id="showroom" class="showroom" aria-label="Private luxury 3D vehicle garage">
+      <!-- 3D architectural environment, rendered offline from modeled garage geometry.
+           This is a backdrop only; parked cars are native interactive GLB models. -->
+      <div class="garage garage-architecture" aria-hidden="true">
+        <picture class="garage-environment">
+          <source media="(max-width:620px)" srcset="./assets/environment/private_garage_1080x1350.webp">
+          <img src="./assets/environment/private_garage_1920x1080.webp" alt="" fetchpriority="high" draggable="false">
+        </picture>
+        <div class="garage-environment-lights"></div>
+        <div class="garage-entry-shadow"></div>
+      </div>
+      <div class="room-topline"><span><i class="indicator"></i> A LUXURY CINEMATIC HYPERCAR SHOWROOM</span><span>EST. MMXXVI — NO. 001</span></div>
+      <div class="hero-copy" id="heroCopy"><span class="eyebrow">VÉLANCE · PRIVATE MOTOR GALLERY</span><h1>The art of<br> <em>performance.</em></h1><p>Eight extraordinary machines. One private gallery.</p></div>
+      <div class="garage-bay-rail" id="bayRail" aria-hidden="true"></div>
+      <div class="garage-entrance-marker" aria-hidden="true"><span>PRIVATE GALLERY</span><i></i><span>LEVEL 01 / 16 BAYS</span></div>
+      <div class="car-stage" id="carStage" aria-label="Drag horizontally to browse real 3D cars parked in numbered bays">
+        <div class="car-lineup" id="carLineup"></div>
+        <div class="stage-readout" id="stageReadout" role="status" aria-live="polite">PREPARING THE GALLERY</div>
+      </div>
+      <div class="garage-loader" id="garageLoader" aria-hidden="true">
+        <span class="eyebrow">VÉLANCE</span>
+        <strong>Opening the gallery</strong>
+        <div class="loader-track"><i id="loaderBar"></i></div>
+        <span class="loader-count" id="loaderCount">00 / 08 MACHINES</span>
+      </div>
+      <div class="home-controls" id="homeControls">
+        <div class="home-index"><span class="eyebrow">THE PRIVATE COLLECTION</span><strong>THE PRIVATE <em>GALLERY</em></strong></div>
+        <div class="home-center">
+          <div class="home-viewtools">
+            <button type="button" id="rowBtn" class="viewtool" aria-pressed="false" aria-label="Switch between the front and rear row of bays">REAR ROW <span>⇅</span></button>
+            <button type="button" id="overviewBtn" class="viewtool" aria-pressed="false" aria-label="View the whole gallery from above">FULL GALLERY <span>⛶</span></button>
+          </div>
+          <div class="home-navigation"><button type="button" id="prevCar" aria-label="Previous vehicle">←</button><button type="button" id="selectCar" class="primary-button">VIEW THIS MACHINE <span>↗</span></button><button type="button" id="nextCar" aria-label="Next vehicle">→</button></div>
+        </div>
+        <div class="home-page"><span id="activeCount">01</span><i></i><span id="totalCount">16</span></div>
+      </div>
+      <div class="interaction-hint" id="interactionHint">SWIPE THE GALLERY TO EXPLORE <span>↔</span></div>
+
+      <!-- B: THE CHOSEN GLB ONLY, TO THE LEFT; SPECS ONLY, TO THE RIGHT -->
+      <section class="selected-view" id="selectedView" aria-label="Selected machine details" aria-hidden="true">
+        <div class="selected-left">
+          <div class="selected-kicker"><span class="eyebrow">THE PRIVATE GALLERY</span><span id="selectedBay">BAY 01 / 08</span></div>
+          <div class="selected-floor" aria-hidden="true"><div class="selected-parking-outline"></div></div>
+          <div id="selectedModelHost" class="selected-model-host" aria-label="Interactive 3D vehicle. Drag to orbit; scrolling moves the page."></div>
+          <p class="selected-model-status" id="selectedModelStatus" role="status">LOAD REAL 3D MODEL</p>
+          <div class="selected-zoom-controls" aria-label="3D view controls">
+            <button type="button" id="zoomReset" class="zoom-reset" aria-label="Reset view">FIT</button>
+          </div>
+          <span class="model-drag-hint">DRAG TO ORBIT</span>
+        </div>
+        <div class="selected-right">
+          <div class="selected-headline"><span class="eyebrow" id="selectedMaker">MCLAREN</span><h2 id="selectedName">P1</h2><p id="selectedTag">THE ULTIMATE SERIES</p></div>
+          <div class="selected-metadata"><span id="selectedEdition">2013</span><span id="selectedAsset">ORIGINAL GLB</span></div>
+          <div class="selected-specs" id="selectedSpecs"></div>
+          <div class="paint-row" id="paintRow" aria-label="Body finish">
+            <span class="eyebrow">BODY FINISH</span>
+            <div class="paint-swatches" id="paintSwatches" role="group" aria-label="Choose body colour"></div>
+          </div>
+          <div class="selected-actions"><button type="button" id="discoverImages" class="primary-button">DISCOVER EVERY ANGLE <span>↓</span></button><button type="button" id="backToGarage" class="outline-button">← BACK TO GALLERY</button></div>
+        </div>
+      </section>
+      <div class="garage-bottomline">VÉLANCE <span>—</span> THE ART OF PERFORMANCE</div>
+    </section>
+
+    <!-- C: FIVE DISTINCT STATIC ALPHA IMAGES + GSAP/LENIS MOTION; NO GLB, NO IMAGE ZOOM. -->
+    <div id="review" class="review-collection" hidden>
+      <section class="review-intro" aria-label="Visual study introduction"><span class="eyebrow">THE EXPERIENCE / 01—05</span><h2>Five perspectives.<br><em>One extraordinary machine.</em></h2><p>The following compositions use high-resolution transparent images, not interactive models.</p></section>
+      <div id="reviewSections"></div>
+      <!-- D: FINAL IMAGE BOARD ONLY; NO MODEL CANVAS -->
+      <section id="board" class="final-board" aria-labelledby="boardTitle">
+        <div class="board-topline"><span class="eyebrow">06 / THE VISUAL ARCHIVE</span><span id="boardEdition">PRIVATE COLLECTION / 2026</span></div>
+        <div class="board-heading"><div><span class="eyebrow" id="boardMaker">MCLAREN</span><h2 id="boardTitle">Five frames.<br><em>One icon.</em></h2></div><p>THE COMPLETE STUDY<br>FRONT / PROFILE / REAR / SIGNATURE</p></div>
+        <div class="board-grid" id="boardGrid" aria-label="Five static vehicle images"></div>
+        <div class="board-closing"><span>VÉLANCE — AN AUTOMOTIVE EDITORIAL</span><button type="button" id="boardBack" class="outline-button">← BACK TO SHOWROOM</button></div>
+      </section>
+    </div>
+  </main>
+  <div class="notice" id="notice" hidden role="status"><p id="noticeText"></p><button type="button" id="noticeDismiss" aria-label="Dismiss notification">×</button></div>
+  <script type="module" src="./src/ui/app.js?v=10.3-hall"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Copy only the 8 GLB files listed in MODEL_MANIFEST.json here. Aston Martin Valkyrie is intentionally excluded.
