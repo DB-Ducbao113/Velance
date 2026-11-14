@@ -588,9 +588,8 @@ body.gate-open{overflow:hidden}
 @media(max-width:840px){.paint-row{gap:12px;margin-top:14px;padding-top:12px}.paint-swatch{width:19px;height:19px}.paint-swatches{gap:8px}}
 @media(max-width:620px){.identity span{display:none}.selected-right{overflow-y:auto}.paint-row{margin-top:12px;padding-top:10px}.paint-row>.eyebrow{font-size:7px}}
 /* ---- luxury home control deck ---- */
-.home-center{gap:16px}
-.home-center::before{content:'';width:132px;height:1px;background:linear-gradient(90deg,transparent,rgba(230,207,170,.5),transparent)}
-.home-viewtools{gap:0;align-items:stretch}
+.home-center{gap:0}
+.home-viewtools{position:absolute;right:0;bottom:calc(100% + 12px);gap:0;align-items:stretch}
 .viewtool{background:transparent;border:0;border-bottom:1px solid rgba(230,207,170,.26);min-height:36px;padding:0 20px;color:#c9b291;font-size:10px;letter-spacing:.24em;box-shadow:none}
 .viewtool + .viewtool{border-left:1px solid rgba(230,207,170,.16)}
 .viewtool span{font-size:12px;color:#d9bd97}
@@ -606,3 +605,4 @@ body.gate-open{overflow:hidden}
 .home-navigation .primary-button::before{content:'';position:absolute;inset:5px;border:1px solid rgba(24,22,19,.3);pointer-events:none}
 .home-navigation .primary-button:hover{background:linear-gradient(180deg,#fbeed8,#e8cfae)}
 .home-navigation .primary-button span{font-size:13px}
+@media(max-width:620px){.home-viewtools{position:static;bottom:auto;width:100%;justify-content:center;order:-1}}
