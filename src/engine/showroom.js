@@ -216,7 +216,11 @@ export class GarageShowroom {
     this.drag = null; this.dragged = false; this.suppressUntil = 0;
     this.cars = new Map(); this.fades = new Map(); this.labels = []; this.placeholders = new Map();
     this.paintChoice = new Map();
-    this.queue = []; this.queued = new Set(); this.loading = false; this.inflight = null; this.streamStarted = false;
+    this.queue = []; this.queued = new Set(); this.loading = false;
+    // Downloads run in parallel (HTTP/2 streams) and are decoupled from the
+    // serialized GPU compile, so total wait is the slowest single GLB, not the sum.
+    this.buffers = new Map(); this.dlControllers = new Set();
+    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 4 : 8;
     this.loader = new GLTFLoader(); this.loader.setMeshoptDecoder(MeshoptDecoder);
     this.loadTimes = {}; this.t0 = performance.now(); this.firstFrameAt = null;
     this.flight = null; this.selected = null;
@@ -284,7 +288,8 @@ export class GarageShowroom {
     this.bindInput();
     this.resize();
     this.applyHomeCamera();
-    this.prioritize(this.focus);
+    this.enqueueAround(this.focus);
+    this.prefetchAll();
     await this.warmScene().catch(error => console.warn('[VÉLANCE] pipeline warm-up failed:', error));
     if (this.disposed) return;
     this.refreshShadow();
@@ -698,22 +703,43 @@ export class GarageShowroom {
   }
 
   /* ------------------------------------------------------------- loading */
-  /* Progressive: the focused bay loads first; the rest stream in one at a
-   * time with idle gaps so first paint and interaction never wait on 8 GLBs. */
+  /* Downloads run concurrently (HTTP/2 streams) into a buffer map while the
+   * GPU compile stays serialized but consumes already-parsed scenes. Total
+   * wait is the slowest single GLB plus the compile chain, never their sum. */
+  async acquireDL() { while (this.dlActive >= this.dlLimit) await new Promise(r => this.dlWaiters.push(r)); this.dlActive++; }
+  releaseDL() { this.dlActive--; (this.dlWaiters.shift() || (() => {}))(); }
+  prefetch(index) {
+    index %= this.vehicles.length;
+    if (this.disposed || this.cars.has(index) || this.buffers.has(index)) return;
+    const vehicle = this.vehicles[index];
+    const controller = new AbortController(); this.dlControllers.add(controller);
+    const task = (async () => {
+      await this.acquireDL();
+      try {
+        const url = new URL(`./assets/models/${encodeURIComponent(vehicle.file)}`, location.href);
+        const res = await fetch(url, { signal: controller.signal, cache: 'force-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const buffer = await res.arrayBuffer();
+        return await new Promise((ok, no) => this.loader.parse(buffer, new URL('./assets/models/', location.href).href, ok, no));
+      } finally { this.dlControllers.delete(controller); this.releaseDL(); }
+    })();
+    task.catch(() => {});
+    this.buffers.set(index, task);
+  }
+  prefetchAll() { for (let i = 0; i < this.vehicles.length; i++) this.prefetch(i); }
   prioritize(index) {
     index %= this.vehicles.length;
     if (this.cars.has(index) || this.disposed) return;
     this.queue = this.queue.filter(i => i !== index);
     this.queue.unshift(index); this.queued.add(index);
-    if (this.inflight && this.inflight.index !== index) this.inflight.controller.abort();
+    this.prefetch(index);
     this.runQueue();
   }
   sortQueue() { const col = this.focus % this.vehicles.length; this.queue.sort((a, b) => Math.abs(a - col) - Math.abs(b - col)); }
-  requeue(index) { if (!this.cars.has(index) && !this.queued.has(index)) { this.queue.push(index); this.queued.add(index); this.sortQueue(); } }
   enqueueAround(center) {
     center %= this.vehicles.length;
     const order = [...this.vehicles.keys()].sort((a, b) => Math.abs(a - center) - Math.abs(b - center));
-    for (const i of order) if (!this.cars.has(i) && !this.queued.has(i) && this.inflight?.index !== i) { this.queue.push(i); this.queued.add(i); }
+    for (const i of order) if (!this.cars.has(i) && !this.queued.has(i)) { this.queue.push(i); this.queued.add(i); }
     this.runQueue();
   }
   async runQueue() {
@@ -721,20 +747,15 @@ export class GarageShowroom {
     this.loading = true;
     try {
       while (this.queue.length) {
-        if (this.streamStarted) await new Promise(r => setTimeout(r, this.mobile ? 150 : 120));
-        if (this.disposed || !this.queue.length) return;
+        if (this.disposed) return;
         const index = this.queue.shift(); this.queued.delete(index);
         if (this.cars.has(index)) continue;
         const vehicle = this.vehicles[index];
-        const controller = new AbortController(); this.inflight = { index, controller };
         const started = performance.now();
         try {
-          const url = new URL(`./assets/models/${encodeURIComponent(vehicle.file)}`, location.href);
-          const res = await fetch(url, { signal: controller.signal, cache: 'force-cache' });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const buffer = await res.arrayBuffer();
-          if (controller.signal.aborted) { this.requeue(index); continue; }
-          const gltf = await new Promise((ok, no) => this.loader.parse(buffer, new URL('./assets/models/', location.href).href, ok, no));
+          this.prefetch(index);
+          const gltf = await this.buffers.get(index);
+          this.buffers.delete(index);
           if (this.disposed) return;
           const holder = normalise(gltf.scene, vehicle);
           holder.rotation.y += .3 + (index >= this.perRow ? Math.PI : 0) + (NOSE_BACK.has(vehicle.id) ? Math.PI : 0);
@@ -778,12 +799,10 @@ export class GarageShowroom {
           this.loadTimes[vehicle.id] = Math.round(performance.now() - started);
           this.labels[index].classList.add('is-loaded');
           this.onProgress(this.parked, this.vehicles.length, index);
-          if (this.parked === 1 && !this.streamStarted) { this.streamStarted = true; this.enqueueAround(this.focus); }
           if (this.parked === this.vehicles.length) this.onReady();
         } catch (err) {
-          if (err?.name === 'AbortError') this.requeue(index);
-          else { this.labels[index].classList.add('is-error'); this.onError(index, err.message || String(err)); }
-        } finally { if (this.inflight?.index === index) this.inflight = null; }
+          if (err?.name !== 'AbortError') { this.labels[index].classList.add('is-error'); this.onError(index, err.message || String(err)); }
+        }
       }
     } finally {
       this.loading = false;
@@ -1262,9 +1281,11 @@ export class GarageShowroom {
     const orbitActive = !!this.controls?.enabled && now - this.lastOrbitAt < 160;
     const interacting = !!this.drag?.moved || !!this.flight || orbitActive || settling || this.fades.size > 0;
     const idleInterval = this.mobile ? 1000 / 24 : 1000 / 30;
-    // Trickle one texture upload per idle frame so first reveal of a culled
+    // Trickle a few texture uploads per idle frame so first reveal of a culled
     // machine never pays a bulk GPU upload; gestures always preempt it.
-    if (!interacting && this.texQueue.length) this.renderer.initTexture?.(this.texQueue.shift());
+    if (!interacting && this.texQueue.length) {
+      for (let i = 0; i < 3 && this.texQueue.length; i++) this.renderer.initTexture?.(this.texQueue.shift());
+    }
     if (!interacting && now - this.lastDraw < idleInterval) return;
     const dt = Math.min(.05, (now - (this.lastNow || now)) / 1000) || .016;
     if (interacting && this.lastNow) {
@@ -1476,7 +1497,8 @@ export class GarageShowroom {
   }
   dispose() {
     this.disposed = true;
-    this.inflight?.controller.abort();
+    for (const c of this.dlControllers) c.abort();
+    this.dlControllers.clear();
     this.controls?.dispose();
     this.ktx2?.dispose();
     if (this.renderer.hasInitialized()) this.renderer.setAnimationLoop(null);
