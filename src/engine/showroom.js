@@ -220,7 +220,7 @@ export class GarageShowroom {
     // Downloads run in parallel (HTTP/2 streams) and are decoupled from the
     // serialized GPU compile, so total wait is the slowest single GLB, not the sum.
     this.buffers = new Map(); this.dlControllers = new Set();
-    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 4 : 8;
+    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 6 : 16;
     this.loader = new GLTFLoader(); this.loader.setMeshoptDecoder(MeshoptDecoder);
     this.loadTimes = {}; this.t0 = performance.now(); this.firstFrameAt = null;
     this.flight = null; this.selected = null;
@@ -288,8 +288,11 @@ export class GarageShowroom {
     this.bindInput();
     this.resize();
     this.applyHomeCamera();
+    // Focused bay gets the connection to itself first (fast first paint), then
+    // the remaining GLBs burst in parallel once its buffer is in hand.
+    this.prefetch(this.focus);
     this.enqueueAround(this.focus);
-    this.prefetchAll();
+    this.buffers.get(this.focus)?.finally(() => this.prefetchAll());
     await this.warmScene().catch(error => console.warn('[VÉLANCE] pipeline warm-up failed:', error));
     if (this.disposed) return;
     this.refreshShadow();
