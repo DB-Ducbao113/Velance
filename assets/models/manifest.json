@@ -1,0 +1,185 @@
+{
+  "version": 2,
+  "textureFormat": "webp",
+  "entries": [
+    {
+      "file": "2014_ferrari_laferrari.glb",
+      "bytes": 2051028,
+      "triangles": 111994,
+      "primitives": 19,
+      "materials": 19,
+      "textures": 32,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d"
+    },
+    {
+      "file": "2023_ferrari_sf90_xx_stradale.glb",
+      "bytes": 4776456,
+      "triangles": 259975,
+      "primitives": 29,
+      "materials": 27,
+      "textures": 31,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "3d1e1d3780cb8d4befe7baf9116a7905e760164942e1e323f61dd68caefc8d31"
+    },
+    {
+      "file": "2024_lamborghini_revuelto.glb",
+      "bytes": 5237772,
+      "triangles": 259965,
+      "primitives": 40,
+      "materials": 35,
+      "textures": 38,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "48af72c043acaa6290f10fe58f44eb83c542788cd82dcbbe001067940bc7659d"
+    },
+    {
+      "file": "2025_koenigsegg_jesko_attack_7376.glb",
+      "bytes": 5881252,
+      "triangles": 259912,
+      "primitives": 59,
+      "materials": 52,
+      "textures": 40,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "ee80b21670a36afa2b46c9a303a6a463a550b42a61806e17f1e58d72d2d2ae00"
+    },
+    {
+      "file": "aston_martin_valkyrie.glb",
+      "bytes": 6280716,
+      "triangles": 259992,
+      "primitives": 20,
+      "materials": 20,
+      "textures": 58,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "641b09176be6f9a1827885a686908a6e130ad7dc6dd62ee9d3f384938e22201b"
+    },
+    {
+      "file": "bugatti_tourbillon_2024.glb",
+      "bytes": 4570980,
+      "triangles": 259968,
+      "primitives": 28,
+      "materials": 28,
+      "textures": 35,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "7c235fcd8fa4530564381a50f21e397bb4c2248c92c27624a00511fa51c4f58e"
+    },
+    {
+      "file": "corvette_stingray.glb",
+      "bytes": 2207152,
+      "triangles": 269332,
+      "primitives": 16,
+      "materials": 16,
+      "textures": 2,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "2c2f6aab0ef79b470660e2b9bdac09a2750e227e171c6ee1938c02e12629fbe2"
+    },
+    {
+      "file": "lamborghini_aventador.glb",
+      "bytes": 7891484,
+      "triangles": 258277,
+      "primitives": 16,
+      "materials": 16,
+      "textures": 4,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "e22205261c7e3bafee8b3255272766caf562346a792799ca42c3ea8f5bd19440"
+    },
+    {
+      "file": "mclaren-765lt___with_windows__v2.glb",
+      "bytes": 7586188,
+      "triangles": 260568,
+      "primitives": 29,
+      "materials": 29,
+      "textures": 0,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "7de424589621d40c071daaf309c655b10245404b433f4a2531258e147701a87f"
+    },
+    {
+      "file": "mclaren_p1.glb",
+      "bytes": 1825600,
+      "triangles": 231449,
+      "primitives": 33,
+      "materials": 33,
+      "textures": 2,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "d74566dd81b25e77e9de7303afe4d8b777b2d2c3af7475f8c120cebae077aa11"
+    },
+    {
+      "file": "mclaren_senna_free.glb",
+      "bytes": 2686388,
+      "triangles": 260463,
+      "primitives": 37,
+      "materials": 37,
+      "textures": 0,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "8c6452059797daacd5c30a9e8e95aadc4f4bd683731d988987c9094013951637"
+    },
+    {
+      "file": "mercedes-amg_project-one.glb",
+      "bytes": 866236,
+      "triangles": 79204,
+      "primitives": 27,
+      "materials": 27,
+      "textures": 4,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499"
+    },
+    {
+      "file": "pagani_huayra_free.glb",
+      "bytes": 2757552,
+      "triangles": 259971,
+      "primitives": 36,
+      "materials": 36,
+      "textures": 0,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "b3f9a854e1ffe6cc8673111e234e00f60de6078e997a6d66ebf79c4ac7f00f00"
+    },
+    {
+      "file": "pagani_utopia_2023.glb",
+      "bytes": 5625156,
+      "triangles": 260330,
+      "primitives": 33,
+      "materials": 33,
+      "textures": 35,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "1a5ef0d5faf932ea0c0fdd0e03d71789e16084cbd7bfb381f8525598f6f84086"
+    },
+    {
+      "file": "porsche_911_with_interior.glb",
+      "bytes": 5545868,
+      "triangles": 260791,
+      "primitives": 37,
+      "materials": 37,
+      "textures": 45,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "e9f455e3b8ee53164ec149efdfa4c10d8030ca01826164672ffa48d111346a14"
+    },
+    {
+      "file": "porsche_918_spyder_2015.glb",
+      "bytes": 3258356,
+      "triangles": 259250,
+      "primitives": 53,
+      "materials": 53,
+      "textures": 26,
+      "skins": 0,
+      "prepared": true,
+      "sha256": "77147cb4c38ee2dc9e2e3c1aa7ba1e0b8ff0d45514b01f4a58d1d3b5592ba415"
+    }
+  ],
+  "bytes": 69048184,
+  "triangles": 3811441,
+  "failures": []
+}

@@ -1,5 +1,6 @@
 # Source-only assets (kept locally, not published)
 assets/models_original/
+assets/models_prepared/
 assets/images/**/*.png
 
 # Dependencies & scratch

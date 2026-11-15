@@ -1,0 +1,12 @@
+{
+  "name": "tsl-carpaint",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Layered car paint node material for three.js WebGPU and WebGL2.",
+  "license": "MIT",
+  "exports": { ".": "./src/index.js" },
+  "files": ["src", "LICENSE", "README.md"],
+  "peerDependencies": { "three": "0.187.0" },
+  "scripts": { "test": "node test/gpu.mjs" },
+  "devDependencies": { "puppeteer-core": "^23.11.1" }
+}

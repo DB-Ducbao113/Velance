@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230b1014'/><path d='M16 20h8l10 17 10-17h8L37 44h-8z' fill='%23e8cd9f'/></svg>">
   <meta name="description" content="VÉLANCE — The Art of Performance. A luxury cinematic hypercar showroom: real 3D machines in a private motor gallery.">
   <title>VÉLANCE — The Art of Performance · Luxury Cinematic Hypercar Showroom</title>
-  <link rel="stylesheet" href="./styles/main.css?v=10.3-hall">
+  <link rel="stylesheet" href="./styles/main.css?v=11.0-webgpu">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="./assets/environment/private_garage_1920x1080.webp" fetchpriority="high">
@@ -15,7 +15,10 @@
   <script defer src="./vendor/motion/gsap.min.js"></script>
   <script defer src="./vendor/motion/ScrollTrigger.min.js"></script>
   <script defer src="./vendor/motion/lenis.min.js"></script>
-  <script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+  <script type="importmap">{"imports":{"three":"./vendor/three/three.webgpu.js","three/webgpu":"./vendor/three/three.webgpu.js","three/tsl":"./vendor/three/three.tsl.js","three/addons/":"./vendor/three/addons/","tsl-carpaint":"./packages/tsl-carpaint/src/index.js"}}</script>
+  <link rel="modulepreload" href="./vendor/three/three.core.js">
+  <link rel="modulepreload" href="./vendor/three/three.tsl.js">
+  <link rel="modulepreload" href="./vendor/three/three.webgpu.js">
 </head>
 <body data-build="NOIR_GARAGE_V8_MOTION_INTEGRATED">
   <div class="grain" aria-hidden="true"></div>
@@ -29,8 +32,8 @@
       <span class="eyebrow gate-eyebrow">Private Motor Gallery · Est. MMXXVI</span>
       <h1 class="gate-logo wordmark">VÉLANCE</h1>
       <div class="gate-tagline"><i></i><span>The Art of Performance</span><i></i></div>
-      <p class="gate-sub">Eight machines. Sixteen bays. One private gallery.</p>
-      <p class="gate-marques">Bugatti · Koenigsegg · Pagani · Ferrari · McLaren · Mercedes-AMG</p>
+      <p class="gate-sub">Sixteen machines. Sixteen bays. One private gallery.</p>
+      <p class="gate-marques">Bugatti · Koenigsegg · Pagani · Ferrari · McLaren · Lamborghini · Porsche · Chevrolet · Mercedes-AMG · Aston Martin</p>
       <button type="button" id="gateEnter" class="gate-cta">Enter the gallery <span aria-hidden="true">↗</span></button>
       <span class="gate-meta">Level 01 / 16 bays · Native GLB</span>
     </div>
@@ -58,18 +61,24 @@
         <div class="garage-entry-shadow"></div>
       </div>
       <div class="room-topline"><span><i class="indicator"></i> A LUXURY CINEMATIC HYPERCAR SHOWROOM</span><span>EST. MMXXVI — NO. 001</span></div>
-      <div class="hero-copy" id="heroCopy"><span class="eyebrow">VÉLANCE · PRIVATE MOTOR GALLERY</span><h1>The art of<br> <em>performance.</em></h1><p>Eight extraordinary machines. One private gallery.</p></div>
+      <div class="hero-copy" id="heroCopy"><span class="eyebrow">VÉLANCE · PRIVATE MOTOR GALLERY</span><h1>The art of<br> <em>performance.</em></h1><p>Sixteen extraordinary machines. One private gallery.</p></div>
       <div class="garage-bay-rail" id="bayRail" aria-hidden="true"></div>
       <div class="garage-entrance-marker" aria-hidden="true"><span>PRIVATE GALLERY</span><i></i><span>LEVEL 01 / 16 BAYS</span></div>
       <div class="car-stage" id="carStage" aria-label="Drag horizontally to browse real 3D cars parked in numbered bays">
         <div class="car-lineup" id="carLineup"></div>
+        <div class="overview-title" id="overviewTitle" aria-hidden="true">
+          <span class="eyebrow">VÉLANCE · PRIVATE MOTOR GALLERY</span>
+          <h2>The full <em>gallery.</em></h2>
+          <span class="overview-sub">SIXTEEN MACHINES · TWO FACING ROWS</span>
+          <i class="overview-rule"></i>
+        </div>
         <div class="stage-readout" id="stageReadout" role="status" aria-live="polite">PREPARING THE GALLERY</div>
       </div>
       <div class="garage-loader" id="garageLoader" aria-hidden="true">
         <span class="eyebrow">VÉLANCE</span>
         <strong>Opening the gallery</strong>
         <div class="loader-track"><i id="loaderBar"></i></div>
-        <span class="loader-count" id="loaderCount">00 / 08 MACHINES</span>
+        <span class="loader-count" id="loaderCount">00 / 16 MACHINES</span>
       </div>
       <div class="home-controls" id="homeControls">
         <div class="home-index"><span class="eyebrow">THE PRIVATE COLLECTION</span><strong>THE PRIVATE <em>GALLERY</em></strong></div>
@@ -87,7 +96,7 @@
       <!-- B: THE CHOSEN GLB ONLY, TO THE LEFT; SPECS ONLY, TO THE RIGHT -->
       <section class="selected-view" id="selectedView" aria-label="Selected machine details" aria-hidden="true">
         <div class="selected-left">
-          <div class="selected-kicker"><span class="eyebrow">THE PRIVATE GALLERY</span><span id="selectedBay">BAY 01 / 08</span></div>
+          <div class="selected-kicker"><button type="button" id="backToGarageTop" class="selected-back" aria-label="Back to gallery">←<span>BACK TO GALLERY</span></button><span class="eyebrow">THE PRIVATE GALLERY</span><span id="selectedBay">BAY 01 / 16</span></div>
           <div class="selected-floor" aria-hidden="true"><div class="selected-parking-outline"></div></div>
           <div id="selectedModelHost" class="selected-model-host" aria-label="Interactive 3D vehicle. Drag to orbit; scrolling moves the page."></div>
           <p class="selected-model-status" id="selectedModelStatus" role="status">LOAD REAL 3D MODEL</p>
@@ -124,6 +133,6 @@
     </div>
   </main>
   <div class="notice" id="notice" hidden role="status"><p id="noticeText"></p><button type="button" id="noticeDismiss" aria-label="Dismiss notification">×</button></div>
-  <script type="module" src="./src/ui/app.js?v=10.3-hall"></script>
+  <script type="module" src="./src/ui/app.js?v=11.0-webgpu"></script>
 </body>
 </html>

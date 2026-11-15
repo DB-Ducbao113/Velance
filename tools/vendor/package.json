@@ -1,0 +1,13 @@
+{
+  "name": "velance-vendor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproducible vendoring of three.js WebGPU/TSL builds: exact npm version, esbuild-minified, addon allow-list, integrity manifest.",
+  "scripts": {
+    "three": "node vendor-three.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

@@ -14,7 +14,8 @@ assets/images/
     05-signature.webp
   laferrari/
     ... the same five filenames ...
-  jesko23/ jesko25/ tourbillon24/ tourbillon26/ paganiutopia/ amgone/
+  tourbillon24/ jesko25/ paganiutopia/ laferrari/ mclarenp1/ amgone/ sf90xx/ revuelto/
+  aventador/ porsche918/ huayra/ corvette/ senna/ mclaren765lt/ porsche911/ valkyrie/
     ... the same five filenames ...
 ```
 

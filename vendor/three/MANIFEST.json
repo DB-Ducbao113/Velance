@@ -1,0 +1,91 @@
+{
+ "package": "three",
+ "version": "0.187.0",
+ "integrity": "sha512-Qiu7R+Cmh8CstZsY1uJOSWnVlfo7ZtNLV7mF8Jltk3LB3AtDu9cRZlcnRKkAk8Y4z6KKw35z7Y7Urd7jWY8etA==",
+ "total": {
+  "bytes": 1948031,
+  "gzip": 648247
+ },
+ "files": {
+  "three.core.js": {
+   "bytes": 395915,
+   "gzip": 106038,
+   "sha256": "04750c60541ce68acf84ea72bdaea4b2dc7696b0501d36faeaa9d1d0cc63ba78"
+  },
+  "three.tsl.js": {
+   "bytes": 314984,
+   "gzip": 92011,
+   "sha256": "3a97ae441e3674806deedd396b31725f19b2383aacf65d8ee55517e31bfd67d7"
+  },
+  "three.webgpu.js": {
+   "bytes": 459090,
+   "gzip": 125188,
+   "sha256": "a82931414d23b769425d7c3d1350cdc63cbfd9acabe36e1291198dd5e76989d6"
+  },
+  "addons/loaders/GLTFLoader.js": {
+   "bytes": 46665,
+   "gzip": 13819,
+   "sha256": "2e2d9dcbb822a6ae50bf4dc676e80db50778cd108aa549ed4c7206d9e2cad774"
+  },
+  "addons/loaders/KTX2Loader.js": {
+   "bytes": 17122,
+   "gzip": 5656,
+   "sha256": "986f685f7efc996bfdc26cb9722379800d0dc8bf4082a3f19f3d001993b234f3"
+  },
+  "addons/libs/meshopt_decoder.module.js": {
+   "bytes": 26491,
+   "gzip": 7257,
+   "sha256": "290e40980860bed57e80b8b749196fd21ea0fc902b7898824b61f6099e075999"
+  },
+  "addons/libs/ktx-parse.module.js": {
+   "bytes": 19998,
+   "gzip": 5756,
+   "sha256": "72cc52352fc865e28d5c6c665e6ff49626ff84cbb70e7eb043cf6090722500f8"
+  },
+  "addons/libs/zstddec.module.js": {
+   "bytes": 39745,
+   "gzip": 17004,
+   "sha256": "20cc55bf28600e083d30db7be1be2a2d8dda2abf981b53fe5587a4f34b1986e8"
+  },
+  "addons/libs/basis/basis_transcoder.js": {
+   "bytes": 57529,
+   "gzip": 15143,
+   "sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1"
+  },
+  "addons/libs/basis/basis_transcoder.wasm": {
+   "bytes": 527333,
+   "gzip": 247535,
+   "sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a"
+  },
+  "addons/math/ColorSpaces.js": {
+   "bytes": 1433,
+   "gzip": 684,
+   "sha256": "63d406733c0b5893dcc9d6dae6e84b4e8a3126af3c0acb02b6b4e68afea57ec4"
+  },
+  "addons/controls/OrbitControls.js": {
+   "bytes": 20202,
+   "gzip": 4452,
+   "sha256": "e37a6ac5c2352e4b0f0bbdc070f5c472d0804dc276f8182dcf29f79a5d9c62b5"
+  },
+  "addons/environments/RoomEnvironment.js": {
+   "bytes": 2145,
+   "gzip": 924,
+   "sha256": "7c0f8204d6e815fff8c10b6ee5ac0510100c05e15d71143bfb45b6f5ebe112bb"
+  },
+  "addons/utils/BufferGeometryUtils.js": {
+   "bytes": 14204,
+   "gzip": 4732,
+   "sha256": "a4cf278643ce8c978721415c447ec5abd81109f9120e2edf7288fb02d035bc4f"
+  },
+  "addons/utils/SkeletonUtils.js": {
+   "bytes": 4123,
+   "gzip": 1581,
+   "sha256": "6c660e1682721267f673ecf4cf2cac4ac4972dc49e43474ea8b269fc98fca55f"
+  },
+  "addons/utils/WorkerPool.js": {
+   "bytes": 1052,
+   "gzip": 467,
+   "sha256": "d46dc565a8dec032e058093162ff359a80d9575f1df18d3e4f8c0d504e1b675b"
+  }
+ }
+}

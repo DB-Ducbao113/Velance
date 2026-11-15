@@ -1,0 +1,63 @@
+name: Validate showroom
+
+on:
+  push:
+    branches: [main, feat/webgpu-carpaint]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      gpu:
+        description: Run headed tests on a configured macOS GPU runner
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  assets-and-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tools/optimize/package-lock.json
+      - run: npm --prefix tools/optimize ci
+      - run: npm --prefix tools/optimize test
+      - run: node tools/optimize/budget.mjs
+      - run: node tools/vendor/verify.mjs
+      - run: |
+          node --check src/engine/showroom.js
+          node --check src/ui/app.js
+          node --check packages/tsl-carpaint/src/index.js
+          node --check packages/tsl-carpaint/demo/app.js
+      - run: npm pack --dry-run
+        working-directory: packages/tsl-carpaint
+
+  gpu:
+    if: github.event_name == 'workflow_dispatch' && inputs.gpu
+    runs-on: [self-hosted, macOS, ARM64, gpu]
+    timeout-minutes: 20
+    env:
+      TEST_ORIGIN: http://127.0.0.1:8095
+      QA_SHOTS: ${{ github.workspace }}/qa-output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm --prefix tools/perf ci
+      - name: Test both rendering backends
+        run: |
+          python3 -m http.server 8095 --bind 127.0.0.1 > /tmp/velance-ci-server.log 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          node packages/tsl-carpaint/test/gpu.mjs
+          node tools/perf/gpu_smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gpu-screenshots
+          path: qa-output
