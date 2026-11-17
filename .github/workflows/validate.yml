@@ -112,7 +112,6 @@ jobs:
       contents: read
     env:
       TEST_ORIGIN: http://127.0.0.1:8095
-      QA_SHOTS: ${{ runner.temp }}/velance-gpu-qa
     steps:
       - name: Checkout without persisted credentials
         uses: actions/checkout@v7
@@ -129,6 +128,8 @@ jobs:
         run: npm --prefix tools/perf ci --ignore-scripts --no-audit --no-fund
       - name: Run loopback GPU tests without publishing image output
         shell: bash
+        env:
+          QA_SHOTS: ${{ runner.temp }}/velance-gpu-qa
         run: |
           set -euo pipefail
           mkdir -p "$QA_SHOTS"
