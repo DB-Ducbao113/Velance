@@ -1,0 +1,43 @@
+{
+  "format": "velance-p7-lazy-browser/1",
+  "atUtc": "2026-11-17T05:49:51.982Z",
+  "releaseId": "b77bf5a4c6e1077782a94279e0ba8eda87ff96d3cca42ce94496896b70384728",
+  "chrome": "Chrome/157.0.8103.79",
+  "node": "v24.21.0",
+  "localOnly": true,
+  "sameMacGpu": true,
+  "distinctDevices": 0,
+  "browserContexts": 2,
+  "test": "cold 1 GLB → navigate 2nd → select → rear-row on-demand select → explicit full overview 16",
+  "runs": [
+    {
+      "backend": "webgpu",
+      "firstReadyMs": 675,
+      "coldModelFiles": 1,
+      "coldBytes": 1940719,
+      "coldThirdPartyBytes": 124469,
+      "afterOverviewModelFiles": 16,
+      "finalLocalBytes": 48485231,
+      "finalThirdPartyBytes": 124469,
+      "finalLoaded": 16,
+      "successfulSelection": true,
+      "errors": [],
+      "result": "PASS_LOCAL"
+    },
+    {
+      "backend": "webgl2",
+      "firstReadyMs": 587,
+      "coldModelFiles": 1,
+      "coldBytes": 1940719,
+      "coldThirdPartyBytes": 124469,
+      "afterOverviewModelFiles": 16,
+      "finalLocalBytes": 48485231,
+      "finalThirdPartyBytes": 124469,
+      "finalLoaded": 16,
+      "successfulSelection": true,
+      "errors": [],
+      "result": "PASS_LOCAL"
+    }
+  ],
+  "overall": "PASS_LOCAL"
+}

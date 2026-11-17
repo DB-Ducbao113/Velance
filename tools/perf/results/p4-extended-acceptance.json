@@ -1,0 +1,204 @@
+{
+  "format": "velance-p4-extended-acceptance/1",
+  "createdAtUtc": "2026-11-17T04:58:56.073Z",
+  "result": "PASS_LOCAL",
+  "evidenceFiles": {
+    "original": "p4-acceptance.json",
+    "constrained": "p4-browser-both-constrained.json",
+    "webgpu4": "p4-multitab-webgpu-4.json",
+    "webgl4": "p4-multitab-webgl2-4.json",
+    "virtual": "p4-real-asset-virtual-10-25-50-100.json",
+    "mixed": "p4-mixed-soak-60s-3day.json",
+    "native": "p4-native-extended.tap"
+  },
+  "groups": {
+    "priorP4": {
+      "p4OriginalGate": {
+        "passed": true,
+        "description": "P4 30-day SQLite, API, overload and synthetic delivery gate"
+      },
+      "originalNoProductionClaim": {
+        "passed": true,
+        "description": "No invented CDN claim"
+      }
+    },
+    "constrainedChrome": {
+      "bothBackends": {
+        "passed": true,
+        "description": "Chrome constrained network 20Mbps/40ms; 3 pairs per backend"
+      },
+      "allTwelveLoaded": {
+        "passed": true,
+        "description": "Every A/B case loaded all 16 GLBs and had no errors"
+      },
+      "allSixFrameDelta": {
+        "passed": true,
+        "description": "Frame-gap candidate-baseline paired median below +1ms in 3 UI stages x2 backends"
+      }
+    },
+    "sameGpuMultitab": {
+      "webgpu4": {
+        "passed": true,
+        "description": "Four cold-cache same-GPU Chrome tabs loaded all 16 GLBs and completed overview/selected UI, <=30 seconds/tab"
+      },
+      "webgl4": {
+        "passed": true,
+        "description": "Four cold-cache same-GPU Chrome tabs loaded all 16 GLBs and completed overview/selected UI, <=30 seconds/tab"
+      }
+    },
+    "realAssetsVirtualUsers": {
+      "realAssets": {
+        "passed": true,
+        "description": "Real 16 GLBs and 80 editorial WebP in release, no synthetic small-file substitution"
+      },
+      "fourProfiles": {
+        "passed": true,
+        "description": "10/25/50/100 virtual journeys: 16 real GLB+5 real WebP+304, exact SHA/ETag/bytes"
+      },
+      "correctConcurrentBoundary": {
+        "passed": true,
+        "description": "100 virtual HTTP clients explicitly not asserted equivalent to 100 simultaneously active downloads"
+      }
+    },
+    "mixedSoakAndFault": {
+      "durationAndDB": {
+        "passed": true,
+        "description": "60s mixed read+write soak, 3-day 900k seeded samples"
+      },
+      "offeredSustained": {
+        "passed": true,
+        "description": "Every one of 600 offered mixed POSTs acknowledged, no local drops/timeouts/HTTP errors"
+      },
+      "readsAndBackup": {
+        "passed": true,
+        "description": "All mixed API reads full responses and native backup verified while writes continue"
+      },
+      "crashRecovery": {
+        "passed": true,
+        "description": "Isolated SIGKILL/restart, ACKed receipts survive, identical replay and seq advance durable"
+      },
+      "allSloGates": {
+        "passed": true,
+        "description": "Baseline p95/p99/read/RSS/loop, receipts, integrity, order and orphans passed"
+      }
+    },
+    "native": {
+      "extendedNative": {
+        "passed": true,
+        "description": "At least 16 native performance harness tests passed"
+      }
+    }
+  },
+  "measured": {
+    "conditioned": {
+      "cases": 12,
+      "pairedDeltaMs": [
+        {
+          "backend": "webgpu",
+          "stage": "home",
+          "delta": 0.01
+        },
+        {
+          "backend": "webgpu",
+          "stage": "overview",
+          "delta": -0.01
+        },
+        {
+          "backend": "webgpu",
+          "stage": "orbit",
+          "delta": 0
+        },
+        {
+          "backend": "webgl2",
+          "stage": "home",
+          "delta": 0.01
+        },
+        {
+          "backend": "webgl2",
+          "stage": "overview",
+          "delta": 0
+        },
+        {
+          "backend": "webgl2",
+          "stage": "orbit",
+          "delta": -0.01
+        }
+      ]
+    },
+    "chrome": [
+      {
+        "backend": "webgpu",
+        "tabs": 4,
+        "loaded16": 4,
+        "elapsedMs": 9985.513707999999,
+        "transferBytes": 190253558
+      },
+      {
+        "backend": "webgl2",
+        "tabs": 4,
+        "loaded16": 4,
+        "elapsedMs": 11434.260459000001,
+        "transferBytes": 190253568
+      }
+    ],
+    "virtual": [
+      {
+        "users": 10,
+        "requests": 220,
+        "receivedBytes": 460113354,
+        "p95FullJourneyMs": 567.378,
+        "wallMs": 619.055,
+        "peakActualDownloads": 10
+      },
+      {
+        "users": 25,
+        "requests": 550,
+        "receivedBytes": 1147743010,
+        "p95FullJourneyMs": 1386.379,
+        "wallMs": 1391.991,
+        "peakActualDownloads": 16
+      },
+      {
+        "users": 50,
+        "requests": 1100,
+        "receivedBytes": 2285733386,
+        "p95FullJourneyMs": 2641.375,
+        "wallMs": 2644.826,
+        "peakActualDownloads": 16
+      },
+      {
+        "users": 100,
+        "requests": 2200,
+        "receivedBytes": 4569093434,
+        "p95FullJourneyMs": 5266.083,
+        "wallMs": 5271.124,
+        "peakActualDownloads": 16
+      }
+    ],
+    "mixed": {
+      "offered": 600,
+      "acknowledged": 600,
+      "readOffered": 270,
+      "readSucceeded": 270,
+      "receiptCount": 451,
+      "backupVerified": true,
+      "crashRecovery": true,
+      "rssPeakMiB": 191.328125,
+      "eventLoopP99MaxMs": 13.533183
+    },
+    "native": {
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "deliberateUnverifiedProductionRequirements": [
+    "Real 100 independent browser devices/users simultaneous over network",
+    "Multi-region CDN PoPs/cache hit ratio/origin egress and TLS/WAF",
+    "24h+ production-like soak, production host and WAN, iPhone hardware measurements",
+    "Encrypted offsite backup/restore, persistent alert delivery, SSO and private origin",
+    "GLB and render rights to public WebGL distribution"
+  ],
+  "scope": "Local fixture and real local assets only; nothing publicly deployed; no real telemetry.db touched"
+}

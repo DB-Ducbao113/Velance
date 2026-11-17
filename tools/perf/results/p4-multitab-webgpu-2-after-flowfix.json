@@ -1,0 +1,86 @@
+{
+  "format": "velance-p4-real-multitab/1",
+  "measuredAtUtc": "2026-11-17T04:55:33.423Z",
+  "environment": {
+    "node": "v24.21.0",
+    "chrome": "Chrome/157.0.8103.79",
+    "cpu": "Apple M5",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "profile": {
+    "tabs": 2,
+    "backend": "webgpu",
+    "viewport": "1440x900",
+    "perVisitorBrowserContext": true,
+    "coldCache": true,
+    "maxSeconds": 90,
+    "showroom": "all 16 GLB, then overview and selected car",
+    "localOnly": true,
+    "distinctRealDevices": 0,
+    "distinctTabs": 2
+  },
+  "release": {
+    "id": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+    "totalFiles": 125
+  },
+  "elapsedMs": 5392.5704590000005,
+  "totalTransferBytes": 95126778,
+  "visitors": [
+    {
+      "visitorIndex": 0,
+      "loadMs": 3105.9422090000003,
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 132115732,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563389,
+      "failures": [],
+      "completed": true
+    },
+    {
+      "visitorIndex": 1,
+      "loadMs": 3122.3066659999995,
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 143461100,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563389,
+      "failures": [],
+      "completed": true
+    }
+  ],
+  "gates": {
+    "noErrors": true,
+    "allLoaded16": true,
+    "requestedBackend": true,
+    "allVisitorsCompleted": true,
+    "telemetryOptedOut": true
+  },
+  "overall": "PASS_LOCAL",
+  "limitations": [
+    "Independent tabs in ONE Chrome browser on one GPU, not independent devices, users, global CDN, or Internet traffic.",
+    "Cache separated by browser contexts, GPU process and host CPU remain shared.",
+    "No guarantee against session length, battery drain or production WebGPU availability."
+  ]
+}

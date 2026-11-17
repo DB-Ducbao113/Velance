@@ -1,0 +1,49 @@
+{
+  "format": "velance-p7-lazy-browser/1",
+  "atUtc": "2026-11-17T07:55:04.312Z",
+  "releaseId": "bb69a78a339519344b38a49425c55d0a8c87a50cccebcd27ec9329aef52f1bd8",
+  "chrome": "Chrome/157.0.8103.79",
+  "node": "v24.21.0",
+  "localOnly": true,
+  "sameMacGpu": true,
+  "distinctDevices": 0,
+  "browserContexts": 2,
+  "test": "cold 1 GLB → navigate 2nd → select → rear-row on-demand select → explicit full overview 16",
+  "runs": [
+    {
+      "backend": "webgpu",
+      "firstReadyMs": 780,
+      "coldModelFiles": 1,
+      "coldBytes": 1946393,
+      "coldThirdPartyBytes": 124466,
+      "afterOverviewModelFiles": 16,
+      "finalLocalBytes": 48496539,
+      "finalThirdPartyBytes": 124466,
+      "finalLoaded": 16,
+      "successfulSelection": true,
+      "consentDefaultOff": true,
+      "consentUiAndWithdrawalPass": true,
+      "telemetryPostCount": 0,
+      "errors": [],
+      "result": "PASS_LOCAL"
+    },
+    {
+      "backend": "webgl2",
+      "firstReadyMs": 742,
+      "coldModelFiles": 1,
+      "coldBytes": 1946393,
+      "coldThirdPartyBytes": 124469,
+      "afterOverviewModelFiles": 16,
+      "finalLocalBytes": 48496539,
+      "finalThirdPartyBytes": 124469,
+      "finalLoaded": 16,
+      "successfulSelection": true,
+      "consentDefaultOff": true,
+      "consentUiAndWithdrawalPass": true,
+      "telemetryPostCount": 0,
+      "errors": [],
+      "result": "PASS_LOCAL"
+    }
+  ],
+  "overall": "PASS_LOCAL"
+}

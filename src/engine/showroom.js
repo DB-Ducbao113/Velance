@@ -18,6 +18,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { createCarPaintMaterial } from 'tsl-carpaint';
+import { loadOrder } from './load-policy.js';
 
 const BAY_W = 6.4;
 const CAR_LEN = 4.6;
@@ -217,10 +218,11 @@ export class GarageShowroom {
     this.cars = new Map(); this.fades = new Map(); this.labels = []; this.placeholders = new Map();
     this.paintChoice = new Map();
     this.queue = []; this.queued = new Set(); this.loading = false;
-    // Downloads run in parallel (HTTP/2 streams) and are decoupled from the
-    // serialized GPU compile, so total wait is the slowest single GLB, not the sum.
+    // P7: bounded transfers; navigation requests a machine on demand. All
+    // sixteen GLBs are NOT prefetched during cold page load.
     this.buffers = new Map(); this.dlControllers = new Set();
-    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 6 : 16;
+    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 2 : 4;
+    this.initialReady = false;
     this.loader = new GLTFLoader(); this.loader.setMeshoptDecoder(MeshoptDecoder);
     this.loadTimes = {}; this.t0 = performance.now(); this.firstFrameAt = null;
     this.flight = null; this.selected = null;
@@ -288,11 +290,9 @@ export class GarageShowroom {
     this.bindInput();
     this.resize();
     this.applyHomeCamera();
-    // Focused bay gets the connection to itself first (fast first paint), then
-    // the remaining GLBs burst in parallel once its buffer is in hand.
-    this.prefetch(this.focus);
-    this.enqueueAround(this.focus);
-    this.buffers.get(this.focus)?.finally(() => this.prefetchAll());
+    // Only the current machine transfers on a cold visit. Empty bays retain
+    // their interactive placeholders until the visitor navigates to them.
+    this.prioritize(this.focus);
     await this.warmScene().catch(error => console.warn('[VÉLANCE] pipeline warm-up failed:', error));
     if (this.disposed) return;
     this.refreshShadow();
@@ -706,9 +706,7 @@ export class GarageShowroom {
   }
 
   /* ------------------------------------------------------------- loading */
-  /* Downloads run concurrently (HTTP/2 streams) into a buffer map while the
-   * GPU compile stays serialized but consumes already-parsed scenes. Total
-   * wait is the slowest single GLB plus the compile chain, never their sum. */
+  /* Downloads are on-demand; GPU compilation remains serialized. */
   async acquireDL() { while (this.dlActive >= this.dlLimit) await new Promise(r => this.dlWaiters.push(r)); this.dlActive++; }
   releaseDL() { this.dlActive--; (this.dlWaiters.shift() || (() => {}))(); }
   prefetch(index) {
@@ -729,7 +727,6 @@ export class GarageShowroom {
     task.catch(() => {});
     this.buffers.set(index, task);
   }
-  prefetchAll() { for (let i = 0; i < this.vehicles.length; i++) this.prefetch(i); }
   prioritize(index) {
     index %= this.vehicles.length;
     if (this.cars.has(index) || this.disposed) return;
@@ -741,7 +738,8 @@ export class GarageShowroom {
   sortQueue() { const col = this.focus % this.vehicles.length; this.queue.sort((a, b) => Math.abs(a - col) - Math.abs(b - col)); }
   enqueueAround(center) {
     center %= this.vehicles.length;
-    const order = [...this.vehicles.keys()].sort((a, b) => Math.abs(a - center) - Math.abs(b - center));
+    // Explicit full-gallery gesture only. Never call this at initial boot.
+    const order = loadOrder(center, this.vehicles.length, { all: true });
     for (const i of order) if (!this.cars.has(i) && !this.queued.has(i)) { this.queue.push(i); this.queued.add(i); }
     this.runQueue();
   }
@@ -802,7 +800,7 @@ export class GarageShowroom {
           this.loadTimes[vehicle.id] = Math.round(performance.now() - started);
           this.labels[index].classList.add('is-loaded');
           this.onProgress(this.parked, this.vehicles.length, index);
-          if (this.parked === this.vehicles.length) this.onReady();
+          if (!this.initialReady) { this.initialReady = true; this.onReady(); }
         } catch (err) {
           if (err?.name !== 'AbortError') { this.labels[index].classList.add('is-error'); this.onError(index, err.message || String(err)); }
         }
@@ -997,7 +995,13 @@ export class GarageShowroom {
       this.suppressUntil = performance.now() + 350;
       // Release with momentum: a flick glides onward, then settles to a bay.
       if (this.overview) this.ovTarget = clamp(this.ovTarget + p.vel * .12, -this.ovLimit, this.ovLimit);
-      else { const [lo, hi] = this.rowBounds(); this.setFocus(clamp(Math.round(this.position), lo, hi)); }
+      else {
+        const [lo, hi] = this.rowBounds();
+        this.setFocus(clamp(Math.round(this.position), lo, hi));
+        // During drag, focus updates are silent. Commit the settled selection
+        // to the UI only once after the gesture ends.
+        this.onFocus(this.focus);
+      }
       setTimeout(() => { this.dragged = false; }, 40);
     };
     stage.addEventListener('pointerup', e => {
@@ -1067,8 +1071,8 @@ export class GarageShowroom {
     this.row = rowOf(next);
     if (next !== this.focus) { this.focus = next; if (!silent) this.onFocus(next); }
     if (this.reduced) this.position = next;
-    this.sortQueue();
-    this.runQueue();
+    // Pointer-drag previews do not trigger expensive downloads until release.
+    if (!silent) this.prioritize(next);
   }
   /* Flip between the front and rear gallery with a short crane across the hall. */
   toggleRow() {
@@ -1153,6 +1157,7 @@ export class GarageShowroom {
     if (this.mode !== 'home') return;
     const on = !this.overview;
     this.applyOverviewState(on);
+    if (on) this.enqueueAround(this.focus);
     const to = on ? this.overviewPose() : this.homePose(this.position);
     this.flight = { t: 0, start: performance.now(), dur: this.reduced ? 0 : .7, fromPos: this.camera.position.clone(), fromLook: this.currentLook(), toPos: to.pos, toLook: to.look, done: null };
   }

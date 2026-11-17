@@ -1,0 +1,1179 @@
+{
+  "format": "velance-p9-model-candidates/1",
+  "reviewDate": "2026-11-17",
+  "scope": "16 current public model GLBs; all approvals remain UNVERIFIED; zero-cost local read-only asset research",
+  "publicLaunch": "NO_GO",
+  "sourceMethod": "Original GLB JSON chunk asset.extras + exact bytes SHA-256 + material/node name intersection + Sketchfab indexed listing search + Git history",
+  "caveat": "Uploader metadata and current indexed license labels are declarations, not an independent license grant or evidence of upstream rights; direct Sketchfab pages commonly returned 403. Do not approve based on this file.",
+  "summary": {
+    "totalModels": 16,
+    "exactExporterSourceUrls": 16,
+    "independentlyIndexedMatchingListings": 15,
+    "originalsDeclaredCcBy40": 15,
+    "originalsDeclaredCcByNcSa40": 1,
+    "originalPublicShasDiffer": 16,
+    "preparedPublicShasDiffer": 15,
+    "rightsApproved": 0
+  },
+  "normativeLicenses": [
+    {
+      "label": "CC-BY-4.0",
+      "deed": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "label": "CC-BY-NC-SA-4.0",
+      "deed": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    }
+  ],
+  "sketchfabReference": "https://sketchfab.com/developers/download-api/guidelines",
+  "models": [
+    {
+      "file": "2014_ferrari_laferrari.glb",
+      "original": {
+        "path": "assets/models_original/2014_ferrari_laferrari.glb",
+        "bytes": 7930216,
+        "sha256": "040a02d22032d626a1528a5620961a982e1a23b9b66aa56a1cda1c97276235cc",
+        "generator": "Sketchfab-0.23.0",
+        "assetCopyright": null,
+        "nodeCount": 916,
+        "materialCount": 19,
+        "imageCount": 35
+      },
+      "prepared": {
+        "path": "assets/models_prepared/2014_ferrari_laferrari.glb",
+        "bytes": 1941748,
+        "sha256": "f8c2ebc1f161cfaa8f98343e895836f2f95b7f024480277a2d004e6f411200bb",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 19,
+        "materialCount": 19,
+        "imageCount": 32
+      },
+      "public": {
+        "path": "assets/models/2014_ferrari_laferrari.glb",
+        "bytes": 2051028,
+        "sha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 19,
+        "materialCount": 19,
+        "imageCount": 32
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "2014 Ferrari LaFerrari",
+        "uploader": "Ddiaz Design",
+        "uploaderProfileUrl": "https://sketchfab.com/ddiaz-design",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/2014-ferrari-laferrari-8b46fa49718647de846387ef4c1e95b3",
+        "licenseLabelAtExport": "CC-BY-NC-SA-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "assetGenerator": "Sketchfab-0.23.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": [
+          "https://sketchfab.com/ddiaz-design",
+          "https://www.vertex-warehouse.com/models/csr2"
+        ]
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 19,
+        "currentNodeNameCount": 19,
+        "currentMaterialNamesMatchedOriginal": 19,
+        "currentMaterialNameCount": 19
+      },
+      "riskTier": "CRITICAL",
+      "riskEvidence": "Exporter says CC BY-NC-SA 4.0; search-indexed current listing says CC BY 4.0; uploader says model from Need For Speed Mobile; profile states non-commercial references",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "2023_ferrari_sf90_xx_stradale.glb",
+      "original": {
+        "path": "assets/models_original/2023_ferrari_sf90_xx_stradale.glb",
+        "bytes": 18482208,
+        "sha256": "424082aabdaaa354441919f9e9bdf85864bb8eff427b7c8400da06927a561870",
+        "generator": "Sketchfab-16.51.0",
+        "assetCopyright": null,
+        "nodeCount": 2201,
+        "materialCount": 27,
+        "imageCount": 31
+      },
+      "prepared": {
+        "path": "assets/models_prepared/2023_ferrari_sf90_xx_stradale.glb",
+        "bytes": 6657668,
+        "sha256": "e10b1787415f3d16fdc6c6834cbb372e757d7b4457bd94374646f8ed5f517803",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 29,
+        "materialCount": 27,
+        "imageCount": 31
+      },
+      "public": {
+        "path": "assets/models/2023_ferrari_sf90_xx_stradale.glb",
+        "bytes": 3022024,
+        "sha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 29,
+        "materialCount": 27,
+        "imageCount": 31
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "2023 Ferrari SF90 XX Stradale",
+        "uploader": "Ddiaz Design",
+        "uploaderProfileUrl": "https://sketchfab.com/ddiaz-design",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/2023-ferrari-sf90-xx-stradale-2c80c667232544649328cf3589921bcd",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.51.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": [
+          "https://sketchfab.com/ddiaz-design",
+          "https://www.facebook.com/p/GM25-100042237200164/"
+        ]
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 29,
+        "currentNodeNameCount": 29,
+        "currentMaterialNamesMatchedOriginal": 27,
+        "currentMaterialNameCount": 27
+      },
+      "riskTier": "CRITICAL",
+      "riskEvidence": "Listing explicitly based on CSR2 3D model; uploader profile disallows commercial uses",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "2024_lamborghini_revuelto.glb",
+      "original": {
+        "path": "assets/models_original/2024_lamborghini_revuelto.glb",
+        "bytes": 21083032,
+        "sha256": "aa71da47e1dc2951d38448642a12e4703bffda35f4c597286e2a1d04d843c359",
+        "generator": "Sketchfab-17.8.0",
+        "assetCopyright": null,
+        "nodeCount": 803,
+        "materialCount": 39,
+        "imageCount": 48
+      },
+      "prepared": {
+        "path": "assets/models_prepared/2024_lamborghini_revuelto.glb",
+        "bytes": 3028336,
+        "sha256": "53d452d213d563fd78d545533bc338af0c34524acc6c55ef537880198f7c9056",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 40,
+        "materialCount": 35,
+        "imageCount": 38
+      },
+      "public": {
+        "path": "assets/models/2024_lamborghini_revuelto.glb",
+        "bytes": 3330124,
+        "sha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 40,
+        "materialCount": 35,
+        "imageCount": 38
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "2024 Lamborghini Revuelto",
+        "uploader": "HYPR:IMPS 3D",
+        "uploaderProfileUrl": "https://sketchfab.com/HYPRIMPS3D",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/2024-lamborghini-revuelto-6b1217debc3449eabd993c5af8b4a7e5",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-17.8.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 40,
+        "currentNodeNameCount": 40,
+        "currentMaterialNamesMatchedOriginal": 35,
+        "currentMaterialNameCount": 35
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "2025_koenigsegg_jesko_attack_7376.glb",
+      "original": {
+        "path": "assets/models_original/2025_koenigsegg_jesko_attack_7376.glb",
+        "bytes": 57158480,
+        "sha256": "fa683862bce19e4cb0a7612d858c1817bbed481b1c72edd83b571092ef8f768f",
+        "generator": "Sketchfab-0.17.0",
+        "assetCopyright": null,
+        "nodeCount": 595,
+        "materialCount": 100,
+        "imageCount": 53
+      },
+      "prepared": {
+        "path": "assets/models_prepared/2025_koenigsegg_jesko_attack_7376.glb",
+        "bytes": 3646696,
+        "sha256": "24b69bb98e23db834daf83f9a1147e2a40a014a7cdb074e6508a4e07c69b2361",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 58,
+        "materialCount": 51,
+        "imageCount": 40
+      },
+      "public": {
+        "path": "assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+        "bytes": 3949468,
+        "sha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 59,
+        "materialCount": 52,
+        "imageCount": 40
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "2025 Koenigsegg Jesko Attack #7376",
+        "uploader": "HYPR:IMPS 3D",
+        "uploaderProfileUrl": "https://sketchfab.com/HYPRIMPS3D",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/2025-koenigsegg-jesko-attack-7376-35d9ccc6636a49b0bbcfae3069f544e5",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-0.17.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 59,
+        "currentNodeNameCount": 59,
+        "currentMaterialNamesMatchedOriginal": 52,
+        "currentMaterialNameCount": 52
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "aston_martin_valkyrie.glb",
+      "original": {
+        "path": "assets/models_original/aston_martin_valkyrie.glb",
+        "bytes": 234099828,
+        "sha256": "bd7d6c04568d7f4389c268ae3f6db731c0efe3b5286e54650916b175069b645b",
+        "generator": "Sketchfab-15.49.0",
+        "assetCopyright": null,
+        "nodeCount": 313,
+        "materialCount": 20,
+        "imageCount": 63
+      },
+      "prepared": {
+        "path": "assets/models_prepared/aston_martin_valkyrie.glb",
+        "bytes": 4502128,
+        "sha256": "ab29ebd2cf2382479499df34173554ad78eb1e382809b5df071b6b47c22514b8",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 20,
+        "materialCount": 20,
+        "imageCount": 58
+      },
+      "public": {
+        "path": "assets/models/aston_martin_valkyrie.glb",
+        "bytes": 4744940,
+        "sha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 20,
+        "materialCount": 20,
+        "imageCount": 58
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Aston Martin Valkyrie",
+        "uploader": "chiwei",
+        "uploaderProfileUrl": "https://sketchfab.com/chiwei2333",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/aston-martin-valkyrie-1ffd7998ae1f4b8ba5a74d8a74b598e2",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-15.49.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": [
+          "https://sketchfab.com/CasacadeOperations/models"
+        ]
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 20,
+        "currentNodeNameCount": 20,
+        "currentMaterialNamesMatchedOriginal": 20,
+        "currentMaterialNameCount": 20
+      },
+      "riskTier": "HIGH",
+      "riskEvidence": "Uploader states original model is by Casacade Models; reworked UVs and textures",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "bugatti_tourbillon_2024.glb",
+      "original": {
+        "path": "assets/models_original/bugatti_tourbillon_2024.glb",
+        "bytes": 22476496,
+        "sha256": "d2fbcc87a9fd4d842a398947e3fa6f5680c606455e01ea5a80dab6b0735d7ded",
+        "generator": "Sketchfab-16.59.0",
+        "assetCopyright": null,
+        "nodeCount": 90,
+        "materialCount": 32,
+        "imageCount": 35
+      },
+      "prepared": {
+        "path": "assets/models_prepared/bugatti_tourbillon_2024.glb",
+        "bytes": 2433148,
+        "sha256": "f9d5c56686fe5c9ca9895af6e0beed85abbf79fab7d8b9d3f2fa31cf6f6378dd",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 28,
+        "materialCount": 28,
+        "imageCount": 35
+      },
+      "public": {
+        "path": "assets/models/bugatti_tourbillon_2024.glb",
+        "bytes": 2713072,
+        "sha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 28,
+        "materialCount": 28,
+        "imageCount": 35
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Bugatti Tourbillon 2024",
+        "uploader": "MdMahib",
+        "uploaderProfileUrl": "https://sketchfab.com/MdMahib",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/bugatti-tourbillon-2024-c992c9bc9ba8427197d5fe380eaa2b31",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.59.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 28,
+        "currentNodeNameCount": 28,
+        "currentMaterialNamesMatchedOriginal": 28,
+        "currentMaterialNameCount": 28
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "corvette_stingray.glb",
+      "original": {
+        "path": "assets/models_original/corvette_stingray.glb",
+        "bytes": 21385476,
+        "sha256": "f6a1b32eb0ed61e704065ee2dc33419a6100fa2cfcdb08d3b2281ed68a6dfd60",
+        "generator": "Sketchfab-15.29.0",
+        "assetCopyright": null,
+        "nodeCount": 241,
+        "materialCount": 18,
+        "imageCount": 3
+      },
+      "prepared": {
+        "path": "assets/models_prepared/corvette_stingray.glb",
+        "bytes": 2743152,
+        "sha256": "8353679ba6f580b8b6b639f7723b2435a7a31bc3286c4d5b5aae8bcebb304380",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 16,
+        "materialCount": 16,
+        "imageCount": 2
+      },
+      "public": {
+        "path": "assets/models/corvette_stingray.glb",
+        "bytes": 1372820,
+        "sha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 16,
+        "materialCount": 16,
+        "imageCount": 2
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Corvette Stingray",
+        "uploader": "Harri3D",
+        "uploaderProfileUrl": "https://sketchfab.com/harrisondorn",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/corvette-stingray-edabade6d6074197ba73a52809e398a4",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-15.29.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": false,
+        "currentIndexedLicense": null,
+        "downloadButtonObservedInIndex": false,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": [
+          "https://harri3d.artstation.com/"
+        ]
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 16,
+        "currentNodeNameCount": 16,
+        "currentMaterialNamesMatchedOriginal": 16,
+        "currentMaterialNameCount": 16
+      },
+      "riskTier": "HIGH",
+      "riskEvidence": "Exact listing URL is embedded locally but could not be independently indexed or fetched (403)",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "lamborghini_aventador.glb",
+      "original": {
+        "path": "assets/models_original/lamborghini_aventador.glb",
+        "bytes": 106103320,
+        "sha256": "f9737dce6bfabe118176447bd7eb09e9eaa446862b66622826afda6c9c1e20db",
+        "generator": "Sketchfab-16.75.0",
+        "assetCopyright": null,
+        "nodeCount": 72,
+        "materialCount": 18,
+        "imageCount": 4
+      },
+      "prepared": {
+        "path": "assets/models_prepared/lamborghini_aventador.glb",
+        "bytes": 2881024,
+        "sha256": "27444858cfad85dbc04a086a075a000e219a0bc38d4ede1d25914a5c5f197feb",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 16,
+        "materialCount": 16,
+        "imageCount": 4
+      },
+      "public": {
+        "path": "assets/models/lamborghini_aventador.glb",
+        "bytes": 3407460,
+        "sha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 16,
+        "materialCount": 16,
+        "imageCount": 4
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Lamborghini Aventador",
+        "uploader": "Blender Studio",
+        "uploaderProfileUrl": "https://sketchfab.com/Blend_GUY",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/lamborghini-aventador-3d4f50dba72b4329bde2ef22894f500a",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.75.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 16,
+        "currentNodeNameCount": 16,
+        "currentMaterialNamesMatchedOriginal": 16,
+        "currentMaterialNameCount": 16
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "mclaren-765lt___with_windows__v2.glb",
+      "original": {
+        "path": "assets/models_original/mclaren-765lt___with_windows__v2.glb",
+        "bytes": 170730412,
+        "sha256": "b9eb3660895fbc5f951dc2b7a4f60994173915c18c61c90488c69b53384b10b1",
+        "generator": "Sketchfab-16.14.0",
+        "assetCopyright": null,
+        "nodeCount": 151,
+        "materialCount": 29,
+        "imageCount": 0
+      },
+      "prepared": {
+        "path": "assets/models_prepared/mclaren-765lt___with_windows__v2.glb",
+        "bytes": 3103916,
+        "sha256": "697a741353ddcae48957015d4ebc8c26ac5be099913e4dce81e9585c6890c292",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 29,
+        "materialCount": 29,
+        "imageCount": 0
+      },
+      "public": {
+        "path": "assets/models/mclaren-765lt___with_windows__v2.glb",
+        "bytes": 3674696,
+        "sha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 29,
+        "materialCount": 29,
+        "imageCount": 0
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Mclaren-765lt  ( With Windows ) V2",
+        "uploader": "Sloftm_Carz",
+        "uploaderProfileUrl": "https://sketchfab.com/SLBofficial",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/mclaren-765lt-with-windows-v2-cc1876d0179b42aeb31e004c01a857da",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.14.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": [
+          "https://sketchfab.com/SLBofficial"
+        ]
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 29,
+        "currentNodeNameCount": 29,
+        "currentMaterialNamesMatchedOriginal": 29,
+        "currentMaterialNameCount": 29
+      },
+      "riskTier": "HIGH",
+      "riskEvidence": "Uploader profile says free models are not rights/licensed",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "mclaren_p1.glb",
+      "original": {
+        "path": "assets/models_original/mclaren_p1.glb",
+        "bytes": 11355560,
+        "sha256": "813c34892fc0cba2f0846a5daadd6a191cbe51e9939049231768595a5d6df4a0",
+        "generator": "Sketchfab-15.33.0",
+        "assetCopyright": null,
+        "nodeCount": 794,
+        "materialCount": 52,
+        "imageCount": 3
+      },
+      "prepared": {
+        "path": "assets/models_prepared/mclaren_p1.glb",
+        "bytes": 958436,
+        "sha256": "db7b78c8a2273b8b78b1bec69de996939cc21ac56ef6258be997bd0e9b6f7c98",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 33,
+        "materialCount": 33,
+        "imageCount": 2
+      },
+      "public": {
+        "path": "assets/models/mclaren_p1.glb",
+        "bytes": 1104124,
+        "sha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 33,
+        "materialCount": 33,
+        "imageCount": 2
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "McLaren P1",
+        "uploader": "hartwelkisaka",
+        "uploaderProfileUrl": "https://sketchfab.com/hartwelkisaka",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/mclaren-p1-e791b5aee5c6497c83994f4e5f1db84b",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-15.33.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 33,
+        "currentNodeNameCount": 33,
+        "currentMaterialNamesMatchedOriginal": 33,
+        "currentMaterialNameCount": 33
+      },
+      "riskTier": "ELEVATED",
+      "riskEvidence": "Indexed Sketchfab listing has NoAI flag; confirm constraints for any AI-based derivative pipeline",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "mclaren_senna_free.glb",
+      "original": {
+        "path": "assets/models_original/mclaren_senna_free.glb",
+        "bytes": 26986904,
+        "sha256": "ffd124e440fad20faa83b633d27225c8138f9ae6b58cb1ee9846549eb6e1333d",
+        "generator": "Sketchfab-16.99.0",
+        "assetCopyright": null,
+        "nodeCount": 412,
+        "materialCount": 37,
+        "imageCount": 0
+      },
+      "prepared": {
+        "path": "assets/models_prepared/mclaren_senna_free.glb",
+        "bytes": 1493268,
+        "sha256": "34704f06580bdf04595d76e6b1e7b01f00ce989dcf28cfca2e0d1f3a1e6f3ddd",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 36,
+        "materialCount": 36,
+        "imageCount": 0
+      },
+      "public": {
+        "path": "assets/models/mclaren_senna_free.glb",
+        "bytes": 1632788,
+        "sha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 36,
+        "materialCount": 36,
+        "imageCount": 0
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "McLaren Senna Free",
+        "uploader": "Black Snow",
+        "uploaderProfileUrl": "https://sketchfab.com/BlackSnow02",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/mclaren-senna-free-ea3e43a6eb004853a87fe9c58422eb96",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.99.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 36,
+        "currentNodeNameCount": 36,
+        "currentMaterialNamesMatchedOriginal": 36,
+        "currentMaterialNameCount": 36
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "mercedes-amg_project-one.glb",
+      "original": {
+        "path": "assets/models_original/mercedes-amg_project-one.glb",
+        "bytes": 3266640,
+        "sha256": "2110558d2ce4b6f27330ca6f4debc5f9bbd5bdb2b179862e103068d9369476a7",
+        "generator": "Sketchfab-16.61.0",
+        "assetCopyright": null,
+        "nodeCount": 163,
+        "materialCount": 30,
+        "imageCount": 5
+      },
+      "prepared": {
+        "path": "assets/models_prepared/mercedes-amg_project-one.glb",
+        "bytes": 866236,
+        "sha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 27,
+        "materialCount": 27,
+        "imageCount": 4
+      },
+      "public": {
+        "path": "assets/models/mercedes-amg_project-one.glb",
+        "bytes": 866236,
+        "sha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 27,
+        "materialCount": 27,
+        "imageCount": 4
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Mercedes-AMG Project-ONE",
+        "uploader": "dannzjs",
+        "uploaderProfileUrl": "https://sketchfab.com/dannzjs",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/mercedes-amg-project-one-8f76cd6087b54380b54075a30e662a02",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.61.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": true,
+        "currentNodeNamesMatchedOriginal": 27,
+        "currentNodeNameCount": 27,
+        "currentMaterialNamesMatchedOriginal": 27,
+        "currentMaterialNameCount": 27
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "pagani_huayra_free.glb",
+      "original": {
+        "path": "assets/models_original/pagani_huayra_free.glb",
+        "bytes": 12499188,
+        "sha256": "6a588b97bf2dc99f675cbbc675df5a7509b58b1fcaf85a58b990bf91a54963d9",
+        "generator": "Sketchfab-16.95.0",
+        "assetCopyright": null,
+        "nodeCount": 65,
+        "materialCount": 39,
+        "imageCount": 0
+      },
+      "prepared": {
+        "path": "assets/models_prepared/pagani_huayra_free.glb",
+        "bytes": 1513836,
+        "sha256": "d263533cedeab949a0afcc6fccdc538f9d717b7516f4646ff2ad86426ddd9b31",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 36,
+        "materialCount": 36,
+        "imageCount": 0
+      },
+      "public": {
+        "path": "assets/models/pagani_huayra_free.glb",
+        "bytes": 1656572,
+        "sha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 36,
+        "materialCount": 36,
+        "imageCount": 0
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Pagani Huayra [Free]",
+        "uploader": "Black Snow",
+        "uploaderProfileUrl": "https://sketchfab.com/BlackSnow02",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/pagani-huayra-free-c2d61a9f53a54a229547bb76e4b71e25",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.95.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 36,
+        "currentNodeNameCount": 36,
+        "currentMaterialNamesMatchedOriginal": 36,
+        "currentMaterialNameCount": 36
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "pagani_utopia_2023.glb",
+      "original": {
+        "path": "assets/models_original/pagani_utopia_2023.glb",
+        "bytes": 24659408,
+        "sha256": "18495ec2c69500cd9922f77d1a93292ab2aa03b0027d1c7ea4fd6309e77e4ba3",
+        "generator": "Sketchfab-16.0.0",
+        "assetCopyright": null,
+        "nodeCount": 458,
+        "materialCount": 33,
+        "imageCount": 38
+      },
+      "prepared": {
+        "path": "assets/models_prepared/pagani_utopia_2023.glb",
+        "bytes": 3289692,
+        "sha256": "9713070cc2ce4b3b3241c36ab1789357a98e2c3351974753dda6d80374a4761c",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 33,
+        "materialCount": 33,
+        "imageCount": 35
+      },
+      "public": {
+        "path": "assets/models/pagani_utopia_2023.glb",
+        "bytes": 3605996,
+        "sha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 33,
+        "materialCount": 33,
+        "imageCount": 35
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Pagani Utopia 2023",
+        "uploader": "DFLEX",
+        "uploaderProfileUrl": "https://sketchfab.com/DFLEX",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/pagani-utopia-2023-a8a0264c80714a21b6f3e2ab4b538b0b",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.0.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 33,
+        "currentNodeNameCount": 33,
+        "currentMaterialNamesMatchedOriginal": 33,
+        "currentMaterialNameCount": 33
+      },
+      "riskTier": "ELEVATED",
+      "riskEvidence": "Original material names use CSR2_ prefix; investigate game-derived asset provenance without assuming it",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "porsche_911_with_interior.glb",
+      "original": {
+        "path": "assets/models_original/porsche_911_with_interior.glb",
+        "bytes": 40710436,
+        "sha256": "aef53d169d8778124bafea96b0385f2228493664cc1f231f9847cb35806c989f",
+        "generator": "Sketchfab-16.25.0",
+        "assetCopyright": null,
+        "nodeCount": 149,
+        "materialCount": 37,
+        "imageCount": 46
+      },
+      "prepared": {
+        "path": "assets/models_prepared/porsche_911_with_interior.glb",
+        "bytes": 3871692,
+        "sha256": "5ed2f6296f7c2c6657d93cc36e04a85caeae84d8c8f07d704a7d2026b707eae6",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 37,
+        "materialCount": 37,
+        "imageCount": 45
+      },
+      "public": {
+        "path": "assets/models/porsche_911_with_interior.glb",
+        "bytes": 4092320,
+        "sha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 37,
+        "materialCount": 37,
+        "imageCount": 45
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Porsche 911 with interior",
+        "uploader": "n.brizitskaya",
+        "uploaderProfileUrl": "https://sketchfab.com/n.brizitskaya",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/porsche-911-with-interior-877b1bc1739f4a2bb65d62fd7ffd9f75",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-16.25.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 37,
+        "currentNodeNameCount": 37,
+        "currentMaterialNamesMatchedOriginal": 37,
+        "currentMaterialNameCount": 37
+      },
+      "riskTier": "ELEVATED",
+      "riskEvidence": "Listing identifies a 911 Turbo S; VELANCE calls it Carrera S",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    },
+    {
+      "file": "porsche_918_spyder_2015.glb",
+      "original": {
+        "path": "assets/models_original/porsche_918_spyder_2015.glb",
+        "bytes": 11809420,
+        "sha256": "f5bd0da07975ae42a70af6a593cad546db71ff689a9504e2bef1514f9cd0d707",
+        "generator": "Sketchfab-0.6.0",
+        "assetCopyright": null,
+        "nodeCount": 685,
+        "materialCount": 56,
+        "imageCount": 27
+      },
+      "prepared": {
+        "path": "assets/models_prepared/porsche_918_spyder_2015.glb",
+        "bytes": 1903908,
+        "sha256": "0622443b6a0c66d6696049861566fc2bf0c402653fa6d3d0dae4bd459bcce7af",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 53,
+        "materialCount": 53,
+        "imageCount": 26
+      },
+      "public": {
+        "path": "assets/models/porsche_918_spyder_2015.glb",
+        "bytes": 2087852,
+        "sha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+        "generator": "glTF-Transform v4.5.1",
+        "assetCopyright": null,
+        "nodeCount": 53,
+        "materialCount": 53,
+        "imageCount": 26
+      },
+      "embeddedSketchfabExporterEvidence": {
+        "title": "Porsche 918 Spyder 2015",
+        "uploader": "3D Cars Studio",
+        "uploaderProfileUrl": "https://sketchfab.com/3DC_STUDIO",
+        "sourceModelUrl": "https://sketchfab.com/3d-models/porsche-918-spyder-2015-b8d069b411804e43bccccd2e9e6fc1e7",
+        "licenseLabelAtExport": "CC-BY-4.0",
+        "licenseUrlAtExport": "http://creativecommons.org/licenses/by/4.0/",
+        "assetGenerator": "Sketchfab-0.6.0",
+        "modelUrlConfidence": "HIGH_LOCAL_METADATA"
+      },
+      "independentWebResearch": {
+        "checkedDate": "2026-11-17",
+        "method": "Indexed public Sketchfab result; direct Sketchfab fetch commonly 403",
+        "exactUrlCorroborated": true,
+        "currentIndexedLicense": "CC-BY-4.0",
+        "downloadButtonObservedInIndex": true,
+        "chainOfTitleVerified": false,
+        "assetDownloadRetested": false,
+        "additionalEvidenceUrls": []
+      },
+      "forensicIdentity": {
+        "originalAndPublicShaEqual": false,
+        "preparedAndPublicShaEqual": false,
+        "currentNodeNamesMatchedOriginal": 53,
+        "currentNodeNameCount": 53,
+        "currentMaterialNamesMatchedOriginal": 53,
+        "currentMaterialNameCount": 53
+      },
+      "riskTier": "UNRESOLVED",
+      "riskEvidence": "The listing CC label alone does not prove the uploader owns all component rights",
+      "clearanceStatus": "UNVERIFIED",
+      "independentLegalSignoff": false,
+      "requiredNextProof": [
+        "Original author or authorized licensor and all upstream asset/texture rights",
+        "Archived correct license effective for exact downloaded revision and commercial/public use",
+        "Proof distribution of optimized standalone GLB via self-hosted WebGL/CDN is permitted",
+        "Attribution plus 80 derivative editorial WebP rights and independent legal signoff"
+      ]
+    }
+  ]
+}

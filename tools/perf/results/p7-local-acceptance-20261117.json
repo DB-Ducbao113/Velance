@@ -1,0 +1,66 @@
+{
+  "format": "velance-p7-local-acceptance/1",
+  "atUtc": "2026-11-17T05:50:13.875Z",
+  "node": "v24.21.0",
+  "result": "PASS_LOCAL_BROWSER_AND_NATIVE",
+  "publicLaunch": "NO_GO",
+  "internetDeploymentAuthorized": false,
+  "cloudDeploymentPerformed": false,
+  "nativeTests": {
+    "tests": 21,
+    "passed": 21,
+    "failed": 0
+  },
+  "rightsAudit": {
+    "result": "PASS_LOCAL",
+    "publicLaunch": "NO_GO",
+    "g0": "BLOCKED",
+    "approved": 0,
+    "unverified": 96,
+    "additionalRightsNeeded": [
+      "/assets/environment/private_garage_1080x1350.webp",
+      "/assets/environment/private_garage_1920x1080.webp"
+    ]
+  },
+  "sourceReleaseId": "b77bf5a4c6e1077782a94279e0ba8eda87ff96d3cca42ce94496896b70384728",
+  "sourceReleaseFiles": 126,
+  "historicalP4ReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "historicalP4FullBrowserEvidenceAppliesToCurrentRelease": false,
+  "headedBrowser": {
+    "result": "PASS_LOCAL",
+    "releaseId": "b77bf5a4c6e1077782a94279e0ba8eda87ff96d3cca42ce94496896b70384728",
+    "backends": [
+      "webgl2",
+      "webgpu"
+    ],
+    "coldNetworkBytes": {
+      "webgpu": 1940719,
+      "webgl2": 1940719
+    },
+    "report": "tools/perf/results/p7-lazy-browser-20261117.json"
+  },
+  "realDatabase": {
+    "before": {
+      "bytes": 155648,
+      "modifiedMs": 1794754488799.5728,
+      "changedMs": 1794754488799.5728
+    },
+    "after": {
+      "bytes": 155648,
+      "modifiedMs": 1794754488799.5728,
+      "changedMs": 1794754488799.5728
+    },
+    "untouched": true
+  },
+  "providerGates": {
+    "assetLicenseAndLegalSignoff": "BLOCKED",
+    "privacyLegalSignoff": "BLOCKED",
+    "privateOriginCdnTlsWaf": "NEEDS_PROVIDER_TEST",
+    "opsSsoMfaRbac": "NEEDS_PROVIDER_TEST",
+    "encryptedOffHostRecovery": "NEEDS_PROVIDER_TEST",
+    "externalAlertDelivery": "NEEDS_PROVIDER_TEST",
+    "realMultiRegionWanSoak": "NEEDS_PROVIDER_TEST",
+    "canaryAndProviderRollback": "NEEDS_PROVIDER_TEST",
+    "publicOwnerApproval": "NO_GO"
+  }
+}

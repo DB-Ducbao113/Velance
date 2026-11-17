@@ -1,0 +1,624 @@
+{
+  "format": "velance-p4-browser/1",
+  "timestamp": "2026-11-17T04:37:20.531Z",
+  "environment": {
+    "node": "v24.21.0",
+    "chrome": "Chrome/157.0.8103.79",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "27.0.0",
+    "cpu": "Apple M5",
+    "logicalCpus": 10
+  },
+  "settings": {
+    "backends": [
+      "webgpu",
+      "webgl"
+    ],
+    "pairs": 3,
+    "profile": "loopback",
+    "headless": false,
+    "browserCache": "warm reload in fresh context per pair",
+    "telemetryOptedOut": true,
+    "localOnly": true,
+    "sourceAssetsUnchanged": true,
+    "testStages": [
+      "home-idle after loaded16",
+      "overview idle",
+      "selected-orbit drag"
+    ]
+  },
+  "release": {
+    "id": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+    "files": 125
+  },
+  "verdicts": [
+    {
+      "backend": "webgpu",
+      "stage": "home",
+      "deltasMs": [
+        -0.02,
+        0,
+        -0.03
+      ],
+      "pairedMedianDeltaMs": -0.02,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    },
+    {
+      "backend": "webgpu",
+      "stage": "overview",
+      "deltasMs": [
+        0.01,
+        0,
+        0.03
+      ],
+      "pairedMedianDeltaMs": 0.01,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    },
+    {
+      "backend": "webgpu",
+      "stage": "orbit",
+      "deltasMs": [
+        0,
+        -0.01,
+        -0.03
+      ],
+      "pairedMedianDeltaMs": -0.01,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    },
+    {
+      "backend": "webgl2",
+      "stage": "home",
+      "deltasMs": [
+        -0.05,
+        -0.15,
+        0.16
+      ],
+      "pairedMedianDeltaMs": -0.05,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    },
+    {
+      "backend": "webgl2",
+      "stage": "overview",
+      "deltasMs": [
+        -0.02,
+        -0.06,
+        0.14
+      ],
+      "pairedMedianDeltaMs": -0.02,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    },
+    {
+      "backend": "webgl2",
+      "stage": "orbit",
+      "deltasMs": [
+        -0.08,
+        -0.1,
+        -0.07
+      ],
+      "pairedMedianDeltaMs": -0.08,
+      "criterion": "median paired avg-frame-gap delta < 1.0 ms",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "name": "baseline",
+      "backend": "webgpu",
+      "pair": 0,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 180,
+        "avg": 8.35,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.4,
+        "max": 10.6
+      },
+      "overview": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.9,
+        "p99": 9.2,
+        "max": 9.4
+      },
+      "orbit": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.9,
+        "p99": 9.3,
+        "max": 9.3
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgpu",
+      "pair": 0,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.4,
+        "max": 9.4
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.34,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 9.4,
+        "max": 9.4
+      },
+      "orbit": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.4,
+        "max": 9.4
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgpu",
+      "pair": 1,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 179,
+        "avg": 8.38,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.4,
+        "max": 16.2
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.6,
+        "max": 11.1
+      },
+      "orbit": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.4,
+        "max": 9.4
+      },
+      "errors": []
+    },
+    {
+      "name": "baseline",
+      "backend": "webgpu",
+      "pair": 1,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 179,
+        "avg": 8.38,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.3,
+        "max": 16.6
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.5,
+        "p99": 9.2,
+        "max": 9.2
+      },
+      "orbit": {
+        "frames": 180,
+        "avg": 8.34,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.3,
+        "max": 9.3
+      },
+      "errors": []
+    },
+    {
+      "name": "baseline",
+      "backend": "webgpu",
+      "pair": 2,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 180,
+        "avg": 8.36,
+        "p50": 8.3,
+        "p95": 8.9,
+        "p99": 9.3,
+        "max": 10.5
+      },
+      "overview": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.9,
+        "p99": 9.3,
+        "max": 9.4
+      },
+      "orbit": {
+        "frames": 180,
+        "avg": 8.36,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 9.4,
+        "max": 10.5
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgpu",
+      "pair": 2,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.9,
+        "p99": 9.4,
+        "max": 9.4
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.36,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.5,
+        "max": 10.5
+      },
+      "orbit": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.2,
+        "max": 9.4
+      },
+      "errors": []
+    },
+    {
+      "name": "baseline",
+      "backend": "webgl2",
+      "pair": 0,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 179,
+        "avg": 8.38,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 9.4,
+        "max": 16.7
+      },
+      "overview": {
+        "frames": 179,
+        "avg": 8.38,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 9.4,
+        "max": 16.7
+      },
+      "orbit": {
+        "frames": 180,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.3,
+        "max": 9.3
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgl2",
+      "pair": 0,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 9.3,
+        "max": 9.4
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.36,
+        "p50": 8.3,
+        "p95": 9,
+        "p99": 9.3,
+        "max": 16.6
+      },
+      "orbit": {
+        "frames": 182,
+        "avg": 8.25,
+        "p50": 8.3,
+        "p95": 8.6,
+        "p99": 9.2,
+        "max": 9.2
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgl2",
+      "pair": 1,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 184,
+        "avg": 8.18,
+        "p50": 8.2,
+        "p95": 9.1,
+        "p99": 10,
+        "max": 12.2
+      },
+      "overview": {
+        "frames": 183,
+        "avg": 8.24,
+        "p50": 8.2,
+        "p95": 8.8,
+        "p99": 9.3,
+        "max": 16.9
+      },
+      "orbit": {
+        "frames": 182,
+        "avg": 8.28,
+        "p50": 8.3,
+        "p95": 9.2,
+        "p99": 10.1,
+        "max": 10.5
+      },
+      "errors": []
+    },
+    {
+      "name": "baseline",
+      "backend": "webgl2",
+      "pair": 1,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 9.9,
+        "max": 10
+      },
+      "overview": {
+        "frames": 181,
+        "avg": 8.3,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 10.6,
+        "max": 17.6
+      },
+      "orbit": {
+        "frames": 179,
+        "avg": 8.38,
+        "p50": 8.3,
+        "p95": 10,
+        "p99": 11.6,
+        "max": 11.7
+      },
+      "errors": []
+    },
+    {
+      "name": "baseline",
+      "backend": "webgl2",
+      "pair": 2,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 182,
+        "avg": 8.27,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 10.5,
+        "max": 10.5
+      },
+      "overview": {
+        "frames": 180,
+        "avg": 8.34,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 10.6,
+        "max": 17
+      },
+      "orbit": {
+        "frames": 179,
+        "avg": 8.4,
+        "p50": 8.3,
+        "p95": 9.1,
+        "p99": 10.7,
+        "max": 11.7
+      },
+      "errors": []
+    },
+    {
+      "name": "candidate",
+      "backend": "webgl2",
+      "pair": 2,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "profile": "loopback",
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "telemetryEnabled": false
+      },
+      "home": {
+        "frames": 178,
+        "avg": 8.43,
+        "p50": 8.4,
+        "p95": 10.2,
+        "p99": 11.2,
+        "max": 14.3
+      },
+      "overview": {
+        "frames": 178,
+        "avg": 8.48,
+        "p50": 8.4,
+        "p95": 10.4,
+        "p99": 16.6,
+        "max": 16.6
+      },
+      "orbit": {
+        "frames": 181,
+        "avg": 8.33,
+        "p50": 8.3,
+        "p95": 8.7,
+        "p99": 9.3,
+        "max": 9.3
+      },
+      "errors": []
+    }
+  ],
+  "gates": {
+    "browserErrors": true,
+    "all16AndBackend": true,
+    "frameDelta": true
+  },
+  "caveats": [
+    "GPU-frame measurements are local-device paired samples, not CDN/network capacity.",
+    "No exact visual pixel equivalence assertion, screenshot suite, real iPhone or full P4 fleet matrix here."
+  ]
+}

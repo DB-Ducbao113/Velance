@@ -1,0 +1,68 @@
+{
+  "format": "velance-backend-p2-local/1",
+  "recordedAtUtc": "2026-11-17T04:02:23.784Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "osRelease": "27.0.0",
+    "cpuModel": "Apple M5",
+    "logicalCpuCount": 10,
+    "physicalMemoryBytes": 34359738368
+  },
+  "gate": {
+    "status": "pass",
+    "syntaxChecks": 12,
+    "nativeTestFiles": 4,
+    "command": "node tools/ops/check.mjs",
+    "rawTapCommand": "node --test --test-concurrency=1 --test-reporter=tap tools/ops/test/*.mjs",
+    "rawTap": "tools/perf/results/backend-p2-local-passed.tap",
+    "tests": {
+      "tests": 30,
+      "pass": 30,
+      "fail": 0,
+      "skipped": 0,
+      "duration_ms": 2276.681208
+    }
+  },
+  "previousFailureRetained": {
+    "rawTap": "tools/perf/results/backend-p2-local-failed.tap",
+    "tests": {
+      "tests": 27,
+      "pass": 26,
+      "fail": 1,
+      "skipped": 0,
+      "duration_ms": 6713.6865
+    },
+    "failingTest": "complete 413 at byte cap for fixed and chunked bodies",
+    "error": "EPIPE (client sent extra bytes after early HTTP rejection)",
+    "resolution": "bounded header-only fixed oversize and incremental CAP+1 chunked test; complete 413 response required",
+    "focusedTestRepeatedPasses": 10
+  },
+  "isolatedVerification": [
+    "ACKed SQLite receipts persist across SIGKILL of owned fixture child, restart and duplicate replay",
+    "native concurrent backup restores internally consistent receipts/samples/events and opens in the read API",
+    "temporary DB write lock yields DB_BUSY 503 and recovers after rollback",
+    "backup manifest checksum/schema/content verification, corrupt-newest fallback and protected restore destination",
+    "retention read-only dry run and fixture apply after verified pre-delete snapshot",
+    "health/readiness, metrics/log field filtering, worker failure, summary windows/cursors and admission controls",
+    "temporary SQLite read-only volume returns DB_STORAGE_FAILURE on startup, with no alternate writer"
+  ],
+  "limitations": [
+    "not a 30-day capacity or soak benchmark",
+    "not public production readiness",
+    "no provider TLS, SSO, CDN, off-host encrypted backup or external on-call alert service",
+    "license review and P3/P4/P5 acceptance remain outstanding"
+  ],
+  "dataSafety": "Only temporary fixture databases/processes used; production telemetry.db unchanged.",
+  "previousSuccessfulRun": {
+    "rawTap": "tools/perf/results/backend-p2-local-pre-readonly.tap",
+    "tests": {
+      "tests": 29,
+      "pass": 29,
+      "fail": 0,
+      "skipped": 0,
+      "duration_ms": 2063.037292
+    }
+  }
+}

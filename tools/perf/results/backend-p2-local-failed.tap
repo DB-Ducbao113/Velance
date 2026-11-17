@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: query/storage opt-out has no UUID, context, network, timers or listeners; static is HEAD-only
+ok 1 - query/storage opt-out has no UUID, context, network, timers or listeners; static is HEAD-only
+  ---
+  duration_ms: 2.09275
+  type: 'test'
+  ...
+# Subtest: leaving during activation prevents late HEAD from starting collection
+ok 2 - leaving during activation prevents late HEAD from starting collection
+  ---
+  duration_ms: 0.344459
+  type: 'test'
+  ...
+# Subtest: metadata-only checkpoints, immutable snapshot and late gate entry
+ok 3 - metadata-only checkpoints, immutable snapshot and late gate entry
+  ---
+  duration_ms: 1.53325
+  type: 'test'
+  ...
+# Subtest: single-flight regular flush, hidden checkpoint and terminal callbacks cannot resurrect
+ok 4 - single-flight regular flush, hidden checkpoint and terminal callbacks cannot resurrect
+  ---
+  duration_ms: 1.542459
+  type: 'test'
+  ...
+# Subtest: hidden/visible and bfcache preserve session with exactly one sampler; false beacon uses keepalive
+ok 5 - hidden/visible and bfcache preserve session with exactly one sampler; false beacon uses keepalive
+  ---
+  duration_ms: 0.659833
+  type: 'test'
+  ...
+# Subtest: failure disables quietly and removes every listener/timer without retry
+ok 6 - failure disables quietly and removes every listener/timer without retry
+  ---
+  duration_ms: 0.692167
+  type: 'test'
+  ...
+# Subtest: bounded UTF-8 batches drain queues without truncating JSON; errors redact URLs and tokens
+ok 7 - bounded UTF-8 batches drain queues without truncating JSON; errors redact URLs and tokens
+  ---
+  duration_ms: 3.083292
+  type: 'test'
+  ...
+# Subtest: selected orbit, settling, flight and overview use active cadence; idle/offscreen/fallback stay unknown
+ok 8 - selected orbit, settling, flight and overview use active cadence; idle/offscreen/fallback stay unknown
+  ---
+  duration_ms: 0.903125
+  type: 'test'
+  ...
+# Subtest: worker backup, manifest verification and safe restore use private temporary files
+ok 9 - worker backup, manifest verification and safe restore use private temporary files
+  ---
+  duration_ms: 229.038209
+  type: 'test'
+  ...
+# Subtest: retention dry run is non-destructive; apply snapshots first and preserves current sessions
+ok 10 - retention dry run is non-destructive; apply snapshots first and preserves current sessions
+  ---
+  duration_ms: 172.825792
+  type: 'test'
+  ...
+# Subtest: backup directory permissions, missing database and operation aborts fail safely
+ok 11 - backup directory permissions, missing database and operation aborts fail safely
+  ---
+  duration_ms: 31.755458
+  type: 'test'
+  ...
+# Subtest: rotation removes only oldest matching backups and manifests
+ok 12 - rotation removes only oldest matching backups and manifests
+  ---
+  duration_ms: 108.423625
+  type: 'test'
+  ...
+# Subtest: scheduler bootstrap skips corrupted newest snapshot and trusts verified older backup
+ok 13 - scheduler bootstrap skips corrupted newest snapshot and trusts verified older backup
+  ---
+  duration_ms: 137.035625
+  type: 'test'
+  ...
+# Subtest: metric histograms are cumulative; cardinality and structured-log fields are bounded
+ok 14 - metric histograms are cumulative; cardinality and structured-log fields are bounded
+  ---
+  duration_ms: 0.677
+  type: 'test'
+  ...
+# Subtest: ACKed receipts survive SIGKILL of a fixture child and duplicate replay after restart
+ok 15 - ACKed receipts survive SIGKILL of a fixture child and duplicate replay after restart
+  ---
+  duration_ms: 133.141917
+  type: 'test'
+  ...
+# Subtest: static allowlist, MIME, redirects, canonical containment and custom DB
+ok 16 - static allowlist, MIME, redirects, canonical containment and custom DB
+  ---
+  duration_ms: 67.843167
+  type: 'test'
+  ...
+# Subtest: Host, Origin, Fetch metadata and CLI boundaries
+ok 17 - Host, Origin, Fetch metadata and CLI boundaries
+  ---
+  duration_ms: 190.595625
+  type: 'test'
+  ...
+# Subtest: complete 413 at byte cap for fixed and chunked bodies, abort survival, HTTP status contracts
+not ok 18 - complete 413 at byte cap for fixed and chunked bodies, abort survival, HTTP status contracts
+  ---
+  duration_ms: 5040.959583
+  type: 'test'
+  location: '/Users/baobungbu/Vibe Coding/VELANCE/tools/ops/test/server.mjs:96:1'
+  failureType: 'testCodeFailure'
+  error: 'write EPIPE'
+  code: 'EPIPE'
+  stack: |-
+    WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:87:19)
+  ...
+# Subtest: strict all-or-nothing validation, JSON roundtrip, multi-byte strings
+ok 19 - strict all-or-nothing validation, JSON roundtrip, multi-byte strings
+  ---
+  duration_ms: 65.412209
+  type: 'test'
+  ...
+# Subtest: ordering, immutable identity, dedupe after restart and transactional receipt rollback
+ok 20 - ordering, immutable identity, dedupe after restart and transactional receipt rollback
+  ---
+  duration_ms: 63.040459
+  type: 'test'
+  ...
+# Subtest: legacy migration backs up every row and is idempotent
+ok 21 - legacy migration backs up every row and is idempotent
+  ---
+  duration_ms: 52.428042
+  type: 'test'
+  ...
+# Subtest: summary percentiles exclude unknown values and preserve partial/fallback semantics
+ok 22 - summary percentiles exclude unknown values and preserve partial/fallback semantics
+  ---
+  duration_ms: 33.67625
+  type: 'test'
+  ...
+# Subtest: summary windows reject malformed bounds, exclude upper edge and cache exact windows
+ok 23 - summary windows reject malformed bounds, exclude upper edge and cache exact windows
+  ---
+  duration_ms: 36.164291
+  type: 'test'
+  ...
+# Subtest: session and detail cursors are stable, bounded and reject malformed cursors
+ok 24 - session and detail cursors are stable, bounded and reject malformed cursors
+  ---
+  duration_ms: 42.511333
+  type: 'test'
+  ...
+# Subtest: admission rejects bursts without losing accepted receipts or capacity
+ok 25 - admission rejects bursts without losing accepted receipts or capacity
+  ---
+  duration_ms: 68.199208
+  type: 'test'
+  ...
+# Subtest: health, metrics, request logs and worker failure retain expected contracts
+ok 26 - health, metrics, request logs and worker failure retain expected contracts
+  ---
+  duration_ms: 33.553333
+  type: 'test'
+  ...
+# Subtest: writer failure denies further ingestion and retains committed data
+ok 27 - writer failure denies further ingestion and retains committed data
+  ---
+  duration_ms: 32.044709
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 26
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6713.6865

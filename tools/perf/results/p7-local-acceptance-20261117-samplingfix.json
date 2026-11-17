@@ -1,0 +1,66 @@
+{
+  "format": "velance-p7-local-acceptance/1",
+  "atUtc": "2026-11-17T05:53:23.959Z",
+  "node": "v24.21.0",
+  "result": "PASS_LOCAL_BROWSER_AND_NATIVE",
+  "publicLaunch": "NO_GO",
+  "internetDeploymentAuthorized": false,
+  "cloudDeploymentPerformed": false,
+  "nativeTests": {
+    "tests": 22,
+    "passed": 22,
+    "failed": 0
+  },
+  "rightsAudit": {
+    "result": "PASS_LOCAL",
+    "publicLaunch": "NO_GO",
+    "g0": "BLOCKED",
+    "approved": 0,
+    "unverified": 96,
+    "additionalRightsNeeded": [
+      "/assets/environment/private_garage_1080x1350.webp",
+      "/assets/environment/private_garage_1920x1080.webp"
+    ]
+  },
+  "sourceReleaseId": "bb69a78a339519344b38a49425c55d0a8c87a50cccebcd27ec9329aef52f1bd8",
+  "sourceReleaseFiles": 126,
+  "historicalP4ReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "historicalP4FullBrowserEvidenceAppliesToCurrentRelease": false,
+  "headedBrowser": {
+    "result": "PASS_LOCAL",
+    "releaseId": "bb69a78a339519344b38a49425c55d0a8c87a50cccebcd27ec9329aef52f1bd8",
+    "backends": [
+      "webgl2",
+      "webgpu"
+    ],
+    "coldNetworkBytes": {
+      "webgpu": 1940806,
+      "webgl2": 1940806
+    },
+    "report": "tools/perf/results/p7-lazy-browser-20261117-samplingfix.json"
+  },
+  "realDatabase": {
+    "before": {
+      "bytes": 155648,
+      "modifiedMs": 1794754488799.5728,
+      "changedMs": 1794754488799.5728
+    },
+    "after": {
+      "bytes": 155648,
+      "modifiedMs": 1794754488799.5728,
+      "changedMs": 1794754488799.5728
+    },
+    "untouched": true
+  },
+  "providerGates": {
+    "assetLicenseAndLegalSignoff": "BLOCKED",
+    "privacyLegalSignoff": "BLOCKED",
+    "privateOriginCdnTlsWaf": "NEEDS_PROVIDER_TEST",
+    "opsSsoMfaRbac": "NEEDS_PROVIDER_TEST",
+    "encryptedOffHostRecovery": "NEEDS_PROVIDER_TEST",
+    "externalAlertDelivery": "NEEDS_PROVIDER_TEST",
+    "realMultiRegionWanSoak": "NEEDS_PROVIDER_TEST",
+    "canaryAndProviderRollback": "NEEDS_PROVIDER_TEST",
+    "publicOwnerApproval": "NO_GO"
+  }
+}

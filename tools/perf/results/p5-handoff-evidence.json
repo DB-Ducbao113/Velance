@@ -1,0 +1,12 @@
+{
+  "format": "velance-p5-handoff-check/1",
+  "timestamp": "2026-11-17T05:00:54.022Z",
+  "mode": "evidence",
+  "node": "v24.21.0",
+  "nativeQualityGate": "PASS",
+  "sourceMatchesAcceptedRelease": true,
+  "publicLaunch": "NOT_AUTHORIZED",
+  "releaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "snapshotFiles": 125,
+  "p4ExtendedAcceptance": "PASS_LOCAL"
+}

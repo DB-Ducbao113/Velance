@@ -1,0 +1,585 @@
+{
+  "format": "velance-p4-delivery-capacity/1",
+  "measuredAtUtc": "2026-11-17T04:38:31.274Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "logicalCpus": 10,
+    "host": "127.0.0.1",
+    "clientAndServerInSameProcess": true
+  },
+  "config": {
+    "durationSecondsPerMode": 10,
+    "targetRpsPerMode": 10,
+    "maxConcurrency": 16,
+    "totalOfferedSteadyState": 300,
+    "separateConcurrencyProbeOffers": 16,
+    "maxResponseBytes": 2097152,
+    "requestTimeoutMs": 4000,
+    "maxDurationSecondsPerMode": 30,
+    "modes": [
+      "uncached",
+      "warm",
+      "identity"
+    ],
+    "rateModel": "open-loop scheduled arrivals; late arrivals shed instead of burst replay"
+  },
+  "fixture": {
+    "source": "generated in private OS temp directory; no repository assets read",
+    "fileCount": 4,
+    "sourceBytes": 511066,
+    "sizes": {
+      "index.html": 4009,
+      "src/app.js": 15377,
+      "assets/models/synthetic.glb": 393356,
+      "assets/images/synthetic/angle.webp": 98324
+    },
+    "releaseId": "3a6fbdd028d26674fdf66e92cd5b44b2b680f739833e504302b32729390b396b",
+    "snapshotFiles": 4,
+    "releaseBytes": 511066,
+    "diskBefore": {
+      "apparentBytes": 1022915,
+      "regularFiles": 10,
+      "filesystemAvailableBytes": 736202575872
+    },
+    "diskAfter": {
+      "apparentBytes": 1022915,
+      "regularFiles": 10,
+      "filesystemAvailableBytes": 736201199616
+    },
+    "binaryWebpIsTransferSurrogate": true
+  },
+  "priming": {
+    "requests": 4,
+    "bodyBytes": 492869,
+    "estimatedHttp1HeaderBytes": 1619,
+    "headers": {
+      "html": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "vary": "Accept-Encoding",
+        "etag": "\"76b1adc33d9977853810005b201abc32ab743decd37d35a62d71b78195e217b2-br\"",
+        "content-type": "text/html; charset=utf-8",
+        "content-encoding": "br",
+        "content-length": "143",
+        "x-content-type-options": "nosniff",
+        "cross-origin-resource-policy": "same-origin"
+      },
+      "js": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "vary": "Accept-Encoding",
+        "etag": "\"039f31267d17d1684a973e5a4075868d4c7ee8aedaaa663a2eaacaa356895ea5-gzip\"",
+        "content-type": "text/javascript; charset=utf-8",
+        "content-encoding": "gzip",
+        "content-length": "1046",
+        "x-content-type-options": "nosniff",
+        "cross-origin-resource-policy": "same-origin"
+      },
+      "glb": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "vary": "Accept-Encoding",
+        "etag": "\"09e26456b47689c8e9a10b85dbd732616772ead6929f0439966e2eecbae4a5e9-identity\"",
+        "content-type": "model/gltf-binary",
+        "content-encoding": null,
+        "content-length": "393356",
+        "x-content-type-options": "nosniff",
+        "cross-origin-resource-policy": "same-origin"
+      },
+      "webp": {
+        "cache-control": "public, max-age=31536000, immutable",
+        "vary": "Accept-Encoding",
+        "etag": "\"634d74133974b84ded0939bffe13ad0e09ad2d6c7fdf2f9d6cdd5a4fae2ce45b-identity\"",
+        "content-type": "image/webp",
+        "content-encoding": null,
+        "content-length": "98324",
+        "x-content-type-options": "nosniff",
+        "cross-origin-resource-policy": "same-origin"
+      }
+    }
+  },
+  "modes": [
+    {
+      "mode": "uncached",
+      "definition": "unconditional GET, no client cache, HTML Brotli / JS gzip / binary identity",
+      "load": {
+        "targetRps": 10,
+        "durationSeconds": 10,
+        "concurrencyLimit": 16,
+        "offered": 100,
+        "sent": 100,
+        "completed": 100,
+        "transportErrors": 0,
+        "shedConcurrency": 0,
+        "shedSchedulerLag": 0,
+        "refusedBeforeSend": 0,
+        "peakInFlight": 1,
+        "observedCompletionRps": 10,
+        "offeredWindowMs": 10000,
+        "scheduleMs": 9900.169,
+        "totalWallMs": 9901.399
+      },
+      "statusCounts": {
+        "200": 100,
+        "304": 0,
+        "429": 0,
+        "503": 0
+      },
+      "statusClasses": {
+        "2xx": 100
+      },
+      "httpErrors": {
+        "status429": 0,
+        "status503": 0,
+        "other4xx5xx": 0
+      },
+      "latencyMs": {
+        "completed": {
+          "samples": 100,
+          "p50": 1.611,
+          "p95": 4.317,
+          "p99": 8.819,
+          "max": 8.819
+        },
+        "expectedStatus": {
+          "samples": 100,
+          "p50": 1.611,
+          "p95": 4.317,
+          "p99": 8.819,
+          "max": 8.819
+        },
+        "scheduledToComplete": {
+          "samples": 100,
+          "p50": 1.893,
+          "p95": 4.152,
+          "p99": 8.883,
+          "max": 8.883
+        }
+      },
+      "transfer": {
+        "actualBodyBytes": 12321725,
+        "estimatedHttp1HeaderBytes": 40475,
+        "estimatedHttp1TotalBytes": 12362200,
+        "meanBodyBytesPerCompleted": 123217.25,
+        "excludes": "TCP/IP framing, packets, request headers, TLS; response header size reconstructed from rawHeaders"
+      },
+      "byResource": {
+        "html": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 3575,
+          "headerBytes": 10350
+        },
+        "js": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 26150,
+          "headerBytes": 10625
+        },
+        "glb": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 9833900,
+          "headerBytes": 9850
+        },
+        "webp": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 2458100,
+          "headerBytes": 9650
+        }
+      },
+      "headersObserved": {
+        "html": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"76b1adc33d9977853810005b201abc32ab743decd37d35a62d71b78195e217b2-br\"",
+          "content-type": "text/html; charset=utf-8",
+          "content-encoding": "br",
+          "content-length": "143",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "js": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"039f31267d17d1684a973e5a4075868d4c7ee8aedaaa663a2eaacaa356895ea5-gzip\"",
+          "content-type": "text/javascript; charset=utf-8",
+          "content-encoding": "gzip",
+          "content-length": "1046",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "glb": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"09e26456b47689c8e9a10b85dbd732616772ead6929f0439966e2eecbae4a5e9-identity\"",
+          "content-type": "model/gltf-binary",
+          "content-encoding": null,
+          "content-length": "393356",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "webp": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"634d74133974b84ded0939bffe13ad0e09ad2d6c7fdf2f9d6cdd5a4fae2ce45b-identity\"",
+          "content-type": "image/webp",
+          "content-encoding": null,
+          "content-length": "98324",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        }
+      },
+      "policyViolations": {},
+      "transportErrorCodes": {},
+      "resources": {
+        "processRssBeforeBytes": 75350016,
+        "processRssAfterBytes": 87293952,
+        "processPeakRssBytes": 87293952,
+        "processHeapAfterBytes": 10313920,
+        "cpuUserMs": 232.781,
+        "cpuSystemMs": 73.335,
+        "eventLoopDelayMs": {
+          "p50": 11.026,
+          "p95": 11.108,
+          "p99": 11.485,
+          "max": 15.729
+        }
+      }
+    },
+    {
+      "mode": "warm",
+      "definition": "conditional GET with primed ETag; HTTP 304, no payload",
+      "load": {
+        "targetRps": 10,
+        "durationSeconds": 10,
+        "concurrencyLimit": 16,
+        "offered": 100,
+        "sent": 100,
+        "completed": 100,
+        "transportErrors": 0,
+        "shedConcurrency": 0,
+        "shedSchedulerLag": 0,
+        "refusedBeforeSend": 0,
+        "peakInFlight": 1,
+        "observedCompletionRps": 10,
+        "offeredWindowMs": 10000,
+        "scheduleMs": 9899.564,
+        "totalWallMs": 9901.281
+      },
+      "statusCounts": {
+        "200": 0,
+        "304": 100,
+        "429": 0,
+        "503": 0
+      },
+      "statusClasses": {
+        "3xx": 100
+      },
+      "httpErrors": {
+        "status429": 0,
+        "status503": 0,
+        "other4xx5xx": 0
+      },
+      "latencyMs": {
+        "completed": {
+          "samples": 100,
+          "p50": 1.531,
+          "p95": 3.181,
+          "p99": 7.561,
+          "max": 7.561
+        },
+        "expectedStatus": {
+          "samples": 100,
+          "p50": 1.531,
+          "p95": 3.181,
+          "p99": 7.561,
+          "max": 7.561
+        },
+        "scheduledToComplete": {
+          "samples": 100,
+          "p50": 1.797,
+          "p95": 3.723,
+          "p99": 8.989,
+          "max": 8.989
+        }
+      },
+      "transfer": {
+        "actualBodyBytes": 0,
+        "estimatedHttp1HeaderBytes": 39225,
+        "estimatedHttp1TotalBytes": 39225,
+        "meanBodyBytesPerCompleted": 0,
+        "excludes": "TCP/IP framing, packets, request headers, TLS; response header size reconstructed from rawHeaders"
+      },
+      "byResource": {
+        "html": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 0,
+          "headerBytes": 10075
+        },
+        "js": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 0,
+          "headerBytes": 10325
+        },
+        "glb": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 0,
+          "headerBytes": 9500
+        },
+        "webp": {
+          "sent": 25,
+          "completed": 25,
+          "bodyBytes": 0,
+          "headerBytes": 9325
+        }
+      },
+      "headersObserved": {
+        "html": {
+          "status": 304,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"76b1adc33d9977853810005b201abc32ab743decd37d35a62d71b78195e217b2-br\"",
+          "content-type": "text/html; charset=utf-8",
+          "content-encoding": "br",
+          "content-length": null,
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "js": {
+          "status": 304,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"039f31267d17d1684a973e5a4075868d4c7ee8aedaaa663a2eaacaa356895ea5-gzip\"",
+          "content-type": "text/javascript; charset=utf-8",
+          "content-encoding": "gzip",
+          "content-length": null,
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "glb": {
+          "status": 304,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"09e26456b47689c8e9a10b85dbd732616772ead6929f0439966e2eecbae4a5e9-identity\"",
+          "content-type": "model/gltf-binary",
+          "content-encoding": null,
+          "content-length": null,
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "webp": {
+          "status": 304,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"634d74133974b84ded0939bffe13ad0e09ad2d6c7fdf2f9d6cdd5a4fae2ce45b-identity\"",
+          "content-type": "image/webp",
+          "content-encoding": null,
+          "content-length": null,
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        }
+      },
+      "policyViolations": {},
+      "transportErrorCodes": {},
+      "resources": {
+        "processRssBeforeBytes": 87293952,
+        "processRssAfterBytes": 87572480,
+        "processPeakRssBytes": 87572480,
+        "processHeapAfterBytes": 9514456,
+        "cpuUserMs": 176.481,
+        "cpuSystemMs": 63.135,
+        "eventLoopDelayMs": {
+          "p50": 11.01,
+          "p95": 11.133,
+          "p99": 11.624,
+          "max": 21.43
+        }
+      }
+    },
+    {
+      "mode": "identity",
+      "definition": "unconditional binary GET (GLB/WebP), Accept-Encoding: identity",
+      "load": {
+        "targetRps": 10,
+        "durationSeconds": 10,
+        "concurrencyLimit": 16,
+        "offered": 100,
+        "sent": 100,
+        "completed": 100,
+        "transportErrors": 0,
+        "shedConcurrency": 0,
+        "shedSchedulerLag": 0,
+        "refusedBeforeSend": 0,
+        "peakInFlight": 1,
+        "observedCompletionRps": 10,
+        "offeredWindowMs": 10000,
+        "scheduleMs": 9900.212,
+        "totalWallMs": 9901.481
+      },
+      "statusCounts": {
+        "200": 100,
+        "304": 0,
+        "429": 0,
+        "503": 0
+      },
+      "statusClasses": {
+        "2xx": 100
+      },
+      "httpErrors": {
+        "status429": 0,
+        "status503": 0,
+        "other4xx5xx": 0
+      },
+      "latencyMs": {
+        "completed": {
+          "samples": 100,
+          "p50": 1.849,
+          "p95": 3.757,
+          "p99": 5.051,
+          "max": 5.051
+        },
+        "expectedStatus": {
+          "samples": 100,
+          "p50": 1.849,
+          "p95": 3.757,
+          "p99": 5.051,
+          "max": 5.051
+        },
+        "scheduledToComplete": {
+          "samples": 100,
+          "p50": 2.033,
+          "p95": 3.815,
+          "p99": 5.541,
+          "max": 5.541
+        }
+      },
+      "transfer": {
+        "actualBodyBytes": 24584000,
+        "estimatedHttp1HeaderBytes": 39000,
+        "estimatedHttp1TotalBytes": 24623000,
+        "meanBodyBytesPerCompleted": 245840,
+        "excludes": "TCP/IP framing, packets, request headers, TLS; response header size reconstructed from rawHeaders"
+      },
+      "byResource": {
+        "html": {
+          "sent": 0,
+          "completed": 0,
+          "bodyBytes": 0,
+          "headerBytes": 0
+        },
+        "js": {
+          "sent": 0,
+          "completed": 0,
+          "bodyBytes": 0,
+          "headerBytes": 0
+        },
+        "glb": {
+          "sent": 50,
+          "completed": 50,
+          "bodyBytes": 19667800,
+          "headerBytes": 19700
+        },
+        "webp": {
+          "sent": 50,
+          "completed": 50,
+          "bodyBytes": 4916200,
+          "headerBytes": 19300
+        }
+      },
+      "headersObserved": {
+        "glb": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"09e26456b47689c8e9a10b85dbd732616772ead6929f0439966e2eecbae4a5e9-identity\"",
+          "content-type": "model/gltf-binary",
+          "content-encoding": null,
+          "content-length": "393356",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        },
+        "webp": {
+          "status": 200,
+          "cache-control": "public, max-age=31536000, immutable",
+          "vary": "Accept-Encoding",
+          "etag": "\"634d74133974b84ded0939bffe13ad0e09ad2d6c7fdf2f9d6cdd5a4fae2ce45b-identity\"",
+          "content-type": "image/webp",
+          "content-encoding": null,
+          "content-length": "98324",
+          "x-content-type-options": "nosniff",
+          "cross-origin-resource-policy": "same-origin"
+        }
+      },
+      "policyViolations": {},
+      "transportErrorCodes": {},
+      "resources": {
+        "processRssBeforeBytes": 87572480,
+        "processRssAfterBytes": 94601216,
+        "processPeakRssBytes": 94601216,
+        "processHeapAfterBytes": 9908584,
+        "cpuUserMs": 221.605,
+        "cpuSystemMs": 81.178,
+        "eventLoopDelayMs": {
+          "p50": 11.026,
+          "p95": 11.198,
+          "p99": 11.534,
+          "max": 12.337
+        }
+      }
+    }
+  ],
+  "concurrencyProbe": {
+    "kind": "simultaneous-client-requests",
+    "resource": "synthetic GLB",
+    "reason": "exercise concurrent per-request SHA256 file checks, outside rate-controlled scenarios",
+    "offered": 16,
+    "sent": 16,
+    "completed": 16,
+    "clientRequestsDispatchedTogether": 16,
+    "statuses": {
+      "200": 16,
+      "429": 0,
+      "503": 0
+    },
+    "policyViolations": {},
+    "latencyMs": {
+      "samples": 16,
+      "p50": 17.727,
+      "p95": 19.298,
+      "p99": 19.298,
+      "max": 19.298
+    },
+    "elapsedMs": 20.293,
+    "actualBodyBytes": 6293696,
+    "estimatedHttp1HeaderBytes": 6304,
+    "caveat": "Client dispatch fan-out is bounded by the agent socket cap; server-level concurrency is not directly measured."
+  },
+  "upstreamOutage": {
+    "upstream": "unavailable loopback port (no DB)",
+    "staticStatus": 200,
+    "staticComplete": true,
+    "telemetryStatus": 503,
+    "telemetryComplete": true,
+    "passed": true
+  },
+  "caveats": [
+    "Only local 127.0.0.1 HTTP/1.1. This does not measure CDN POPs, external clients, WAF, TLS, WAN latency, or global throughput.",
+    "The client and P3 preview run in the same Node process and compete for CPU, RSS and event loop; resource numbers are combined.",
+    "Uncached means an unconditional request with no client HTTP cache; the server may reuse its own compressed-representation cache.",
+    "Warm uses If-None-Match/304 to model conditional HTTP revalidation; actual CDN/browser cache hits often generate no HTTP request.",
+    "p50/p95/p99 are observed sample quantiles at the offered load; small test samples have low confidence and cannot establish user capacity.",
+    "HTTP bytes include actual received response payload, plus an estimate of serialized HTTP/1.1 response headers, excluding TCP/IP.",
+    "GLB and WebP assets are synthetic binary payloads for transfer tests; browser decoding, streaming 3D and GPU performance are not measured.",
+    "Release-file SHA256 verification happens on every served request, including GLB; OS page cache may satisfy disk reads.",
+    "The separate simultaneous GLB burst checks fan-out under the configured cap but is not a steady-state target-RPS result."
+  ]
+}

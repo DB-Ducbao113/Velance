@@ -4,7 +4,7 @@
  * Below the showroom: exactly five STATIC transparent 4K images + editorial board.
  */
 import { VEHICLES } from '../data/vehicles.js';
-import { bootNoirMotion, refreshNoirMotion, motionScrollTo, setImageLoaded, playSelectedMotion } from '../motion/motion.js';
+import { bootVelanceMotion, refreshVelanceMotion, motionScrollTo, setImageLoaded, playSelectedMotion } from '../motion/motion.js';
 const $ = id => document.getElementById(id);
 const clamp = (n, min = 0, max = 1) => Math.min(max, Math.max(min, n));
 const pad = n => String(n).padStart(2, '0');
@@ -26,6 +26,18 @@ const state = {
 function toast(text) { $('noticeText').textContent = text; $('notice').hidden = false; }
 function modelStatus(text) { $('selectedModelStatus').textContent = text; }
 function readout(text) { $('stageReadout').textContent = text; }
+function pendingPreview(index) {
+  const host = $('selectedModelHost');
+  host.querySelector('.model-loading-preview')?.remove();
+  const vehicle = VEHICLES[index];
+  if (!vehicle || state.engine?.cars.has(index)) return;
+  const img = document.createElement('img');
+  img.className = 'model-loading-preview';
+  img.alt = `${vehicle.make} ${vehicle.name} preview while 3D loads`;
+  img.decoding = 'async';
+  img.src = `./assets/images/${encodeURIComponent(vehicle.id)}/${IMG_FILES[0]}`;
+  host.appendChild(img);
+}
 
 /* ------------------------------------------------------------ 3D boot */
 async function boot3D() {
@@ -44,13 +56,27 @@ async function boot3D() {
         readout(`REAL GLB · ${loaded}/${total} PARKED`);
         if (loaded >= 1) $('garageLoader').classList.add('is-done');
         if (state.selected === index && state.engine) {
+          $('selectedModelHost').querySelector('.model-loading-preview')?.remove();
           modelStatus('DRAG TO EXPLORE · REAL GLB');
           $('selectedModelStatus').classList.add('is-ready');
           $('selectedAsset').textContent = `${(state.engine.cars.get(index)?.userData.triangles || 0).toLocaleString()} TRIANGLES`;
         }
       },
-      onReady: () => { readout('SIXTEEN BAYS · SIXTEEN MACHINES · NATIVE GLB'); $('garageLoader').classList.add('is-done'); },
-      onError: (i, msg) => { console.warn('[VÉLANCE / BAY]', i, msg); readout(`BAY ${pad(i + 1)} ASSET UNAVAILABLE`); },
+      onReady: () => { readout('SIXTEEN BAYS · ON-DEMAND NATIVE GLB'); $('garageLoader').classList.add('is-done'); },
+      onError: (i, msg) => {
+        console.warn('[VÉLANCE / BAY]', i, msg);
+        readout(`BAY ${pad(i + 1)} ASSET UNAVAILABLE`);
+        // In on-demand mode there might be no next machine to clear loader.
+        $('garageLoader').classList.add('is-done');
+        if (state.selected === i) {
+          const v = VEHICLES[i];
+          const host = $('selectedModelHost');
+          host.querySelector('.model-loading-preview')?.remove();
+          host.innerHTML = `<img class="fallback-selected-img" src="./assets/images/${encodeURIComponent(v.id)}/${IMG_FILES[0]}" alt="${esc(v.make)} ${esc(v.name)}">`;
+          modelStatus('ASSET UNAVAILABLE · EDITORIAL ANGLES BELOW');
+          $('selectedModelStatus').classList.remove('is-ready');
+        }
+      },
       onFocus: i => { state.focus = i; $('activeCount').textContent = pad(i + 1); syncRow(i); },
       onSelect: i => selectVehicle(i),
       onOverview: on => {
@@ -132,6 +158,7 @@ function selectVehicle(index) {
       $('selectedModelStatus').classList.toggle('is-ready', state.engine.cars.has(index));
       if (state.engine.cars.has(index)) $('selectedAsset').textContent = `${(state.engine.cars.get(index).userData.triangles || 0).toLocaleString()} TRIANGLES`;
       else if (failed) $('selectedModelHost').innerHTML = `<img class="fallback-selected-img" src="./assets/images/${v.id}/${IMG_FILES[0]}" alt="${esc(v.make)} ${esc(v.name)}">`;
+      else pendingPreview(index);
       renderReviews(v);
       playSelectedMotion();
     }, reduceMotion ? 60 : 340);
@@ -156,8 +183,9 @@ function backHome() {
   $('navReview').hidden = true; $('navBoard').hidden = true;
   $('selectedView').setAttribute('aria-hidden', 'true');
   $('selectedModelStatus').classList.remove('is-ready');
+  $('selectedModelHost').querySelector('.model-loading-preview')?.remove();
   $('review').hidden = true;
-  refreshNoirMotion();
+  refreshVelanceMotion();
   if (state.fallback) $('selectedModelHost').innerHTML = '';
   state.engine?.setFocus(previous);
   motionScrollTo($('showroom'));
@@ -210,7 +238,7 @@ function renderReviews(v) {
   });
   $('boardMaker').textContent = `${v.make} / ${v.name}`;
   $('boardEdition').textContent = v.edition;
-  requestAnimationFrame(() => refreshNoirMotion());
+  requestAnimationFrame(() => refreshVelanceMotion());
 }
 function scrollToReview() {
   if (state.selected === null) { selectVehicle(state.focus); setTimeout(() => scrollToReview(), 460); return; }
@@ -328,9 +356,9 @@ function installHandlers() {
   });
   bootGate();
   buildPaintRow();
-  bootNoirMotion();
+  bootVelanceMotion();
   boot3D();
-  window.__NOIR_QA__ = {
+  window.__VELANCE_QA__ = {
     get selected() { return state.selected; },
     get focus() { return state.engine ? state.engine.focus : state.focus; },
     get overview() { return state.engine ? state.engine.overview : false; },
@@ -343,7 +371,7 @@ function installHandlers() {
     get imageCount() { return state.visibleImages; },
     stats: () => state.engine ? state.engine.stats() : null,
     get engine() { return state.engine; },
-    motion: () => window.__NOIR_MOTION_QA__
+    motion: () => window.__VELANCE_MOTION_QA__
   };
 }
 function scrollFallback(dir) {

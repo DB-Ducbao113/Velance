@@ -1,0 +1,186 @@
+{
+  "format": "velance-p4-capacity-acceptance/1",
+  "timestampUtc": "2026-11-17T04:42:10.967Z",
+  "environment": {
+    "node": "v24.21.0",
+    "os": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "sourceFiles": {
+    "backend": "/Users/baobungbu/Vibe Coding/VELANCE/tools/perf/results/p4-backend-30day-10rps.json",
+    "overload": "/Users/baobungbu/Vibe Coding/VELANCE/tools/perf/results/p4-backend-overload-100rps.json",
+    "delivery": "/Users/baobungbu/Vibe Coding/VELANCE/tools/perf/results/p4-delivery-10rps.json",
+    "browser": "/Users/baobungbu/Vibe Coding/VELANCE/tools/perf/results/p4-browser-both-loopback.json",
+    "native": "/Users/baobungbu/Vibe Coding/VELANCE/tools/perf/results/p4-native.tap"
+  },
+  "statuses": {
+    "backend30Day": "PASS_LOCAL",
+    "overload": "PASS_LOCAL",
+    "delivery": "PASS_LOCAL",
+    "browser": "PASS_LOCAL",
+    "native": "PASS_LOCAL",
+    "overallLocal": "PASS_LOCAL",
+    "cdnProduction": "NOT_CONFIGURED",
+    "singleHostAvailabilitySLO": "NOT_PROVEN",
+    "concurrent100RealUsers": "NOT_PROVEN",
+    "realWorldGPUTestMatrix": "NOT_COMPLETE",
+    "publicReleaseLicensing": "BLOCKED"
+  },
+  "checks": {
+    "backend30Day": {
+      "validOfferedSuccess99_9pct": true,
+      "ingestP95Under150ms": true,
+      "ingestP99Under300ms": true,
+      "dashboardP95Under500ms": true,
+      "rssWithin512MiB": true,
+      "eventLoopP99Within50ms": true,
+      "durabilityAndIntegrity": true,
+      "largeWindow422": true,
+      "offeredExactly600": true,
+      "noLocalSenderDrop": true,
+      "allAckReceiptsDurable": true,
+      "completeJSON": true
+    },
+    "overload": {
+      "intentional429": true,
+      "noSilentDrop": true,
+      "noTimeout": true,
+      "integrity": true,
+      "successGateNotMisapplied": true
+    },
+    "delivery": {
+      "threeModes": true,
+      "statusesAndPolicy": true,
+      "simultaneousBinary": true,
+      "upstreamIsolation": true
+    },
+    "browser": {
+      "bothBackends16Models": true,
+      "noPageErrors": true,
+      "allSixFrameTargets": true,
+      "perBackendThreePaired": true
+    },
+    "native": {
+      "validNativeTap": true
+    }
+  },
+  "metrics": {
+    "backend": {
+      "seedSessions": 30000,
+      "seedSamples": 9000000,
+      "databaseBytes": 783998976,
+      "seedMs": 5994.383,
+      "offered": 600,
+      "ack": 600,
+      "successRate": 1,
+      "ingestP95Ms": 3.94,
+      "ingestP99Ms": 5.621,
+      "dashboardP95Ms": 217.084,
+      "peakRssBytes": 185909248,
+      "maxEventLoopP99Ms": 29.377,
+      "dbIntegrity": "ok",
+      "persistedCounts": {
+        "sessions": 30600,
+        "samples": 9006000,
+        "events": 60600,
+        "batches": 900600
+      }
+    },
+    "overload": {
+      "offered": 1000,
+      "ack": 599,
+      "expected429": 401,
+      "rate": 100
+    },
+    "delivery": {
+      "offeredAcrossModes": 300,
+      "completedAcrossModes": 300,
+      "maxModeP95Ms": 4.317,
+      "warmBodyBytes": 0,
+      "syntheticReleaseBytes": 511066,
+      "simultaneousBinary": {
+        "kind": "simultaneous-client-requests",
+        "resource": "synthetic GLB",
+        "reason": "exercise concurrent per-request SHA256 file checks, outside rate-controlled scenarios",
+        "offered": 16,
+        "sent": 16,
+        "completed": 16,
+        "clientRequestsDispatchedTogether": 16,
+        "statuses": {
+          "200": 16,
+          "429": 0,
+          "503": 0
+        },
+        "policyViolations": {},
+        "latencyMs": {
+          "samples": 16,
+          "p50": 17.727,
+          "p95": 19.298,
+          "p99": 19.298,
+          "max": 19.298
+        },
+        "elapsedMs": 20.293,
+        "actualBodyBytes": 6293696,
+        "estimatedHttp1HeaderBytes": 6304,
+        "caveat": "Client dispatch fan-out is bounded by the agent socket cap; server-level concurrency is not directly measured."
+      }
+    },
+    "browser": {
+      "pairCountPerBackend": 3,
+      "pairedMedianFrameDeltas": [
+        {
+          "backend": "webgpu",
+          "stage": "home",
+          "pairedMedianDeltaMs": -0.02,
+          "passed": true
+        },
+        {
+          "backend": "webgpu",
+          "stage": "overview",
+          "pairedMedianDeltaMs": 0.01,
+          "passed": true
+        },
+        {
+          "backend": "webgpu",
+          "stage": "orbit",
+          "pairedMedianDeltaMs": -0.01,
+          "passed": true
+        },
+        {
+          "backend": "webgl2",
+          "stage": "home",
+          "pairedMedianDeltaMs": -0.05,
+          "passed": true
+        },
+        {
+          "backend": "webgl2",
+          "stage": "overview",
+          "pairedMedianDeltaMs": -0.02,
+          "passed": true
+        },
+        {
+          "backend": "webgl2",
+          "stage": "orbit",
+          "pairedMedianDeltaMs": -0.08,
+          "passed": true
+        }
+      ]
+    },
+    "native": {
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "scope": {
+    "localFixtureOnly": true,
+    "realTelemetryDbModified": false,
+    "productionAssetModified": false,
+    "deployed": false,
+    "committed": false,
+    "pushed": false,
+    "note": "One finite 60s normal benchmark and 10s overload do not prove production SLOs or global CDN capacity."
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "measuredAt": "2026-11-17T04:37:37.517Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "mode": "normal",
+  "profile": {
+    "durationSeconds": 5,
+    "offeredRatePerSecond": 10,
+    "days": 3,
+    "seedSessions": 3000,
+    "seedSamples": 900000,
+    "seedMs": 524.336875,
+    "seedBytes": 77660160,
+    "dashboardClients": 2,
+    "arrival": "open-loop monotonic absolute scheduling; no retry; latency measured from scheduled arrival",
+    "maxPending": 128,
+    "timeoutMs": 10000
+  },
+  "ingest": {
+    "offered": 50,
+    "started": 50,
+    "localDropped": 0,
+    "peakPending": 1,
+    "bytesOffered": 71500,
+    "completed": 50,
+    "acknowledged200": 50,
+    "successRateOfValidOffered": 1,
+    "admittedKnown": 50,
+    "expected429": 0,
+    "unexpected429": 0,
+    "timeout": 0,
+    "networkErrors": 0,
+    "invalidResponses": 0,
+    "otherHTTP": 0,
+    "statuses": {
+      "200": 50
+    },
+    "codes": {},
+    "kinds": {
+      "response": 50
+    }
+  },
+  "latencyMs": {
+    "offeredCompleted": {
+      "n": 50,
+      "min": 1.2132909999995718,
+      "mean": 3.2853971599997953,
+      "p50": 3.272957999999562,
+      "p95": 4.72295799999938,
+      "p99": 6.584833000000003,
+      "max": 6.584833000000003
+    },
+    "admitted": {
+      "n": 50,
+      "min": 1.119874999999979,
+      "mean": 2.711357419999986,
+      "p50": 2.8277079999998023,
+      "p95": 3.5212919999994483,
+      "p99": 5.147917000000007,
+      "max": 5.147917000000007
+    },
+    "successful": {
+      "n": 50,
+      "min": 1.119874999999979,
+      "mean": 2.711357419999986,
+      "p50": 2.8277079999998023,
+      "p95": 3.5212919999994483,
+      "p99": 5.147917000000007,
+      "max": 5.147917000000007
+    },
+    "arrivalToAck": {
+      "n": 50,
+      "min": 1.2132909999995718,
+      "mean": 3.2853971599997953,
+      "p50": 3.272957999999562,
+      "p95": 4.72295799999938,
+      "p99": 6.584833000000003,
+      "max": 6.584833000000003
+    },
+    "rejection429": {
+      "n": 0,
+      "min": null,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "max": null
+    },
+    "schedulingLag": {
+      "n": 50,
+      "min": -0.789625000000342,
+      "mean": 0.48178471999983913,
+      "p50": 0.35620799999992414,
+      "p95": 1.382082999999966,
+      "p99": 1.6704580000000533,
+      "max": 1.6704580000000533
+    }
+  },
+  "dashboard": {
+    "count": 4,
+    "complete200": 4,
+    "p95Ms": 163.93899999999996,
+    "statuses": {
+      "200": 4
+    },
+    "codes": {},
+    "kinds": {
+      "response": 4
+    },
+    "byRoute": {
+      "/api/summary?hours=24": {
+        "statuses": {
+          "200": 2
+        },
+        "codes": {},
+        "kinds": {
+          "response": 2
+        },
+        "latency": {
+          "n": 2,
+          "min": 162.63329199999998,
+          "mean": 163.1364795,
+          "p50": 162.63329199999998,
+          "p95": 163.63966700000003,
+          "p99": 163.63966700000003,
+          "max": 163.63966700000003
+        }
+      },
+      "/api/sessions?limit=50": {
+        "statuses": {
+          "200": 2
+        },
+        "codes": {},
+        "kinds": {
+          "response": 2
+        },
+        "latency": {
+          "n": 2,
+          "min": 163.01629100000002,
+          "mean": 163.4776455,
+          "p50": 163.01629100000002,
+          "p95": 163.93899999999996,
+          "p99": 163.93899999999996,
+          "max": 163.93899999999996
+        }
+      }
+    },
+    "expected422ProbedSeparately": null
+  },
+  "resources": {
+    "samples": 6,
+    "peakRssBytes": 134856704,
+    "maxEventLoopP99Ms": 11.460607,
+    "rssBytes": {
+      "n": 6,
+      "min": 90832896,
+      "mean": 127292757.33333333,
+      "p50": 134447104,
+      "p95": 134856704,
+      "p99": 134856704,
+      "max": 134856704
+    },
+    "eventLoopP99Ms": {
+      "n": 6,
+      "min": 0.000511,
+      "mean": 9.403135,
+      "p50": 11.214847,
+      "p95": 11.460607,
+      "p99": 11.460607,
+      "max": 11.460607
+    }
+  },
+  "verification": {
+    "ok": true,
+    "integrity": "ok",
+    "journalMode": "wal",
+    "wal": {
+      "beforeCheckpointBytes": 2904632,
+      "checkpoint": {
+        "busy": 0,
+        "log": 0,
+        "checkpointed": 0
+      }
+    },
+    "counts": {
+      "sessions": 3050,
+      "samples": 900500,
+      "events": 6050,
+      "batches": 90050
+    },
+    "expected": {
+      "sessions": 3050,
+      "samples": 900500,
+      "events": 6050,
+      "batches": 90050
+    },
+    "seedPersisted": 3000,
+    "livePersisted": 50,
+    "receiptsPersisted": 50,
+    "missingAck": {
+      "count": 0,
+      "examples": []
+    },
+    "unacknowledgedRows": {
+      "count": 0,
+      "examples": []
+    },
+    "incompleteLive": 0,
+    "orphans": {
+      "samples": 0,
+      "events": 0,
+      "batches": 0
+    }
+  },
+  "errors": [],
+  "gates": {
+    "mode": "normal",
+    "validOfferedSuccess99_9pct": true,
+    "ingestP95Under150ms": true,
+    "ingestP99Under300ms": true,
+    "dashboardP95Under500ms": true,
+    "rssWithin512MiB": true,
+    "eventLoopP99Within50ms": true,
+    "durabilityAndIntegrity": true,
+    "optionalLargeWindowProbe": null,
+    "overall": true
+  },
+  "interpretation": "Normal profile: success denominator includes ALL valid offered requests, including local drops and 429."
+}

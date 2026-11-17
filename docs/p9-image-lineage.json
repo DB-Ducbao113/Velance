@@ -1,0 +1,3847 @@
+{
+  "format": "velance-p9-image-lineage/1",
+  "auditedAtUtc": "2026-11-17T08:41:06.592Z",
+  "scope": {
+    "carWebpCount": 80,
+    "carPngMasterCount": 80,
+    "garageWebpCount": 2,
+    "albumCount": 16
+  },
+  "evidenceCodeSha256": {
+    "renderPage": "41dd5d470745a5906dfe7c76a7d4c02f3dcca2b1bd0bead7dd37faa9d1ce6466",
+    "shootScript": "5e43b0719218457f5b0b9f782aa5637631de0c685cccab11e728ec8c55e5a272",
+    "vehicleMap": "798342a155b7cf97e0dee5a8dfa85bf117b2e80d0ff30aff4926884cf1361ac7"
+  },
+  "investigation": {
+    "sharpVersion": "0.35.5",
+    "libvipsVersion": "8.18.7",
+    "exactSharpWebpFromCurrentPng": 45,
+    "olderLosslessNotReproduced": 35,
+    "mediaNoEmbeddedExifXmpIcc": 82,
+    "firstCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+    "secondCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+    "publicUseAuthorized": false,
+    "verifiedLicenseSourceUrls": 0,
+    "olderLosslessDecodedCompared": 35,
+    "olderLosslessDecodedExactToCurrentPng": 0
+  },
+  "albumModelMapping": [
+    {
+      "album": "amgone",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "modelSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "aventador",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "modelSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "corvette",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "modelSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "huayra",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "modelSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "jesko25",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "modelSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "laferrari",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "modelSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "mclaren765lt",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "modelSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "mclarenp1",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "modelSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "paganiutopia",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "modelSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "porsche911",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "modelSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "porsche918",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "modelSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "revuelto",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "modelSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "senna",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "modelSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "sf90xx",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "modelSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 5
+    },
+    {
+      "album": "tourbillon24",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "modelSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    },
+    {
+      "album": "valkyrie",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "modelSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "webpFiles": 5,
+      "webpExactCurrentPngCount": 0
+    }
+  ],
+  "carRenders": [
+    {
+      "path": "/assets/images/amgone/01-front-three-quarter.webp",
+      "album": "amgone",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/mercedes-amg_project-one.glb",
+      "publicGlbSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "publicGlbBytes": 866236,
+      "masterPngPath": "/assets/images/amgone/01-front-three-quarter.png",
+      "masterPngSha256": "af91bc80033034f83d64bf8445f1dda600f545869d2af0d09ab19447116802f2",
+      "masterPngBytes": 1435925,
+      "webpSha256": "34536e7035411f1b68eb4944dcd979f39316eeb34bc44e96d0563fee899d5eac",
+      "webpBytes": 700996,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/amgone/02-near-front.webp",
+      "album": "amgone",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/mercedes-amg_project-one.glb",
+      "publicGlbSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "publicGlbBytes": 866236,
+      "masterPngPath": "/assets/images/amgone/02-near-front.png",
+      "masterPngSha256": "481e5056cca9d7d913cce71f11de330d790f01820035f588e9d15c3a973e5dd2",
+      "masterPngBytes": 1247454,
+      "webpSha256": "cd1181a938ac58db4908ac4358e8e5c1527fadf8a46df862938ae2f60d1c7f81",
+      "webpBytes": 630196,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/amgone/03-side-profile.webp",
+      "album": "amgone",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/mercedes-amg_project-one.glb",
+      "publicGlbSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "publicGlbBytes": 866236,
+      "masterPngPath": "/assets/images/amgone/03-side-profile.png",
+      "masterPngSha256": "bcbd0a8c2117d3cea38a39a48cbcdd90af2127a8d13439f82464e1c9cf4dc7b8",
+      "masterPngBytes": 1628469,
+      "webpSha256": "4ded3595594b12bc38ea9293e1152b0f88960bfec47570215951125ca5dbf4a2",
+      "webpBytes": 864508,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/amgone/04-rear-three-quarter.webp",
+      "album": "amgone",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/mercedes-amg_project-one.glb",
+      "publicGlbSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "publicGlbBytes": 866236,
+      "masterPngPath": "/assets/images/amgone/04-rear-three-quarter.png",
+      "masterPngSha256": "598ebbfab6a511b252457f8d7b47be9d4b2434c7ea20f9e419ae67f3d994d08e",
+      "masterPngBytes": 1372516,
+      "webpSha256": "ec76c684637445a49bda6db97f72d5d861284c4e7fc639c3e1c76cd9a9c8054d",
+      "webpBytes": 660314,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/amgone/05-signature.webp",
+      "album": "amgone",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/mercedes-amg_project-one.glb",
+      "publicGlbSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "publicGlbBytes": 866236,
+      "masterPngPath": "/assets/images/amgone/05-signature.png",
+      "masterPngSha256": "9f17e690cc771502737198c75cf9573332bab5724c94242814e2547fdd0d3ba9",
+      "masterPngBytes": 837933,
+      "webpSha256": "3ea1ade11606b709fa78195154ea84b6f5a365d555a6070406f877f2f48ae8e3",
+      "webpBytes": 411564,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/aventador/01-front-three-quarter.webp",
+      "album": "aventador",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/lamborghini_aventador.glb",
+      "publicGlbSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "publicGlbBytes": 3407460,
+      "masterPngPath": "/assets/images/aventador/01-front-three-quarter.png",
+      "masterPngSha256": "a3e8bfd0a8a3ca631fb59b171a0763a01d999aa3ceb178d1590d35cbe3297761",
+      "masterPngBytes": 1537374,
+      "webpSha256": "7845e8cbfe0d442c1ab69f8ff6f0d73cd83052d6d4519002e519eba8d7ad69a9",
+      "webpBytes": 156996,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/aventador/02-near-front.webp",
+      "album": "aventador",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/lamborghini_aventador.glb",
+      "publicGlbSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "publicGlbBytes": 3407460,
+      "masterPngPath": "/assets/images/aventador/02-near-front.png",
+      "masterPngSha256": "0eea4a69144a797ef07f85dad49d3e5cad187090899d9ba0fb1ff0daa5b334fc",
+      "masterPngBytes": 1313725,
+      "webpSha256": "3d9a7bd2e4fb6458473172f3605325b0325c542fbbac9ecf19b71ac1d70db40c",
+      "webpBytes": 134834,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/aventador/03-side-profile.webp",
+      "album": "aventador",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/lamborghini_aventador.glb",
+      "publicGlbSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "publicGlbBytes": 3407460,
+      "masterPngPath": "/assets/images/aventador/03-side-profile.png",
+      "masterPngSha256": "a0ca9f66a9fef73ca522241ef66a58545b4871ebc66744f9d9b63fff9a0cf1a7",
+      "masterPngBytes": 1379181,
+      "webpSha256": "85aa26a9a17cb5a4d68eceaa0513cbc36471ed75cc68f1204b2c14699eef6e12",
+      "webpBytes": 153168,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/aventador/04-rear-three-quarter.webp",
+      "album": "aventador",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/lamborghini_aventador.glb",
+      "publicGlbSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "publicGlbBytes": 3407460,
+      "masterPngPath": "/assets/images/aventador/04-rear-three-quarter.png",
+      "masterPngSha256": "5352f2746b971b37d6961c91b847ef9f8062ca2e55d1f9786bc9b99864a14634",
+      "masterPngBytes": 1513632,
+      "webpSha256": "7f28b1e5e8b5e3c837dba90562daba3c572f7406dfcf648bc2e81ee22ba303a2",
+      "webpBytes": 161074,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/aventador/05-signature.webp",
+      "album": "aventador",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/lamborghini_aventador.glb",
+      "publicGlbSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "publicGlbBytes": 3407460,
+      "masterPngPath": "/assets/images/aventador/05-signature.png",
+      "masterPngSha256": "4e910b3c3e1840e38c69302d7dcf47ef87bf4f8d4727b7653ce890477a17f8f3",
+      "masterPngBytes": 1535728,
+      "webpSha256": "ea3f0c3b301b39aafddc7499c17a7382efffbede3b03afc8d1d2f3a2267abde1",
+      "webpBytes": 162466,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/corvette/01-front-three-quarter.webp",
+      "album": "corvette",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/corvette_stingray.glb",
+      "publicGlbSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "publicGlbBytes": 1372820,
+      "masterPngPath": "/assets/images/corvette/01-front-three-quarter.png",
+      "masterPngSha256": "bf4d98f6e87dfe058d6567fd6e01e5b943a9f15cfd0c5810c7730f9c2b292323",
+      "masterPngBytes": 2175365,
+      "webpSha256": "c7a4529bca6b1b268905e6f169367b15b5e021ba68f74b1991d1124752ee7c61",
+      "webpBytes": 198870,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/corvette/02-near-front.webp",
+      "album": "corvette",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/corvette_stingray.glb",
+      "publicGlbSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "publicGlbBytes": 1372820,
+      "masterPngPath": "/assets/images/corvette/02-near-front.png",
+      "masterPngSha256": "3bfd76b4a67b204d32eb1c7ddce0be2eeade25e3f12e59ec1d2444cb68beb7b2",
+      "masterPngBytes": 2127866,
+      "webpSha256": "d41c078833f9ee27eff9469da3cea05adc3d1ff64b67fd77d3c5e3f733a025ca",
+      "webpBytes": 184472,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/corvette/03-side-profile.webp",
+      "album": "corvette",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/corvette_stingray.glb",
+      "publicGlbSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "publicGlbBytes": 1372820,
+      "masterPngPath": "/assets/images/corvette/03-side-profile.png",
+      "masterPngSha256": "7b17c7ab6d1b3bd577f00cfe2ddfbb6a96abd59233a80f60427b95219a7ba33d",
+      "masterPngBytes": 1674679,
+      "webpSha256": "94c4f2f3b8bb315459b22927c03c95b13a0e8195b385188c054240c8b5b2fb81",
+      "webpBytes": 160646,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/corvette/04-rear-three-quarter.webp",
+      "album": "corvette",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/corvette_stingray.glb",
+      "publicGlbSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "publicGlbBytes": 1372820,
+      "masterPngPath": "/assets/images/corvette/04-rear-three-quarter.png",
+      "masterPngSha256": "80992ba8abace099cd1df19b9db2074d52fcdab6a1f59140d423999bc4f0ee10",
+      "masterPngBytes": 2069914,
+      "webpSha256": "2486be11064a2a3e699cf88f6ac8f47f4aeab7a73e0eb1ba8483cb9578454dd8",
+      "webpBytes": 193636,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/corvette/05-signature.webp",
+      "album": "corvette",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/corvette_stingray.glb",
+      "publicGlbSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "publicGlbBytes": 1372820,
+      "masterPngPath": "/assets/images/corvette/05-signature.png",
+      "masterPngSha256": "59901d44c3dfb8522c48aad39fe8029b29db745c1d2e304fb6e58819ff9db536",
+      "masterPngBytes": 2100646,
+      "webpSha256": "6b2325153a631b001a91ac5f44f7462d440244d4bff14a85ee9480ad7bdfeb74",
+      "webpBytes": 191432,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/huayra/01-front-three-quarter.webp",
+      "album": "huayra",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/pagani_huayra_free.glb",
+      "publicGlbSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "publicGlbBytes": 1656572,
+      "masterPngPath": "/assets/images/huayra/01-front-three-quarter.png",
+      "masterPngSha256": "04f37d0e30735e161f270fb8c6956145dac19c471974edfedb5e0a946b39fced",
+      "masterPngBytes": 1706095,
+      "webpSha256": "92e0fe3996ef89b98fe8e73521ef37926712b4cde71265e7ac6bede5d51da25d",
+      "webpBytes": 159958,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/huayra/02-near-front.webp",
+      "album": "huayra",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/pagani_huayra_free.glb",
+      "publicGlbSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "publicGlbBytes": 1656572,
+      "masterPngPath": "/assets/images/huayra/02-near-front.png",
+      "masterPngSha256": "c5d86956f05f600761773399944b9a85051bac577c853d6b3c916e23abfc5274",
+      "masterPngBytes": 1441793,
+      "webpSha256": "10445494b056e60ac6c61432841b53dddbeb746c7074bc47763385db34e6e5a5",
+      "webpBytes": 141844,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/huayra/03-side-profile.webp",
+      "album": "huayra",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/pagani_huayra_free.glb",
+      "publicGlbSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "publicGlbBytes": 1656572,
+      "masterPngPath": "/assets/images/huayra/03-side-profile.png",
+      "masterPngSha256": "b19cf5780302f9ff88b17683fd094a5ef1d3507d4306f26b033953bf6184a800",
+      "masterPngBytes": 1393791,
+      "webpSha256": "b292e866208097527b6a1c798bfe862c102db04ebfb6c25faa9e2aad28d8b363",
+      "webpBytes": 138696,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/huayra/04-rear-three-quarter.webp",
+      "album": "huayra",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/pagani_huayra_free.glb",
+      "publicGlbSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "publicGlbBytes": 1656572,
+      "masterPngPath": "/assets/images/huayra/04-rear-three-quarter.png",
+      "masterPngSha256": "699e2126aa2030ba71c54bd1dc8a84113a963e25807621b3543d33ec3554c230",
+      "masterPngBytes": 1416746,
+      "webpSha256": "8fb2f7f883f60ea6e6760186901874cf7e7e374eb7733b0c0136f225051e83f4",
+      "webpBytes": 144696,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/huayra/05-signature.webp",
+      "album": "huayra",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/pagani_huayra_free.glb",
+      "publicGlbSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "publicGlbBytes": 1656572,
+      "masterPngPath": "/assets/images/huayra/05-signature.png",
+      "masterPngSha256": "9a339b8b0c258ffbf4ee037fd93fb498bd23b6d519c312a30ab97a3f63443215",
+      "masterPngBytes": 1544894,
+      "webpSha256": "186452c58e8dd8144a0371403a82c841a8b6aac2c14b05e567718f0bd1978160",
+      "webpBytes": 148528,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/jesko25/01-front-three-quarter.webp",
+      "album": "jesko25",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "publicGlbSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "publicGlbBytes": 3949468,
+      "masterPngPath": "/assets/images/jesko25/01-front-three-quarter.png",
+      "masterPngSha256": "5f4aaa54f33c667450a1afb14ea55cbe2bab3eafb1fad5c3c91344a9b9be0e3b",
+      "masterPngBytes": 3142722,
+      "webpSha256": "4410e1aedf71885031dbcfe630ed25311b3c5f8238df45ca0c94fd28ef39611e",
+      "webpBytes": 1617496,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/jesko25/02-near-front.webp",
+      "album": "jesko25",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "publicGlbSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "publicGlbBytes": 3949468,
+      "masterPngPath": "/assets/images/jesko25/02-near-front.png",
+      "masterPngSha256": "e0d91d64bec869f4ed998ca404526128430c3f532ebf6d9b5b4c937675bcc93c",
+      "masterPngBytes": 3885310,
+      "webpSha256": "9070468924678c90667560d9ee82b7382f14a1f1b44c2d1613e3054ad3cd864f",
+      "webpBytes": 1967396,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/jesko25/03-side-profile.webp",
+      "album": "jesko25",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "publicGlbSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "publicGlbBytes": 3949468,
+      "masterPngPath": "/assets/images/jesko25/03-side-profile.png",
+      "masterPngSha256": "ed7219856b5b8552f8bf455ae6e6fd6308b04dd5b727ebbc0a29db1f323a69c2",
+      "masterPngBytes": 1641615,
+      "webpSha256": "09609dce737e299377edbeff700001a7ce88434c333432b52229468734d6aa9e",
+      "webpBytes": 895406,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/jesko25/04-rear-three-quarter.webp",
+      "album": "jesko25",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "publicGlbSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "publicGlbBytes": 3949468,
+      "masterPngPath": "/assets/images/jesko25/04-rear-three-quarter.png",
+      "masterPngSha256": "0f982d9c2527e8b0a5659eabc570c3f39dc52238834b6e746bb51a964d577f0d",
+      "masterPngBytes": 2797315,
+      "webpSha256": "c323e12237666c99194f109f36b643aa5823e0bb7b3d6358b55ed8234170dd63",
+      "webpBytes": 1482540,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/jesko25/05-signature.webp",
+      "album": "jesko25",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "publicGlbSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "publicGlbBytes": 3949468,
+      "masterPngPath": "/assets/images/jesko25/05-signature.png",
+      "masterPngSha256": "5d50cd62bd070483db61be063000052a2a1fe349dca6e8faeb4ebf694777c5bc",
+      "masterPngBytes": 3117717,
+      "webpSha256": "054072233db26eeb123295967241d41b747121e48d1d25ee392617fe964d3e16",
+      "webpBytes": 1656530,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/laferrari/01-front-three-quarter.webp",
+      "album": "laferrari",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/2014_ferrari_laferrari.glb",
+      "publicGlbSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "publicGlbBytes": 2051028,
+      "masterPngPath": "/assets/images/laferrari/01-front-three-quarter.png",
+      "masterPngSha256": "a8ffa5ce8607135976d1ce7438a5ade1dae0ab56583b2b1bf692f44046ecb697",
+      "masterPngBytes": 1727402,
+      "webpSha256": "22c34657fcb3f0adbb85db4ab3b3e811096201ffeca948e50e8bbbc8c9791d3b",
+      "webpBytes": 879532,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/laferrari/02-near-front.webp",
+      "album": "laferrari",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/2014_ferrari_laferrari.glb",
+      "publicGlbSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "publicGlbBytes": 2051028,
+      "masterPngPath": "/assets/images/laferrari/02-near-front.png",
+      "masterPngSha256": "e2635bd1d8e70155790ec968cc5ff94c646ae07621aba7613abc06c4c0c51623",
+      "masterPngBytes": 1873041,
+      "webpSha256": "725089957676a497f7e19badf8ffbd7f491a1c3f7070af3b5c0df5e859cbd596",
+      "webpBytes": 961988,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/laferrari/03-side-profile.webp",
+      "album": "laferrari",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/2014_ferrari_laferrari.glb",
+      "publicGlbSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "publicGlbBytes": 2051028,
+      "masterPngPath": "/assets/images/laferrari/03-side-profile.png",
+      "masterPngSha256": "ba9a6fd47ac6ba3cd3aee71aef2fc1575f8ced7d5630a533e61b78e72d0f73ec",
+      "masterPngBytes": 1482908,
+      "webpSha256": "504f18d58cd5ccdc669ea8bde0260c361ba72c6587c4325ab9df97e48ec45cec",
+      "webpBytes": 785034,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/laferrari/04-rear-three-quarter.webp",
+      "album": "laferrari",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/2014_ferrari_laferrari.glb",
+      "publicGlbSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "publicGlbBytes": 2051028,
+      "masterPngPath": "/assets/images/laferrari/04-rear-three-quarter.png",
+      "masterPngSha256": "67640a35d5fd1fa468ea6bc3a70fb0c2565c657380d43f465283fd0e24c50dc9",
+      "masterPngBytes": 1869087,
+      "webpSha256": "6e0f5b634a23494a183b7a6c274078a17095d1ca58b4bc709757882c3e1f262c",
+      "webpBytes": 942764,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/laferrari/05-signature.webp",
+      "album": "laferrari",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/2014_ferrari_laferrari.glb",
+      "publicGlbSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "publicGlbBytes": 2051028,
+      "masterPngPath": "/assets/images/laferrari/05-signature.png",
+      "masterPngSha256": "6b6d7e8075b924444608a4781db3fc32d021247148a802269e5425580708ac59",
+      "masterPngBytes": 1862131,
+      "webpSha256": "1ed4549dd0d6b98bd73f9b3fd8f77c8add96e41517942cb1820947ded5b17675",
+      "webpBytes": 992722,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/mclaren765lt/01-front-three-quarter.webp",
+      "album": "mclaren765lt",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "publicGlbSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "publicGlbBytes": 3674696,
+      "masterPngPath": "/assets/images/mclaren765lt/01-front-three-quarter.png",
+      "masterPngSha256": "c7830e7c9e44a5962077f1df19ff0c6853ed754e2da2d7ad05e3cc59ce45f121",
+      "masterPngBytes": 1728954,
+      "webpSha256": "976551a33fe47d7727c52c86c5db7aff41bea24331e6bb6cd60798a0d6494d44",
+      "webpBytes": 233888,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/mclaren765lt/02-near-front.webp",
+      "album": "mclaren765lt",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "publicGlbSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "publicGlbBytes": 3674696,
+      "masterPngPath": "/assets/images/mclaren765lt/02-near-front.png",
+      "masterPngSha256": "9f117e4cf6981940a5377188bc6ae1abbb1f9dd13037076928cd488af1ceaaf8",
+      "masterPngBytes": 1566604,
+      "webpSha256": "7ca38eee8080e23f342b099a27224e873f8280672e76972a45b89238bb9fcea3",
+      "webpBytes": 198202,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/mclaren765lt/03-side-profile.webp",
+      "album": "mclaren765lt",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "publicGlbSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "publicGlbBytes": 3674696,
+      "masterPngPath": "/assets/images/mclaren765lt/03-side-profile.png",
+      "masterPngSha256": "a14d54d8cc84c2b576700d76eb22d3223d2290fbd1ad5d0dcf64ed7c1618fcce",
+      "masterPngBytes": 1324729,
+      "webpSha256": "c6102da1713de4d5dd2458e6de41bad233fe9dc78e488c3405345c75ad2b4d02",
+      "webpBytes": 200394,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/mclaren765lt/04-rear-three-quarter.webp",
+      "album": "mclaren765lt",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "publicGlbSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "publicGlbBytes": 3674696,
+      "masterPngPath": "/assets/images/mclaren765lt/04-rear-three-quarter.png",
+      "masterPngSha256": "08e5512597225d45edfd1b0322fccab06d6922bdbc793007ea7120b230e5b9d9",
+      "masterPngBytes": 1598296,
+      "webpSha256": "34e3a87b5dfbf562fa4456ef97c2db214655cc7383fdb59a77672ebbd030e306",
+      "webpBytes": 220090,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/mclaren765lt/05-signature.webp",
+      "album": "mclaren765lt",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "publicGlbSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "publicGlbBytes": 3674696,
+      "masterPngPath": "/assets/images/mclaren765lt/05-signature.png",
+      "masterPngSha256": "ffd5661110130aeddf4a3109712ff1351cb355f2a4616c68b1bf073214bc9b17",
+      "masterPngBytes": 1614071,
+      "webpSha256": "b63519219e0852f8d5c2082080203a79cf14d7b104849e6b0d18553d3943045e",
+      "webpBytes": 207170,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/mclarenp1/01-front-three-quarter.webp",
+      "album": "mclarenp1",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/mclaren_p1.glb",
+      "publicGlbSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "publicGlbBytes": 1104124,
+      "masterPngPath": "/assets/images/mclarenp1/01-front-three-quarter.png",
+      "masterPngSha256": "4e864d81e9c8c32b7393fa3150129fe6b16a1e1768b8fbd1ba2125f2c81c702e",
+      "masterPngBytes": 1189379,
+      "webpSha256": "da9d2878d1506dc1f9166431bfbdcb67280b7bf592a2dc35764354c51b6ad086",
+      "webpBytes": 630502,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/mclarenp1/02-near-front.webp",
+      "album": "mclarenp1",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/mclaren_p1.glb",
+      "publicGlbSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "publicGlbBytes": 1104124,
+      "masterPngPath": "/assets/images/mclarenp1/02-near-front.png",
+      "masterPngSha256": "30308573c4434f73a50b0c49693de1b179b37daae2e719e6c2bfe8a0cc1ad6b7",
+      "masterPngBytes": 1422645,
+      "webpSha256": "8e3f902ac92fe310dc06d7251ae1f45fd9973c7472d5fe1c830b77c3bd61dd8a",
+      "webpBytes": 708564,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/mclarenp1/03-side-profile.webp",
+      "album": "mclarenp1",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/mclaren_p1.glb",
+      "publicGlbSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "publicGlbBytes": 1104124,
+      "masterPngPath": "/assets/images/mclarenp1/03-side-profile.png",
+      "masterPngSha256": "a760b375d8da11fd9b36b8fd8f91bf3006d99cac849704ab1c509f4fc58e6b09",
+      "masterPngBytes": 1144100,
+      "webpSha256": "6b9e15331c99ec1a56aea4d367ea6b7a5bfa93326f80b959b35f2d0592d637f5",
+      "webpBytes": 589214,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/mclarenp1/04-rear-three-quarter.webp",
+      "album": "mclarenp1",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/mclaren_p1.glb",
+      "publicGlbSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "publicGlbBytes": 1104124,
+      "masterPngPath": "/assets/images/mclarenp1/04-rear-three-quarter.png",
+      "masterPngSha256": "8a164b3b2380407948bc0f1bc91fdbc88518a877df0e92c2652c661f81e452df",
+      "masterPngBytes": 1194973,
+      "webpSha256": "5f0be4352ffe8e8eb587c236665f1715fb57d209ffa36b87f3b134403e8058c3",
+      "webpBytes": 618066,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/mclarenp1/05-signature.webp",
+      "album": "mclarenp1",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/mclaren_p1.glb",
+      "publicGlbSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "publicGlbBytes": 1104124,
+      "masterPngPath": "/assets/images/mclarenp1/05-signature.png",
+      "masterPngSha256": "28a5eff82b991398ea5fbc97ec8838b6c28f6346994b26ad2ff592e831d4bad7",
+      "masterPngBytes": 1505948,
+      "webpSha256": "593bc913f2ee77b03240f3d67fad6e04151a6d8832496ca73950408b0e65d41b",
+      "webpBytes": 739672,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/paganiutopia/01-front-three-quarter.webp",
+      "album": "paganiutopia",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/pagani_utopia_2023.glb",
+      "publicGlbSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "publicGlbBytes": 3605996,
+      "masterPngPath": "/assets/images/paganiutopia/01-front-three-quarter.png",
+      "masterPngSha256": "83d6c17f228e5af219c1b0613b4e3279c6078542d66b8e08e0610cc2e0086aa7",
+      "masterPngBytes": 1425119,
+      "webpSha256": "e8f5ad55ceee40113064196c05841e33a5a86fadeb2103e2d07e5b22b3482fa5",
+      "webpBytes": 818612,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/paganiutopia/02-near-front.webp",
+      "album": "paganiutopia",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/pagani_utopia_2023.glb",
+      "publicGlbSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "publicGlbBytes": 3605996,
+      "masterPngPath": "/assets/images/paganiutopia/02-near-front.png",
+      "masterPngSha256": "6b14847c568726c351b13e12b181a9060e6b8e8a773d00715600a1d226d6aaa5",
+      "masterPngBytes": 1517714,
+      "webpSha256": "b0e801f5751173d5240cf9498888085e1a8350a134c261f01956b9a6dab2b435",
+      "webpBytes": 871850,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/paganiutopia/03-side-profile.webp",
+      "album": "paganiutopia",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/pagani_utopia_2023.glb",
+      "publicGlbSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "publicGlbBytes": 3605996,
+      "masterPngPath": "/assets/images/paganiutopia/03-side-profile.png",
+      "masterPngSha256": "af8de1e0f65aa364cc8ace3fbe50b04b36473fe3bbdddb1ffa0f495799d36076",
+      "masterPngBytes": 1478199,
+      "webpSha256": "a889059e6c17b56b3e42f0e4496c7bc277b757a2ccc4720013891c9f792b2c48",
+      "webpBytes": 772152,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/paganiutopia/04-rear-three-quarter.webp",
+      "album": "paganiutopia",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/pagani_utopia_2023.glb",
+      "publicGlbSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "publicGlbBytes": 3605996,
+      "masterPngPath": "/assets/images/paganiutopia/04-rear-three-quarter.png",
+      "masterPngSha256": "463aa6b25e421ff24a4a7ba7b40e87dac159fabf18eed27ce42a7463b14af1f7",
+      "masterPngBytes": 1504631,
+      "webpSha256": "5804a3d7d9d95051380d96e94f39b7fea7f1f7189900ff65e3f7b52615b376d3",
+      "webpBytes": 848380,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/paganiutopia/05-signature.webp",
+      "album": "paganiutopia",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/pagani_utopia_2023.glb",
+      "publicGlbSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "publicGlbBytes": 3605996,
+      "masterPngPath": "/assets/images/paganiutopia/05-signature.png",
+      "masterPngSha256": "0f7c9cec09d1eeced4b1ad135b446df6d3993abba040da58bc946e55c569dd36",
+      "masterPngBytes": 1262995,
+      "webpSha256": "c498840b3bbbbe7d9a6a9d0128d0421c6d05bcfa504b7748c5c106c467284534",
+      "webpBytes": 710862,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/porsche911/01-front-three-quarter.webp",
+      "album": "porsche911",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/porsche_911_with_interior.glb",
+      "publicGlbSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "publicGlbBytes": 4092320,
+      "masterPngPath": "/assets/images/porsche911/01-front-three-quarter.png",
+      "masterPngSha256": "f76ed6770f4d615201c722d8fd4dea18fffeeb82d64cf77080bac635fedc741b",
+      "masterPngBytes": 1732028,
+      "webpSha256": "dee084852aa95b540b2e9d9ae7dcbd27f73d1cc2bf5f09e2a82b62f809adf51d",
+      "webpBytes": 138178,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche911/02-near-front.webp",
+      "album": "porsche911",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/porsche_911_with_interior.glb",
+      "publicGlbSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "publicGlbBytes": 4092320,
+      "masterPngPath": "/assets/images/porsche911/02-near-front.png",
+      "masterPngSha256": "32cc5d848de6872669265a212af7bcde56c439302d058bf4764b800b4b88eba8",
+      "masterPngBytes": 1896697,
+      "webpSha256": "67f990eb4d641f814ef3667e0b134663ae62a3d7068435c5af8996c47ed6402a",
+      "webpBytes": 144714,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche911/03-side-profile.webp",
+      "album": "porsche911",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/porsche_911_with_interior.glb",
+      "publicGlbSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "publicGlbBytes": 4092320,
+      "masterPngPath": "/assets/images/porsche911/03-side-profile.png",
+      "masterPngSha256": "27dca0f9844ee311dcfd7c8461023d9ff5fa3605dc37e4a1bc2d15d9b2094f89",
+      "masterPngBytes": 1701236,
+      "webpSha256": "fcaf20cc3ed62b96190872fbe1559fcba936d98eb50b5ce74c6f49e72155dc51",
+      "webpBytes": 155358,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche911/04-rear-three-quarter.webp",
+      "album": "porsche911",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/porsche_911_with_interior.glb",
+      "publicGlbSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "publicGlbBytes": 4092320,
+      "masterPngPath": "/assets/images/porsche911/04-rear-three-quarter.png",
+      "masterPngSha256": "b21b63284666d622ed73395c3f36716060329958d794939379ba10fbcf619a04",
+      "masterPngBytes": 2042967,
+      "webpSha256": "a5ec03cfb9aaf1783e85d2f4acb4499725ed8a9406982529da0964c313704fe0",
+      "webpBytes": 172452,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche911/05-signature.webp",
+      "album": "porsche911",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/porsche_911_with_interior.glb",
+      "publicGlbSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "publicGlbBytes": 4092320,
+      "masterPngPath": "/assets/images/porsche911/05-signature.png",
+      "masterPngSha256": "1dac47ee74e71ce6a761462ca7189086248cd0778370b026e3a07fe333de8d67",
+      "masterPngBytes": 1775256,
+      "webpSha256": "f41188ab3e29841c1be7d6737d11cbbd0ac4baf669baa7e0bf22cc3f9bd81bac",
+      "webpBytes": 139532,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche918/01-front-three-quarter.webp",
+      "album": "porsche918",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/porsche_918_spyder_2015.glb",
+      "publicGlbSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "publicGlbBytes": 2087852,
+      "masterPngPath": "/assets/images/porsche918/01-front-three-quarter.png",
+      "masterPngSha256": "eebf446b07c1f7bb149d518c76f7adf6d3b08ffe620feeef890f85c1cb838a55",
+      "masterPngBytes": 1855340,
+      "webpSha256": "65720aef2305c5c5c02f28163477111e13d0a6df70d1798ee12ca5d3b9ed192a",
+      "webpBytes": 160700,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche918/02-near-front.webp",
+      "album": "porsche918",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/porsche_918_spyder_2015.glb",
+      "publicGlbSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "publicGlbBytes": 2087852,
+      "masterPngPath": "/assets/images/porsche918/02-near-front.png",
+      "masterPngSha256": "35052da33ca8a6e5e3444c366e502521a8720da147ede51eec4f83f64c8cf09b",
+      "masterPngBytes": 1692457,
+      "webpSha256": "85c4f63b323d2b020c5910e591e0bea838809452c038a6f3b76dec6fdc88dbb5",
+      "webpBytes": 149112,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche918/03-side-profile.webp",
+      "album": "porsche918",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/porsche_918_spyder_2015.glb",
+      "publicGlbSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "publicGlbBytes": 2087852,
+      "masterPngPath": "/assets/images/porsche918/03-side-profile.png",
+      "masterPngSha256": "d2977c9a057973b82ab9a601f186a9505825de97b8011d985bfb53486cfc87e2",
+      "masterPngBytes": 1503251,
+      "webpSha256": "88570507cc480355237527cdcc76c344dfd86cd0b3a0e344e9ed4f8797fec6ef",
+      "webpBytes": 135278,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche918/04-rear-three-quarter.webp",
+      "album": "porsche918",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/porsche_918_spyder_2015.glb",
+      "publicGlbSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "publicGlbBytes": 2087852,
+      "masterPngPath": "/assets/images/porsche918/04-rear-three-quarter.png",
+      "masterPngSha256": "92b6cbe3684e67ebf03f5846644dc24a11282a2e5abbb1858a58b04bed356f1c",
+      "masterPngBytes": 1965960,
+      "webpSha256": "f93ab4fa3559abd5bf0daabecfa115aed64faf505b31d44d05f29f27bb286993",
+      "webpBytes": 183660,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/porsche918/05-signature.webp",
+      "album": "porsche918",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/porsche_918_spyder_2015.glb",
+      "publicGlbSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "publicGlbBytes": 2087852,
+      "masterPngPath": "/assets/images/porsche918/05-signature.png",
+      "masterPngSha256": "269bf9878d52f37e407f0bb54996f2f6eb5f3aaadc4333066ad71c7d54f3570b",
+      "masterPngBytes": 1744169,
+      "webpSha256": "04fce2144f67961c72a3b8c2e3d852d1810a8cdd4b37e6d7062063fb758c9edc",
+      "webpBytes": 150598,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/revuelto/01-front-three-quarter.webp",
+      "album": "revuelto",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/2024_lamborghini_revuelto.glb",
+      "publicGlbSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "publicGlbBytes": 3330124,
+      "masterPngPath": "/assets/images/revuelto/01-front-three-quarter.png",
+      "masterPngSha256": "78e0ad764b206b9f89425a774c6ea5ec27f142385650e04d8375ba93a1545c91",
+      "masterPngBytes": 1970905,
+      "webpSha256": "78fc1df6af8ec33d5c59bfcec3a40808113d2ca160ad9477556346f546e69acf",
+      "webpBytes": 211862,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/revuelto/02-near-front.webp",
+      "album": "revuelto",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/2024_lamborghini_revuelto.glb",
+      "publicGlbSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "publicGlbBytes": 3330124,
+      "masterPngPath": "/assets/images/revuelto/02-near-front.png",
+      "masterPngSha256": "7495a9c954bf260481bcffee0efb7e324ea68c589a0653f1e396dfca356aac10",
+      "masterPngBytes": 1879687,
+      "webpSha256": "1549c8afff73b3ad36fc5989d933059632ba8932e661474599b58e8f465d1f31",
+      "webpBytes": 193804,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/revuelto/03-side-profile.webp",
+      "album": "revuelto",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/2024_lamborghini_revuelto.glb",
+      "publicGlbSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "publicGlbBytes": 3330124,
+      "masterPngPath": "/assets/images/revuelto/03-side-profile.png",
+      "masterPngSha256": "96e621934f5a033f2771411d38590c18da66143ba77bdb96f240ffdfa94b47c9",
+      "masterPngBytes": 1653980,
+      "webpSha256": "56d866b1ab21d1ef252ee599cf24a86ace8f6d6d861bbf1d72624e8a4b4f7263",
+      "webpBytes": 180478,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/revuelto/04-rear-three-quarter.webp",
+      "album": "revuelto",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/2024_lamborghini_revuelto.glb",
+      "publicGlbSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "publicGlbBytes": 3330124,
+      "masterPngPath": "/assets/images/revuelto/04-rear-three-quarter.png",
+      "masterPngSha256": "2bd52e7a90f153e468d26bbabf79f7d9de2b660f20232e3d4bf60a49d767a532",
+      "masterPngBytes": 1909446,
+      "webpSha256": "5950dff69992d9828f498e6ee83a86adcee3440034eb04ef2a0b4228079c392b",
+      "webpBytes": 203340,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/revuelto/05-signature.webp",
+      "album": "revuelto",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/2024_lamborghini_revuelto.glb",
+      "publicGlbSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "publicGlbBytes": 3330124,
+      "masterPngPath": "/assets/images/revuelto/05-signature.png",
+      "masterPngSha256": "605bcc441045a2716a39fc2fe7e2eac4b565bfa4edcb8a7620a1609579868f51",
+      "masterPngBytes": 1869670,
+      "webpSha256": "a3e6f258ff67160b765ff7cc087ec92399aa3ee835968b8b1ca5a52b65f38b47",
+      "webpBytes": 192970,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/senna/01-front-three-quarter.webp",
+      "album": "senna",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/mclaren_senna_free.glb",
+      "publicGlbSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "publicGlbBytes": 1632788,
+      "masterPngPath": "/assets/images/senna/01-front-three-quarter.png",
+      "masterPngSha256": "4a3f6a2c8c93f5e5d7a7503eefc452f9578487760cd7013116d75306a48e1887",
+      "masterPngBytes": 2122609,
+      "webpSha256": "a3e9066f0a57ef04e0ce9abf4296c7c369813123bf3207b34b13115d1ec38c39",
+      "webpBytes": 245960,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/senna/02-near-front.webp",
+      "album": "senna",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/mclaren_senna_free.glb",
+      "publicGlbSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "publicGlbBytes": 1632788,
+      "masterPngPath": "/assets/images/senna/02-near-front.png",
+      "masterPngSha256": "d744181dfc2351e636c3d32269a335bd86a5d31e1bd3e71399b86b35860aff30",
+      "masterPngBytes": 1826113,
+      "webpSha256": "2ec50031f425acc390269e29bb0fb297deebef235108c5cff23059e73b868abc",
+      "webpBytes": 197738,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/senna/03-side-profile.webp",
+      "album": "senna",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/mclaren_senna_free.glb",
+      "publicGlbSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "publicGlbBytes": 1632788,
+      "masterPngPath": "/assets/images/senna/03-side-profile.png",
+      "masterPngSha256": "754c4b230ccfd601db56463e877e3fc5e6f51952d9484474f4b337dca2eb948f",
+      "masterPngBytes": 1637586,
+      "webpSha256": "b9fb127955c0b1e7e0c808b0911c0b8144fd44d089690665272b94a4ddb33d53",
+      "webpBytes": 194794,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/senna/04-rear-three-quarter.webp",
+      "album": "senna",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/mclaren_senna_free.glb",
+      "publicGlbSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "publicGlbBytes": 1632788,
+      "masterPngPath": "/assets/images/senna/04-rear-three-quarter.png",
+      "masterPngSha256": "94b2b7c3fa3a80e36d6d30dbf9fdc5b3594260612c71a3ee4fec4e0b97fe3818",
+      "masterPngBytes": 1983415,
+      "webpSha256": "829ed01ced2cbcb17c34b8cd329d25aec1e95261f57f6a97dd1657d1060db281",
+      "webpBytes": 239356,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/senna/05-signature.webp",
+      "album": "senna",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/mclaren_senna_free.glb",
+      "publicGlbSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "publicGlbBytes": 1632788,
+      "masterPngPath": "/assets/images/senna/05-signature.png",
+      "masterPngSha256": "73225e2776ba649c75cb3b8c26c58ed52adc495eece9155909d7c215d58bb973",
+      "masterPngBytes": 1919621,
+      "webpSha256": "1b1365afa06570fbb9e57b5043fed42ad95c99f3661a60aa6d22cf10bfda6539",
+      "webpBytes": 210404,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/sf90xx/01-front-three-quarter.webp",
+      "album": "sf90xx",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "publicGlbSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "publicGlbBytes": 3022024,
+      "masterPngPath": "/assets/images/sf90xx/01-front-three-quarter.png",
+      "masterPngSha256": "339e3ae6ab0800b501ef47ccc78bac3adb6bc6d4f1dfddc2711f1b6493548c8f",
+      "masterPngBytes": 1793438,
+      "webpSha256": "e3b4a67797050614fa91fea27c44c91fb165682095f973ab8e3b5a7c5aee2ae8",
+      "webpBytes": 151774,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/sf90xx/02-near-front.webp",
+      "album": "sf90xx",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "publicGlbSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "publicGlbBytes": 3022024,
+      "masterPngPath": "/assets/images/sf90xx/02-near-front.png",
+      "masterPngSha256": "cf31a6da513e7c3d16f8a1fb1dad4be465106c4f7d4747f6394fcbd52d13f742",
+      "masterPngBytes": 1785449,
+      "webpSha256": "4659f9b59494c8087334fbccaa0ddf59b48b7337ca16dcfb0dd9ba5dd68c7dc8",
+      "webpBytes": 149494,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/sf90xx/03-side-profile.webp",
+      "album": "sf90xx",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "publicGlbSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "publicGlbBytes": 3022024,
+      "masterPngPath": "/assets/images/sf90xx/03-side-profile.png",
+      "masterPngSha256": "f9eb5dcf1a40fb45d67fc8ecedba0c7fcb5c4b92b6d3e3b720d53c36dd40decb",
+      "masterPngBytes": 1438292,
+      "webpSha256": "63910be12c65f5b9e0ef11d59d633a2ca20013ce82915602f0882058ec2aed92",
+      "webpBytes": 130724,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/sf90xx/04-rear-three-quarter.webp",
+      "album": "sf90xx",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "publicGlbSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "publicGlbBytes": 3022024,
+      "masterPngPath": "/assets/images/sf90xx/04-rear-three-quarter.png",
+      "masterPngSha256": "5a030b333ceb90659cd9a3496cd0b652deca7fad82390b24959fc89da088685f",
+      "masterPngBytes": 1708228,
+      "webpSha256": "330cb3ba3672a9a119ae002320c0649de9f41c09eea5557b26fc30631dc353b4",
+      "webpBytes": 152668,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/sf90xx/05-signature.webp",
+      "album": "sf90xx",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "publicGlbSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "publicGlbBytes": 3022024,
+      "masterPngPath": "/assets/images/sf90xx/05-signature.png",
+      "masterPngSha256": "eeec7dc24869f17aed7a0f98c405390da95610eaeb199e6da2514c8c9cb59e40",
+      "masterPngBytes": 1716136,
+      "webpSha256": "6ab94182adcd34e40b6362de6e1ede4ec6d4f68ab91f392374798077809ce3f4",
+      "webpBytes": 145986,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8X",
+        "ALPH",
+        "VP8"
+      ],
+      "webpCodec": "VP8X_ALPHA_VP8_lossy",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": true,
+      "firstGitCommit": "dbaaed61146555cfe48d34ea91cac3c0412e00ca",
+      "firstGitCommitKind": "new_nine_album_batch_2026-11-15",
+      "renderLineage": "VERIFIED_CURRENT_PNG_TO_WEBP_SHA256",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": null,
+      "modelRelationEvidence": "RENDER_SCRIPT_MAPS_CURRENT_GLB_PNG_REENCODES_EXACTLY_RENDER_NOT_REPRODUCED"
+    },
+    {
+      "path": "/assets/images/tourbillon24/01-front-three-quarter.webp",
+      "album": "tourbillon24",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/bugatti_tourbillon_2024.glb",
+      "publicGlbSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "publicGlbBytes": 2713072,
+      "masterPngPath": "/assets/images/tourbillon24/01-front-three-quarter.png",
+      "masterPngSha256": "a70e5a1b12240142d77fc86b94cd13614986fd5a9fa051bc51021ba252780e86",
+      "masterPngBytes": 1395457,
+      "webpSha256": "20b34fe06ef09e05f46e794d084a763467e61b93f60eec278cd424310135b87a",
+      "webpBytes": 690856,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/tourbillon24/02-near-front.webp",
+      "album": "tourbillon24",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/bugatti_tourbillon_2024.glb",
+      "publicGlbSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "publicGlbBytes": 2713072,
+      "masterPngPath": "/assets/images/tourbillon24/02-near-front.png",
+      "masterPngSha256": "854e7644af9013cab5726dde16dd7495870cd68a301ce74daff41d315a779c51",
+      "masterPngBytes": 1734629,
+      "webpSha256": "9067efd9536de43df005b6359a9cfe883c671fff39753645e4bae7a1f223004d",
+      "webpBytes": 864690,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/tourbillon24/03-side-profile.webp",
+      "album": "tourbillon24",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/bugatti_tourbillon_2024.glb",
+      "publicGlbSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "publicGlbBytes": 2713072,
+      "masterPngPath": "/assets/images/tourbillon24/03-side-profile.png",
+      "masterPngSha256": "fb5e4c5672cedbcb21fa6a0c06e4517811152fc026966c62ad66dfd8fd1f5f91",
+      "masterPngBytes": 1517508,
+      "webpSha256": "156c33d46b08d765e204db706b76c7dadd9fae80777c9361ac5d36a6c5ce36fe",
+      "webpBytes": 737590,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/tourbillon24/04-rear-three-quarter.webp",
+      "album": "tourbillon24",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/bugatti_tourbillon_2024.glb",
+      "publicGlbSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "publicGlbBytes": 2713072,
+      "masterPngPath": "/assets/images/tourbillon24/04-rear-three-quarter.png",
+      "masterPngSha256": "77e5719a6da1dfccabbbd13555fdc190c5c0c1a5135c6609873ec3eeb33fd938",
+      "masterPngBytes": 1584484,
+      "webpSha256": "7e632e3b3832540cbce9b67cb12470557f5817b1b8c2f0f48206415fb3ba8809",
+      "webpBytes": 794594,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/tourbillon24/05-signature.webp",
+      "album": "tourbillon24",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/bugatti_tourbillon_2024.glb",
+      "publicGlbSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "publicGlbBytes": 2713072,
+      "masterPngPath": "/assets/images/tourbillon24/05-signature.png",
+      "masterPngSha256": "a9496eba0dfd3e64e1a22ef94e05e662a3a2e5da2094f5752720f765191e50ca",
+      "masterPngBytes": 2226713,
+      "webpSha256": "ea1728f9649189f72da5b14bf7064aff0278a7701ce5e20c12fb74dadd119ab0",
+      "webpBytes": 1097268,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/valkyrie/01-front-three-quarter.webp",
+      "album": "valkyrie",
+      "pose": "01-front-three-quarter",
+      "publicGlb": "/assets/models/aston_martin_valkyrie.glb",
+      "publicGlbSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "publicGlbBytes": 4744940,
+      "masterPngPath": "/assets/images/valkyrie/01-front-three-quarter.png",
+      "masterPngSha256": "5c9e5f9da0b8fc8d9e88268ed3c9da145b8903db2454e18150e6c2a428446507",
+      "masterPngBytes": 1392080,
+      "webpSha256": "045aea6114fedc3947378115df169df67cbea4a78457740908cff050fa5db0b4",
+      "webpBytes": 792978,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/valkyrie/02-near-front.webp",
+      "album": "valkyrie",
+      "pose": "02-near-front",
+      "publicGlb": "/assets/models/aston_martin_valkyrie.glb",
+      "publicGlbSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "publicGlbBytes": 4744940,
+      "masterPngPath": "/assets/images/valkyrie/02-near-front.png",
+      "masterPngSha256": "253f2e3db7eef4ff6c1cef7ac6a92fa6d49963cd8fb00e77138fc86a581f65ec",
+      "masterPngBytes": 1169367,
+      "webpSha256": "21320a4d1c8f1045d24ed632a22aeed6cf5fef8eb2ad46b5b120e91d82a2fa95",
+      "webpBytes": 664264,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/valkyrie/03-side-profile.webp",
+      "album": "valkyrie",
+      "pose": "03-side-profile",
+      "publicGlb": "/assets/models/aston_martin_valkyrie.glb",
+      "publicGlbSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "publicGlbBytes": 4744940,
+      "masterPngPath": "/assets/images/valkyrie/03-side-profile.png",
+      "masterPngSha256": "96e4728e1c16ed03ca754e96d022e4235d5d9da2b271d6457c5c32b2e5afe719",
+      "masterPngBytes": 2056295,
+      "webpSha256": "7ca0ae8480b50c5a200744543ca7f22914d3c234cb96bb2769c672a46ca00aec",
+      "webpBytes": 1180712,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/valkyrie/04-rear-three-quarter.webp",
+      "album": "valkyrie",
+      "pose": "04-rear-three-quarter",
+      "publicGlb": "/assets/models/aston_martin_valkyrie.glb",
+      "publicGlbSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "publicGlbBytes": 4744940,
+      "masterPngPath": "/assets/images/valkyrie/04-rear-three-quarter.png",
+      "masterPngSha256": "5a20fd1cac4a9077dd7baf39c0878b27f47b3588d6f1d671219f3dfe5a62cccd",
+      "masterPngBytes": 1382515,
+      "webpSha256": "60b47b72f5ca20cf313ccab87ccdf07b15c2ee3f9587642ccf581c271eb4b84d",
+      "webpBytes": 759508,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    },
+    {
+      "path": "/assets/images/valkyrie/05-signature.webp",
+      "album": "valkyrie",
+      "pose": "05-signature",
+      "publicGlb": "/assets/models/aston_martin_valkyrie.glb",
+      "publicGlbSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "publicGlbBytes": 4744940,
+      "masterPngPath": "/assets/images/valkyrie/05-signature.png",
+      "masterPngSha256": "9f801c2fbc0db22ce066f69dde059adeda7a4b82030f327107aca92a5bc75791",
+      "masterPngBytes": 977701,
+      "webpSha256": "28be5623e1c869242f74ec1b49fd119badd7f3e6a169af978fb9ab5a954bae9a",
+      "webpBytes": 545776,
+      "dimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "masterDimensions": {
+        "width": 3840,
+        "height": 2160,
+        "hasAlpha": true
+      },
+      "webpRiffChunks": [
+        "VP8L"
+      ],
+      "webpCodec": "VP8L_lossless",
+      "webpHasEmbeddedExifXmpIcc": false,
+      "matchedExactSharpQuality90AlphaQuality100": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "firstGitCommitKind": "initial_2026-11-14",
+      "renderLineage": "LIKELY_OLDER_RENDER_VARIANT_NOT_REPRODUCIBLE_FROM_CURRENT_PNG",
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "tools/render/shoot.mjs:18-27",
+        "tools/render/render.html:35-80",
+        "src/data/vehicles.js:4-20",
+        "assets/models/manifest.json",
+        "docs/p5-asset-rights-register.json",
+        "assets/images/README.md:21-24"
+      ],
+      "rawDecodedRgbaMatchesCurrentPng": false,
+      "modelRelationEvidence": "CURRENT_SCRIPT_MAPS_GLB_BUT_HISTORICAL_RENDER_SOURCE_VERSION_UNVERIFIED"
+    }
+  ],
+  "garage": [
+    {
+      "path": "/assets/environment/private_garage_1080x1350.webp",
+      "sha256": "e296b9eac26e3ad7dddd211e30dd8bbe4a0e6dc66535022e9eeea3819709fdb6",
+      "bytes": 230852,
+      "dimensions": {
+        "width": 1080,
+        "height": 1350,
+        "hasAlpha": false
+      },
+      "filenameNominalDimensions": [
+        1080,
+        1350
+      ],
+      "webpRiffChunks": [
+        "VP8"
+      ],
+      "webpHasEmbeddedExifXmpIcc": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "renderLineage": "UNKNOWN_CREATOR_AND_ORIGINAL",
+      "sourceFile": null,
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "git commit 4c330ab",
+        "index.html:13,27,57-58",
+        "tools/render/shoot.mjs",
+        "tools/render/render.html"
+      ]
+    },
+    {
+      "path": "/assets/environment/private_garage_1920x1080.webp",
+      "sha256": "46288c9cc07a0a98db1e21b901f324f5f51fcd21cdb4a24924d7d05a511d4947",
+      "bytes": 354550,
+      "dimensions": {
+        "width": 1672,
+        "height": 941,
+        "hasAlpha": false
+      },
+      "filenameNominalDimensions": [
+        1920,
+        1080
+      ],
+      "webpRiffChunks": [
+        "VP8"
+      ],
+      "webpHasEmbeddedExifXmpIcc": false,
+      "firstGitCommit": "4c330ab45c31c295525c04d9d5fb95a13d825c72",
+      "renderLineage": "UNKNOWN_CREATOR_AND_ORIGINAL",
+      "sourceFile": null,
+      "sourceRightsUrl": null,
+      "legalRights": "UNVERIFIED",
+      "evidenceRefs": [
+        "git commit 4c330ab",
+        "index.html:13,27,57-58",
+        "tools/render/shoot.mjs",
+        "tools/render/render.html"
+      ]
+    }
+  ],
+  "garagePairInference": {
+    "relationship": "LIKELY_SAME_SCENE_CENTER_CROP_NOT_PROVEN_ORIGINAL",
+    "wide": "/assets/environment/private_garage_1920x1080.webp",
+    "portrait": "/assets/environment/private_garage_1080x1350.webp",
+    "wideActualDimensions": [
+      1672,
+      941
+    ],
+    "portraitActualDimensions": [
+      1080,
+      1350
+    ],
+    "centerCropEstimate": {
+      "left": 460,
+      "top": 0,
+      "width": 752,
+      "height": 941
+    },
+    "downsampleCompare": {
+      "width": 180,
+      "height": 225,
+      "meanAbsoluteChannelDifference": 3.691,
+      "maxChannelValue": 255
+    },
+    "doesNotProveLicense": true
+  },
+  "legalCaveats": [
+    "Bit-exact conversion proves WebP bytes can be produced from current PNG, not who owns PNG, source 3D model, textures, HDRI or commercial distribution rights.",
+    "Lossless older WebPs have matching naming/angles and source model mapping but cannot be reproduced using current Sharp quality 90 path; precise source/render revision is unproven.",
+    "Neither garage image contains embedded creator/license metadata, and no authoring/download record or license was found in the repository; no external source URL is assigned.",
+    "Manufacturer product-information source URLs in VEHICLES are not GLB nor image redistribution licenses.",
+    "No public release or automatic legal approval is permitted."
+  ]
+}

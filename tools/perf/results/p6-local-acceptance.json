@@ -1,0 +1,46 @@
+{
+  "format": "velance-p6-local-acceptance/1",
+  "assessedAtUtc": "2026-11-17T05:31:47.455Z",
+  "node": "v24.21.0",
+  "mode": "evidence",
+  "result": "PASS_LOCAL",
+  "publicLaunch": "BLOCKED",
+  "internetDeploymentAuthorized": false,
+  "cloudDeploymentPerformed": false,
+  "stagingContract": "VALIDATED_FAIL_CLOSED",
+  "p6SecurityTests": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "p4P3P2NativeRegression": "PASS_LOCAL",
+  "legalAssetRights": {
+    "approved": 0,
+    "unverified": 96
+  },
+  "publicProviderGates": {
+    "legalAssetReview": "BLOCKED",
+    "providerTlsWafIamCdn": "NEEDS_PROVIDER_TEST",
+    "opsIdentity": "NEEDS_PROVIDER_TEST",
+    "privacyOwnerSignoff": "BLOCKED",
+    "offHostRecovery": "NEEDS_PROVIDER_TEST",
+    "externalAlertDelivery": "NEEDS_PROVIDER_TEST",
+    "wanSoakAndDevices": "NEEDS_PROVIDER_TEST",
+    "releaseCanaryRollback": "NEEDS_PROVIDER_TEST"
+  },
+  "limitations": [
+    "No cloud origin/CDN/TLS/WAF/SSO/MFA deployed or verified",
+    "Local loopback fixtures only; no WAN/24-hour soak or real-device validation",
+    "No encrypted off-host backup, independent recovery host, alert delivery or on-call verified",
+    "No consent/legal owner signoff; 96 public asset permissions unverified"
+  ],
+  "currentReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "p4AcceptedReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "currentSourceMatchesP4FullBrowserEvidence": true,
+  "currentSnapshotFiles": 125,
+  "realDatabase": {
+    "touchedByGate": false,
+    "sizeAtEnd": 155648,
+    "mtimeMsAtEnd": 1794754488799.5728
+  }
+}

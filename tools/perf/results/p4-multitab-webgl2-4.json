@@ -1,0 +1,128 @@
+{
+  "format": "velance-p4-real-multitab/1",
+  "measuredAtUtc": "2026-11-17T04:56:10.624Z",
+  "environment": {
+    "node": "v24.21.0",
+    "chrome": "Chrome/157.0.8103.79",
+    "cpu": "Apple M5",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "profile": {
+    "tabs": 4,
+    "backend": "webgl2",
+    "viewport": "1440x900",
+    "perVisitorBrowserContext": true,
+    "coldCache": true,
+    "maxSeconds": 120,
+    "showroom": "all 16 GLB, then overview and selected car",
+    "localOnly": true,
+    "distinctRealDevices": 0,
+    "distinctTabs": 4
+  },
+  "release": {
+    "id": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+    "totalFiles": 125
+  },
+  "elapsedMs": 11434.260459000001,
+  "totalTransferBytes": 190253568,
+  "visitors": [
+    {
+      "visitorIndex": 0,
+      "loadMs": 8921.137958,
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 60477264,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563392,
+      "failures": [],
+      "completed": true
+    },
+    {
+      "visitorIndex": 1,
+      "loadMs": 8964.575334000001,
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 38873768,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563392,
+      "failures": [],
+      "completed": true
+    },
+    {
+      "visitorIndex": 2,
+      "loadMs": 8871.164583000002,
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 61827640,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563392,
+      "failures": [],
+      "completed": true
+    },
+    {
+      "visitorIndex": 3,
+      "loadMs": 8120.328291,
+      "state": {
+        "backend": "webgl2",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 60601088,
+      "statuses": {
+        "200": 408
+      },
+      "networkFiles": 408,
+      "fromCache": 1,
+      "transferBytes": 47563392,
+      "failures": [],
+      "completed": true
+    }
+  ],
+  "gates": {
+    "noErrors": true,
+    "allLoaded16": true,
+    "requestedBackend": true,
+    "allVisitorsCompleted": true,
+    "telemetryOptedOut": true
+  },
+  "overall": "PASS_LOCAL",
+  "limitations": [
+    "Independent tabs in ONE Chrome browser on one GPU, not independent devices, users, global CDN, or Internet traffic.",
+    "Cache separated by browser contexts, GPU process and host CPU remain shared.",
+    "No guarantee against session length, battery drain or production WebGPU availability."
+  ]
+}

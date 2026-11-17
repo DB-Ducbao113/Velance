@@ -1,0 +1,106 @@
+{
+  "format": "velance-p7-rights-audit/1",
+  "localAudit": "PASS_LOCAL",
+  "publicLaunch": "NO_GO",
+  "g0LegalGate": "BLOCKED",
+  "legalDistributionAuthorizedByAudit": false,
+  "disclaimer": "SHA-256 proves byte identity only; APPROVED metadata cannot prove independent legal authorization.",
+  "sourceRelease": {
+    "id": "4ccdc5acbdda23ebd91011965aa8cb3571cb426a9594f3651c81fc5b7b9fb671",
+    "manifestFormat": "velance-static-release/1",
+    "files": 126,
+    "sourceBytesMatchRelease": true,
+    "manifestIdVerified": true,
+    "historicalP4ReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+    "matchesHistoricalP4Release": false
+  },
+  "registeredRights": {
+    "models": 16,
+    "webpRenders": 80,
+    "total": 96,
+    "unverified": 96,
+    "claimedApproved": 0,
+    "rejected": 0,
+    "legalSignaturesIndependentlyVerified": 0,
+    "provenanceMissingFields": {
+      "attributionRequired": 96,
+      "authorOrOwner": 96,
+      "exactLicenseUrl": 96,
+      "independentProvenanceChecked": 96,
+      "licenseName": 96,
+      "originalSourceProof": 96,
+      "originalSourceUrl": 96,
+      "permitsCommercialWebsite": 96,
+      "permitsModelConversion": 16,
+      "permitsModification": 16,
+      "permitsRenderDerivativeDistribution": 80,
+      "permitsSelfHostedWebGLDistribution": 16,
+      "reviewedAtUtc": 96,
+      "reviewer": 96,
+      "rightsEvidenceFile": 96
+    }
+  },
+  "publicRightsScope": {
+    "mediaFiles": 98,
+    "coveredByP5Register": 96,
+    "additionalRightsNeeded": [
+      "/assets/environment/private_garage_1080x1350.webp",
+      "/assets/environment/private_garage_1920x1080.webp"
+    ],
+    "complete": false
+  },
+  "excludedSourceMedia": {
+    "count": 114,
+    "byExtension": {
+      ".png": 80,
+      ".glb": 34
+    },
+    "examples": [
+      "/assets/images/amgone/01-front-three-quarter.png",
+      "/assets/images/amgone/02-near-front.png",
+      "/assets/images/amgone/03-side-profile.png",
+      "/assets/images/amgone/04-rear-three-quarter.png",
+      "/assets/images/amgone/05-signature.png",
+      "/assets/images/aventador/01-front-three-quarter.png",
+      "/assets/images/aventador/02-near-front.png",
+      "/assets/images/aventador/03-side-profile.png",
+      "/assets/images/aventador/04-rear-three-quarter.png",
+      "/assets/images/aventador/05-signature.png",
+      "/assets/images/corvette/01-front-three-quarter.png",
+      "/assets/images/corvette/02-near-front.png",
+      "/assets/images/corvette/03-side-profile.png",
+      "/assets/images/corvette/04-rear-three-quarter.png",
+      "/assets/images/corvette/05-signature.png",
+      "/assets/images/huayra/01-front-three-quarter.png"
+    ],
+    "note": "Not in immutable public release; no distribution authority inferred if publishing later."
+  },
+  "otherLegalReview": {
+    "thirdPartyCodeCandidates": [
+      "/packages/tsl-carpaint/src/index.js",
+      "/vendor/motion/ScrollTrigger.min.js",
+      "/vendor/motion/gsap.min.js",
+      "/vendor/motion/lenis.min.js",
+      "/vendor/three/addons/controls/OrbitControls.js",
+      "/vendor/three/addons/environments/RoomEnvironment.js",
+      "/vendor/three/addons/libs/basis/basis_transcoder.js",
+      "/vendor/three/addons/libs/basis/basis_transcoder.wasm",
+      "/vendor/three/addons/libs/ktx-parse.module.js",
+      "/vendor/three/addons/libs/meshopt_decoder.module.js",
+      "/vendor/three/addons/libs/zstddec.module.js",
+      "/vendor/three/addons/loaders/GLTFLoader.js",
+      "/vendor/three/addons/loaders/KTX2Loader.js",
+      "/vendor/three/addons/math/ColorSpaces.js",
+      "/vendor/three/addons/utils/BufferGeometryUtils.js",
+      "/vendor/three/addons/utils/SkeletonUtils.js",
+      "/vendor/three/addons/utils/WorkerPool.js",
+      "/vendor/three/three.core.js",
+      "/vendor/three/three.tsl.js",
+      "/vendor/three/three.webgpu.js"
+    ],
+    "brandTrademarkRights": "UNVERIFIED",
+    "environmentOrRenderSceneLineage": "UNVERIFIED",
+    "note": "Vehicle brand marks, texture/HDRI, original render inputs, fonts and third-party runtime licenses require separate human review."
+  },
+  "generatedAtUtc": "2026-11-17T05:46:09.445Z"
+}

@@ -1,0 +1,39 @@
+{
+  "format": "velance-p5-readiness/1",
+  "assessedAtUtc": "2026-11-17T05:05:51.349Z",
+  "localHandoff": "PASS_LOCAL",
+  "documentedP4Evidence": "PASS_LOCAL",
+  "sourceAssetDigestIdentity": "VERIFIED",
+  "publicLaunch": "BLOCKED",
+  "internetDeploymentAuthorized": false,
+  "sourceReleaseId": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+  "rights": {
+    "approved": 0,
+    "unverified": 96,
+    "invalidApproval": 0,
+    "total": 96,
+    "checksumMismatch": 0,
+    "template": "docs/p5-asset-rights-register.json",
+    "note": "All 96 rights entries require evidence, individual review and independent legal signoff; a hash is not a license."
+  },
+  "publicRequirements": {
+    "licenseProvenance": "BLOCKED",
+    "immutableCDNAndPrivateObjectOrigin": "NOT_CONFIGURED",
+    "domainTLSAndHTTPSSecurityHeaders": "NOT_CONFIGURED",
+    "edgeAbuseControlsAndTelemetryRateRules": "NOT_CONFIGURED",
+    "privateReadApiOpsSSOAndLeastPrivilege": "NOT_CONFIGURED",
+    "telemetryConsentPrivacyNoticeRetention": "NOT_CONFIGURED",
+    "encryptedOffHostBackupsAndRestoreDrill": "NOT_CONFIGURED",
+    "externalMonitoringAlertDeliveryAndOnCall": "NOT_CONFIGURED",
+    "realMultiRegionProductionLoadAnd24hSoak": "NOT_VERIFIED",
+    "productionReleaseCanaryAndRollback": "NOT_VERIFIED",
+    "accountableOperatorAndLaunchApproval": "UNASSIGNED"
+  },
+  "missingHandoffDocs": [],
+  "boundaries": [
+    "Local HTTP and Apple M5 GPU evidence only",
+    "100 virtual HTTP clients used a global maximum of 16 simultaneous file downloads",
+    "Four real Chrome tabs share one GPU rather than four independent client devices",
+    "No public CDN/Internet, private identity system, licensed materials, or offsite recovery has been deployed"
+  ]
+}
