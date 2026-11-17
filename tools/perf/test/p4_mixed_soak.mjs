@@ -12,7 +12,23 @@ function run(args, timeout = 18000) {
   const result = spawnSync(process.execPath, [source, ...args], {
     encoding: 'utf8', timeout, maxBuffer: 1024 * 1024
   });
-  assert.equal(result.status, 0, `${args.join(' ')}: ${result.stderr || result.error?.message}`);
+  let gates = null, backup = null, ingestion = null, resources = null, reads = null;
+  try {
+    const report = JSON.parse(result.stdout);
+    gates = report.gates;
+    backup = report.backup;
+    ingestion = report.ingestion;
+    resources = report.resources;
+    reads = report.reads;
+  } catch { /* A crash or timeout may leave no JSON report. */ }
+  assert.equal(result.status, 0, `${args.join(' ')}:
+stderr: ${result.stderr || result.error?.message || '(none)'}
+signal: ${result.signal ?? '(none)'}
+gates: ${JSON.stringify(gates)}
+backup: ${JSON.stringify(backup)}
+ingestion: ${JSON.stringify(ingestion && { offered: ingestion.offered, acknowledged: ingestion.acknowledged, latencyMs: ingestion.latencyMs })}
+resources: ${JSON.stringify(resources)}
+reads: ${JSON.stringify(reads)}`);
   return JSON.parse(result.stdout);
 }
 
