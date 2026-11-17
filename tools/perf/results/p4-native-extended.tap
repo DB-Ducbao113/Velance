@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: strict CLI parser, safe defaults and nearest-rank percentiles
+ok 1 - strict CLI parser, safe defaults and nearest-rank percentiles
+  ---
+  duration_ms: 0.669958
+  type: 'test'
+  ...
+# Subtest: days=1 seed-only creates fresh temporary WAL fixture with exact 300k deterministic sample count
+ok 2 - days=1 seed-only creates fresh temporary WAL fixture with exact 300k deterministic sample count
+  ---
+  duration_ms: 373.165417
+  type: 'test'
+  ...
+# Subtest: normal 10/s run reports durable ACK receipts, response classifications and bounded output file
+ok 3 - normal 10/s run reports durable ACK receipts, response classifications and bounded output file
+  ---
+  duration_ms: 1125.409916
+  type: 'test'
+  ...
+# Subtest: 100/s overload reports expected 429 without claiming offered-success gate
+ok 4 - 100/s overload reports expected 429 without claiming offered-success gate
+  ---
+  duration_ms: 3174.000958
+  type: 'test'
+  ...
+# Subtest: internal child cannot target an ordinary DB path
+ok 5 - internal child cannot target an ordinary DB path
+  ---
+  duration_ms: 44.731333
+  type: 'test'
+  ...
+# Subtest: CLI options are strict and enforce per-mode load, duration, and memory bounds
+ok 6 - CLI options are strict and enforce per-mode load, duration, and memory bounds
+  ---
+  duration_ms: 0.656708
+  type: 'test'
+  ...
+# Subtest: fixture-only P4 capacity records offered/sent/completed, HTTP headers, 304 and real body bytes
+ok 7 - fixture-only P4 capacity records offered/sent/completed, HTTP headers, 304 and real body bytes
+  ---
+  duration_ms: 2346.993458
+  type: 'test'
+  ...
+# Subtest: strict defaults, input hard caps and percentile computation
+ok 8 - strict defaults, input hard caps and percentile computation
+  ---
+  duration_ms: 0.697417
+  type: 'test'
+  ...
+# Subtest: stable session id, ordered seq and identical duplicate payloads
+ok 9 - stable session id, ordered seq and identical duplicate payloads
+  ---
+  duration_ms: 0.214167
+  type: 'test'
+  ...
+# Subtest: smoke: 10/s mixed loopback reads, backup, post-ACK SIGKILL/replay/restart are separately verified
+ok 10 - smoke: 10/s mixed loopback reads, backup, post-ACK SIGKILL/replay/restart are separately verified
+  ---
+  duration_ms: 3147.012875
+  type: 'test'
+  ...
+# Subtest: child mode rejects caller-provided DB outside its own temporary workspace
+ok 11 - child mode rejects caller-provided DB outside its own temporary workspace
+  ---
+  duration_ms: 33.151458
+  type: 'test'
+  ...
+# Subtest: 3-day/900k-sample short regression verifies backup overlaps live ACKs and restart durability
+ok 12 - 3-day/900k-sample short regression verifies backup overlaps live ACKs and restart durability
+  ---
+  duration_ms: 4274.416042
+  type: 'test'
+  ...
+# Subtest: CLI controls do not accidentally start a heavy 100-user simulation and enforce strict caps
+ok 13 - CLI controls do not accidentally start a heavy 100-user simulation and enforce strict caps
+  ---
+  duration_ms: 0.811083
+  type: 'test'
+  ...
+# Subtest: inventory is strict: no guessing if one GLB, one WebP or a full album is missing
+ok 14 - inventory is strict: no guessing if one GLB, one WebP or a full album is missing
+  ---
+  duration_ms: 16.993292
+  type: 'test'
+  ...
+# Subtest: SHA256 + full response, HTTP 200 and conditional 304 are mandatory, incomplete 200 is a failure
+ok 15 - SHA256 + full response, HTTP 200 and conditional 304 are mandatory, incomplete 200 is a failure
+  ---
+  duration_ms: 0.242875
+  type: 'test'
+  ...
+# Subtest: tiny 1/10 fixture virtual clients stream all sixteen GLBs, selected WebPs, warm 304 and current release
+ok 16 - tiny 1/10 fixture virtual clients stream all sixteen GLBs, selected WebPs, warm 304 and current release
+  ---
+  duration_ms: 582.011125
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 15291.511875

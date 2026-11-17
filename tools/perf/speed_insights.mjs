@@ -25,7 +25,7 @@ const collector = () => {
   new PerformanceObserver(l => { for (const e of l.getEntries()) if (e.interactionId) V.events.push(e.duration); }).observe({ type: 'event', buffered: true, durationThreshold: 16 });
   new PerformanceObserver(l => { for (const e of l.getEntries()) V.longtasks.push({ start: e.startTime, dur: e.duration }); }).observe({ type: 'longtask', buffered: true });
   const poll = setInterval(() => {
-    const s = window.__NOIR_QA__?.stats?.();
+    const s = window.__VELANCE_QA__?.stats?.();
     if (!s) return;
     if (V.heroAt === null && s.loaded >= 1) V.heroAt = performance.now();
     if (V.allAt === null && s.loaded >= s.total) { V.allAt = performance.now(); clearInterval(poll); }
@@ -43,7 +43,7 @@ const cadence = ms => new Promise(res => {
   requestAnimationFrame(tick);
 });
 const sceneBudget = () => {
-  const eng = window.__NOIR_QA__.engine;
+  const eng = window.__VELANCE_QA__.engine;
   const seen = new Set(); let bytes = 0, compressed = 0;
   eng.scene.traverse(o => {
     const mats = o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : [];
@@ -85,9 +85,9 @@ for (let r = 0; r < RUNS; r++) {
   const enterP = page.evaluate(cadence, 2600);
   await page.click('#gateEnter');
   const enter = await enterP;
-  await page.evaluate(() => window.__NOIR_QA__.engine.setFocus(0));
+  await page.evaluate(() => window.__VELANCE_QA__.engine.setFocus(0));
   await sleep(600);
-  const homeStats = await page.evaluate(() => window.__NOIR_QA__.stats());
+  const homeStats = await page.evaluate(() => window.__VELANCE_QA__.stats());
   if (SHOTS && r === 0) { mkdirSync(SHOTS, { recursive: true }); await page.screenshot({ path: join(SHOTS, `${LABEL}-home.png`) }); }
   const selP = page.evaluate(cadence, 1500);
   await page.click('#selectCar');
@@ -97,12 +97,12 @@ for (let r = 0; r < RUNS; r++) {
   const orbitP = page.evaluate(cadence, 2000);
   await drag(page, '#selectedModelHost', 260, 2000);
   const orbit = await orbitP;
-  const selStats = await page.evaluate(() => window.__NOIR_QA__.stats());
+  const selStats = await page.evaluate(() => window.__VELANCE_QA__.stats());
   if (SHOTS && r === 0) {
-    await page.evaluate(() => { const q = window.__NOIR_QA__; q.engine.setPaint(q.selected, '#7c1418'); });
+    await page.evaluate(() => { const q = window.__VELANCE_QA__; q.engine.setPaint(q.selected, '#7c1418'); });
     await sleep(400);
     await page.screenshot({ path: join(SHOTS, `${LABEL}-selected-rosso.png`) });
-    await page.evaluate(() => { const q = window.__NOIR_QA__; q.engine.setPaint(q.selected, null); });
+    await page.evaluate(() => { const q = window.__VELANCE_QA__; q.engine.setPaint(q.selected, null); });
   }
   await page.keyboard.press('Escape');
   await sleep(1400);
@@ -134,7 +134,7 @@ for (let r = 0; r < RUNS; r++) {
       loadLongTaskMs: loadTasks.reduce((a, t) => a + t.dur, 0), loadLongTaskMax: loadTasks.reduce((a, t) => Math.max(a, t.dur), 0),
       heroMs: V.heroAt, allMs: V.allAt,
       mbTotal: +(res.reduce((a, e) => a + (e.encodedBodySize || e.transferSize || 0), 0) / 1048576).toFixed(2), byType,
-      budget: b, stats: window.__NOIR_QA__.stats()
+      budget: b, stats: window.__VELANCE_QA__.stats()
     };
   }, budget));
   runs.push({

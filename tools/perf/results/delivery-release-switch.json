@@ -1,0 +1,16 @@
+{
+  "format": "velance-release-browser-switch/1",
+  "recordedAtUtc": "2026-11-17T04:23:15.571Z",
+  "chrome": "Chrome/157.0.8103.79",
+  "oldRelease": "7c4de4df5007d1d18bb9b18aa49a34423fe8b0f0ce191b40fd3c040ab31204b2",
+  "newRelease": "d139b642ee510941542264b30e462220156dd2be949880ba16a5761215bf2a85",
+  "checks": {
+    "oldTabAfterActivation": "A",
+    "newTabAfterActivation": "B",
+    "rollbackNewNavigation": "A",
+    "stillOpenNewTabAfterRollback": "B",
+    "allDynamicImportsVersioned": true
+  },
+  "localOnly": true,
+  "syntheticSource": true
+}

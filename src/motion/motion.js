@@ -13,7 +13,7 @@ let fallbackScroll = null;
 let initialized = false;
 let scrollTicker = null;
 const motionStage = { engine: 'native-fallback', images:0, reveals:0, interactive:0, lenis:false, reduced:lowMotion.matches };
-window.__NOIR_MOTION_QA__=motionStage;
+window.__VELANCE_MOTION_QA__=motionStage;
 
 function clearSections() {
   for (const t of active) t.kill?.(); active=[];
@@ -35,7 +35,7 @@ function setupLenis() {
     gsap.ticker.add(scrollTicker);
     gsap.ticker.lagSmoothing(0);
     motionStage.lenis=true;
-  }catch(e){console.warn('[NOIR MOTION] Lenis unavailable, native scrolling continues',e);lenis=null;}
+  }catch(e){console.warn('[VELANCE MOTION] Lenis unavailable, native scrolling continues',e);lenis=null;}
 }
 function initializeMotion() {
   const gsap=window.gsap;
@@ -103,18 +103,18 @@ function setupTextReveals() {
   } else {
     const obs=new IntersectionObserver((entries)=>{
       for (const e of entries){
-        if(e.isIntersecting)e.target.classList.add('noir-in-view');
-        else if(e.boundingClientRect.top>0)e.target.classList.remove('noir-in-view');
+        if(e.isIntersecting)e.target.classList.add('velance-in-view');
+        else if(e.boundingClientRect.top>0)e.target.classList.remove('velance-in-view');
       }
     },{threshold:0.08,rootMargin:'0px 0px -5% 0px'});
-    for(const el of targets){el.classList.add('noir-await');obs.observe(el);}
+    for(const el of targets){el.classList.add('velance-await');obs.observe(el);}
     observers.push(obs);
   }
 }
 
 function setupMicroInteractions() {
-  if(document.documentElement.dataset.noirMicro==='ready')return;
-  document.documentElement.dataset.noirMicro='ready';
+  if(document.documentElement.dataset.velanceMicro==='ready')return;
+  document.documentElement.dataset.velanceMicro='ready';
   // React Bits-inspired spotlight & border response; ported to the existing
   // vanilla app so the user-supplied site does NOT require a React rewrite.
   document.addEventListener('pointermove',event=>{
@@ -133,7 +133,7 @@ function setupMicroInteractions() {
   });
   motionStage.interactive=1;
 }
-export function refreshNoirMotion() {
+export function refreshVelanceMotion() {
   clearSections();initializeMotion();
   const review=document.getElementById('review');
   if(!review || review.hidden){motionStage.images=0;motionStage.reveals=0;return;}
@@ -161,8 +161,8 @@ export function setImageLoaded(image) {
   const section=image.closest('.shot-section');
   if(section) setPhotoOpacity(image,reduce()?1:scrollGeometry(section).alpha);
 }
-export function bootNoirMotion() {
+export function bootVelanceMotion() {
   initializeMotion();
-  if(lowMotion.addEventListener)lowMotion.addEventListener('change',()=>{refreshNoirMotion();});
-  refreshNoirMotion();
+  if(lowMotion.addEventListener)lowMotion.addEventListener('change',()=>{refreshVelanceMotion();});
+  refreshVelanceMotion();
 }

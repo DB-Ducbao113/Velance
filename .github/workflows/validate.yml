@@ -1,5 +1,6 @@
-name: Validate showroom
+name: VELANCE local-only validation (no deployment)
 
+# No pull_request_target, no write token, no secrets, no publishing.
 on:
   push:
     branches: [main, feat/webgpu-carpaint]
@@ -7,57 +8,133 @@ on:
   workflow_dispatch:
     inputs:
       gpu:
-        description: Run headed tests on a configured macOS GPU runner
+        description: Opt-in GPU test on a configured private macOS runner (no screenshots uploaded)
+        required: false
+        type: boolean
+        default: false
+      release_dry_run:
+        description: Verify an ephemeral local release without uploading assets
+        required: false
         type: boolean
         default: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: velance-validate-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  assets-and-source:
+  validate:
+    name: Node 24 security, P7 and native regression
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      CI: 'true'
+    defaults:
+      run:
+        shell: bash
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # Official v7 majors run on Node 24; unlike a SHA, a major tag can move.
+      # See docs/p8-cicd.md for action provenance limitation and review gate.
+      - name: Checkout (no persisted GitHub credentials)
+        uses: actions/checkout@v7
         with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: tools/optimize/package-lock.json
-      - run: npm --prefix tools/optimize ci
-      - run: npm --prefix tools/optimize test
-      - run: node tools/optimize/budget.mjs
-      - run: node tools/vendor/verify.mjs
-      - run: |
+          persist-credentials: false
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+
+      - name: Setup Node 24 (no cross-run dependency cache)
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Verify Node 24 and P8 security policy (fail closed)
+        run: |
+          node --version
+          node -e 'if (Number(process.versions.node.split(".")[0]) !== 24) process.exit(1)'
+          test -f tools/p8/security.mjs || { echo '::error::P8 security gate missing'; exit 1; }
+          node tools/p8/security.mjs --mode ci
+
+      - name: Install locked optimization test dependencies (ignore lifecycle scripts)
+        run: npm --prefix tools/optimize ci --ignore-scripts --no-audit --no-fund
+
+      - name: Optimization and prepared model budget tests
+        run: |
+          npm --prefix tools/optimize test
+          node tools/optimize/budget.mjs
+          node tools/vendor/verify.mjs
+
+      - name: P5 native delivery and regression gate (no deploy)
+        run: node tools/p5/check.mjs --mode native
+
+      - name: P6 private staging/security native gate (no deploy)
+        run: node tools/p6/check.mjs --mode native
+
+      - name: P7 asset audit/consent/lazy-load native gate (no deploy)
+        run: node tools/p7/check.mjs --mode native
+
+      - name: P8 aggregated security + HTTP headers native regression
+        run: node tools/p8/check.mjs --mode native
+
+      - name: Source/package syntax (no build upload)
+        run: |
           node --check src/engine/showroom.js
           node --check src/ui/app.js
           node --check packages/tsl-carpaint/src/index.js
           node --check packages/tsl-carpaint/demo/app.js
-      - run: npm pack --dry-run
-        working-directory: packages/tsl-carpaint
 
+      - name: Package metadata dry-run (no publish or upload)
+        working-directory: packages/tsl-carpaint
+        run: npm pack --dry-run --ignore-scripts
+
+      # Only a manual workflow_dispatch can activate this. The immutable release
+      # is built in RUNNER_TEMP, verified and deleted before the job ends.
+      # No upload-artifact, cache, deployment, pages or release-publish actions.
+      - name: Manual ephemeral release build/verify dry-run (NO PUBLICATION)
+        if: github.event_name == 'workflow_dispatch' && inputs.release_dry_run == true
+        run: node tools/p8/release-dry-run.mjs
+
+  # Private GPU path remains strictly manual and depends on native validation.
+  # The P7 headed browser harness exercises lazy-loading, not obsolete eager-load assertions.
+  # No screenshot artifact is ever uploaded or published.
   gpu:
+    needs: validate
     if: github.event_name == 'workflow_dispatch' && inputs.gpu
     runs-on: [self-hosted, macOS, ARM64, gpu]
     timeout-minutes: 20
+    permissions:
+      contents: read
     env:
       TEST_ORIGIN: http://127.0.0.1:8095
-      QA_SHOTS: ${{ github.workspace }}/qa-output
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v7
         with:
-          node-version: 24
-      - run: npm --prefix tools/perf ci
-      - name: Test both rendering backends
+          persist-credentials: false
+          lfs: false
+          submodules: false
+      - name: Node 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install private GPU fixture dependencies
+        run: npm --prefix tools/perf ci --ignore-scripts --no-audit --no-fund
+      - name: Run loopback GPU tests without publishing image output
+        shell: bash
+        env:
+          QA_SHOTS: ${{ runner.temp }}/velance-gpu-qa
         run: |
-          python3 -m http.server 8095 --bind 127.0.0.1 > /tmp/velance-ci-server.log 2>&1 &
+          set -euo pipefail
+          mkdir -p "$QA_SHOTS"
+          python3 -m http.server 8095 --bind 127.0.0.1 >/dev/null 2>&1 &
           server=$!
-          trap 'kill "$server"' EXIT
+          trap 'kill "$server" 2>/dev/null || true; rm -rf "$QA_SHOTS"' EXIT
           node packages/tsl-carpaint/test/gpu.mjs
-          node tools/perf/gpu_smoke.mjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: gpu-screenshots
-          path: qa-output
+          node tools/p7/browser_lazy.mjs

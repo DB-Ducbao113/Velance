@@ -1,0 +1,299 @@
+{
+  "measuredAt": "2026-11-17T04:41:14.978Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "mode": "overload",
+  "profile": {
+    "durationSeconds": 10,
+    "offeredRatePerSecond": 100,
+    "days": 0,
+    "seedSessions": 0,
+    "seedSamples": 0,
+    "seedMs": 0.2716659999999962,
+    "seedBytes": 45056,
+    "dashboardClients": 2,
+    "arrival": "open-loop monotonic absolute scheduling; no retry; latency measured from scheduled arrival",
+    "maxPending": 128,
+    "timeoutMs": 10000
+  },
+  "ingest": {
+    "offered": 1000,
+    "started": 1000,
+    "localDropped": 0,
+    "peakPending": 1,
+    "bytesOffered": 1430000,
+    "actualStartedRatePerSecond": 100,
+    "actualStartsPerSecond": {
+      "bins": [
+        [
+          0,
+          100
+        ],
+        [
+          1,
+          101
+        ],
+        [
+          2,
+          99
+        ],
+        [
+          3,
+          100
+        ],
+        [
+          4,
+          100
+        ],
+        [
+          5,
+          100
+        ],
+        [
+          6,
+          100
+        ],
+        [
+          7,
+          100
+        ],
+        [
+          8,
+          100
+        ],
+        [
+          9,
+          100
+        ]
+      ],
+      "distribution": {
+        "n": 10,
+        "min": 99,
+        "mean": 100,
+        "p50": 100,
+        "p95": 101,
+        "p99": 101,
+        "max": 101
+      }
+    },
+    "completed": 1000,
+    "acknowledged200": 599,
+    "successRateOfValidOffered": 0.599,
+    "admittedKnown": 599,
+    "expected429": 401,
+    "unexpected429": 0,
+    "timeout": 0,
+    "networkErrors": 0,
+    "invalidResponses": 0,
+    "otherHTTP": 0,
+    "statuses": {
+      "200": 599,
+      "429": 401
+    },
+    "codes": {
+      "RATE_LIMIT": 401
+    },
+    "kinds": {
+      "response": 1000
+    }
+  },
+  "latencyMs": {
+    "offeredCompleted": {
+      "n": 1000,
+      "min": -0.50604199999907,
+      "mean": 1.5394574110001642,
+      "p50": 1.4397919999998976,
+      "p95": 2.9998330000007627,
+      "p99": 3.478500000001077,
+      "max": 6.449083000000002
+    },
+    "admitted": {
+      "n": 599,
+      "min": 0.3755839999998898,
+      "mean": 1.4343787362270404,
+      "p50": 1.5884580000001733,
+      "p95": 2.467999999999847,
+      "p99": 3.0420840000006137,
+      "max": 5.040875
+    },
+    "non429Responses": {
+      "n": 599,
+      "min": 0.3755839999998898,
+      "mean": 1.4343787362270404,
+      "p50": 1.5884580000001733,
+      "p95": 2.467999999999847,
+      "p99": 3.0420840000006137,
+      "max": 5.040875
+    },
+    "successful": {
+      "n": 599,
+      "min": 0.3755839999998898,
+      "mean": 1.4343787362270404,
+      "p50": 1.5884580000001733,
+      "p95": 2.467999999999847,
+      "p99": 3.0420840000006137,
+      "max": 5.040875
+    },
+    "arrivalToAck": {
+      "n": 599,
+      "min": -0.3296250000003056,
+      "mean": 1.8598543188649033,
+      "p50": 1.8219170000011218,
+      "p95": 3.0927920000003724,
+      "p99": 3.6287920000004306,
+      "max": 6.449083000000002
+    },
+    "rejection429": {
+      "n": 401,
+      "min": 0.21362500000032014,
+      "mean": 0.6742763815461212,
+      "p50": 0.6437500000001819,
+      "p95": 1.0068749999991269,
+      "p99": 1.5552090000001044,
+      "max": 4.749332999999751
+    },
+    "schedulingLag": {
+      "n": 1000,
+      "min": -1.3372079999990092,
+      "mean": 0.37235208600017233,
+      "p50": 0.4181250000001455,
+      "p95": 1.0312919999996666,
+      "p99": 1.100416999999652,
+      "max": 2.079500000000735
+    }
+  },
+  "dashboard": {
+    "count": 8,
+    "complete200": 8,
+    "p95Ms": 5.935207999999989,
+    "statuses": {
+      "200": 8
+    },
+    "codes": {},
+    "kinds": {
+      "response": 8
+    },
+    "byRoute": {
+      "/api/summary?hours=24": {
+        "statuses": {
+          "200": 4
+        },
+        "codes": {},
+        "kinds": {
+          "response": 4
+        },
+        "latency": {
+          "n": 4,
+          "min": 1.8224159999999756,
+          "mean": 3.720968500000005,
+          "p50": 2.062750000000051,
+          "p95": 5.935207999999989,
+          "p99": 5.935207999999989,
+          "max": 5.935207999999989
+        }
+      },
+      "/api/sessions?limit=50": {
+        "statuses": {
+          "200": 4
+        },
+        "codes": {},
+        "kinds": {
+          "response": 4
+        },
+        "latency": {
+          "n": 4,
+          "min": 4.495125000000371,
+          "mean": 4.927854250000102,
+          "p50": 4.749084000000039,
+          "p95": 5.239417000000003,
+          "p99": 5.239417000000003,
+          "max": 5.239417000000003
+        }
+      }
+    },
+    "expected422ProbedSeparately": null
+  },
+  "resources": {
+    "samples": 11,
+    "peakRssBytes": 110755840,
+    "maxEventLoopP99Ms": 11.927551,
+    "rssBytes": {
+      "n": 11,
+      "min": 90750976,
+      "mean": 105648500.36363636,
+      "p50": 107085824,
+      "p95": 110755840,
+      "p99": 110755840,
+      "max": 110755840
+    },
+    "eventLoopP99Ms": {
+      "n": 11,
+      "min": 0.000511,
+      "mean": 10.465697909090908,
+      "p50": 11.411455,
+      "p95": 11.927551,
+      "p99": 11.927551,
+      "max": 11.927551
+    }
+  },
+  "verification": {
+    "ok": true,
+    "integrity": "ok",
+    "journalMode": "wal",
+    "wal": {
+      "beforeCheckpointBytes": 4148872,
+      "checkpoint": {
+        "busy": 0,
+        "log": 0,
+        "checkpointed": 0
+      }
+    },
+    "counts": {
+      "sessions": 599,
+      "samples": 5990,
+      "events": 599,
+      "batches": 599
+    },
+    "expected": {
+      "sessions": 599,
+      "samples": 5990,
+      "events": 599,
+      "batches": 599
+    },
+    "seedPersisted": 0,
+    "livePersisted": 599,
+    "receiptsPersisted": 599,
+    "missingAck": {
+      "count": 0,
+      "examples": []
+    },
+    "unacknowledgedRows": {
+      "count": 0,
+      "examples": []
+    },
+    "incompleteLive": 0,
+    "orphans": {
+      "samples": 0,
+      "events": 0,
+      "batches": 0
+    }
+  },
+  "errors": [],
+  "gates": {
+    "mode": "overload",
+    "validOfferedSuccess99_9pct": null,
+    "ingestP95Under150ms": null,
+    "ingestP99Under300ms": null,
+    "dashboardP95Under500ms": true,
+    "rssWithin512MiB": true,
+    "eventLoopP99Within50ms": true,
+    "durabilityAndIntegrity": true,
+    "optionalLargeWindowProbe": null,
+    "overall": null
+  },
+  "interpretation": "Overload profile: 429 rejections are reported separately; full-offered success is NOT claimed or gated."
+}

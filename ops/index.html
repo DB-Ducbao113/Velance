@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1014">
+  <title>VÉLANCE — Fleet Operations</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230b1014'/><path d='M16 20h8l10 17 10-17h8L37 44h-8z' fill='%23e8cd9f'/></svg>">
+  <link rel="stylesheet" href="./ops.css">
+</head>
+<body>
+  <header class="ops-top">
+    <div class="ops-identity">
+      <strong class="wordmark">VÉLANCE</strong>
+      <span class="eyebrow">FLEET OPERATIONS · LOCAL TELEMETRY</span>
+    </div>
+    <div class="ops-live"><i class="live-dot"></i><span id="updatedAt">connecting…</span></div>
+  </header>
+
+  <main class="ops-main">
+    <div class="ops-controls">
+      <label for="summaryWindow">Session-start window</label>
+      <select id="summaryWindow"><option value="1">Last hour</option><option value="6">Last 6 hours</option><option value="24" selected>Last 24 hours</option></select>
+      <span id="windowCoverage" aria-live="polite"></span>
+    </div>
+    <section class="kpi-row" id="kpiRow" aria-label="Fleet key metrics"></section>
+
+    <div class="ops-grid">
+      <section class="panel panel-wide">
+        <div class="panel-head"><span class="eyebrow">01 / LOAD PERFORMANCE</span><h2>Boot waterfall <em>trend.</em></h2></div>
+        <div class="chart-host" id="trendChart"></div>
+        <div class="coverage" id="trendCoverage"></div>
+        <div class="legend"><span><i class="sw sw-gold"></i>first car</span><span><i class="sw sw-steel"></i>all sixteen loaded</span></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><span class="eyebrow">02 / ACTIVE CADENCE · IDLE UNKNOWN</span><h2>By <em>phase.</em></h2></div>
+        <div id="phaseTable"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><span class="eyebrow">03 / FLEET MIX</span><h2>Backends &amp; <em>devices.</em></h2></div>
+        <div class="mix-host" id="mixChart"></div>
+      </section>
+
+      <section class="panel panel-wide">
+        <div class="panel-head"><span class="eyebrow">04 / SESSIONS</span><h2>The <em>register.</em></h2></div>
+        <div class="table-host">
+          <table class="sessions-table">
+            <thead><tr><th>Received</th><th>Backend</th><th>Device</th><th>First car</th><th>All loaded</th><th>Samples</th><th>Errors</th></tr></thead>
+            <tbody id="sessionRows"></tbody>
+          </table>
+        </div>
+        <div class="ops-controls"><button type="button" id="sessionsLatest">Newest</button><button type="button" id="sessionsOlder" disabled>Older sessions</button><span id="sessionCoverage">All retained sessions · 50 per page · live ordering</span></div>
+      </section>
+    </div>
+
+    <section class="panel drill" id="drill" hidden>
+      <div class="panel-head">
+        <span class="eyebrow">05 / SESSION DRILL-DOWN</span>
+        <h2 id="drillTitle">Session</h2>
+        <button type="button" class="drill-close" id="drillClose" aria-label="Close drill-down">×</button>
+      </div>
+      <div class="drill-context" id="drillContext"></div>
+      <div class="ops-controls"><span id="detailCoverage" aria-live="polite"></span><button type="button" id="detailOlder" disabled>Load older observations</button><button type="button" id="detailLatest">Refresh latest</button></div>
+      <div class="drill-grid">
+        <div><span class="eyebrow">BOOT WATERFALL</span><div id="drillWaterfall"></div></div>
+        <div><span class="eyebrow">ACTIVE CADENCE · IDLE UNKNOWN</span><div id="drillSpark"></div></div>
+      </div>
+      <div class="drill-grid">
+        <div><span class="eyebrow">PER-MACHINE LOAD</span><div id="drillLoads"></div></div>
+        <div><span class="eyebrow">EVENT LOG</span><div class="event-log" id="drillEvents"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ops-foot"><span>VÉLANCE — THE ART OF PERFORMANCE</span><span>LOCAL-ONLY · MINIMIZED TELEMETRY · SQLITE</span></footer>
+  <script type="module" src="./ops.js"></script>
+</body>
+</html>

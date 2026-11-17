@@ -1,0 +1,555 @@
+{
+  "measuredAt": "2026-11-17T04:57:47.358Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "profile": {
+    "durationSeconds": 60,
+    "offeredRatePerSecond": 10,
+    "seededDays": 3,
+    "seeds": {
+      "sessions": 3000,
+      "samples": 900000,
+      "events": 6000,
+      "batches": 90000,
+      "checkpoint": {
+        "busy": 0,
+        "log": 0,
+        "checkpointed": 0
+      },
+      "durationMs": 543.3602080000001,
+      "bytes": 75694080
+    },
+    "requested": 600,
+    "maxPendingPosts": 64,
+    "maxPendingReads": 32,
+    "requestTimeoutMs": 8000,
+    "scheduling": "absolute monotonic open-loop, no retries in steady state",
+    "faultSeparation": "SIGKILL occurs only after steady-state requests settle and persisted ACKs verified"
+  },
+  "ingestion": {
+    "offered": 600,
+    "issued": 600,
+    "droppedBeforeSend": 0,
+    "peakPending": 1,
+    "completed": 600,
+    "acknowledged": 600,
+    "successFractionOfAllOffered": 1,
+    "expected429": 0,
+    "unexpected429": 0,
+    "errors503": 0,
+    "timeout": 0,
+    "network": 0,
+    "incomplete": 0,
+    "duplicateAccepted": 150,
+    "receiptsAcknowledged": 450,
+    "statuses": {
+      "200": 600
+    },
+    "kinds": {
+      "response": 600
+    },
+    "codes": {},
+    "latencyMs": {
+      "n": 600,
+      "p50": 2.2277089999988675,
+      "p95": 3.540584000002127,
+      "p99": 5.290833999999904,
+      "max": 9.329541999999492,
+      "mean": 2.290795398333853
+    },
+    "offeredCompletionMs": {
+      "n": 600,
+      "p50": 2.2277089999988675,
+      "p95": 3.540584000002127,
+      "p99": 5.290833999999904,
+      "max": 9.329541999999492,
+      "mean": 2.290795398333853
+    },
+    "wireLatencyMs": {
+      "n": 600,
+      "p50": 1.6315419999955338,
+      "p95": 2.6476250000005166,
+      "p99": 4.826958000005106,
+      "max": 9.095291999999972,
+      "mean": 1.6972743633332612
+    },
+    "scheduleLagMs": {
+      "n": 600,
+      "p50": 0.6090000000003783,
+      "p95": 1.2900000000008731,
+      "p99": 1.6790000000000873,
+      "max": 2.545249999999214,
+      "mean": 0.5455040000003855
+    },
+    "startedPerSecond": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        11
+      ],
+      [
+        3,
+        9
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        5,
+        10
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        10
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        10
+      ],
+      [
+        12,
+        10
+      ],
+      [
+        13,
+        10
+      ],
+      [
+        14,
+        10
+      ],
+      [
+        15,
+        11
+      ],
+      [
+        16,
+        9
+      ],
+      [
+        17,
+        10
+      ],
+      [
+        18,
+        11
+      ],
+      [
+        19,
+        9
+      ],
+      [
+        20,
+        10
+      ],
+      [
+        21,
+        10
+      ],
+      [
+        22,
+        10
+      ],
+      [
+        23,
+        11
+      ],
+      [
+        24,
+        10
+      ],
+      [
+        25,
+        9
+      ],
+      [
+        26,
+        10
+      ],
+      [
+        27,
+        10
+      ],
+      [
+        28,
+        10
+      ],
+      [
+        29,
+        10
+      ],
+      [
+        30,
+        10
+      ],
+      [
+        31,
+        10
+      ],
+      [
+        32,
+        10
+      ],
+      [
+        33,
+        10
+      ],
+      [
+        34,
+        10
+      ],
+      [
+        35,
+        10
+      ],
+      [
+        36,
+        10
+      ],
+      [
+        37,
+        10
+      ],
+      [
+        38,
+        10
+      ],
+      [
+        39,
+        10
+      ],
+      [
+        40,
+        10
+      ],
+      [
+        41,
+        11
+      ],
+      [
+        42,
+        9
+      ],
+      [
+        43,
+        10
+      ],
+      [
+        44,
+        10
+      ],
+      [
+        45,
+        10
+      ],
+      [
+        46,
+        10
+      ],
+      [
+        47,
+        10
+      ],
+      [
+        48,
+        10
+      ],
+      [
+        49,
+        10
+      ],
+      [
+        50,
+        10
+      ],
+      [
+        51,
+        10
+      ],
+      [
+        52,
+        10
+      ],
+      [
+        53,
+        11
+      ],
+      [
+        54,
+        9
+      ],
+      [
+        55,
+        10
+      ],
+      [
+        56,
+        11
+      ],
+      [
+        57,
+        9
+      ],
+      [
+        58,
+        10
+      ],
+      [
+        59,
+        10
+      ]
+    ]
+  },
+  "reads": {
+    "offered": 270,
+    "completed": 270,
+    "localDrops": 0,
+    "peakPending": 5,
+    "success": 270,
+    "latencyMs": {
+      "n": 270,
+      "p50": 2.282500000001164,
+      "p95": 6.503166999999962,
+      "p99": 194.62462500000038,
+      "max": 198.10445900000195,
+      "mean": 7.917653411111484
+    },
+    "byRoute": {
+      "ready": {
+        "count": 60,
+        "statuses": {
+          "200": 60
+        },
+        "kinds": {
+          "response": 60
+        },
+        "codes": {},
+        "latencyMs": {
+          "n": 60,
+          "p50": 1.8811669999995502,
+          "p95": 3.204334000000017,
+          "p99": 8.430000000000291,
+          "max": 8.430000000000291,
+          "mean": 2.035894766667127
+        }
+      },
+      "metrics": {
+        "count": 60,
+        "statuses": {
+          "200": 60
+        },
+        "kinds": {
+          "response": 60
+        },
+        "codes": {},
+        "latencyMs": {
+          "n": 60,
+          "p50": 2.290791999999783,
+          "p95": 4.256542000000081,
+          "p99": 8.95179200000075,
+          "max": 8.95179200000075,
+          "mean": 2.4483288000000982
+        }
+      },
+      "summary": {
+        "count": 60,
+        "statuses": {
+          "200": 60
+        },
+        "kinds": {
+          "response": 60
+        },
+        "codes": {},
+        "latencyMs": {
+          "n": 60,
+          "p50": 1.8092499999984284,
+          "p95": 167.67987499999992,
+          "p99": 197.53983400000288,
+          "max": 197.53983400000288,
+          "mean": 14.095857250000224
+        }
+      },
+      "sessions": {
+        "count": 60,
+        "statuses": {
+          "200": 60
+        },
+        "kinds": {
+          "response": 60
+        },
+        "codes": {},
+        "latencyMs": {
+          "n": 60,
+          "p50": 2.9541670000035083,
+          "p95": 168.052959,
+          "p99": 198.10445900000195,
+          "max": 198.10445900000195,
+          "mean": 15.331454516667135
+        }
+      },
+      "detail": {
+        "count": 30,
+        "statuses": {
+          "200": 30
+        },
+        "kinds": {
+          "response": 30
+        },
+        "codes": {},
+        "latencyMs": {
+          "n": 30,
+          "p50": 3.117291999998997,
+          "p95": 4.871584000000439,
+          "p99": 11.99225000000024,
+          "max": 11.99225000000024,
+          "mean": 3.435810033334193
+        }
+      }
+    },
+    "statuses": {
+      "200": 270
+    },
+    "kinds": {
+      "response": 270
+    },
+    "codes": {}
+  },
+  "resources": {
+    "sampleCount": 63,
+    "rssBytes": {
+      "n": 63,
+      "p50": 173621248,
+      "p95": 200622080,
+      "p99": 200622080,
+      "max": 200622080,
+      "mean": 170793837.7142857
+    },
+    "eventLoopP99Ms": {
+      "n": 63,
+      "p50": 11.288575,
+      "p95": 11.837439,
+      "p99": 13.533183,
+      "max": 13.533183,
+      "mean": 11.033208904761903
+    }
+  },
+  "backup": {
+    "attempted": true,
+    "verified": true,
+    "durationMs": 918.3440420000006,
+    "bytes": 75763712,
+    "ackBefore": 200,
+    "ackAtFinish": 210,
+    "ackDuring": 10,
+    "counts": {
+      "sessions": 3051,
+      "samples": 900453,
+      "events": 6151,
+      "batches": 90151
+    }
+  },
+  "fault": {
+    "injected": true,
+    "isolatedFromSteadyState": true,
+    "signal": "SIGKILL",
+    "precondition": {
+      "allSettled": true,
+      "acknowledged": 600,
+      "durableBeforeKill": true
+    },
+    "restartReady": true,
+    "detailRecovered": true,
+    "replay": {
+      "status": 200,
+      "kind": "response",
+      "idempotent": true
+    },
+    "orderedAdvance": {
+      "status": 200,
+      "kind": "response",
+      "seq": 3,
+      "persisted": true
+    },
+    "afterCrashIntegrity": true,
+    "afterReplayIntegrity": true,
+    "passed": true
+  },
+  "verification": {
+    "ok": true,
+    "integrity": "ok",
+    "mode": "wal",
+    "checkpoint": {
+      "busy": 0,
+      "log": 10,
+      "checkpointed": 10
+    },
+    "counts": {
+      "sessions": 3150,
+      "samples": 901353,
+      "events": 6451,
+      "batches": 90451
+    },
+    "expected": {
+      "sessions": 3150,
+      "samples": 901353,
+      "events": 6451,
+      "batches": 90451
+    },
+    "seedCount": 3000,
+    "liveSessions": 150,
+    "durableReceipts": 451,
+    "duplicateAckCount": 150,
+    "missingAcknowledged": [],
+    "unexpectedReceipts": [],
+    "wrongOrder": [],
+    "liveSamples": 1353,
+    "liveEvents": 451,
+    "orphanCounts": {
+      "samples": 0,
+      "events": 0,
+      "batches": 0
+    }
+  },
+  "gates": {
+    "validOffered99_9pct": true,
+    "ackP95Under150ms": true,
+    "ackP99Under300ms": true,
+    "mixedReadsP95Under500ms": true,
+    "rssUnder512MiB": true,
+    "eventLoopP99Under50ms": true,
+    "verifiedConcurrentBackup": true,
+    "injectedFaultRecovery": true,
+    "durableSQLite": true,
+    "overall": true
+  },
+  "stderrSamples": [],
+  "caveat": "Synthetic loopback fixture. Not evidence of CDN distribution, real clients, long-haul network or production uptime."
+}

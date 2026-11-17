@@ -1,0 +1,90 @@
+{
+  "format": "velance-p4-real-multitab/1",
+  "measuredAtUtc": "2026-11-17T04:54:53.540Z",
+  "environment": {
+    "node": "v24.21.0",
+    "chrome": "Chrome/157.0.8103.79",
+    "cpu": "Apple M5",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "profile": {
+    "tabs": 2,
+    "backend": "webgpu",
+    "viewport": "1440x900",
+    "perVisitorBrowserContext": true,
+    "coldCache": true,
+    "maxSeconds": 90,
+    "showroom": "all 16 GLB, then overview and selected car",
+    "localOnly": true,
+    "distinctRealDevices": 0,
+    "distinctTabs": 2
+  },
+  "release": {
+    "id": "1f626b6c60d66af3202ae953167338e464f4c8ce49e539bbb94f92e701d0a3b6",
+    "totalFiles": 125
+  },
+  "elapsedMs": 4034.268917,
+  "totalTransferBytes": 88550872,
+  "visitors": [
+    {
+      "visitorIndex": 0,
+      "loadMs": 3116.4687079999994,
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 144065892,
+      "statuses": {
+        "200": 403
+      },
+      "networkFiles": 403,
+      "fromCache": 1,
+      "transferBytes": 44275436,
+      "failures": [
+        "Node is either not clickable or not an Element"
+      ],
+      "completed": false
+    },
+    {
+      "visitorIndex": 1,
+      "loadMs": 3098.8187909999997,
+      "state": {
+        "backend": "webgpu",
+        "loaded": 16,
+        "bays": 16,
+        "fallback": false,
+        "engineReady": true,
+        "telemetryEnabled": false
+      },
+      "heapBytes": 141623188,
+      "statuses": {
+        "200": 403
+      },
+      "networkFiles": 403,
+      "fromCache": 1,
+      "transferBytes": 44275436,
+      "failures": [
+        "Node is either not clickable or not an Element"
+      ],
+      "completed": false
+    }
+  ],
+  "gates": {
+    "noErrors": false,
+    "allLoaded16": true,
+    "requestedBackend": true,
+    "allVisitorsCompleted": false,
+    "telemetryOptedOut": true
+  },
+  "overall": "FAIL_LOCAL",
+  "limitations": [
+    "Independent tabs in ONE Chrome browser on one GPU, not independent devices, users, global CDN, or Internet traffic.",
+    "Cache separated by browser contexts, GPU process and host CPU remain shared.",
+    "No guarantee against session length, battery drain or production WebGPU availability."
+  ]
+}

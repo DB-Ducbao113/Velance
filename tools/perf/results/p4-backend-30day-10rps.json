@@ -1,0 +1,503 @@
+{
+  "measuredAt": "2026-11-17T04:40:37.831Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5"
+  },
+  "mode": "normal",
+  "profile": {
+    "durationSeconds": 60,
+    "offeredRatePerSecond": 10,
+    "days": 30,
+    "seedSessions": 30000,
+    "seedSamples": 9000000,
+    "seedMs": 5994.383042,
+    "seedBytes": 783998976,
+    "dashboardClients": 2,
+    "arrival": "open-loop monotonic absolute scheduling; no retry; latency measured from scheduled arrival",
+    "maxPending": 128,
+    "timeoutMs": 10000
+  },
+  "ingest": {
+    "offered": 600,
+    "started": 600,
+    "localDropped": 0,
+    "peakPending": 1,
+    "bytesOffered": 858000,
+    "actualStartedRatePerSecond": 10,
+    "actualStartsPerSecond": {
+      "bins": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          17,
+          11
+        ],
+        [
+          18,
+          9
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          20,
+          10
+        ],
+        [
+          21,
+          10
+        ],
+        [
+          22,
+          10
+        ],
+        [
+          23,
+          10
+        ],
+        [
+          24,
+          11
+        ],
+        [
+          25,
+          9
+        ],
+        [
+          26,
+          10
+        ],
+        [
+          27,
+          10
+        ],
+        [
+          28,
+          10
+        ],
+        [
+          29,
+          11
+        ],
+        [
+          30,
+          9
+        ],
+        [
+          31,
+          10
+        ],
+        [
+          32,
+          11
+        ],
+        [
+          33,
+          9
+        ],
+        [
+          34,
+          10
+        ],
+        [
+          35,
+          10
+        ],
+        [
+          36,
+          11
+        ],
+        [
+          37,
+          10
+        ],
+        [
+          38,
+          9
+        ],
+        [
+          39,
+          10
+        ],
+        [
+          40,
+          10
+        ],
+        [
+          41,
+          10
+        ],
+        [
+          42,
+          11
+        ],
+        [
+          43,
+          10
+        ],
+        [
+          44,
+          9
+        ],
+        [
+          45,
+          10
+        ],
+        [
+          46,
+          10
+        ],
+        [
+          47,
+          10
+        ],
+        [
+          48,
+          10
+        ],
+        [
+          49,
+          10
+        ],
+        [
+          50,
+          10
+        ],
+        [
+          51,
+          10
+        ],
+        [
+          52,
+          10
+        ],
+        [
+          53,
+          10
+        ],
+        [
+          54,
+          10
+        ],
+        [
+          55,
+          10
+        ],
+        [
+          56,
+          10
+        ],
+        [
+          57,
+          10
+        ],
+        [
+          58,
+          10
+        ],
+        [
+          59,
+          10
+        ]
+      ],
+      "distribution": {
+        "n": 60,
+        "min": 9,
+        "mean": 10,
+        "p50": 10,
+        "p95": 11,
+        "p99": 11,
+        "max": 11
+      }
+    },
+    "completed": 600,
+    "acknowledged200": 600,
+    "successRateOfValidOffered": 1,
+    "admittedKnown": 600,
+    "expected429": 0,
+    "unexpected429": 0,
+    "timeout": 0,
+    "networkErrors": 0,
+    "invalidResponses": 0,
+    "otherHTTP": 0,
+    "statuses": {
+      "200": 600
+    },
+    "codes": {},
+    "kinds": {
+      "response": 600
+    }
+  },
+  "latencyMs": {
+    "offeredCompleted": {
+      "n": 600,
+      "min": -0.3570000000036089,
+      "mean": 2.3895738366653814,
+      "p50": 2.234582999997656,
+      "p95": 3.9396660000020347,
+      "p99": 5.6206249999959255,
+      "max": 21.223665999999866
+    },
+    "admitted": {
+      "n": 600,
+      "min": 0.7326670000002196,
+      "mean": 1.905735623333306,
+      "p50": 1.6853330000012647,
+      "p95": 3.1743329999990237,
+      "p99": 4.4644159999952535,
+      "max": 20.311541000000034
+    },
+    "non429Responses": {
+      "n": 600,
+      "min": 0.7326670000002196,
+      "mean": 1.905735623333306,
+      "p50": 1.6853330000012647,
+      "p95": 3.1743329999990237,
+      "p99": 4.4644159999952535,
+      "max": 20.311541000000034
+    },
+    "successful": {
+      "n": 600,
+      "min": 0.7326670000002196,
+      "mean": 1.905735623333306,
+      "p50": 1.6853330000012647,
+      "p95": 3.1743329999990237,
+      "p99": 4.4644159999952535,
+      "max": 20.311541000000034
+    },
+    "arrivalToAck": {
+      "n": 600,
+      "min": -0.3570000000036089,
+      "mean": 2.3895738366653814,
+      "p50": 2.234582999997656,
+      "p95": 3.9396660000020347,
+      "p99": 5.6206249999959255,
+      "max": 21.223665999999866
+    },
+    "rejection429": {
+      "n": 0,
+      "min": null,
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "max": null
+    },
+    "schedulingLag": {
+      "n": 600,
+      "min": -1.5975839999991877,
+      "mean": 0.4297849599987603,
+      "p50": 0.4763330000005226,
+      "p95": 1.099540999995952,
+      "p99": 1.4130000000004657,
+      "max": 6.867165999999997
+    }
+  },
+  "dashboard": {
+    "count": 48,
+    "complete200": 48,
+    "p95Ms": 217.08424999999988,
+    "statuses": {
+      "200": 48
+    },
+    "codes": {},
+    "kinds": {
+      "response": 48
+    },
+    "byRoute": {
+      "/api/summary?hours=24": {
+        "statuses": {
+          "200": 24
+        },
+        "codes": {},
+        "kinds": {
+          "response": 24
+        },
+        "latency": {
+          "n": 24,
+          "min": 0.5942080000022543,
+          "mean": 50.487281208333684,
+          "p50": 1.1906660000022384,
+          "p95": 216.92529099999956,
+          "p99": 217.08424999999988,
+          "max": 217.08424999999988
+        }
+      },
+      "/api/sessions?limit=50": {
+        "statuses": {
+          "200": 24
+        },
+        "codes": {},
+        "kinds": {
+          "response": 24
+        },
+        "latency": {
+          "n": 24,
+          "min": 1.9113330000000133,
+          "mean": 51.89834041666639,
+          "p50": 3.077167000003101,
+          "p95": 218.16600000000471,
+          "p99": 219.00675000000047,
+          "max": 219.00675000000047
+        }
+      }
+    },
+    "expected422ProbedSeparately": {
+      "status": 422,
+      "kind": "response",
+      "code": "WINDOW_TOO_LARGE",
+      "ms": 30.177834000001894,
+      "expected": 422,
+      "valid": true
+    }
+  },
+  "resources": {
+    "samples": 61,
+    "peakRssBytes": 185909248,
+    "maxEventLoopP99Ms": 29.376511,
+    "rssBytes": {
+      "n": 61,
+      "min": 90947584,
+      "mean": 145310233.18032786,
+      "p50": 155762688,
+      "p95": 185237504,
+      "p99": 185909248,
+      "max": 185909248
+    },
+    "eventLoopP99Ms": {
+      "n": 61,
+      "min": 0.000511,
+      "mean": 11.85490575409836,
+      "p50": 11.288575,
+      "p95": 14.221311,
+      "p99": 29.376511,
+      "max": 29.376511
+    }
+  },
+  "verification": {
+    "ok": true,
+    "integrity": "ok",
+    "journalMode": "wal",
+    "wal": {
+      "beforeCheckpointBytes": 4190072,
+      "checkpoint": {
+        "busy": 0,
+        "log": 0,
+        "checkpointed": 0
+      }
+    },
+    "counts": {
+      "sessions": 30600,
+      "samples": 9006000,
+      "events": 60600,
+      "batches": 900600
+    },
+    "expected": {
+      "sessions": 30600,
+      "samples": 9006000,
+      "events": 60600,
+      "batches": 900600
+    },
+    "seedPersisted": 30000,
+    "livePersisted": 600,
+    "receiptsPersisted": 600,
+    "missingAck": {
+      "count": 0,
+      "examples": []
+    },
+    "unacknowledgedRows": {
+      "count": 0,
+      "examples": []
+    },
+    "incompleteLive": 0,
+    "orphans": {
+      "samples": 0,
+      "events": 0,
+      "batches": 0
+    }
+  },
+  "errors": [],
+  "gates": {
+    "mode": "normal",
+    "validOfferedSuccess99_9pct": true,
+    "ingestP95Under150ms": true,
+    "ingestP99Under300ms": true,
+    "dashboardP95Under500ms": true,
+    "rssWithin512MiB": true,
+    "eventLoopP99Within50ms": true,
+    "durabilityAndIntegrity": true,
+    "optionalLargeWindowProbe": true,
+    "overall": true
+  },
+  "interpretation": "Normal profile: success denominator includes ALL valid offered requests, including local drops and 429."
+}

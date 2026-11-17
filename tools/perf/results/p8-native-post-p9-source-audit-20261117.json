@@ -1,0 +1,80 @@
+{
+  "format": "velance-p8-local-security-ci/1",
+  "createdAtUtc": "2026-11-17T08:45:26.806Z",
+  "result": "PASS_LOCAL_NATIVE",
+  "node": "v24.21.0",
+  "costVnd": 0,
+  "cloudDeploymentPerformed": false,
+  "commitPushMergePerformed": false,
+  "publicLaunch": "NO_GO",
+  "licensedAssetsApprovedByP8": 0,
+  "steps": [
+    {
+      "name": "P8 security scanner",
+      "status": "PASS",
+      "elapsedMs": 955
+    },
+    {
+      "name": "syntax tools/p8/check.mjs",
+      "status": "PASS",
+      "elapsedMs": 18
+    },
+    {
+      "name": "syntax tools/delivery/security-headers.mjs",
+      "status": "PASS",
+      "elapsedMs": 19
+    },
+    {
+      "name": "syntax tools/delivery/server.mjs",
+      "status": "PASS",
+      "elapsedMs": 19
+    },
+    {
+      "name": "syntax tools/delivery/static.mjs",
+      "status": "PASS",
+      "elapsedMs": 18
+    },
+    {
+      "name": "syntax tools/ops/server.mjs",
+      "status": "PASS",
+      "elapsedMs": 20
+    },
+    {
+      "name": "P8 native security regression",
+      "status": "PASS",
+      "elapsedMs": 210,
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "P7 security/rights/zero-cost regression",
+      "status": "PASS",
+      "elapsedMs": 1901
+    },
+    {
+      "name": "P6/P4/P3/P2 nested native regression",
+      "status": "PASS",
+      "elapsedMs": 20832
+    }
+  ],
+  "realDB": {
+    "before": {
+      "bytes": 155648,
+      "mtimeMs": 1794754488799.5728,
+      "ctimeMs": 1794754488799.5728
+    },
+    "after": {
+      "bytes": 155648,
+      "mtimeMs": 1794754488799.5728,
+      "ctimeMs": 1794754488799.5728
+    },
+    "unchanged": true
+  },
+  "limits": [
+    "No real provider TLS/WAF/SSO/MFA or off-host recovery was verified",
+    "P8 browser CSP test is separate from this native CI run; no claim of GPU browser validation in CI",
+    "96 GLB/WebP rights and 2 public environment WebP rights remain unverified",
+    "CI local pass does not authorize production deploy"
+  ]
+}

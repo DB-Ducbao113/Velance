@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: immutable release routing, versioned cache, HEAD and private endpoint isolation
+ok 1 - immutable release routing, versioned cache, HEAD and private endpoint isolation
+  ---
+  duration_ms: 79.770417
+  type: 'test'
+  ...
+# Subtest: release activation and rollback preserve old loaded links without mixed version
+ok 2 - release activation and rollback preserve old loaded links without mixed version
+  ---
+  duration_ms: 118.168667
+  type: 'test'
+  ...
+# Subtest: in-place same-size release modification is rejected before immutable response
+ok 3 - in-place same-size release modification is rejected before immutable response
+  ---
+  duration_ms: 55.265541
+  type: 'test'
+  ...
+# Subtest: telemetry proxy forwards only exact POST to a fixed loopback upstream and static survives upstream outage
+ok 4 - telemetry proxy forwards only exact POST to a fixed loopback upstream and static survives upstream outage
+  ---
+  duration_ms: 63.773416
+  type: 'test'
+  ...
+# Subtest: preview upstream configuration accepts loopback only including bracketed IPv6
+ok 5 - preview upstream configuration accepts loopback only including bracketed IPv6
+  ---
+  duration_ms: 0.4325
+  type: 'test'
+  ...
+# Subtest: source snapshot copies public bytes exactly and never includes Ops, render, DB or master assets
+ok 6 - source snapshot copies public bytes exactly and never includes Ops, render, DB or master assets
+  ---
+  duration_ms: 529.610167
+  type: 'test'
+  ...
+# Subtest: a snapshot has deterministic content ID and a duplicate cannot overwrite the old files
+ok 7 - a snapshot has deterministic content ID and a duplicate cannot overwrite the old files
+  ---
+  duration_ms: 148.257083
+  type: 'test'
+  ...
+# Subtest: verify rejects changed bytes, manifest rewrites, missing and unlisted release files
+ok 8 - verify rejects changed bytes, manifest rewrites, missing and unlisted release files
+  ---
+  duration_ms: 68.760333
+  type: 'test'
+  ...
+# Subtest: snapshot and verification reject symlinks and malformed release identifiers
+ok 9 - snapshot and verification reject symlinks and malformed release identifiers
+  ---
+  duration_ms: 65.553458
+  type: 'test'
+  ...
+# Subtest: activation verifies full snapshot; pointer switches atomically; rollback swaps and retains releases
+ok 10 - activation verifies full snapshot; pointer switches atomically; rollback swaps and retains releases
+  ---
+  duration_ms: 154.248333
+  type: 'test'
+  ...
+# Subtest: activation and rollback refuse corrupt snapshots without modifying active pointer
+ok 11 - activation and rollback refuse corrupt snapshots without modifying active pointer
+  ---
+  duration_ms: 135.2485
+  type: 'test'
+  ...
+# Subtest: readActiveRelease rejects tampered pointer and symlink pointer
+ok 12 - readActiveRelease rejects tampered pointer and symlink pointer
+  ---
+  duration_ms: 67.216416
+  type: 'test'
+  ...
+# Subtest: CLI snapshot, verify, activate and rollback use the same release contract
+ok 13 - CLI snapshot, verify, activate and rollback use the same release contract
+  ---
+  duration_ms: 337.987583
+  type: 'test'
+  ...
+# Subtest: allowlist preserves P2 mutable routes while excluding hidden, source maps and release-only paths
+ok 14 - allowlist preserves P2 mutable routes while excluding hidden, source maps and release-only paths
+  ---
+  duration_ms: 0.603667
+  type: 'test'
+  ...
+# Subtest: canonical resolver denies symlinks outside public trees and DB / sidecars even under public extensions
+ok 15 - canonical resolver denies symlinks outside public trees and DB / sidecars even under public extensions
+  ---
+  duration_ms: 18.094917
+  type: 'test'
+  ...
+# Subtest: mutable redirects, HEAD, MIME, ops header and cache policy
+ok 16 - mutable redirects, HEAD, MIME, ops header and cache policy
+  ---
+  duration_ms: 15.522333
+  type: 'test'
+  ...
+# Subtest: negotiation honors q=0, wildcard, explicit identity and refuses impossible representations
+ok 17 - negotiation honors q=0, wildcard, explicit identity and refuses impossible representations
+  ---
+  duration_ms: 11.962375
+  type: 'test'
+  ...
+# Subtest: ETags are representation-specific; weak, list and star If-None-Match yield correct 304 GET/HEAD
+ok 18 - ETags are representation-specific; weak, list and star If-None-Match yield correct 304 GET/HEAD
+  ---
+  duration_ms: 7.663083
+  type: 'test'
+  ...
+# Subtest: same-size edits and atomic replacements invalidate representations and ETags
+ok 19 - same-size edits and atomic replacements invalidate representations and ETags
+  ---
+  duration_ms: 5.688583
+  type: 'test'
+  ...
+# Subtest: immutable policy validates content before 304/body, keeps opsHeader opt-in, and serves binary identity
+ok 20 - immutable policy validates content before 304/body, keeps opsHeader opt-in, and serves binary identity
+  ---
+  duration_ms: 8.049333
+  type: 'test'
+  ...
+# Subtest: compression jobs share a representation and repeated concurrent requests decode correctly
+ok 21 - compression jobs share a representation and repeated concurrent requests decode correctly
+  ---
+  duration_ms: 8.917834
+  type: 'test'
+  ...
+# Subtest: compression bounds reject oversized inputs while allowing large identity streams
+ok 22 - compression bounds reject oversized inputs while allowing large identity streams
+  ---
+  duration_ms: 10.401083
+  type: 'test'
+  ...
+# Subtest: aborted binary stream releases the request and the server continues serving valid files
+ok 23 - aborted binary stream releases the request and the server continues serving valid files
+  ---
+  duration_ms: 18.210291
+  type: 'test'
+  ...
+# Subtest: 40+ distinct concurrent JS encodings saturate bounded compression reservations without corrupting responses
+ok 24 - 40+ distinct concurrent JS encodings saturate bounded compression reservations without corrupting responses
+  ---
+  duration_ms: 539.756292
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2586.455333

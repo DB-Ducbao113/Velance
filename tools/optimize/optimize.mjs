@@ -1,4 +1,4 @@
-/* One-time offline GLB optimization for NOIR GARAGE.
+/* One-time offline GLB optimization for VELANCE.
  * dequantize + weld + join + meshopt FILTER (geometry), WebP <=1024 (textures).
  * No quantization: runtime bakes node transforms on CPU, quantized node-scale
  * compensation corrupts shared accessors. Originals in assets/models_original/.

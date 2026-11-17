@@ -1,0 +1,1505 @@
+{
+  "format": "velance-p9-asset-source-ledger/1",
+  "generatedAtUtc": "2026-11-17T08:39:01.222Z",
+  "rightsApproval": "NO_GO",
+  "sourceKind": "SKETCHFAB_EXPORTER_ASSET_EXTRAS",
+  "caveat": "Source metadata identifies a download listing and uploader, not true owner or authorized distributor. Live page license statements can conflict; self-hosting still requires review.",
+  "originalModelCount": 16,
+  "renderCount": 80,
+  "environmentCount": 2,
+  "models": [
+    {
+      "publicPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "originalFile": "assets/models_original/2014_ferrari_laferrari.glb",
+      "originalSha256": "040a02d22032d626a1528a5620961a982e1a23b9b66aa56a1cda1c97276235cc",
+      "publicSha256": "b57b11c01d776a7c0f683836e60e565763e08cec2b2bc74b9c8ef1d369c08f9d",
+      "exporter": {
+        "title": "2014 Ferrari LaFerrari",
+        "url": "https://sketchfab.com/3d-models/2014-ferrari-laferrari-8b46fa49718647de846387ef4c1e95b3",
+        "uploader": "Ddiaz Design",
+        "uploaderProfile": "https://sketchfab.com/ddiaz-design",
+        "exporterLicenseClaim": "CC-BY-NC-SA-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "generator": "Sketchfab-0.23.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/2014-ferrari-laferrari-8b46fa49718647de846387ef4c1e95b3",
+        "comparison": "CONFLICT_EXPORTER_VS_LIVE_PAGE",
+        "concerns": [
+          "license_changed_or_conflicting_exporter",
+          "Need For Speed Mobile model",
+          "Ddiaz profile says noncommercial references"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "originalFile": "assets/models_original/2023_ferrari_sf90_xx_stradale.glb",
+      "originalSha256": "424082aabdaaa354441919f9e9bdf85864bb8eff427b7c8400da06927a561870",
+      "publicSha256": "f0eec50af8d57937756bd78c934f09b5a0680876b2d930657c467300aaa5c96f",
+      "exporter": {
+        "title": "2023 Ferrari SF90 XX Stradale",
+        "url": "https://sketchfab.com/3d-models/2023-ferrari-sf90-xx-stradale-2c80c667232544649328cf3589921bcd",
+        "uploader": "Ddiaz Design",
+        "uploaderProfile": "https://sketchfab.com/ddiaz-design",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.51.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/2023-ferrari-sf90-xx-stradale-2c80c667232544649328cf3589921bcd",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": [
+          "CSR2 game-derived model",
+          "Ddiaz profile says noncommercial references"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "originalFile": "assets/models_original/2024_lamborghini_revuelto.glb",
+      "originalSha256": "aa71da47e1dc2951d38448642a12e4703bffda35f4c597286e2a1d04d843c359",
+      "publicSha256": "c735ac5979ac6c881a79ebd9c5dc6018df3c59fb7465a2fd056d5257aea6dbbe",
+      "exporter": {
+        "title": "2024 Lamborghini Revuelto",
+        "url": "https://sketchfab.com/3d-models/2024-lamborghini-revuelto-6b1217debc3449eabd993c5af8b4a7e5",
+        "uploader": "HYPR:IMPS 3D",
+        "uploaderProfile": "https://sketchfab.com/HYPRIMPS3D",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-17.8.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/2024-lamborghini-revuelto-6b1217debc3449eabd993c5af8b4a7e5",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "originalFile": "assets/models_original/2025_koenigsegg_jesko_attack_7376.glb",
+      "originalSha256": "fa683862bce19e4cb0a7612d858c1817bbed481b1c72edd83b571092ef8f768f",
+      "publicSha256": "4782a741bb633557cf312527d46246231bbdcea07ee29957a1c0dd8aaa0a177d",
+      "exporter": {
+        "title": "2025 Koenigsegg Jesko Attack #7376",
+        "url": "https://sketchfab.com/3d-models/2025-koenigsegg-jesko-attack-7376-35d9ccc6636a49b0bbcfae3069f544e5",
+        "uploader": "HYPR:IMPS 3D",
+        "uploaderProfile": "https://sketchfab.com/HYPRIMPS3D",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-0.17.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/2025-koenigsegg-jesko-attack-7376-35d9ccc6636a49b0bbcfae3069f544e5",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/aston_martin_valkyrie.glb",
+      "originalFile": "assets/models_original/aston_martin_valkyrie.glb",
+      "originalSha256": "bd7d6c04568d7f4389c268ae3f6db731c0efe3b5286e54650916b175069b645b",
+      "publicSha256": "c45c09819c4db667f2407cadb009bdd3f470949268e5914107558a0e13586ab6",
+      "exporter": {
+        "title": "Aston Martin Valkyrie",
+        "url": "https://sketchfab.com/3d-models/aston-martin-valkyrie-1ffd7998ae1f4b8ba5a74d8a74b598e2",
+        "uploader": "chiwei",
+        "uploaderProfile": "https://sketchfab.com/chiwei2333",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-15.49.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/aston-martin-valkyrie-1ffd7998ae1f4b8ba5a74d8a74b598e2",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": [
+          "rework of Cascade Models original; upstream rights not established"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "originalFile": "assets/models_original/bugatti_tourbillon_2024.glb",
+      "originalSha256": "d2fbcc87a9fd4d842a398947e3fa6f5680c606455e01ea5a80dab6b0735d7ded",
+      "publicSha256": "c1098cf331935fa6e7cdf40dbf82ba9d21c481de2d6224bf7ee67846a32294e8",
+      "exporter": {
+        "title": "Bugatti Tourbillon 2024",
+        "url": "https://sketchfab.com/3d-models/bugatti-tourbillon-2024-c992c9bc9ba8427197d5fe380eaa2b31",
+        "uploader": "MdMahib",
+        "uploaderProfile": "https://sketchfab.com/MdMahib",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.59.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/bugatti-tourbillon-2024-c992c9bc9ba8427197d5fe380eaa2b31",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/corvette_stingray.glb",
+      "originalFile": "assets/models_original/corvette_stingray.glb",
+      "originalSha256": "f6a1b32eb0ed61e704065ee2dc33419a6100fa2cfcdb08d3b2281ed68a6dfd60",
+      "publicSha256": "54d974dbe87a9e6a7dc51afe2225a1c5e8e5d58cc5e1c1c3d36cac0c7e5e810d",
+      "exporter": {
+        "title": "Corvette Stingray",
+        "url": "https://sketchfab.com/3d-models/corvette-stingray-edabade6d6074197ba73a52809e398a4",
+        "uploader": "Harri3D",
+        "uploaderProfile": "https://sketchfab.com/harrisondorn",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-15.29.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": null,
+        "listingUrl": "https://sketchfab.com/3d-models/corvette-stingray-edabade6d6074197ba73a52809e398a4",
+        "comparison": "NO_INDEPENDENT_LIVE_LISTING",
+        "concerns": [
+          "Sketchfab page not independently retrieved in web search; original metadata only"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/lamborghini_aventador.glb",
+      "originalFile": "assets/models_original/lamborghini_aventador.glb",
+      "originalSha256": "f9737dce6bfabe118176447bd7eb09e9eaa446862b66622826afda6c9c1e20db",
+      "publicSha256": "3a9c67ab9e510d0b709f6c22b7e2153256ae4d1dbe9b909324c6b840f38ac24d",
+      "exporter": {
+        "title": "Lamborghini Aventador",
+        "url": "https://sketchfab.com/3d-models/lamborghini-aventador-3d4f50dba72b4329bde2ef22894f500a",
+        "uploader": "Blender Studio",
+        "uploaderProfile": "https://sketchfab.com/Blend_GUY",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.75.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/lamborghini-aventador-3d4f50dba72b4329bde2ef22894f500a",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "originalFile": "assets/models_original/mclaren-765lt___with_windows__v2.glb",
+      "originalSha256": "b9eb3660895fbc5f951dc2b7a4f60994173915c18c61c90488c69b53384b10b1",
+      "publicSha256": "2bc10378cf88ea0b961b4d5ab6401b734e407afd635068e29907a32768f2783b",
+      "exporter": {
+        "title": "Mclaren-765lt  ( With Windows ) V2",
+        "url": "https://sketchfab.com/3d-models/mclaren-765lt-with-windows-v2-cc1876d0179b42aeb31e004c01a857da",
+        "uploader": "Sloftm_Carz",
+        "uploaderProfile": "https://sketchfab.com/SLBofficial",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.14.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/mclaren-765lt-with-windows-v2-cc1876d0179b42aeb31e004c01a857da",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/mclaren_p1.glb",
+      "originalFile": "assets/models_original/mclaren_p1.glb",
+      "originalSha256": "813c34892fc0cba2f0846a5daadd6a191cbe51e9939049231768595a5d6df4a0",
+      "publicSha256": "6eac94ad3eacb0690c2c470da42d6f4377c44a430bb53f9badbc73f25203dedb",
+      "exporter": {
+        "title": "McLaren P1",
+        "url": "https://sketchfab.com/3d-models/mclaren-p1-e791b5aee5c6497c83994f4e5f1db84b",
+        "uploader": "hartwelkisaka",
+        "uploaderProfile": "https://sketchfab.com/hartwelkisaka",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-15.33.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/mclaren-p1-e791b5aee5c6497c83994f4e5f1db84b",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": [
+          "NoAI uploader tag; preserve model-specific conditions"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/mclaren_senna_free.glb",
+      "originalFile": "assets/models_original/mclaren_senna_free.glb",
+      "originalSha256": "ffd124e440fad20faa83b633d27225c8138f9ae6b58cb1ee9846549eb6e1333d",
+      "publicSha256": "c794d27cf612f93bb0d7d18e60e5c558bddecd4dc6c6212acf43894bcb888d6a",
+      "exporter": {
+        "title": "McLaren Senna Free",
+        "url": "https://sketchfab.com/3d-models/mclaren-senna-free-ea3e43a6eb004853a87fe9c58422eb96",
+        "uploader": "Black Snow",
+        "uploaderProfile": "https://sketchfab.com/BlackSnow02",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.99.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/mclaren-senna-free-ea3e43a6eb004853a87fe9c58422eb96",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/mercedes-amg_project-one.glb",
+      "originalFile": "assets/models_original/mercedes-amg_project-one.glb",
+      "originalSha256": "2110558d2ce4b6f27330ca6f4debc5f9bbd5bdb2b179862e103068d9369476a7",
+      "publicSha256": "c6252b86acc1f605acc74a319fb58c7eec774a917c8420825adcdbcdd8fe5499",
+      "exporter": {
+        "title": "Mercedes-AMG Project-ONE",
+        "url": "https://sketchfab.com/3d-models/mercedes-amg-project-one-8f76cd6087b54380b54075a30e662a02",
+        "uploader": "dannzjs",
+        "uploaderProfile": "https://sketchfab.com/dannzjs",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.61.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/mercedes-amg-project-one-8f76cd6087b54380b54075a30e662a02",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/pagani_huayra_free.glb",
+      "originalFile": "assets/models_original/pagani_huayra_free.glb",
+      "originalSha256": "6a588b97bf2dc99f675cbbc675df5a7509b58b1fcaf85a58b990bf91a54963d9",
+      "publicSha256": "f98d4f192036cb775b8ce7fc5e017fb50d1e17d310860e6fd1d15bc318e0aaaf",
+      "exporter": {
+        "title": "Pagani Huayra [Free]",
+        "url": "https://sketchfab.com/3d-models/pagani-huayra-free-c2d61a9f53a54a229547bb76e4b71e25",
+        "uploader": "Black Snow",
+        "uploaderProfile": "https://sketchfab.com/BlackSnow02",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.95.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/pagani-huayra-free-c2d61a9f53a54a229547bb76e4b71e25",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/pagani_utopia_2023.glb",
+      "originalFile": "assets/models_original/pagani_utopia_2023.glb",
+      "originalSha256": "18495ec2c69500cd9922f77d1a93292ab2aa03b0027d1c7ea4fd6309e77e4ba3",
+      "publicSha256": "2c8a981b0e1edc5e2f004050d8e87e0232970dd8789b277d5177f55ea3ede8dd",
+      "exporter": {
+        "title": "Pagani Utopia 2023",
+        "url": "https://sketchfab.com/3d-models/pagani-utopia-2023-a8a0264c80714a21b6f3e2ab4b538b0b",
+        "uploader": "DFLEX",
+        "uploaderProfile": "https://sketchfab.com/DFLEX",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.0.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/pagani-utopia-2023-a8a0264c80714a21b6f3e2ab4b538b0b",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": [
+          "upstream author/embedded materials provenance unresolved"
+        ]
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/porsche_911_with_interior.glb",
+      "originalFile": "assets/models_original/porsche_911_with_interior.glb",
+      "originalSha256": "aef53d169d8778124bafea96b0385f2228493664cc1f231f9847cb35806c989f",
+      "publicSha256": "051967596edd8899f1d359b7ee0fd2227cb7ed52c3fdc5d28d74ff2e41dd7b46",
+      "exporter": {
+        "title": "Porsche 911 with interior",
+        "url": "https://sketchfab.com/3d-models/porsche-911-with-interior-877b1bc1739f4a2bb65d62fd7ffd9f75",
+        "uploader": "n.brizitskaya",
+        "uploaderProfile": "https://sketchfab.com/n.brizitskaya",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-16.25.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/porsche-911-with-interior-877b1bc1739f4a2bb65d62fd7ffd9f75",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    },
+    {
+      "publicPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "originalFile": "assets/models_original/porsche_918_spyder_2015.glb",
+      "originalSha256": "f5bd0da07975ae42a70af6a593cad546db71ff689a9504e2bef1514f9cd0d707",
+      "publicSha256": "b1c5dce714402ad1dcc7f23bdc81c34aff54ace9ae531ae5d6a273c66f21c69a",
+      "exporter": {
+        "title": "Porsche 918 Spyder 2015",
+        "url": "https://sketchfab.com/3d-models/porsche-918-spyder-2015-b8d069b411804e43bccccd2e9e6fc1e7",
+        "uploader": "3D Cars Studio",
+        "uploaderProfile": "https://sketchfab.com/3DC_STUDIO",
+        "exporterLicenseClaim": "CC-BY-4.0",
+        "claimedLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "generator": "Sketchfab-0.6.0"
+      },
+      "livePage": {
+        "checkedOn": "2026-11-17",
+        "listedLicenseClaim": "CC-BY-4.0",
+        "listingUrl": "https://sketchfab.com/3d-models/porsche-918-spyder-2015-b8d069b411804e43bccccd2e9e6fc1e7",
+        "comparison": "EXPORTER_AND_LIVE_PAGE_LICENSE_LABEL_AGREE",
+        "concerns": []
+      },
+      "publicRights": "UNVERIFIED",
+      "ownershipChecked": false,
+      "commercialPermissionChecked": false,
+      "selfHostedWebglPermissionChecked": false
+    }
+  ],
+  "renders": [
+    {
+      "path": "/assets/images/amgone/01-front-three-quarter.webp",
+      "sha256": "34536e7035411f1b68eb4944dcd979f39316eeb34bc44e96d0563fee899d5eac",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/amgone/02-near-front.webp",
+      "sha256": "cd1181a938ac58db4908ac4358e8e5c1527fadf8a46df862938ae2f60d1c7f81",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/amgone/03-side-profile.webp",
+      "sha256": "4ded3595594b12bc38ea9293e1152b0f88960bfec47570215951125ca5dbf4a2",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/amgone/04-rear-three-quarter.webp",
+      "sha256": "ec76c684637445a49bda6db97f72d5d861284c4e7fc639c3e1c76cd9a9c8054d",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/amgone/05-signature.webp",
+      "sha256": "3ea1ade11606b709fa78195154ea84b6f5a365d555a6070406f877f2f48ae8e3",
+      "modelPath": "/assets/models/mercedes-amg_project-one.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/aventador/01-front-three-quarter.webp",
+      "sha256": "7845e8cbfe0d442c1ab69f8ff6f0d73cd83052d6d4519002e519eba8d7ad69a9",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/aventador/02-near-front.webp",
+      "sha256": "3d9a7bd2e4fb6458473172f3605325b0325c542fbbac9ecf19b71ac1d70db40c",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/aventador/03-side-profile.webp",
+      "sha256": "85aa26a9a17cb5a4d68eceaa0513cbc36471ed75cc68f1204b2c14699eef6e12",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/aventador/04-rear-three-quarter.webp",
+      "sha256": "7f28b1e5e8b5e3c837dba90562daba3c572f7406dfcf648bc2e81ee22ba303a2",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/aventador/05-signature.webp",
+      "sha256": "ea3f0c3b301b39aafddc7499c17a7382efffbede3b03afc8d1d2f3a2267abde1",
+      "modelPath": "/assets/models/lamborghini_aventador.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/corvette/01-front-three-quarter.webp",
+      "sha256": "c7a4529bca6b1b268905e6f169367b15b5e021ba68f74b1991d1124752ee7c61",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/corvette/02-near-front.webp",
+      "sha256": "d41c078833f9ee27eff9469da3cea05adc3d1ff64b67fd77d3c5e3f733a025ca",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/corvette/03-side-profile.webp",
+      "sha256": "94c4f2f3b8bb315459b22927c03c95b13a0e8195b385188c054240c8b5b2fb81",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/corvette/04-rear-three-quarter.webp",
+      "sha256": "2486be11064a2a3e699cf88f6ac8f47f4aeab7a73e0eb1ba8483cb9578454dd8",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/corvette/05-signature.webp",
+      "sha256": "6b2325153a631b001a91ac5f44f7462d440244d4bff14a85ee9480ad7bdfeb74",
+      "modelPath": "/assets/models/corvette_stingray.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/huayra/01-front-three-quarter.webp",
+      "sha256": "92e0fe3996ef89b98fe8e73521ef37926712b4cde71265e7ac6bede5d51da25d",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/huayra/02-near-front.webp",
+      "sha256": "10445494b056e60ac6c61432841b53dddbeb746c7074bc47763385db34e6e5a5",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/huayra/03-side-profile.webp",
+      "sha256": "b292e866208097527b6a1c798bfe862c102db04ebfb6c25faa9e2aad28d8b363",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/huayra/04-rear-three-quarter.webp",
+      "sha256": "8fb2f7f883f60ea6e6760186901874cf7e7e374eb7733b0c0136f225051e83f4",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/huayra/05-signature.webp",
+      "sha256": "186452c58e8dd8144a0371403a82c841a8b6aac2c14b05e567718f0bd1978160",
+      "modelPath": "/assets/models/pagani_huayra_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/jesko25/01-front-three-quarter.webp",
+      "sha256": "4410e1aedf71885031dbcfe630ed25311b3c5f8238df45ca0c94fd28ef39611e",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/jesko25/02-near-front.webp",
+      "sha256": "9070468924678c90667560d9ee82b7382f14a1f1b44c2d1613e3054ad3cd864f",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/jesko25/03-side-profile.webp",
+      "sha256": "09609dce737e299377edbeff700001a7ce88434c333432b52229468734d6aa9e",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/jesko25/04-rear-three-quarter.webp",
+      "sha256": "c323e12237666c99194f109f36b643aa5823e0bb7b3d6358b55ed8234170dd63",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/jesko25/05-signature.webp",
+      "sha256": "054072233db26eeb123295967241d41b747121e48d1d25ee392617fe964d3e16",
+      "modelPath": "/assets/models/2025_koenigsegg_jesko_attack_7376.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/laferrari/01-front-three-quarter.webp",
+      "sha256": "22c34657fcb3f0adbb85db4ab3b3e811096201ffeca948e50e8bbbc8c9791d3b",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/laferrari/02-near-front.webp",
+      "sha256": "725089957676a497f7e19badf8ffbd7f491a1c3f7070af3b5c0df5e859cbd596",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/laferrari/03-side-profile.webp",
+      "sha256": "504f18d58cd5ccdc669ea8bde0260c361ba72c6587c4325ab9df97e48ec45cec",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/laferrari/04-rear-three-quarter.webp",
+      "sha256": "6e0f5b634a23494a183b7a6c274078a17095d1ca58b4bc709757882c3e1f262c",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/laferrari/05-signature.webp",
+      "sha256": "1ed4549dd0d6b98bd73f9b3fd8f77c8add96e41517942cb1820947ded5b17675",
+      "modelPath": "/assets/models/2014_ferrari_laferrari.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclaren765lt/01-front-three-quarter.webp",
+      "sha256": "976551a33fe47d7727c52c86c5db7aff41bea24331e6bb6cd60798a0d6494d44",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclaren765lt/02-near-front.webp",
+      "sha256": "7ca38eee8080e23f342b099a27224e873f8280672e76972a45b89238bb9fcea3",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclaren765lt/03-side-profile.webp",
+      "sha256": "c6102da1713de4d5dd2458e6de41bad233fe9dc78e488c3405345c75ad2b4d02",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclaren765lt/04-rear-three-quarter.webp",
+      "sha256": "34e3a87b5dfbf562fa4456ef97c2db214655cc7383fdb59a77672ebbd030e306",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclaren765lt/05-signature.webp",
+      "sha256": "b63519219e0852f8d5c2082080203a79cf14d7b104849e6b0d18553d3943045e",
+      "modelPath": "/assets/models/mclaren-765lt___with_windows__v2.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclarenp1/01-front-three-quarter.webp",
+      "sha256": "da9d2878d1506dc1f9166431bfbdcb67280b7bf592a2dc35764354c51b6ad086",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclarenp1/02-near-front.webp",
+      "sha256": "8e3f902ac92fe310dc06d7251ae1f45fd9973c7472d5fe1c830b77c3bd61dd8a",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclarenp1/03-side-profile.webp",
+      "sha256": "6b9e15331c99ec1a56aea4d367ea6b7a5bfa93326f80b959b35f2d0592d637f5",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclarenp1/04-rear-three-quarter.webp",
+      "sha256": "5f0be4352ffe8e8eb587c236665f1715fb57d209ffa36b87f3b134403e8058c3",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/mclarenp1/05-signature.webp",
+      "sha256": "593bc913f2ee77b03240f3d67fad6e04151a6d8832496ca73950408b0e65d41b",
+      "modelPath": "/assets/models/mclaren_p1.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/paganiutopia/01-front-three-quarter.webp",
+      "sha256": "e8f5ad55ceee40113064196c05841e33a5a86fadeb2103e2d07e5b22b3482fa5",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/paganiutopia/02-near-front.webp",
+      "sha256": "b0e801f5751173d5240cf9498888085e1a8350a134c261f01956b9a6dab2b435",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/paganiutopia/03-side-profile.webp",
+      "sha256": "a889059e6c17b56b3e42f0e4496c7bc277b757a2ccc4720013891c9f792b2c48",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/paganiutopia/04-rear-three-quarter.webp",
+      "sha256": "5804a3d7d9d95051380d96e94f39b7fea7f1f7189900ff65e3f7b52615b376d3",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/paganiutopia/05-signature.webp",
+      "sha256": "c498840b3bbbbe7d9a6a9d0128d0421c6d05bcfa504b7748c5c106c467284534",
+      "modelPath": "/assets/models/pagani_utopia_2023.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche911/01-front-three-quarter.webp",
+      "sha256": "dee084852aa95b540b2e9d9ae7dcbd27f73d1cc2bf5f09e2a82b62f809adf51d",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche911/02-near-front.webp",
+      "sha256": "67f990eb4d641f814ef3667e0b134663ae62a3d7068435c5af8996c47ed6402a",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche911/03-side-profile.webp",
+      "sha256": "fcaf20cc3ed62b96190872fbe1559fcba936d98eb50b5ce74c6f49e72155dc51",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche911/04-rear-three-quarter.webp",
+      "sha256": "a5ec03cfb9aaf1783e85d2f4acb4499725ed8a9406982529da0964c313704fe0",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche911/05-signature.webp",
+      "sha256": "f41188ab3e29841c1be7d6737d11cbbd0ac4baf669baa7e0bf22cc3f9bd81bac",
+      "modelPath": "/assets/models/porsche_911_with_interior.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche918/01-front-three-quarter.webp",
+      "sha256": "65720aef2305c5c5c02f28163477111e13d0a6df70d1798ee12ca5d3b9ed192a",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche918/02-near-front.webp",
+      "sha256": "85c4f63b323d2b020c5910e591e0bea838809452c038a6f3b76dec6fdc88dbb5",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche918/03-side-profile.webp",
+      "sha256": "88570507cc480355237527cdcc76c344dfd86cd0b3a0e344e9ed4f8797fec6ef",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche918/04-rear-three-quarter.webp",
+      "sha256": "f93ab4fa3559abd5bf0daabecfa115aed64faf505b31d44d05f29f27bb286993",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/porsche918/05-signature.webp",
+      "sha256": "04fce2144f67961c72a3b8c2e3d852d1810a8cdd4b37e6d7062063fb758c9edc",
+      "modelPath": "/assets/models/porsche_918_spyder_2015.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/revuelto/01-front-three-quarter.webp",
+      "sha256": "78fc1df6af8ec33d5c59bfcec3a40808113d2ca160ad9477556346f546e69acf",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/revuelto/02-near-front.webp",
+      "sha256": "1549c8afff73b3ad36fc5989d933059632ba8932e661474599b58e8f465d1f31",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/revuelto/03-side-profile.webp",
+      "sha256": "56d866b1ab21d1ef252ee599cf24a86ace8f6d6d861bbf1d72624e8a4b4f7263",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/revuelto/04-rear-three-quarter.webp",
+      "sha256": "5950dff69992d9828f498e6ee83a86adcee3440034eb04ef2a0b4228079c392b",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/revuelto/05-signature.webp",
+      "sha256": "a3e6f258ff67160b765ff7cc087ec92399aa3ee835968b8b1ca5a52b65f38b47",
+      "modelPath": "/assets/models/2024_lamborghini_revuelto.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/senna/01-front-three-quarter.webp",
+      "sha256": "a3e9066f0a57ef04e0ce9abf4296c7c369813123bf3207b34b13115d1ec38c39",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/senna/02-near-front.webp",
+      "sha256": "2ec50031f425acc390269e29bb0fb297deebef235108c5cff23059e73b868abc",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/senna/03-side-profile.webp",
+      "sha256": "b9fb127955c0b1e7e0c808b0911c0b8144fd44d089690665272b94a4ddb33d53",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/senna/04-rear-three-quarter.webp",
+      "sha256": "829ed01ced2cbcb17c34b8cd329d25aec1e95261f57f6a97dd1657d1060db281",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/senna/05-signature.webp",
+      "sha256": "1b1365afa06570fbb9e57b5043fed42ad95c99f3661a60aa6d22cf10bfda6539",
+      "modelPath": "/assets/models/mclaren_senna_free.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/sf90xx/01-front-three-quarter.webp",
+      "sha256": "e3b4a67797050614fa91fea27c44c91fb165682095f973ab8e3b5a7c5aee2ae8",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/sf90xx/02-near-front.webp",
+      "sha256": "4659f9b59494c8087334fbccaa0ddf59b48b7337ca16dcfb0dd9ba5dd68c7dc8",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/sf90xx/03-side-profile.webp",
+      "sha256": "63910be12c65f5b9e0ef11d59d633a2ca20013ce82915602f0882058ec2aed92",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/sf90xx/04-rear-three-quarter.webp",
+      "sha256": "330cb3ba3672a9a119ae002320c0649de9f41c09eea5557b26fc30631dc353b4",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/sf90xx/05-signature.webp",
+      "sha256": "6ab94182adcd34e40b6362de6e1ede4ec6d4f68ab91f392374798077809ce3f4",
+      "modelPath": "/assets/models/2023_ferrari_sf90_xx_stradale.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/tourbillon24/01-front-three-quarter.webp",
+      "sha256": "20b34fe06ef09e05f46e794d084a763467e61b93f60eec278cd424310135b87a",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/tourbillon24/02-near-front.webp",
+      "sha256": "9067efd9536de43df005b6359a9cfe883c671fff39753645e4bae7a1f223004d",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/tourbillon24/03-side-profile.webp",
+      "sha256": "156c33d46b08d765e204db706b76c7dadd9fae80777c9361ac5d36a6c5ce36fe",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/tourbillon24/04-rear-three-quarter.webp",
+      "sha256": "7e632e3b3832540cbce9b67cb12470557f5817b1b8c2f0f48206415fb3ba8809",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/tourbillon24/05-signature.webp",
+      "sha256": "ea1728f9649189f72da5b14bf7064aff0278a7701ce5e20c12fb74dadd119ab0",
+      "modelPath": "/assets/models/bugatti_tourbillon_2024.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/valkyrie/01-front-three-quarter.webp",
+      "sha256": "045aea6114fedc3947378115df169df67cbea4a78457740908cff050fa5db0b4",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/valkyrie/02-near-front.webp",
+      "sha256": "21320a4d1c8f1045d24ed632a22aeed6cf5fef8eb2ad46b5b120e91d82a2fa95",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/valkyrie/03-side-profile.webp",
+      "sha256": "7ca0ae8480b50c5a200744543ca7f22914d3c234cb96bb2769c672a46ca00aec",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/valkyrie/04-rear-three-quarter.webp",
+      "sha256": "60b47b72f5ca20cf313ccab87ccdf07b15c2ee3f9587642ccf581c271eb4b84d",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    },
+    {
+      "path": "/assets/images/valkyrie/05-signature.webp",
+      "sha256": "28be5623e1c869242f74ec1b49fd119badd7f3e6a169af978fb9ab5a954bae9a",
+      "modelPath": "/assets/models/aston_martin_valkyrie.glb",
+      "localGeneration": {
+        "pipeline": "tools/render/shoot.mjs + tools/render/render.html",
+        "renderer": "Three.js WebGPU + GLTFLoader + RoomEnvironment + Sharp PNG -> WebP",
+        "outputPattern": "5 camera angles per VEHICLES id",
+        "provenanceLevel": "REPRODUCIBLE_CODE_PRESENT__OUTPUT_NOT_BYTE_VERIFIED"
+      },
+      "publicRights": "UNVERIFIED",
+      "underlyingModelCopyrightClearance": false
+    }
+  ],
+  "environments": [
+    {
+      "path": "/assets/environment/private_garage_1080x1350.webp",
+      "sha256": "e296b9eac26e3ad7dddd211e30dd8bbe4a0e6dc66535022e9eeea3819709fdb6",
+      "knownExternalSource": null,
+      "authorOrOwner": null,
+      "license": null,
+      "rightsStatus": "UNVERIFIED",
+      "note": "Two environmental WebPs are not in the 96-entry P5 register. Creator and source not proven."
+    },
+    {
+      "path": "/assets/environment/private_garage_1920x1080.webp",
+      "sha256": "46288c9cc07a0a98db1e21b901f324f5f51fcd21cdb4a24924d7d05a511d4947",
+      "knownExternalSource": null,
+      "authorOrOwner": null,
+      "license": null,
+      "rightsStatus": "UNVERIFIED",
+      "note": "Two environmental WebPs are not in the 96-entry P5 register. Creator and source not proven."
+    }
+  ]
+}

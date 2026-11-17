@@ -1,0 +1,1562 @@
+{
+  "date": "2026-11-15T15:00:32.793Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "darwin-arm64",
+    "viewport": "1440x900",
+    "backend": "webgpu",
+    "cache": "disabled",
+    "chrome": "Google Chrome 157.0.8103.51"
+  },
+  "methodology": {
+    "runs": "3 sequential pairs before and 3 after; ON/OFF, OFF/ON, ON/OFF; no overlapping GPU journeys",
+    "origin": "isolated loopback ops server and temporary DB, never production session data",
+    "commands": [
+      "TEST_ORIGIN=http://127.0.0.1:8093 node tools/perf/measure.mjs",
+      "TEST_ORIGIN=http://127.0.0.1:8093 QUERY=notelemetry=1 node tools/perf/measure.mjs",
+      "TEST_ORIGIN=http://127.0.0.1:8094 node tools/perf/measure.mjs",
+      "TEST_ORIGIN=http://127.0.0.1:8094 QUERY=notelemetry=1 node tools/perf/measure.mjs"
+    ],
+    "bootKey": "enterToFirstCarGaps is a legacy name; interval ends at allLoaded",
+    "selected": "Arithmetic mean of the six per-car gap averages per run; worst p95/max across those cars",
+    "gate": "Each phase median paired ON-minus-OFF gap average must be less than 1 ms",
+    "limitations": "Single-machine lab result, three pairs, rounded harness summaries, no statistical equivalence or field-performance claim; no runs excluded"
+  },
+  "gatePassed": true,
+  "summary": {
+    "before": {
+      "enterToAllLoaded": {
+        "pairedOnMinusOffAvgMs": [
+          0,
+          0.5,
+          -0.1
+        ],
+        "medianDeltaMs": 0,
+        "on": {
+          "medianAvgMs": 11.3,
+          "worstP95Ms": 17.6,
+          "worstFrameMs": 33.3
+        },
+        "off": {
+          "medianAvgMs": 11.1,
+          "worstP95Ms": 17.6,
+          "worstFrameMs": 34.3
+        }
+      },
+      "overview": {
+        "pairedOnMinusOffAvgMs": [
+          -0.1,
+          -0.1,
+          -0.1
+        ],
+        "medianDeltaMs": -0.1,
+        "on": {
+          "medianAvgMs": 8.6,
+          "worstP95Ms": 9.3,
+          "worstFrameMs": 16.8
+        },
+        "off": {
+          "medianAvgMs": 8.7,
+          "worstP95Ms": 16,
+          "worstFrameMs": 17.6
+        }
+      },
+      "selected": {
+        "pairedOnMinusOffAvgMs": [
+          0,
+          0.0167,
+          0.0167
+        ],
+        "medianDeltaMs": 0.0167,
+        "on": {
+          "medianAvgMs": 8.3167,
+          "worstP95Ms": 9.3,
+          "worstFrameMs": 16.7
+        },
+        "off": {
+          "medianAvgMs": 8.3,
+          "worstP95Ms": 9.3,
+          "worstFrameMs": 25
+        }
+      }
+    },
+    "after": {
+      "enterToAllLoaded": {
+        "pairedOnMinusOffAvgMs": [
+          0.1,
+          0.4,
+          -0.4
+        ],
+        "medianDeltaMs": 0.1,
+        "on": {
+          "medianAvgMs": 11.4,
+          "worstP95Ms": 17.5,
+          "worstFrameMs": 33.5
+        },
+        "off": {
+          "medianAvgMs": 11.3,
+          "worstP95Ms": 17.3,
+          "worstFrameMs": 41.6
+        }
+      },
+      "overview": {
+        "pairedOnMinusOffAvgMs": [
+          0.2,
+          0.4,
+          -0.3
+        ],
+        "medianDeltaMs": 0.2,
+        "on": {
+          "medianAvgMs": 9,
+          "worstP95Ms": 16.7,
+          "worstFrameMs": 17.6
+        },
+        "off": {
+          "medianAvgMs": 8.8,
+          "worstP95Ms": 16.7,
+          "worstFrameMs": 17.5
+        }
+      },
+      "selected": {
+        "pairedOnMinusOffAvgMs": [
+          0,
+          -0.0333,
+          -0.0167
+        ],
+        "medianDeltaMs": -0.0167,
+        "on": {
+          "medianAvgMs": 8.3,
+          "worstP95Ms": 9.3,
+          "worstFrameMs": 9.4
+        },
+        "off": {
+          "medianAvgMs": 8.3167,
+          "worstP95Ms": 9.3,
+          "worstFrameMs": 25.1
+        }
+      }
+    }
+  },
+  "before": {
+    "stage": "before",
+    "date": "2026-11-15T14:40:25.418Z",
+    "node": "v24.21.0",
+    "platform": "darwin-arm64",
+    "viewport": "1440x900",
+    "backend": "webgpu",
+    "cache": "disabled",
+    "runs": [
+      {
+        "pair": 1,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 349,
+          "firstCar": 1847,
+          "allLoaded": 2722,
+          "enterToFirstCarGaps": {
+            "n": 85,
+            "avg": 11.1,
+            "p95": 16.7,
+            "max": 25.3
+          }
+        },
+        "overview": {
+          "ovFlightMs": 724,
+          "ovGaps": {
+            "n": 144,
+            "avg": 8.7,
+            "p95": 9.2,
+            "max": 16.8
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.6,
+            "max": 9.3
+          },
+          {
+            "i": 4,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.6,
+            "max": 9.2
+          },
+          {
+            "i": 7,
+            "selMs": 707,
+            "n": 203,
+            "avg": 8.4,
+            "p95": 9,
+            "max": 16.6
+          },
+          {
+            "i": 8,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.9,
+            "max": 9.3
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.9,
+            "max": 9.3
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.7,
+            "max": 9.3
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            417,
+            67
+          ],
+          [
+            1116,
+            79
+          ],
+          [
+            1353,
+            100
+          ],
+          [
+            4910,
+            167
+          ],
+          [
+            5760,
+            55
+          ],
+          [
+            15640,
+            72
+          ]
+        ]
+      },
+      {
+        "pair": 1,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 209,
+          "firstCar": 1689,
+          "allLoaded": 2573,
+          "enterToFirstCarGaps": {
+            "n": 86,
+            "avg": 11.1,
+            "p95": 16.9,
+            "max": 33.3
+          }
+        },
+        "overview": {
+          "ovFlightMs": 723,
+          "ovGaps": {
+            "n": 142,
+            "avg": 8.8,
+            "p95": 16,
+            "max": 16.8
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.8,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.6,
+            "max": 9.3
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 203,
+            "avg": 8.4,
+            "p95": 9,
+            "max": 25
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9,
+            "max": 9.3
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            253,
+            72
+          ],
+          [
+            961,
+            83
+          ],
+          [
+            1213,
+            100
+          ],
+          [
+            4761,
+            166
+          ],
+          [
+            5602,
+            61
+          ],
+          [
+            5669,
+            63
+          ],
+          [
+            15512,
+            102
+          ]
+        ]
+      },
+      {
+        "pair": 2,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 378,
+          "firstCar": 1846,
+          "allLoaded": 2777,
+          "enterToFirstCarGaps": {
+            "n": 92,
+            "avg": 11,
+            "p95": 17.6,
+            "max": 25.1
+          }
+        },
+        "overview": {
+          "ovFlightMs": 725,
+          "ovGaps": {
+            "n": 142,
+            "avg": 8.6,
+            "p95": 9.4,
+            "max": 17.6
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 709,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            464,
+            66
+          ],
+          [
+            1165,
+            87
+          ],
+          [
+            1371,
+            106
+          ],
+          [
+            4867,
+            181
+          ],
+          [
+            5714,
+            64
+          ],
+          [
+            15610,
+            71
+          ]
+        ]
+      },
+      {
+        "pair": 2,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 209,
+          "firstCar": 1749,
+          "allLoaded": 2671,
+          "enterToFirstCarGaps": {
+            "n": 86,
+            "avg": 11.5,
+            "p95": 17.6,
+            "max": 33.3
+          }
+        },
+        "overview": {
+          "ovFlightMs": 719,
+          "ovGaps": {
+            "n": 148,
+            "avg": 8.5,
+            "p95": 9.3,
+            "max": 16.7
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.9,
+            "max": 9.3
+          },
+          {
+            "i": 15,
+            "selMs": 715,
+            "n": 205,
+            "avg": 8.4,
+            "p95": 9.2,
+            "max": 16.6
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            268,
+            76
+          ],
+          [
+            990,
+            88
+          ],
+          [
+            1241,
+            117
+          ],
+          [
+            4864,
+            184
+          ],
+          [
+            5709,
+            65
+          ],
+          [
+            5776,
+            52
+          ],
+          [
+            15618,
+            109
+          ]
+        ]
+      },
+      {
+        "pair": 3,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 227,
+          "firstCar": 1769,
+          "allLoaded": 2765,
+          "enterToFirstCarGaps": {
+            "n": 97,
+            "avg": 11.3,
+            "p95": 17.6,
+            "max": 32.4
+          }
+        },
+        "overview": {
+          "ovFlightMs": 724,
+          "ovGaps": {
+            "n": 146,
+            "avg": 8.6,
+            "p95": 9.3,
+            "max": 16.6
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 7,
+            "selMs": 709,
+            "n": 204,
+            "avg": 8.4,
+            "p95": 9.3,
+            "max": 16.7
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 11,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 8.9,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            349,
+            68
+          ],
+          [
+            1022,
+            90
+          ],
+          [
+            1277,
+            119
+          ],
+          [
+            4811,
+            192
+          ],
+          [
+            5660,
+            72
+          ],
+          [
+            5736,
+            53
+          ],
+          [
+            15564,
+            81
+          ],
+          [
+            16027,
+            50
+          ]
+        ]
+      },
+      {
+        "pair": 3,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 278,
+          "firstCar": 1877,
+          "allLoaded": 2966,
+          "enterToFirstCarGaps": {
+            "n": 102,
+            "avg": 11.4,
+            "p95": 17.6,
+            "max": 34.3
+          }
+        },
+        "overview": {
+          "ovFlightMs": 726,
+          "ovGaps": {
+            "n": 143,
+            "avg": 8.7,
+            "p95": 9.4,
+            "max": 17.6
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            384,
+            70
+          ],
+          [
+            842,
+            82
+          ],
+          [
+            1146,
+            98
+          ],
+          [
+            1442,
+            110
+          ],
+          [
+            4928,
+            196
+          ],
+          [
+            5728,
+            58
+          ],
+          [
+            5795,
+            59
+          ],
+          [
+            5861,
+            60
+          ],
+          [
+            15692,
+            83
+          ]
+        ]
+      }
+    ]
+  },
+  "after": {
+    "stage": "after",
+    "date": "2026-11-15T15:00:32.793Z",
+    "node": "v24.21.0",
+    "platform": "darwin-arm64",
+    "viewport": "1440x900",
+    "backend": "webgpu",
+    "cache": "disabled",
+    "runs": [
+      {
+        "pair": 1,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 330,
+          "firstCar": 1899,
+          "allLoaded": 2930,
+          "enterToFirstCarGaps": {
+            "n": 99,
+            "avg": 11.4,
+            "p95": 17.5,
+            "max": 25
+          }
+        },
+        "overview": {
+          "ovFlightMs": 725,
+          "ovGaps": {
+            "n": 143,
+            "avg": 8.9,
+            "p95": 16.7,
+            "max": 17.3
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 715,
+            "n": 206,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 204,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 8,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.3
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            389,
+            67
+          ],
+          [
+            1136,
+            94
+          ],
+          [
+            1400,
+            115
+          ],
+          [
+            4968,
+            196
+          ],
+          [
+            5817,
+            76
+          ],
+          [
+            5900,
+            53
+          ],
+          [
+            15737,
+            79
+          ],
+          [
+            15817,
+            51
+          ]
+        ]
+      },
+      {
+        "pair": 1,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 280,
+          "firstCar": 1814,
+          "allLoaded": 2916,
+          "enterToFirstCarGaps": {
+            "n": 104,
+            "avg": 11.3,
+            "p95": 17,
+            "max": 41.6
+          }
+        },
+        "overview": {
+          "ovFlightMs": 725,
+          "ovGaps": {
+            "n": 143,
+            "avg": 8.7,
+            "p95": 9.3,
+            "max": 17.5
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 749,
+            "n": 210,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 8,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.3,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 204,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            369,
+            67
+          ],
+          [
+            1110,
+            93
+          ],
+          [
+            1374,
+            111
+          ],
+          [
+            4853,
+            211
+          ],
+          [
+            5694,
+            70
+          ],
+          [
+            5769,
+            53
+          ],
+          [
+            15654,
+            101
+          ]
+        ]
+      },
+      {
+        "pair": 2,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 242,
+          "firstCar": 1792,
+          "allLoaded": 2807,
+          "enterToFirstCarGaps": {
+            "n": 99,
+            "avg": 11,
+            "p95": 16.7,
+            "max": 33.4
+          }
+        },
+        "overview": {
+          "ovFlightMs": 721,
+          "ovGaps": {
+            "n": 141,
+            "avg": 8.8,
+            "p95": 15.8,
+            "max": 16.9
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 202,
+            "avg": 8.5,
+            "p95": 9.1,
+            "max": 25.1
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            284,
+            68
+          ],
+          [
+            1101,
+            90
+          ],
+          [
+            1353,
+            107
+          ],
+          [
+            4844,
+            192
+          ],
+          [
+            5685,
+            72
+          ],
+          [
+            5760,
+            54
+          ],
+          [
+            15613,
+            103
+          ]
+        ]
+      },
+      {
+        "pair": 2,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 223,
+          "firstCar": 1750,
+          "allLoaded": 3063,
+          "enterToFirstCarGaps": {
+            "n": 123,
+            "avg": 11.4,
+            "p95": 16.8,
+            "max": 33
+          }
+        },
+        "overview": {
+          "ovFlightMs": 723,
+          "ovGaps": {
+            "n": 135,
+            "avg": 9.2,
+            "p95": 16.7,
+            "max": 17.6
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.4
+          },
+          {
+            "i": 7,
+            "selMs": 706,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 11,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 709,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            263,
+            70
+          ],
+          [
+            1184,
+            105
+          ],
+          [
+            1464,
+            117
+          ],
+          [
+            4826,
+            179
+          ],
+          [
+            5668,
+            60
+          ],
+          [
+            5734,
+            52
+          ],
+          [
+            15556,
+            55
+          ],
+          [
+            15612,
+            58
+          ]
+        ]
+      },
+      {
+        "pair": 3,
+        "telemetry": true,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 285,
+          "firstCar": 1648,
+          "allLoaded": 3123,
+          "enterToFirstCarGaps": {
+            "n": 135,
+            "avg": 11.5,
+            "p95": 16.9,
+            "max": 33.5
+          }
+        },
+        "overview": {
+          "ovFlightMs": 727,
+          "ovGaps": {
+            "n": 141,
+            "avg": 9,
+            "p95": 16.6,
+            "max": 17.4
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 707,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 204,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.4
+          },
+          {
+            "i": 7,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 708,
+            "n": 204,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.3
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.3
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            376,
+            66
+          ],
+          [
+            984,
+            69
+          ],
+          [
+            1265,
+            100
+          ],
+          [
+            3442,
+            124
+          ],
+          [
+            4859,
+            174
+          ],
+          [
+            5709,
+            61
+          ],
+          [
+            15591,
+            74
+          ]
+        ]
+      },
+      {
+        "pair": 3,
+        "telemetry": false,
+        "boot": {
+          "backend": "webgpu",
+          "gateReady": 366,
+          "firstCar": 1879,
+          "allLoaded": 3623,
+          "enterToFirstCarGaps": {
+            "n": 152,
+            "avg": 11.9,
+            "p95": 17.3,
+            "max": 41.6
+          }
+        },
+        "overview": {
+          "ovFlightMs": 732,
+          "ovGaps": {
+            "n": 136,
+            "avg": 9.3,
+            "p95": 16.7,
+            "max": 17.4
+          },
+          "drawCalls": 724,
+          "triangles": 1965726,
+          "pixelRatio": 1
+        },
+        "selects": [
+          {
+            "i": 0,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.1,
+            "max": 9.4
+          },
+          {
+            "i": 4,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 7,
+            "selMs": 709,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 8,
+            "selMs": 707,
+            "n": 203,
+            "avg": 8.4,
+            "p95": 9.3,
+            "max": 17.5
+          },
+          {
+            "i": 11,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          },
+          {
+            "i": 15,
+            "selMs": 708,
+            "n": 205,
+            "avg": 8.3,
+            "p95": 9.2,
+            "max": 9.4
+          }
+        ],
+        "errorCount": 0,
+        "longTasks": [
+          [
+            404,
+            68
+          ],
+          [
+            1034,
+            108
+          ],
+          [
+            1534,
+            126
+          ],
+          [
+            3702,
+            126
+          ],
+          [
+            5120,
+            192
+          ],
+          [
+            5969,
+            67
+          ],
+          [
+            15862,
+            83
+          ]
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "nativeTests": 15,
+    "nativeFailures": 0,
+    "beforeDefectProbes": {
+      "privateGit": 200,
+      "privateDB": 200,
+      "oversize": {
+        "error": "ECONNRESET"
+      },
+      "longJSONAccepted": {
+        "status": 200,
+        "body": "{\"ok\":true}"
+      },
+      "longJSONRead": {
+        "status": 500,
+        "body": "{\"error\":\"internal\"}"
+      },
+      "fractionalLimit": {
+        "status": 500,
+        "body": "{\"error\":\"internal\"}"
+      }
+    },
+    "browser": {
+      "date": "2026-11-15T15:01:54.546Z",
+      "journeys": [
+        {
+          "backend": "webgpu",
+          "allLoadedMs": 2554,
+          "observerMs": 2476.6,
+          "deltaMs": 77.4,
+          "samples": 15,
+          "events": 6,
+          "consoleErrors": 0
+        },
+        {
+          "backend": "webgl2",
+          "allLoadedMs": 3004,
+          "observerMs": 2782.8,
+          "deltaMs": 221.2,
+          "samples": 15,
+          "events": 6,
+          "consoleErrors": 0
+        }
+      ],
+      "checks": [
+        "webgpu: real journey, idle unknown, hidden resume and received navigation checkpoint",
+        "webgl: real journey, idle unknown, hidden resume and received navigation checkpoint",
+        "query and localStorage opt-out produce no collector request",
+        "plain Python static server is HEAD-only",
+        "real Chrome BFCache pageshow.persisted preserves collector session (image-fallback fixture)",
+        "intentional transport failure disables without retry or unhandled rejection",
+        "dashboard empty/partial/zero/late-enter/null, escaping, refresh scroll, close/switch races and mobile",
+        "dashboard handles API failure",
+        "render harness renders five poses without writing model/image assets"
+      ]
+    },
+    "commands": [
+      "node --test tools/ops/test/server.mjs tools/ops/test/collector.mjs",
+      "node tools/perf/ops_smoke.mjs",
+      "TEST_ORIGIN=http://127.0.0.1:8094 node tools/perf/gpu_smoke.mjs",
+      "TEST_ORIGIN=http://127.0.0.1:8094 node packages/tsl-carpaint/test/gpu.mjs"
+    ],
+    "gpuChecks": [
+      "webgpu: 16 cars / two rows, original/rosso, editorial images, one-car drag, overview, mobile PASS",
+      "webgl: 16 cars / two rows, original/rosso, editorial images, one-car drag, overview, mobile PASS",
+      "Automatic WebGL2 fallback without navigator.gpu PASS",
+      "webgpu: finite HDR, live colour, restored colour, flakes, peel, pearl, stable material, responsive layout PASS",
+      "webgl: finite HDR, live colour, restored colour, flakes, peel, pearl, stable material, responsive layout PASS"
+    ],
+    "migration": {
+      "integrity": "ok",
+      "preservedRows": {
+        "sessions": 18,
+        "samples": 399,
+        "events": 253
+      },
+      "nativeBackupVerified": true
+    },
+    "sourceScope": "Showroom engine, UI, motion, models/assets, vendor and CI unchanged from starting state; dashboard CSS adjusted for verified mobile overflow"
+  }
+}

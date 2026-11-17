@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: query/storage opt-out has no UUID, context, network, timers or listeners; static is HEAD-only
+ok 1 - query/storage opt-out has no UUID, context, network, timers or listeners; static is HEAD-only
+  ---
+  duration_ms: 2.534208
+  type: 'test'
+  ...
+# Subtest: leaving during activation prevents late HEAD from starting collection
+ok 2 - leaving during activation prevents late HEAD from starting collection
+  ---
+  duration_ms: 0.508333
+  type: 'test'
+  ...
+# Subtest: metadata-only checkpoints, immutable snapshot and late gate entry
+ok 3 - metadata-only checkpoints, immutable snapshot and late gate entry
+  ---
+  duration_ms: 1.134125
+  type: 'test'
+  ...
+# Subtest: single-flight regular flush, hidden checkpoint and terminal callbacks cannot resurrect
+ok 4 - single-flight regular flush, hidden checkpoint and terminal callbacks cannot resurrect
+  ---
+  duration_ms: 0.970917
+  type: 'test'
+  ...
+# Subtest: hidden/visible and bfcache preserve session with exactly one sampler; false beacon uses keepalive
+ok 5 - hidden/visible and bfcache preserve session with exactly one sampler; false beacon uses keepalive
+  ---
+  duration_ms: 0.619583
+  type: 'test'
+  ...
+# Subtest: failure disables quietly and removes every listener/timer without retry
+ok 6 - failure disables quietly and removes every listener/timer without retry
+  ---
+  duration_ms: 0.6105
+  type: 'test'
+  ...
+# Subtest: bounded UTF-8 batches drain queues without truncating JSON; errors redact URLs and tokens
+ok 7 - bounded UTF-8 batches drain queues without truncating JSON; errors redact URLs and tokens
+  ---
+  duration_ms: 3.256583
+  type: 'test'
+  ...
+# Subtest: selected orbit, settling, flight and overview use active cadence; idle/offscreen/fallback stay unknown
+ok 8 - selected orbit, settling, flight and overview use active cadence; idle/offscreen/fallback stay unknown
+  ---
+  duration_ms: 1.748416
+  type: 'test'
+  ...
+# Subtest: worker backup, manifest verification and safe restore use private temporary files
+ok 9 - worker backup, manifest verification and safe restore use private temporary files
+  ---
+  duration_ms: 237.364167
+  type: 'test'
+  ...
+# Subtest: retention dry run is non-destructive; apply snapshots first and preserves current sessions
+ok 10 - retention dry run is non-destructive; apply snapshots first and preserves current sessions
+  ---
+  duration_ms: 167.016083
+  type: 'test'
+  ...
+# Subtest: backup directory permissions, missing database and operation aborts fail safely
+ok 11 - backup directory permissions, missing database and operation aborts fail safely
+  ---
+  duration_ms: 32.621458
+  type: 'test'
+  ...
+# Subtest: rotation removes only oldest matching backups and manifests
+ok 12 - rotation removes only oldest matching backups and manifests
+  ---
+  duration_ms: 106.698
+  type: 'test'
+  ...
+# Subtest: scheduler bootstrap skips corrupted newest snapshot and trusts verified older backup
+ok 13 - scheduler bootstrap skips corrupted newest snapshot and trusts verified older backup
+  ---
+  duration_ms: 134.982958
+  type: 'test'
+  ...
+# Subtest: metric histograms are cumulative; cardinality and structured-log fields are bounded
+ok 14 - metric histograms are cumulative; cardinality and structured-log fields are bounded
+  ---
+  duration_ms: 0.545583
+  type: 'test'
+  ...
+# Subtest: ACKed receipts survive SIGKILL of a fixture child and duplicate replay after restart
+ok 15 - ACKed receipts survive SIGKILL of a fixture child and duplicate replay after restart
+  ---
+  duration_ms: 143.689459
+  type: 'test'
+  ...
+# Subtest: backup during fixture HTTP ingestion restores an internally consistent committed snapshot
+ok 16 - backup during fixture HTTP ingestion restores an internally consistent committed snapshot
+  ---
+  duration_ms: 176.1705
+  type: 'test'
+  ...
+# Subtest: temporary SQLite write lock returns a bounded 503 and ingestion recovers after release
+ok 17 - temporary SQLite write lock returns a bounded 503 and ingestion recovers after release
+  ---
+  duration_ms: 264.106084
+  type: 'test'
+  ...
+# Subtest: read-only temporary database volume prevents startup without creating an alternate writer
+ok 18 - read-only temporary database volume prevents startup without creating an alternate writer
+  ---
+  duration_ms: 17.347125
+  type: 'test'
+  ...
+# Subtest: static allowlist, MIME, redirects, canonical containment and custom DB
+ok 19 - static allowlist, MIME, redirects, canonical containment and custom DB
+  ---
+  duration_ms: 65.189667
+  type: 'test'
+  ...
+# Subtest: Host, Origin, Fetch metadata and CLI boundaries
+ok 20 - Host, Origin, Fetch metadata and CLI boundaries
+  ---
+  duration_ms: 194.7995
+  type: 'test'
+  ...
+# Subtest: complete 413 at byte cap for fixed and chunked bodies, abort survival, HTTP status contracts
+ok 21 - complete 413 at byte cap for fixed and chunked bodies, abort survival, HTTP status contracts
+  ---
+  duration_ms: 49.085292
+  type: 'test'
+  ...
+# Subtest: strict all-or-nothing validation, JSON roundtrip, multi-byte strings
+ok 22 - strict all-or-nothing validation, JSON roundtrip, multi-byte strings
+  ---
+  duration_ms: 52.881541
+  type: 'test'
+  ...
+# Subtest: ordering, immutable identity, dedupe after restart and transactional receipt rollback
+ok 23 - ordering, immutable identity, dedupe after restart and transactional receipt rollback
+  ---
+  duration_ms: 81.327958
+  type: 'test'
+  ...
+# Subtest: legacy migration backs up every row and is idempotent
+ok 24 - legacy migration backs up every row and is idempotent
+  ---
+  duration_ms: 68.001417
+  type: 'test'
+  ...
+# Subtest: summary percentiles exclude unknown values and preserve partial/fallback semantics
+ok 25 - summary percentiles exclude unknown values and preserve partial/fallback semantics
+  ---
+  duration_ms: 39.813292
+  type: 'test'
+  ...
+# Subtest: summary windows reject malformed bounds, exclude upper edge and cache exact windows
+ok 26 - summary windows reject malformed bounds, exclude upper edge and cache exact windows
+  ---
+  duration_ms: 44.566917
+  type: 'test'
+  ...
+# Subtest: session and detail cursors are stable, bounded and reject malformed cursors
+ok 27 - session and detail cursors are stable, bounded and reject malformed cursors
+  ---
+  duration_ms: 57.39975
+  type: 'test'
+  ...
+# Subtest: admission rejects bursts without losing accepted receipts or capacity
+ok 28 - admission rejects bursts without losing accepted receipts or capacity
+  ---
+  duration_ms: 83.874292
+  type: 'test'
+  ...
+# Subtest: health, metrics, request logs and worker failure retain expected contracts
+ok 29 - health, metrics, request logs and worker failure retain expected contracts
+  ---
+  duration_ms: 38.300959
+  type: 'test'
+  ...
+# Subtest: writer failure denies further ingestion and retains committed data
+ok 30 - writer failure denies further ingestion and retains committed data
+  ---
+  duration_ms: 36.810042
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2276.681208

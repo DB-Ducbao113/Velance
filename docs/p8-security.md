@@ -1,0 +1,57 @@
+# VELANCE P8 — Local security policy, CI và HTTP hardening
+
+**Ngày rà soát:** 17/11/2026. **Kết luận kiểm tra trên worktree local:** `PASS_LOCAL` cho scanner bảo mật, negative fixtures, telemetry consent, release SHA và HTTP security headers. **Public: `NO_GO`, G0 quyền tài sản `BLOCKED`, không có deployment.** Việc chạy kiểm thử local không chứng minh đã có TLS/CDN/WAF/SSO, đã đạt chuẩn privacy hoặc đã được quyền phân phối mô hình.
+
+P8 có mục tiêu thực tế **0 VND, local-first**: dùng Node.js 24, API chuẩn Node và Git sẵn có; không thêm package, cloud resource, credential hoặc thanh toán. GitHub Actions là workflow có sẵn để kiểm tra khi repository được cập nhật nhưng usage/quota thực tế phụ thuộc account và trạng thái repository; **không cam kết remote CI luôn miễn phí**.
+
+## 1. Những gì P8 thực sự kiểm chứng
+
+| Bề mặt | Kiểm soát tại local | Giới hạn |
+| --- | --- | --- |
+| Bản phát hành static | `createSnapshot` → `verifySnapshot` trên thư mục tạm: manifest SHA-256, bytes, path allowlist; P8 kiểm tra lại từng file. Cấm `/ops`, `/tools`, `/docs`, `/.git`, DB/WAL, model gốc, PNG master, key/`.env`, archive bất thường trong snapshot. | Checksum chứng minh byte identity, **không** chứng minh quyền sử dụng hay chống tổn hại nguồn do maintainer có quyền sửa. Không có edge CDN thực tế. |
+| Hardcoded credentials | Quét **mọi file text công khai** trong snapshot: PEM private keys, một số dạng GitHub/GitLab/AWS/Google/Stripe/OpenAI/Slack token, credential URL database và assignment đáng ngờ trong first-party code. | Pattern-based, có thể bỏ sót key mã hóa/ghép chuỗi, credential ít gặp hoặc secret trong Git history; không thay cho secret scanning/SBOM độc lập. Không quét DOCS lịch sử, files test, private fixtures để tránh false positive từ chuỗi minh họa. |
+| `.gitignore` và tracked files | Kiểm tra các rule cho `.env` và `.env.*`, `*.pem`, `*.key`, `*.p12`, `*.pfx`, DB, backups, model gốc/prepared, PNG masters, node modules và release previews; `git ls-files --cached -z` phát hiện path private đã nằm trong index. | `.gitignore` không xóa secret đã commit và không che source khỏi repo remote; phải kiểm tra lịch sử và visibility bằng quy trình riêng. |
+| GitHub Actions | Parse từng `.github/workflows/*.yml/yaml`, chỉ chấp nhận các `uses:` đã review; chặn write token, context secrets, `pull_request_target`/`workflow_run`, không cho chạy lệnh không có trong allowlist, không cho `continue-on-error` hoặc nguy cơ `NODE_OPTIONS`/`BASH_ENV`. Bắt buộc P5/P6/P7, P8 scanner và P8 native gate. | Đây là parser policy có phạm vi hẹp, **không phải YAML parser tổng quát**. Khi thay đổi command/action/runner/shell phải review và mở rộng chính sách một cách có kiểm thử; không tự mặc định an toàn. |
+| Tách CI và phát hành | `contents: read` ở workflow/job; `checkout@v7` với `persist-credentials: false`; `setup-node@v7` với package cache tắt. `gpu` chỉ `workflow_dispatch` có `gpu=true`, `needs: validate` và self-hosted; release dry-run cũng phải có `workflow_dispatch` cùng `release_dry_run=true`. Không có upload-artifact, publish, Pages, package push hoặc provider credential. | Major tags `@v7` có thể di chuyển; chưa pin commit SHA xác minh. Không suy luận supply-chain provenance/branch protection. |
+| Ephemeral release dry-run | CI chỉ được gọi `node tools/p8/release-dry-run.mjs` ở step manual có guard. Scanner pin **SHA-256 của source script** để bất kỳ sửa đổi nào cũng làm gate `FAIL_CLOSED` chờ review. Script tạo/verify/activate immutable snapshot ở `os.tmpdir()` và xóa trong `finally`. | Chỉ tính toán/kiểm tra local; không tạo distribution license, không upload asset, không kiểm tra provider. Nếu thay script, review nội dung thực tế rồi cập nhật fingerprint mới trong scanner có test. |
+| P6 private staging và P7 G0 | `validateStagingContract` giữ `deployEnabled=false`, `publicLaunchAuthorized=false`, no public origin listing, telemetry disabled/deny-by-default, local bind `127.0.0.1`. P7 `auditRights` kiểm tra 96 asset với actual SHA và legal gate `NO_GO`, không auto-approve. | **96/96 UNVERIFIED**, thêm **2 WebP môi trường public chưa có mục rights**. Không có legal signoff; public luôn `NO_GO` kể cả scanner hoàn toàn xanh. |
+| Telemetry consent | Kiểm tra source guard của `src/telemetry/collector.js` và chạy **10 native behavioral tests P7**: mặc định không probe HEAD/POST, grant phải rõ ràng, TTL/version, forced off, rút consent, abort in-flight và resume. Quét first-party code ngăn POST telemetry rõ ràng ngoài collector. | Browser UX/privacy disclosure và hiệu lực consent ở production cần chủ sở hữu Privacy/Legal duyệt, local headless/VM tests không đủ chứng nhận pháp lý. |
+
+CLI `tools/p8/security.mjs` không mở listener, không truy cập network, không đọc/sửa `telemetry.db`, không phát hành file, không chạm rights register hoặc gửi thông báo tới bên ngoài. File tạm từ snapshot ở OS temp và được xóa trong `finally`. Đối với vi phạm, trả JSON với `localSecurity: FAIL_CLOSED`, `violations` có code/path và **exit khác 0**; đối với audit hợp lệ, trả `PASS_LOCAL` với `publicLaunch: NO_GO` và `cloudDeploymentAuthorized: false`. CLI tương thích `--mode ci` và `--mode native`, không có chế độ production.
+
+## 2. HTTP security headers/CSP (kiểm soát mới trong P8)
+
+Prime đã thêm [`tools/delivery/security-headers.mjs`](../tools/delivery/security-headers.mjs) và nối vào local delivery/Ops. Baseline được trả trên các phản hồi phù hợp, gồm `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`, `X-Content-Type-Options: nosniff`, `Cross-Origin-Resource-Policy: same-origin` và `Permissions-Policy` từ chối camera, microphone, geolocation, payment, USB, accelerometer, gyroscope và magnetometer.
+
+CSP cho HTML sử dụng `default-src 'none'`, `object-src 'none'`, `frame-ancestors 'none'`, `form-action 'none'`, `base-uri 'none'`; scripts chỉ `'self'` cùng hash SHA-256 của **một** inline import map được duyệt và `'wasm-unsafe-eval'` cho WebAssembly decoder. Nội dung JS inline không hợp lệ bị từ chối. `connect-src 'self'` hạn chế đích telemetry/network; `worker-src 'self' blob:` hỗ trợ worker; `img-src 'self' data: blob:` phục vụ ảnh nội bộ. Các nguồn ngoài duy nhất được cấu hình cho CSS/fonts là Google Fonts. Header áp dụng cả trường hợp static HEAD/304 và lỗi được test.
+
+**Giới hạn CSP cần ghi rõ:** `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com` vẫn cho phép inline style vì giao diện/motion hiện thời, và `font-src` cho phép `https://fonts.gstatic.com`. Đây chưa phải một CSP không có `unsafe-inline` hoàn toàn. Runtime vẫn tải CSS/font Google Fonts từ dịch vụ bên ngoài nếu browser truy cập; quyền riêng tư, availability/CSP theo provider cần đánh giá. `wasm-unsafe-eval` chỉ mở năng lực WebAssembly, không cấp chung `unsafe-eval` cho JavaScript. Không có giả định CSP thay thế WAF, strict origin ACL hoặc SSO.
+
+[`tools/p8/test/headers.mjs`](../tools/p8/test/headers.mjs) kiểm tra hash import map, từ chối inline script, baseline trên local release `200/HEAD/304/404/307` và Ops local. **3/3 header tests PASS_LOCAL** trong lần kiểm tra P8; thử nghiệm headed Chrome WebGPU/WebGL2 local thuộc P7 riêng (Prime đã ghi nhận **2/2 backend**), chưa phải kiểm tra CDN/Internet.
+
+## 3. Hướng dẫn chạy và kết quả kiểm tra
+
+Chạy tại root dự án VELANCE, Node 24; không yêu cầu `npm install` cho scanner:
+
+```bash
+/Users/baobungbu/.nvm/versions/node/v24.21.0/bin/node --check tools/p8/security.mjs
+/Users/baobungbu/.nvm/versions/node/v24.21.0/bin/node --test tools/p8/test/security.mjs
+/Users/baobungbu/.nvm/versions/node/v24.21.0/bin/node --test tools/p8/test/headers.mjs
+/Users/baobungbu/.nvm/versions/node/v24.21.0/bin/node tools/p8/security.mjs --mode ci
+/Users/baobungbu/.nvm/versions/node/v24.21.0/bin/node tools/p8/check.mjs --mode native
+git diff --check
+```
+
+Các negative fixtures của [`tools/p8/test/security.mjs`](../tools/p8/test/security.mjs) chạy bằng `node:test` trong bộ nhớ, **không sửa CI thật**. Chúng chứng minh scanner từ chối release file private/PNG, SHA mismatch, file ngoài manifest, mẫu key thật, hardcoded credential, CI publish/remote command/unreviewed action, write permission, self-hosted GPU không có manual guard, checkout persist credentials, Git ignore thiếu, tracked secret, P6 staging mở deploy, P7 tự nâng legal approval, default telemetry đổi thành on và bypass collector. Có fixture tích cực cho manual GPU, `defaults.run` YAML, action comment chỉ mang text và dry-run có manual guard. Bộ test có **9 top-level cases** với nhiều nhánh mutation; **9/9 PASS** ở lần chạy local.
+
+Ở lần audit local ngày 17/11/2026: `tools/p8/security.mjs --mode ci` đã quét **126 public snapshot files**, 1 workflow, xác thực 10/10 consent tests; **0 policy violations** sau các thay đổi CI. Snapshot SHA là chứng cứ *tức thời* trong JSON stdout, có thể đổi khi worktree của nhóm tiếp tục sửa. Kết quả là `PASS_LOCAL`, `publicLaunch=NO_GO`, 0/96 rights approved và 2 environment WebP cần quyền; không chuyển `PASS_LOCAL` thành phê duyệt legal. P8 aggregator của Prime chạy thêm các regression P7/P6/P5/P4 theo phạm vi của nó; kết quả chính xác cần đọc từ report native mà aggregator thực sự xuất ra.
+
+## 4. Rủi ro chưa đóng và điều kiện dừng
+
+1. **Quyền tài sản và repo visibility:** P5 register vẫn 16 GLB + 80 WebP `UNVERIFIED`; hai `/assets/environment/private_garage_*.webp` public cũng thiếu hồ sơ quyền. Không đưa các asset sang public bucket, GitHub Release/artifact hoặc public repository chỉ để thử kỹ thuật. Source được checkout trong GitHub Actions có thể chịu quy định quyền truy cập riêng; chỉ quản lý Git và build hash không hợp pháp hóa quyền phân phối.
+2. **Provider/private Ops:** chưa xác minh TLS/public hostname, CDN PoP/origin ACL, rate limit/WAF/DDoS, private Ops SSO/MFA/RBAC, encrypted off-host backups, restore RTO/RPO, privacy signed policy, incident response và external monitoring. Công cụ này chỉ kiểm soát tập policy local.
+3. **Supply-chain và secret history:** action `@v7` là major mutable tag; chưa chứng nhận immutable action commit, SBOM/license audit, dependency CVE policy, clean Git checkout hay GitHub-hosted run. Secret scanner dựa trên pattern và Git index, không rà lịch sử commits hoặc dữ liệu đã xuất khỏi repo.
+4. **CI runner:** hosted GitHub Actions có quota; self-hosted macOS GPU chỉ chạy khi owner gọi thủ công, vẫn sử dụng máy/điện/mạng riêng. Không khẳng định GitHub remote CI đã chạy thành công từ worktree chưa commit/push.
+5. **UI/browser/consent:** CSP còn `style-src 'unsafe-inline'` và phụ thuộc Google Fonts bên ngoài. Consent local không phải sự chấp thuận Privacy/Legal cho production telemetry. Headed browser đã được kiểm tra trên thiết bị local, chưa chứng minh an toàn trên mọi máy/người dùng.
+
+**Quy trình khi kiểm tra đỏ:** đọc `violations[].code` và `path`, kiểm tra source thật và fixture, khắc phục phạm vi đó rồi chạy lại lệnh. Nếu workflow xuất hiện command/action mới hoặc manual release script thay đổi SHA, security review phải quyết định danh mục có thể cho phép; không thêm `|| true`, không tắt bước security test và không tự cập nhật fingerprint để “làm xanh” CI. Theo [P5 launch checklist](p5-public-launch-checklist.md), [P6 security](p6-security-privacy.md), [P7 asset audit](p7-asset-audit.md) và [P8 CI/CD](p8-cicd.md), **G0–G4 vẫn chặn phát hành public**.
