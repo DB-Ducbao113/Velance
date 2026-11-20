@@ -3,7 +3,7 @@ name: VELANCE local-only validation (no deployment)
 # No pull_request_target, no write token, no secrets, no publishing.
 on:
   push:
-    branches: [main, feat/webgpu-carpaint]
+    branches: [main, frontend, feat/webgpu-carpaint]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -64,7 +64,7 @@ jobs:
       - name: Install locked optimization test dependencies (ignore lifecycle scripts)
         run: npm --prefix tools/optimize ci --ignore-scripts --no-audit --no-fund
 
-      - name: Optimization and prepared model budget tests
+      - name: Optimization, runtime LOD, resource lifecycle and archive integrity tests
         run: |
           npm --prefix tools/optimize test
           node tools/optimize/budget.mjs
@@ -101,7 +101,7 @@ jobs:
         run: node tools/p8/release-dry-run.mjs
 
   # Private GPU path remains strictly manual and depends on native validation.
-  # The P7 headed browser harness exercises lazy-loading, not obsolete eager-load assertions.
+  # Both showroom harnesses exercise actual immutable delivery and CSP.
   # No screenshot artifact is ever uploaded or published.
   gpu:
     needs: validate
@@ -110,8 +110,6 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
-    env:
-      TEST_ORIGIN: http://127.0.0.1:8095
     steps:
       - name: Checkout without persisted credentials
         uses: actions/checkout@v7
@@ -126,15 +124,7 @@ jobs:
           package-manager-cache: false
       - name: Install private GPU fixture dependencies
         run: npm --prefix tools/perf ci --ignore-scripts --no-audit --no-fund
-      - name: Run loopback GPU tests without publishing image output
-        shell: bash
-        env:
-          QA_SHOTS: ${{ runner.temp }}/velance-gpu-qa
-        run: |
-          set -euo pipefail
-          mkdir -p "$QA_SHOTS"
-          python3 -m http.server 8095 --bind 127.0.0.1 >/dev/null 2>&1 &
-          server=$!
-          trap 'kill "$server" 2>/dev/null || true; rm -rf "$QA_SHOTS"' EXIT
-          node packages/tsl-carpaint/test/gpu.mjs
-          node tools/p7/browser_lazy.mjs
+      - name: Paint fixture and immutable showroom memory regression
+        run: node tools/perf/gpu-ci.mjs
+      - name: Immutable showroom lazy loading and consent regression
+        run: node tools/p7/browser_lazy.mjs

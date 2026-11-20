@@ -29,6 +29,8 @@ function fixture(t, { fleet = false } = {}) {
   put('assets/models/car-01.glb', Buffer.from([0x67, 0x6c, 0x54, 0x46, 0, 255]));
   put('assets/images/car-01/angle-1.webp', Buffer.from([0x52, 0x49, 0x46, 0x46, 0, 255]));
   put('assets/environment/studio.webp', Buffer.from([0, 1, 2, 3]));
+  put('assets/archive/car01/photo-640.webp', Buffer.from([82,73,70,70]));
+  put('assets/hero/portal-1600.webp', Buffer.from([82,73,70,70]));
   if (fleet) {
     for (let i = 1; i <= 16; i++) {
       const car = `car-${String(i).padStart(2, '0')}`;
@@ -42,7 +44,7 @@ function fixture(t, { fleet = false } = {}) {
     'tools/ops/telemetry.db-wal', 'tools/ops/backups/snapshot.db', '.git/config',
     'node_modules/app/index.js', 'assets/models_original/source.glb',
     'assets/models_prepared/optimized.glb', 'assets/images/car-01/master.png',
-    'src/rogue.css', 'assets/images/car-01/cover.jpg', '.env', 'docs/private.md'
+    'src/rogue.css', 'assets/images/car-01/cover.jpg', 'assets/archive/car01/.stage-a/photo-640.webp', 'assets/archive/car01/source.jpg', 'assets/hero/portal-source.png', '.env', 'docs/private.md'
   ]) put(name);
   t.after(() => rmSync(temp, { recursive: true, force: true }));
   return { temp, sourceRoot, storeDir, put };
@@ -67,6 +69,9 @@ test('source snapshot copies public bytes exactly and never includes Ops, render
   const imageFiles = manifest.files.filter(entry => entry.path.startsWith('/assets/images/') && entry.path.endsWith('.webp'));
   assert.equal(modelFiles.length, 16, 'all 16 public GLBs must be included');
   assert.equal(imageFiles.length, 80, 'all 80 public five-angle images must be included');
+  assert(manifest.files.some(entry => entry.path === '/assets/archive/car01/photo-640.webp'));
+  assert(manifest.files.some(entry => entry.path === '/assets/hero/portal-1600.webp'));
+  assert(!manifest.files.some(entry => entry.path.includes('/.stage-')));
   assert(manifest.files.some(entry => entry.path === '/src/tools/helper.js'), 'nested public JS directories must not be excluded');
   assert(manifest.files.every(entry => !/(?:\/ops\/|\/tools\/render\/|telemetry\.db|models_original|models_prepared|\.png|\.jpg|\.git\/|node_modules|\.env)/.test(entry.path)));
   assert(!manifest.files.some(entry => entry.path === '/src/data/data.json'));

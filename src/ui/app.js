@@ -1,10 +1,12 @@
 /* VÉLANCE / V11
  * Home + Selected Machine = one real perspective WebGPU gallery with a WebGL2
  * fallback (engine/showroom.js).
- * Below the showroom: exactly five STATIC transparent 4K images + editorial board.
+ * Below the showroom: a single photographic archive or labeled 3D study.
  */
 import { VEHICLES } from '../data/vehicles.js';
-import { bootVelanceMotion, refreshVelanceMotion, motionScrollTo, setImageLoaded, playSelectedMotion } from '../motion/motion.js';
+import { createArchive } from './archive.js?v=12.7-cinematic';
+import { bootPortal } from '../motion/portal.js?v=12.5-memory';
+import { bootVelanceMotion, refreshVelanceMotion, motionScrollTo, playSelectedMotion, resetSelectedMotion } from '../motion/motion.js?v=12.6-safari';
 const $ = id => document.getElementById(id);
 const clamp = (n, min = 0, max = 1) => Math.min(max, Math.max(min, n));
 const pad = n => String(n).padStart(2, '0');
@@ -12,17 +14,18 @@ const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const IMG_FILES = ['01-front-three-quarter.webp', '02-near-front.webp', '03-side-profile.webp', '04-rear-three-quarter.webp', '05-signature.webp'];
 const SHOTS = [
-  { title: 'First impression.', emphasis: 'Unmistakable.', label: 'FRONT THREE-QUARTER', caption: '01 / THE FIRST IMPRESSION', description: 'The complete identity. Sculpted surfaces, stance, and aerodynamic intent.', angle: 'FRONT 3/4', asset: '01-front-three-quarter.webp' },
-  { title: 'The face of', emphasis: 'performance.', label: 'NEAR-FRONT', caption: '02 / THE FRONT', description: 'An intimate view of the nose, lighting signature, and front aerodynamic architecture.', angle: 'NEAR-FRONT', asset: '02-near-front.webp' },
-  { title: 'An uncompromising', emphasis: 'silhouette.', label: 'SIDE PROFILE', caption: '03 / THE SILHOUETTE', description: 'A single continuous profile reveals the car’s proportions and surface language.', angle: 'PROFILE', asset: '03-side-profile.webp' },
-  { title: 'Beauty from', emphasis: 'behind.', label: 'REAR THREE-QUARTER', caption: '04 / THE AERODYNAMICS', description: 'Rear haunches, aero elements, and engineered airflow become the focal point.', angle: 'REAR 3/4', asset: '04-rear-three-quarter.webp' },
-  { title: 'The final', emphasis: 'signature.', label: 'SIGNATURE DETAIL', caption: '05 / THE SIGNATURE', description: 'The last perspective completes a five-frame editorial study of the machine.', angle: 'SIGNATURE', asset: '05-signature.webp' }
+  { title: 'FRONT', emphasis: '¾', label: 'FRONT ¾' },
+  { title: 'FRONT', emphasis: 'CLOSE.', label: 'FRONT' },
+  { title: 'SIDE', emphasis: 'PROFILE.', label: 'PROFILE' },
+  { title: 'REAR', emphasis: '¾', label: 'REAR ¾' },
+  { title: 'DETAIL', emphasis: '05.', label: 'DETAIL' }
 ];
 const state = {
   focus: Math.max(0, VEHICLES.findIndex(v => v.id === (new URLSearchParams(location.search).get('car') || 'mclarenp1'))),
   selected: null, engine: null, engineError: null, visibleImages: 0, fallback: false,
-  booting: true, pendingSelect: null
+  booting: true, pendingSelect: null, selectionGeneration: 0, reviewTimer: null, reviewReady: false, pendingScroll: null
 };
+const archive = createArchive(() => state.visibleImages++);
 function toast(text) { $('noticeText').textContent = text; $('notice').hidden = false; }
 function modelStatus(text) { $('selectedModelStatus').textContent = text; }
 function readout(text) { $('stageReadout').textContent = text; }
@@ -42,32 +45,42 @@ function pendingPreview(index) {
 /* ------------------------------------------------------------ 3D boot */
 async function boot3D() {
   try {
-    const { GarageShowroom } = await import('../engine/showroom.js?v=11.0-webgpu');
+    const { GarageShowroom } = await import('../engine/showroom.js?v=12.5-memory');
     const engine = await GarageShowroom.create({
       stage: $('carStage'),
       labelHost: $('carLineup'),
       vehicles: VEHICLES,
       focus: state.focus,
       reduced: reduceMotion,
+      preloadEntrance: !!state.fullEntrance,
       onProgress: (loaded, total, index) => {
         $('showroom').classList.add('is-3d');
         $('loaderBar').style.width = `${Math.round(loaded / total * 100)}%`;
-        $('loaderCount').textContent = `${pad(loaded)} / ${pad(total)} MACHINES`;
-        readout(`REAL GLB · ${loaded}/${total} PARKED`);
-        if (loaded >= 1) $('garageLoader').classList.add('is-done');
+        $('loaderCount').textContent = `${pad(loaded)} / ${pad(total)}`;
+        readout(`${loaded}/${total} LOADED`);
+        if (!state.fullEntrance || loaded === total) $('garageLoader').classList.add('is-done');
         if (state.selected === index && state.engine) {
-          $('selectedModelHost').querySelector('.model-loading-preview')?.remove();
+          $('selectedModelHost').querySelectorAll('.model-loading-preview,.fallback-selected-img').forEach(el => el.remove());
           modelStatus('DRAG TO EXPLORE · REAL GLB');
           $('selectedModelStatus').classList.add('is-ready');
           $('selectedAsset').textContent = `${(state.engine.cars.get(index)?.userData.triangles || 0).toLocaleString()} TRIANGLES`;
         }
       },
-      onReady: () => { readout('SIXTEEN BAYS · ON-DEMAND NATIVE GLB'); $('garageLoader').classList.add('is-done'); },
+      onReady: () => { if (!state.fullEntrance) { readout('3D READY'); $('garageLoader').classList.add('is-done'); } },
+      onDetailReady: i => {
+        if(state.selected!==i||!state.engine)return;
+        $('selectedAsset').textContent=`${(state.engine.cars.get(i)?.userData.triangles||0).toLocaleString()} TRIANGLES`;
+        modelStatus('DRAG TO EXPLORE · REAL GLB');
+      },
+      onDetailError: (i,msg) => {
+        console.warn('[VÉLANCE / DETAIL]',i,msg);
+        if(state.selected===i&&state.engine?.cars.has(i))modelStatus('DRAG TO EXPLORE · GALLERY GLB');
+      },
       onError: (i, msg) => {
         console.warn('[VÉLANCE / BAY]', i, msg);
         readout(`BAY ${pad(i + 1)} ASSET UNAVAILABLE`);
         // In on-demand mode there might be no next machine to clear loader.
-        $('garageLoader').classList.add('is-done');
+        if (!state.fullEntrance) $('garageLoader').classList.add('is-done');
         if (state.selected === i) {
           const v = VEHICLES[i];
           const host = $('selectedModelHost');
@@ -82,13 +95,19 @@ async function boot3D() {
       onOverview: on => {
         const btn = $('overviewBtn');
         btn.setAttribute('aria-pressed', String(on));
-        btn.innerHTML = on ? 'EXIT OVERVIEW <span>✕</span>' : 'FULL GALLERY <span>⛶</span>';
-        $('interactionHint').innerHTML = on ? 'DRAG TO PAN · TAP A MACHINE TO ENTER' : 'SWIPE THE GALLERY TO EXPLORE <span>↔</span>';
+        btn.innerHTML = on ? 'CLOSE <span>✕</span>' : 'ALL 16 <span>⛶</span>';
+        $('interactionHint').innerHTML = on ? 'DRAG · TAP <span>↔</span>' : 'DRAG <span>↔</span>';
         $('rowBtn').disabled = on;
+        $('lightShowBtn').disabled = on;
+        btn.disabled = !!state.engine?.cinema;
+        if (state.fullEntrance && on && !state.engine?.cinema) {
+          state.fullEntrance = false;
+          $('garageLoader').classList.add('is-done');
+          readout(`${state.engine.cars.size}/${VEHICLES.length} LOADED`);
+        }
       }
     });
     state.engine = engine;
-    if (state.pendingEntrance) { state.pendingEntrance = false; playEntrance(); }
     $('showroom').classList.add('is-3d');
     $('activeCount').textContent = pad(state.focus + 1);
     $('totalCount').textContent = pad(VEHICLES.length);
@@ -130,44 +149,66 @@ function populateSelected(v, index) {
   $('selectedBay').textContent = `BAY ${pad(index + 1)} / ${pad(VEHICLES.length)}`;
   $('selectedMaker').textContent = v.make;
   $('selectedName').textContent = v.name;
-  $('selectedTag').textContent = v.tag;
   $('selectedEdition').textContent = v.edition;
   $('selectedAsset').textContent = `GLB · ${v.mb.toFixed(1)} MB`;
   $('selectedSpecs').innerHTML = v.stats.slice(0, 4).map(([k, value]) => `<div class="selected-spec"><span>${esc(k)}</span><strong>${esc(value)}</strong></div>`).join('');
 }
 function selectVehicle(index) {
+  if (state.engine?.cinema || state.engine?.returning || !VEHICLES[index]) return;
   if (state.booting) { state.pendingSelect = index; return; }
   if (state.selected !== null) return;
   state.selected = index;
+  const generation = ++state.selectionGeneration;
+  const current = () => state.selected === index && state.selectionGeneration === generation;
+  state.reviewReady = false; state.pendingScroll = null;
+  $('selectedModelHost').replaceChildren();
+  $('selectedModelStatus').classList.remove('is-ready');
   const v = VEHICLES[index % VEHICLES.length];
   populateSelected(v, index);
+  $('selectionCinemaBay').textContent = `BAY ${pad(index + 1)}`;
+  $('selectionCinemaMake').textContent = v.make;
+  $('selectionCinemaName').textContent = v.name;
   syncPaintRow();
   $('paintRow').hidden = !state.engine;
   $('showroom').classList.add('is-selected');
-  $('navReview').hidden = false; $('navBoard').hidden = false;
-  $('selectedView').setAttribute('aria-hidden', 'false');
-  $('review').hidden = false;
+  $('navReview').hidden = true; $('navBoard').hidden = true;
   if (state.engine) {
+    $('showroom').classList.add('is-approaching');
     modelStatus('APPROACHING THE MACHINE');
-    state.engine.select(index, $('selectedModelHost'));
-    setTimeout(() => {
-      if (state.selected !== index) return;
+    const reveal = () => {
+      if (!current()) return;
       $('showroom').classList.add('reveal-selected');
+      $('selectedView').setAttribute('aria-hidden', 'false');
+      $('selectedView').inert = false;
       const failed = document.querySelector(`.bay-label[data-index="${index}"]`)?.classList.contains('is-error');
       modelStatus(state.engine.cars.has(index) ? 'DRAG TO EXPLORE · REAL GLB' : failed ? 'ASSET UNAVAILABLE · EDITORIAL ANGLES BELOW' : 'LOADING REAL GLB');
       $('selectedModelStatus').classList.toggle('is-ready', state.engine.cars.has(index));
       if (state.engine.cars.has(index)) $('selectedAsset').textContent = `${(state.engine.cars.get(index).userData.triangles || 0).toLocaleString()} TRIANGLES`;
       else if (failed) $('selectedModelHost').innerHTML = `<img class="fallback-selected-img" src="./assets/images/${v.id}/${IMG_FILES[0]}" alt="${esc(v.make)} ${esc(v.name)}">`;
       else pendingPreview(index);
-      renderReviews(v);
       playSelectedMotion();
-    }, reduceMotion ? 60 : 340);
+    };
+    const landed = () => {
+      if (!current()) return;
+      if (!$('showroom').classList.contains('reveal-selected')) reveal();
+      $('showroom').classList.remove('is-approaching');
+      $('autoOrbit').disabled = reduceMotion;
+      // Prepare the responsive editorial gallery after the camera stops moving.
+      // Their image uploads previously caused hitches during the last approach.
+      state.reviewTimer = setTimeout(() => {
+        state.reviewTimer = null;
+        if (current()) openReviews(v);
+      }, 120);
+    };
+    state.engine.select(index, $('selectedModelHost'), reveal, landed);
   } else {
     const host = $('selectedModelHost');
     host.innerHTML = `<img class="fallback-selected-img" src="./assets/images/${v.id}/${IMG_FILES[0]}" alt="${esc(v.make)} ${esc(v.name)}">`;
     modelStatus('EDITORIAL IMAGE MODE');
     $('showroom').classList.add('reveal-selected');
-    renderReviews(v);
+    $('selectedView').setAttribute('aria-hidden', 'false');
+    $('selectedView').inert = false;
+    openReviews(v);
     playSelectedMotion();
   }
   const params = new URLSearchParams(location.search);
@@ -176,73 +217,49 @@ function selectVehicle(index) {
 }
 function backHome() {
   if (state.selected === null) return;
-  const previous = state.selected;
   state.selected = null;
+  state.selectionGeneration++;
+  clearTimeout(state.reviewTimer); state.reviewTimer = null;
+  state.pendingScroll = null; state.reviewReady = false; state.visibleImages = 0;
   state.engine?.clearSelection();
-  $('showroom').classList.remove('is-selected', 'reveal-selected');
+  $('showroom').classList.remove('is-selected', 'is-approaching', 'reveal-selected');
   $('navReview').hidden = true; $('navBoard').hidden = true;
   $('selectedView').setAttribute('aria-hidden', 'true');
+  $('selectedView').inert = true;
   $('selectedModelStatus').classList.remove('is-ready');
-  $('selectedModelHost').querySelector('.model-loading-preview')?.remove();
+  $('autoOrbit').disabled = true;
+  $('selectedModelHost').replaceChildren();
   $('review').hidden = true;
+  resetSelectedMotion();
   refreshVelanceMotion();
-  if (state.fallback) $('selectedModelHost').innerHTML = '';
-  state.engine?.setFocus(previous);
-  motionScrollTo($('showroom'));
+  archive.clear();
+  motionScrollTo($('showroom'), true);
   const params = new URLSearchParams(location.search);
   params.delete('car');
   history.replaceState({}, '', `./index.html${params.size ? `?${params}` : ''}`);
 }
 
-/* ------------------------------------------- five static chapters */
-function imagePath(id, index) { return `./assets/images/${encodeURIComponent(id)}/${IMG_FILES[index]}`; }
-function createPlaceholder(index, carId) {
-  const ph = document.createElement('div'); ph.className = 'shot-placeholder';
-  ph.innerHTML = `<b aria-hidden="true">${pad(index + 1)}</b><span>AWAITING TRANSPARENT ASSET</span><small>assets/images/${esc(carId)}/${esc(IMG_FILES[index])}</small>`;
-  return ph;
-}
-function attachImage(img, placeholder, carId, index) {
-  img.hidden = true;
-  const key = `${carId}:${index}:${performance.now()}`; img.dataset.assetKey = key;
-  img.onload = async () => {
-    if (img.dataset.assetKey !== key) return;
-    // Async decode keeps the 4K raster off the main thread during reveals.
-    try { await img.decode(); } catch {}
-    if (img.dataset.assetKey !== key) return;
-    img.hidden = false; placeholder.hidden = true; state.visibleImages++; setImageLoaded(img);
-  };
-  img.onerror = () => { if (img.dataset.assetKey !== key) return; img.hidden = true; placeholder.hidden = false; };
-  img.src = imagePath(carId, index);
-}
-function createReview(v, index) {
-  const shot = SHOTS[index]; const section = document.createElement('section');
-  section.id = `image-${index + 1}`; section.dataset.motionChapter = pad(index + 1); section.className = `shot-section${index % 2 ? ' reverse' : ''}`;
-  section.setAttribute('aria-label', `Image ${index + 1}: ${shot.label}`);
-  section.innerHTML = `<div class="shot-copy"><span class="shot-label">${shot.caption}</span><h3>${shot.title}<br><em>${shot.emphasis}</em></h3><p>${shot.description}</p><dl><div><dt>THE MACHINE</dt><dd>${esc(v.make)}</dd></div><div><dt>VIEW</dt><dd>${shot.angle}</dd></div></dl></div><div class="shot-frame"><div class="shot-slot"><img hidden decoding="async" alt="${esc(v.make)} ${esc(v.name)} — ${esc(shot.label)}"></div><div class="shot-caption"><span>${pad(index + 1)} / 05 — ${shot.label}</span><span>ORIGINAL MODEL / TRANSPARENT IMAGE</span></div></div>`;
-  const slot = section.querySelector('.shot-slot'), img = slot.querySelector('img'), placeholder = createPlaceholder(index, v.id);
-  slot.appendChild(placeholder); attachImage(img, placeholder, v.id, index);
-  return section;
-}
-function renderReviews(v) {
+/* ------------------------------------------- editorial archive */
+async function openReviews(v) {
+  const generation = state.selectionGeneration;
   state.visibleImages = 0;
-  const sections = $('reviewSections'), board = $('boardGrid'); sections.replaceChildren(); board.replaceChildren();
-  SHOTS.forEach((shot, i) => {
-    sections.append(createReview(v, i));
-    const figure = document.createElement('figure'); figure.className = 'board-item'; figure.dataset.no = pad(i + 1); figure.dataset.angle = String(i); figure.setAttribute('tabindex', '0'); figure.setAttribute('role', 'button'); figure.setAttribute('aria-label', `View ${v.make} ${v.name} angle ${i + 1}`);
-    const img = document.createElement('img'); img.hidden = true; img.decoding = 'async'; img.alt = `${v.make} ${v.name} — ${shot.label}`;
-    const placeholder = createPlaceholder(i, v.id);
-    const caption = document.createElement('figcaption'); caption.textContent = shot.label;
-    const cta = document.createElement('span'); cta.className = 'board-cta'; cta.innerHTML = '<span class="cta-long">VIEW THIS ANGLE</span><span class="cta-short">VIEW</span> ↗';
-    figure.append(img, placeholder, caption, cta); board.append(figure);
-    attachImage(img, placeholder, v.id, i);
+  const fallback = SHOTS.map((shot,i) => {
+    const path = `./assets/images/${encodeURIComponent(v.id)}/${IMG_FILES[i]}`;
+    return {label:shot.label,alt:`${v.make} ${v.name} — ${shot.label} (3D render)`,thumb:path,medium:path,full:path};
   });
-  $('boardMaker').textContent = `${v.make} / ${v.name}`;
-  $('boardEdition').textContent = v.edition;
+  if (!await archive.render(v,fallback) || generation !== state.selectionGeneration) return;
+  $('review').hidden = false;
+  state.reviewReady = true;
+  $('navBoard').hidden = false;
   requestAnimationFrame(() => refreshVelanceMotion());
+  const pending = state.pendingScroll; state.pendingScroll = null;
+  if (pending) motionScrollTo($(pending));
 }
-function scrollToReview() {
-  if (state.selected === null) { selectVehicle(state.focus); setTimeout(() => scrollToReview(), 460); return; }
-  motionScrollTo($('review'));
+function scrollToReview(target = 'review') {
+  if (typeof target !== 'string') target = 'review';
+  if (state.selected === null) return;
+  if (!state.reviewReady) { state.pendingScroll = target; return; }
+  motionScrollTo($(target));
 }
 
 /* --------------------------------------------------------- entrance gate */
@@ -251,26 +268,49 @@ function bootGate() {
   if (!gate) return;
   // Automated sessions and ?nointro go straight to the gallery.
   if (navigator.webdriver || new URLSearchParams(location.search).has('nointro')) { gate.remove(); return; }
+  // The portal is a modal even while the gallery initializes behind it.
+  const background = [$('topbar'), document.querySelector('main'), $('notice')].filter(Boolean);
+  const previousInert = background.map(el => el.inert);
+  background.forEach(el => { el.inert = true; });
+  gate.tabIndex = -1;
+  const button = $('gateEnter');
+  button.focus({ preventScroll: true });
   document.body.classList.add('gate-open');
-  const enter = () => {
+  state.fullEntrance = true;
+  const portal = bootPortal(gate, reduceMotion);
+  let leaving = false;
+  const enter = async () => {
+    if (leaving) return;
+    leaving = true;
+    portal.ignite(true);
+    // Keep the live portal visible until the renderer can show the garage.
+    // Do not wait for all sixteen transfers: the reveal clock handles that.
+    button.disabled = true;
+    button.textContent = 'PREPARING…';
+    gate.focus({ preventScroll: true });
+    await state.bootPromise;
+    playEntrance({ stayOverview: true });
     gate.classList.add('is-leaving');
     document.body.classList.remove('gate-open');
     window.scrollTo(0, 0);
-    setTimeout(() => { gate.remove(); window.scrollTo(0, 0); }, reduceMotion ? 0 : 950);
-    playEntrance();
+    setTimeout(() => {
+      portal.dispose(); gate.remove();
+      background.forEach((el, i) => { el.inert = previousInert[i]; });
+      $('brandLink').focus({ preventScroll: true });
+      window.scrollTo(0, 0);
+    }, reduceMotion ? 0 : 950);
   };
-  $('gateEnter').addEventListener('click', enter);
-  setTimeout(() => $('gateEnter')?.focus({ preventScroll: true }), reduceMotion ? 0 : 1100);
+  button.addEventListener('click', enter);
 }
-/* Cinematic crane-down reveal when the visitor enters from the gate. */
-function playEntrance() {
+/* First visit stays above the entire collection. LIGHTS replays the crane. */
+function playEntrance({ stayOverview = false } = {}) {
   const run = () => {
     if (!state.engine) return;
+    if (!state.engine.entrance({ stayOverview })) return;
     $('showroom').classList.add('is-entering');
-    state.engine.entrance();
-    setTimeout(() => $('showroom').classList.remove('is-entering'), reduceMotion ? 0 : 2000);
+    setTimeout(() => $('showroom').classList.remove('is-entering'), 1250);
   };
-  if (state.engine) run(); else state.pendingEntrance = true;
+  if (state.engine) run();
 }
 
 /* --------------------------------------------------------- body finish */
@@ -314,15 +354,18 @@ function installHandlers() {
   $('nextCar').addEventListener('click', () => state.engine ? state.engine.next() : scrollFallback(1));
   $('selectCar').addEventListener('click', () => selectVehicle(state.engine ? state.engine.focus : state.focus));
   $('overviewBtn').addEventListener('click', () => state.engine?.toggleOverview());
+  $('lightShowBtn').addEventListener('click', playEntrance);
   $('rowBtn').addEventListener('click', () => { const e = state.engine; if (!e) return; e.toggleRow(); });
   $('discoverImages').addEventListener('click', scrollToReview);
   $('zoomReset').addEventListener('click', () => state.engine?.resetView());
-  $('backToGarage').addEventListener('click', backHome);
+  $('autoOrbit').addEventListener('click', () => state.engine?.setAutoShot(!state.engine.autoShot));
+  $('carStage').addEventListener('velance:auto-shot', e => $('autoOrbit').setAttribute('aria-pressed', String(e.detail)));
   $('backToGarageTop').addEventListener('click', backHome);
+  $('cancelApproach').addEventListener('click', backHome);
   $('boardBack').addEventListener('click', backHome);
   $('brandLink').addEventListener('click', e => { e.preventDefault(); if (state.selected !== null) backHome(); else motionScrollTo($('showroom')); });
   $('navReview').addEventListener('click', e => { e.preventDefault(); scrollToReview(); });
-  $('navBoard').addEventListener('click', e => { e.preventDefault(); const entering = state.selected === null; if (entering) selectVehicle(state.focus); setTimeout(() => motionScrollTo($('board')), entering ? 460 : 0); });
+  $('navBoard').addEventListener('click', e => { e.preventDefault(); scrollToReview('board'); });
   const NAV_SECTIONS = [['navReview', 'review'], ['navBoard', 'board']];
   function updateNav() {
     let active = 'navReview';
@@ -343,8 +386,17 @@ function installHandlers() {
   window.addEventListener('scroll', () => requestAnimationFrame(updateNav), { passive: true });
   updateNav();
   $('noticeDismiss').addEventListener('click', () => $('notice').hidden = true);
-  $('boardGrid').addEventListener('keydown', e => { const fig = e.target.closest('.board-item[data-angle]'); if (fig && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); motionScrollTo($(`image-${Number(fig.dataset.angle) + 1}`)); } });
   window.addEventListener('keydown', e => {
+    const gate = $('gate');
+    if (gate) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const button = $('gateEnter');
+        (button.disabled ? gate : button).focus({ preventScroll: true });
+      }
+      return;
+    }
+    if (archive.isOpen() || e.defaultPrevented) return;
     if (e.key === 'Escape') {
       if (state.selected !== null) backHome();
       else if (state.engine?.overview) state.engine.toggleOverview();
@@ -357,7 +409,7 @@ function installHandlers() {
   bootGate();
   buildPaintRow();
   bootVelanceMotion();
-  boot3D();
+  state.bootPromise = boot3D();
   window.__VELANCE_QA__ = {
     get selected() { return state.selected; },
     get focus() { return state.engine ? state.engine.focus : state.focus; },

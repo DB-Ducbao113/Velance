@@ -1,0 +1,117 @@
+/* VÉLANCE / The Portal. One continuous scene plate, live lighting and fog.
+   All typography and controls are accessible HTML. No baked-in interface. */
+body.gate-open { overflow: hidden; }
+.gate.gate--portal {
+  position: fixed; inset: 0; z-index: 200; display: block;
+  width: 100%; height: 100svh; overflow: hidden; isolation: isolate;
+  background: #050505; color: #f5eee3;
+  transition: opacity .85s cubic-bezier(.4,0,.2,1), visibility .85s;
+}
+.gate.gate--portal.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+.portal-scene {
+  position: absolute; z-index: 0; left: 50%; top: 50%;
+  width: max(100vw, calc(100svh * 1.7778)); aspect-ratio: 1672 / 941;
+  transform: translate3d(-50%,-50%,0) scale(1.002);
+  transform-origin: center 60%;
+  transition: transform 1s cubic-bezier(.25,.65,.3,1);
+  animation: portal-reveal 1.6s cubic-bezier(.22,.7,.2,1) both;
+}
+.portal-image,.portal-lights,.portal-fog {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  pointer-events: none;
+}
+.portal-image { object-fit: fill; z-index: 0; }
+.portal-lights { z-index: 1; overflow: visible; opacity: 0; transition: opacity .65s ease; }
+.gate[data-ignited="true"] .portal-lights { opacity: 1; }
+.portal-headlight-core { stroke-width: 3.5; }
+.portal-fog { z-index: 2; }
+.portal-vignette {
+  position: absolute; z-index: 3; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg,rgba(0,0,0,.19),transparent 30%,transparent 69%,rgba(0,0,0,.65) 100%),
+    radial-gradient(ellipse 75% 65% at 50% 52%,transparent 52%,rgba(0,0,0,.27) 100%);
+}
+.gate-hero { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.gate-hero-type {
+  position: absolute; top: 13.8%; left: 50%; margin: 0; white-space: nowrap;
+  font: 500 clamp(66px,12.1vw,214px)/.92 var(--serif);
+  letter-spacing: .035em; text-align: center;
+  background: linear-gradient(177deg,#fff2da 1%,#e4c49a 44%,#a98151 76%,#e6cba1 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 7px 26px #000b);
+  opacity: 0; transform: translateX(-50%);
+  animation: portal-title 1.4s cubic-bezier(.22,.7,.2,1) .22s forwards;
+}
+.gate-bottom {
+  position: absolute; z-index: 5; left: 50%; bottom: clamp(27px,5.4svh,65px);
+  transform: translateX(-50%); display: flex; flex-direction: column;
+  align-items: center; gap: 15px;
+}
+.gate-model {
+  display: flex; align-items: center; gap: 18px;
+  font: 400 16px/1 var(--mono); letter-spacing: .35em;
+  color: #e9cc9e; text-shadow: 0 2px 12px #000;
+}
+.gate-model::before,.gate-model::after {
+  content: ''; width: 36px; height: 1px; background: linear-gradient(90deg,transparent,#d9b482);
+}
+.gate-model::after { transform: rotate(180deg); }
+.gate--portal .gate-cta {
+  display: flex; align-items: center; justify-content: center; gap: 38px;
+  min-height: 54px; min-width: 218px; padding: 0 24px;
+  color: #f7e5ca; background: rgba(11,10,9,.84);
+  border: 1px solid #d8b37f; border-radius: 999px;
+  font: 500 12px/1 var(--mono); letter-spacing: .28em;
+  box-shadow: 0 0 18px #d4a26b26,inset 0 0 13px #d4a26b16;
+  transition: background .25s,box-shadow .25s,transform .25s;
+}
+.gate--portal .gate-cta:hover { background: #21190f; box-shadow: 0 0 24px #d4a26b55; transform: translateY(-2px); }
+.gate--portal .gate-cta:focus-visible { outline: 2px solid #f1d4aa; outline-offset: 5px; }
+.gate--portal .gate-cta span { font-size: 17px; letter-spacing: 0; }
+.is-leaving .portal-scene { animation: none; transform: translate3d(-50%,-50%,0) scale(1.09); }
+@keyframes portal-reveal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes portal-title { from { opacity: 0; transform: translate3d(-50%,12px,0); } to { opacity: 1; transform: translate3d(-50%,0,0); } }
+@media (max-width:840px) and (orientation:portrait) {
+  .portal-scene { width: 145vw; top: 49%; }
+  .portal-vignette { background: linear-gradient(180deg,#050505 0%,#050505 17%,transparent 35%,transparent 61%,#050505 83%,#050505 100%); }
+  .gate-hero-type { top: 17%; font-size: 13.7vw; letter-spacing: .012em; }
+  .gate-bottom { bottom: 10%; }
+}
+@media (max-width:620px) and (orientation:portrait) {
+  .portal-scene { width: 147vw; top: 49%; }
+  .gate-hero-type { top: 20%; font-size: 14vw; }
+  .portal-vignette { background: linear-gradient(180deg,#050505 0%,#050505 23%,transparent 40%,transparent 58%,#050505 76%,#050505 100%); }
+  .gate-bottom { gap: 16px; bottom: 15%; }
+  .gate--portal .gate-cta { min-height: 52px; min-width: 190px; gap: 28px; }
+}
+@media (max-height:520px) and (orientation:landscape) {
+  .gate-hero-type { top: 9%; font-size: min(11vw,22vh); }
+  .gate-bottom { bottom: 4%; gap: 5px; }
+  .gate-model { font-size: 11px; }
+  .gate--portal .gate-cta { min-height: 42px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .portal-scene,.gate-hero-type { animation: none; opacity: 1; }
+  .gate.gate--portal,.portal-scene,.portal-lights,.gate--portal .gate-cta { transition: none; }
+  .is-leaving .portal-scene { transform: translate3d(-50%,-50%,0); }
+}
+
+/* Keep the opt-in settings reachable after ENTER without overlaying the hero.
+   Consent remains off by default; the full control returns in the showroom. */
+body.gate-open #velance-telemetry-settings { visibility: hidden; pointer-events: none; }
+body.gate-open .grain { opacity: .018; }
+
+/* Gallery copy audit: surface only labels needed to navigate or inspect a car. */
+.showroom.is-3d .hero-copy,
+.showroom.is-3d .room-topline,
+.showroom.is-3d .garage-entrance-marker,
+.showroom.is-3d .stage-readout { display: none; }
+.home-controls { display: flex; justify-content: center; align-items: flex-end; }
+.home-center { display: flex; flex-direction: column; align-items: center; }
+.home-page { position: absolute; bottom: 9px; right: 0; }
+.selected-metadata #selectedAsset { display: none; }
+.shot-copy h3 { max-width: 100%; }
+@media (max-width:620px) {
+  .home-controls { flex-direction: column; justify-content: center; align-items: center; }
+  .home-page { position: static; }
+}

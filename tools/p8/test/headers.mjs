@@ -17,11 +17,17 @@ const expected = "'sha256-" + createHash('sha256').update(script).digest('base64
 
 test('CSP hashes only permitted import map, blocks arbitrary inline JS, and restricts browser capabilities', () => {
   const csp = htmlCsp(fixtureHtml);
-  assert.match(csp, /script-src 'self' 'wasm-unsafe-eval'/);
+  const directives = new Map(csp.split('; ').map(directive => {
+    const [name, ...values] = directive.split(' ');
+    return [name, values];
+  }));
+  assert.deepEqual(directives.get('script-src'), ["'self'", "'wasm-unsafe-eval'", expected]);
   assert(csp.includes(expected));
   assert(csp.includes("frame-ancestors 'none'"));
   assert(csp.includes("object-src 'none'"));
-  assert(csp.includes("connect-src 'self'"));
+  assert.deepEqual(directives.get('connect-src'), ["'self'", 'blob:']);
+  assert.deepEqual(directives.get('style-src'), ["'self'", "'unsafe-inline'"]);
+  assert.deepEqual(directives.get('font-src'), ["'none'"]);
   assert(!csp.includes("'unsafe-eval'"));
   assert(!/script-src[^;]*'unsafe-inline'/.test(csp));
   assert(!csp.includes('https:;'));
@@ -30,6 +36,18 @@ test('CSP hashes only permitted import map, blocks arbitrary inline JS, and rest
   assert.throws(() => htmlCsp('<script src="./src/app.js">alert(1)</script>'), /SCRIPT_TAG_HAS_INLINE_BODY/);
   assert.throws(() => htmlCsp(`<script type="importmap">${script}</script><script type="importmap">${script}</script>`), /UNAPPROVED_INLINE_SCRIPT/);
   assert.throws(() => htmlCsp({ toString() { return fixtureHtml; } }), /HTML_BUFFER_REQUIRED/);
+});
+
+test('visitor typography has explicit local fallbacks and no remote font dependencies', () => {
+  const html = readFileSync(new URL('../../../index.html', import.meta.url), 'utf8');
+  const styles = ['main.css', 'landing.css', 'archive.css', 'showroom-refinement.css']
+    .map(name => readFileSync(new URL(`../../../styles/${name}`, import.meta.url), 'utf8')).join('\n');
+  assert.doesNotMatch(html + styles, /fonts\.(?:googleapis|gstatic)\.com/i);
+  assert.doesNotMatch(html, /<link\b[^>]*\brel\s*=\s*['"](?:preconnect|dns-prefetch)['"][^>]*>/i);
+  assert.doesNotMatch(styles, /@import\s|@font-face\s*\{/i);
+  assert.match(styles, /--serif:\s*'Playfair Display',Georgia,'Times New Roman',serif/);
+  assert.match(styles, /--sans:\s*'DM Sans',Arial,sans-serif/);
+  assert.match(styles, /--mono:\s*'DM Mono',[^;\n]*monospace/);
 });
 
 function send(port, path, method = 'GET', headers = {}) {
@@ -49,6 +67,10 @@ function assertHeaders(headers, { html = false } = {}) {
   if (html) {
     assert(headers['content-security-policy'].includes(expected));
     assert(!/script-src[^;]*'unsafe-inline'/.test(headers['content-security-policy']));
+    assert.match(headers['content-security-policy'], /(?:^|; )connect-src 'self' blob:(?:;|$)/);
+    assert.match(headers['content-security-policy'], /(?:^|; )font-src 'none'(?:;|$)/);
+    assert.match(headers['content-security-policy'], /(?:^|; )style-src 'self' 'unsafe-inline'(?:;|$)/);
+    assert.match(headers['content-security-policy'], /(?:^|; )script-src 'self' 'wasm-unsafe-eval' 'sha256-[^']+'(?:;|$)/);
   }
 }
 

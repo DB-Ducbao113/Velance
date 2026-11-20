@@ -66,17 +66,26 @@ const source = rights.sourceRelease;
 let headed = null;
 if (opts.browser) {
   const report = JSON.parse(readFileSync(opts.browser, 'utf8'));
-  assert.equal(report.format, 'velance-p7-lazy-browser/1');
+  assert.equal(report.format, 'velance-p7-lazy-browser/2');
   assert.equal(report.overall, 'PASS_LOCAL');
-  assert.equal(report.releaseId, source.id, 'P7 headed Chrome evidence is for a different source release');
+  assert.equal(report.releaseId, source.id, 'P7 Chrome evidence is for a different source release');
   assert.equal(report.localOnly, true);
+  assert(['headless', 'headed'].includes(report.browserMode));
+  assert.equal(report.reducedMotion, true);
   assert.equal(report.runs.length, 2);
   const backends = report.runs.map(r => r.backend).sort();
   assert.deepEqual(backends, ['webgl2', 'webgpu']);
-  assert(report.runs.every(r => r.coldModelFiles === 1 && r.afterOverviewModelFiles === 16
-    && r.finalLoaded === 16 && r.successfulSelection && r.consentDefaultOff === true
-    && r.consentUiAndWithdrawalPass === true && r.telemetryPostCount === 0 && r.errors.length === 0));
+  assert(report.runs.every(r => r.coldGalleryFiles === 1 && r.coldDetailFiles === 0
+    && r.afterOverviewGalleryFiles === 16 && r.afterOverviewDetailFiles === 2 && r.unexpectedModelFiles === 0
+    && r.finalLoaded === 16 && r.texturedGalleryModels === 13 && r.texturedDetailImages > 0
+    && Object.keys(r.galleryImageCounts).length === 16
+    && Object.values(r.galleryImageCounts).filter(n => n > 0).length === 13
+    && r.successfulSelection === true && r.visitorIsolationWithSavedGrant === true
+    && r.diagnosticsDefaultOff === true && r.consentUiAndWithdrawalPass === true
+    && r.collectorRequestCount === 1 && r.capabilityRequestCount === 1
+    && r.telemetryPostCount === 0 && r.externalHttpRequestCount === 0 && r.errors.length === 0 && r.result === 'PASS_LOCAL'));
   headed = { result: 'PASS_LOCAL', releaseId: report.releaseId,
+    browserMode: report.browserMode, reducedMotion: report.reducedMotion,
     backends, coldNetworkBytes: Object.fromEntries(report.runs.map(r => [r.backend, r.coldBytes])),
     report: 'tools/perf/results/' + opts.browser.split('/').at(-1) };
 }

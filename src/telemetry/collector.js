@@ -55,17 +55,20 @@ function mountConsentControls() {
   if (!document.body || typeof document.createElement !== 'function') return;
   const style = document.createElement('style');
   style.textContent = `
-    #velance-telemetry-settings { position: fixed; left: 12px; bottom: 12px; z-index: 9000;
-      max-width: min(360px, calc(100vw - 24px)); color: #f4f1ea; font: 13px/1.5 system-ui, sans-serif; }
-    #velance-telemetry-settings details { border: 1px solid #737673; border-radius: 8px;
-      background: #161b1c; box-shadow: 0 4px 24px #0008; }
-    #velance-telemetry-settings summary { cursor: pointer; padding: 9px 12px; font-weight: 600; }
-    #velance-telemetry-settings .velance-consent-body { padding: 0 12px 12px; }
+    #velance-telemetry-settings { position: relative; flex:none; z-index: 110;
+      color: #e8cd9f; font: 10px/1.4 var(--mono, monospace); }
+    #velance-telemetry-settings details { position:relative; }
+    #velance-telemetry-settings summary { cursor:pointer; min-height:44px; display:flex;
+      align-items:center; padding:0 6px; letter-spacing:.08em; list-style:none; }
+    #velance-telemetry-settings summary::-webkit-details-marker { display:none; }
+    #velance-telemetry-settings .velance-consent-body { position:absolute; right:0; top:100%;
+      width:min(330px,calc(100vw - 32px)); padding:16px; border:1px solid #b8956377;
+      background:#101619; color:#f5eee3; box-shadow:0 10px 36px #000a; font:13px/1.55 system-ui,sans-serif; }
     #velance-telemetry-settings p { margin: 8px 0; }
-    #velance-telemetry-settings button { background: #eff4f3; color: #162023; border: 0;
-      border-radius: 4px; padding: 9px 12px; margin-top: 6px; cursor: pointer; font: inherit; }
+    #velance-telemetry-settings button { background: #e8cd9f; color: #161719; border: 0;
+      border-radius:0; min-height:44px; padding:9px 12px; margin-top:6px; cursor:pointer; font:inherit; }
     #velance-telemetry-settings button:focus-visible, #velance-telemetry-settings summary:focus-visible {
-      outline: 3px solid #b4e7ee; outline-offset: 2px; }
+      outline:2px solid #e8cd9f; outline-offset:2px; }
     #velance-telemetry-settings [hidden] { display: none !important; }
   `;
   (document.head || document.body).appendChild(style);
@@ -98,9 +101,18 @@ function mountConsentControls() {
   details.appendChild(summary);
   details.appendChild(body);
   root.appendChild(details);
-  document.body.appendChild(root);
+  (document.querySelector('.topnav') || document.body).appendChild(root);
+  details.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && details.open) {
+      event.preventDefault(); event.stopPropagation(); details.open = false; summary.focus();
+    }
+  });
+  document.addEventListener('pointerdown', event => {
+    if (details.open && !root.contains(event.target)) details.open = false;
+  });
   renderConsent = () => {
-    summary.textContent = `Optional diagnostics: ${consentGranted ? 'allowed' : 'off'} · Settings`;
+    summary.textContent = 'SETTINGS';
+    summary.setAttribute('aria-label', `Settings · Optional diagnostics: ${consentGranted ? 'allowed' : 'off'}`);
     allow.hidden = consentGranted || forcedOff;
     withdraw.hidden = !consentGranted && !forcedOff;
     withdraw.textContent = forcedOff ? 'Keep diagnostics disabled' : 'Withdraw permission';

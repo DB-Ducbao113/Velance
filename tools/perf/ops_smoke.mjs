@@ -24,6 +24,14 @@ async function page() {
   const p = await browser.newPage(); await p.setViewport({ width: 1440, height: 900 }); await p.bringToFront();
   return p;
 }
+async function grantForQA(p) {
+  // Synthetic consent in this isolated browser, not a visitor opt-in bypass.
+  await p.evaluateOnNewDocument(() => {
+    if (window === window.top && location.protocol.startsWith('http')) {
+      try { localStorage.setItem('velance_telemetry_consent_v1', JSON.stringify({version:1,decision:'granted',at:Date.now()})); } catch {}
+    }
+  });
+}
 async function idle(p) { await p.waitForFunction(() => !window.__VELANCE_QA__.engine.flight); }
 async function gesture(p, selected = false) {
   const start = selected ? 600 : 1000;
@@ -44,7 +52,8 @@ try {
       window.__loadObserved = null;
       const timer = setInterval(() => { if (window.__VELANCE_QA__?.stats()?.loaded === 16) { window.__loadObserved = performance.now(); clearInterval(timer); } }, 10);
     });
-    await p.goto(`${origin}/index.html?backend=${backend}`, { waitUntil: 'load' });
+    await grantForQA(p);
+    await p.goto(`${origin}/index.html?diagnostics=1&backend=${backend}`, { waitUntil: 'load' });
     await p.waitForFunction(() => Number(getComputedStyle(document.querySelector('#gateEnter')).opacity) > .99);
     await p.screenshot({ path: join(shots, `${backend}-gate.png`) });
     await p.waitForFunction(() => window.__VELANCE_TELEMETRY__?.milestones.allLoaded != null, { timeout: 120000 });
@@ -86,7 +95,8 @@ try {
     const p = await page(), requests = [];
     if (storage) await p.evaluateOnNewDocument(() => localStorage.setItem('velance_telemetry_off', '1'));
     p.on('request', r => { if (r.method() === 'HEAD' || r.url().includes('/api/')) requests.push(r.url()); });
-    await p.goto(origin + '/index.html?' + (storage ? 'nointro' : 'notelemetry&nointro')); await p.waitForFunction(() => window.__VELANCE_TELEMETRY__);
+    await grantForQA(p);
+    await p.goto(origin + '/index.html?diagnostics=1&' + (storage ? 'nointro' : 'notelemetry&nointro')); await p.waitForFunction(() => window.__VELANCE_TELEMETRY__);
     assert.equal(await p.evaluate(() => window.__VELANCE_TELEMETRY__.enabled), false); assert.equal(await p.evaluate(() => window.__VELANCE_TELEMETRY__.session), null);
     assert.deepEqual(requests, []); await p.close();
   }
@@ -97,7 +107,8 @@ try {
   const pythonPort = await new Promise((ok, no) => { python.once('error', no); python.stdout.once('data', d => ok(Number(d.toString().trim()))); });
   const plain = await page(), plainRequests = [];
   plain.on('request', r => { if (r.method() === 'HEAD' || r.url().includes('/api/')) plainRequests.push(r.method()); });
-  await plain.goto(`http://127.0.0.1:${pythonPort}/index.html?nointro`); await plain.waitForFunction(() => window.__VELANCE_TELEMETRY__); await wait(500);
+  await grantForQA(plain);
+  await plain.goto(`http://127.0.0.1:${pythonPort}/index.html?diagnostics=1&nointro`); await plain.waitForFunction(() => window.__VELANCE_TELEMETRY__); await wait(500);
   assert.equal(await plain.evaluate(() => window.__VELANCE_TELEMETRY__.enabled), false); assert.deepEqual(plainRequests, ['HEAD']); await plain.close(); python.kill(); python = null;
   check('plain Python static server is HEAD-only');
 
@@ -108,7 +119,8 @@ try {
     else void r.continue();
   });
   await lifecycle.evaluateOnNewDocument(() => window.addEventListener('pageshow', e => { window.__persisted = e.persisted; }));
-  await lifecycle.goto(origin + '/index.html?nointro'); await lifecycle.waitForFunction(() => window.__VELANCE_TELEMETRY__?.enabled); await wait(300);
+  await grantForQA(lifecycle);
+  await lifecycle.goto(origin + '/index.html?diagnostics=1&nointro'); await lifecycle.waitForFunction(() => window.__VELANCE_TELEMETRY__?.enabled); await wait(300);
   const bfcacheId = await lifecycle.evaluate(() => window.__VELANCE_TELEMETRY__.session);
   await lifecycle.evaluate(() => window.__VELANCE_TELEMETRY__.flush());
   assert.equal((await get(`/api/sessions/${bfcacheId}`)).milestones.allLoaded, null);
@@ -123,10 +135,11 @@ try {
   failure.on('pageerror', e => rejection.push(e.message));
   failure.on('request', r => {
     if (r.url().endsWith('/api/telemetry')) { attempted++; void r.abort('failed'); }
-    else if (r.url().endsWith('/src/ui/app.js')) void r.respond({ status: 200, contentType: 'text/javascript', body: '' });
+    else if (r.url().includes('/src/ui/app.js')) void r.respond({ status: 200, contentType: 'text/javascript', body: '' });
     else void r.continue();
   });
-  await failure.goto(origin + '/index.html?nointro'); await failure.waitForFunction(() => window.__VELANCE_TELEMETRY__?.enabled);
+  await grantForQA(failure);
+  await failure.goto(origin + '/index.html?diagnostics=1&nointro'); await failure.waitForFunction(() => window.__VELANCE_TELEMETRY__?.enabled);
   await failure.evaluate(() => window.__VELANCE_TELEMETRY__.flush());
   assert.equal(await failure.evaluate(() => window.__VELANCE_TELEMETRY__.enabled), false);
   await failure.evaluate(() => window.__VELANCE_TELEMETRY__.flush()); assert.equal(attempted, 1); assert.deepEqual(rejection, []); await failure.close();

@@ -14,13 +14,15 @@ async function sandbox({ search = '', storage = false, ops = true, beacon = true
       addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, new Set()); listeners.get(type).add(fn); },
       removeEventListener(type, fn) { listeners.get(type)?.delete(fn); },
       dispatch(type, event = {}) { for (const fn of [...(listeners.get(type) || [])]) fn(event); },
-      count() { return [...listeners.values()].reduce((n, set) => n + set.size, 0); }
+      count(type) { return type ? (listeners.get(type)?.size || 0) : [...listeners.values()].reduce((n, set) => n + set.size, 0); }
     };
   };
   const element = () => ({ children: [], hidden: false, appendChild(child) { this.children.push(child); return child; },
     setAttribute() {}, addEventListener() {} });
   const document = Object.assign(target(), { hidden: false, body: element(), head: element(),
-    createElement: () => element(), getElementById: () => ({ hidden: false }) });
+    createElement: () => element(), getElementById: id => id === 'gate' ? gate : null,
+    querySelector(selector) { assert.equal(selector, '.topnav'); return null; } });
+  const gate = { hidden: false };
   const window = target();
   const engine = { t0: 0, lastDraw: 0, lastOrbitAt: -1000, mode: 'home', target: 0, position: 0, fades: new Set(), controls: { enabled: false }, stage: { getBoundingClientRect: () => ({ top: 0, bottom: 800 }) } };
   const stats = { backend: 'webgpu', firstFrameMs: null, loaded: 0, total: 16, fps: 120, loadTimes: {}, renderMsAvg: 1, renderMsP95: 2, drawCalls: 3, triangles: 4, pixelRatio: 1, heapMB: null };
@@ -60,15 +62,20 @@ async function sandbox({ search = '', storage = false, ops = true, beacon = true
     }
     clock = end; await settle();
   }
-  return { window, document, engine, stats, timers, calls, beacons, tick, hook: window.__VELANCE_TELEMETRY__,
+  assert.equal(document.count('pointerdown'), 1, 'Consent UI closes on outside pointer input');
+  const collectionListeners = () => {
+    assert.equal(document.count('pointerdown'), 1, 'Only the settings UI listener remains outside the collector');
+    return window.count() + document.count() - 1;
+  };
+  return { window, document, engine, stats, timers, calls, beacons, tick, collectionListeners, hook: window.__VELANCE_TELEMETRY__,
     get uuidCalls() { return uuidCalls; }, get contextReads() { return contextReads; }, posts: () => calls.filter(c => c.method === 'POST').map(c => JSON.parse(c.body)) };
 }
 
-test('query/storage opt-out has no UUID, context, network, timers or listeners; static is HEAD-only', async () => {
+test('query/storage opt-out has no UUID, context, network, timers or collection listeners; static is HEAD-only', async () => {
   for (const options of [{ search: '?notelemetry' }, { storage: true }, { ops: false }]) {
     const s = await sandbox(options); await s.tick(30000);
     assert.equal(s.hook.enabled, false); assert.equal(s.hook.session, null); assert.equal(s.uuidCalls, 0); assert.equal(s.contextReads, 0);
-    assert.equal(s.timers.size, 0); assert.equal(s.window.count() + s.document.count(), 0); assert.equal(s.posts().length, 0);
+    assert.equal(s.timers.size, 0); assert.equal(s.collectionListeners(), 0); assert.equal(s.posts().length, 0);
     assert.equal(s.calls.length, options.ops === false ? 1 : 0);
   }
 });
@@ -79,7 +86,7 @@ test('leaving during activation prevents late HEAD from starting collection', as
   s.window.dispatch('pagehide', { persisted: false });
   release({ ok: true, headers: { get: () => '1' } }); await settle();
   assert.equal(s.hook.enabled, false); assert.equal(s.uuidCalls, 0); assert.equal(s.timers.size, 0);
-  assert.equal(s.window.count() + s.document.count(), 0); assert.equal(s.posts().length, 0);
+  assert.equal(s.collectionListeners(), 0); assert.equal(s.posts().length, 0);
 });
 
 test('metadata-only checkpoints, immutable snapshot and late gate entry', async () => {
@@ -102,7 +109,7 @@ test('single-flight regular flush, hidden checkpoint and terminal callbacks cann
   s.document.hidden = true; s.document.dispatch('visibilitychange');
   assert.equal(s.beacons.length, 1); assert.equal(s.timers.size, 0);
   const checkpoint = JSON.parse(await s.beacons[0].blob.text()); assert.equal(checkpoint.seq, 1); assert.equal(checkpoint.milestones.allLoaded, 250);
-  s.window.dispatch('pagehide', { persisted: false }); assert.equal(s.hook.enabled, false); assert.equal(s.window.count() + s.document.count(), 0);
+  s.window.dispatch('pagehide', { persisted: false }); assert.equal(s.hook.enabled, false); assert.equal(s.collectionListeners(), 0);
   release({ ok: true }); await pending; await s.tick(30000); assert.equal(s.posts().length, 1); assert.equal(s.timers.size, 0);
 });
 
@@ -120,10 +127,10 @@ test('hidden/visible and bfcache preserve session with exactly one sampler; fals
   const seqs = s.posts().map(p => p.seq); assert.equal(new Set(seqs).size, seqs.length);
 });
 
-test('failure disables quietly and removes every listener/timer without retry', async () => {
+test('failure disables quietly and removes every collection listener/timer without retry', async () => {
   for (const transport of [async () => { throw new Error('offline'); }, async () => ({ ok: false })]) {
     const s = await sandbox({ transport }); await s.hook.flush();
-    assert.equal(s.hook.enabled, false); assert.equal(s.timers.size, 0); assert.equal(s.window.count() + s.document.count(), 0);
+    assert.equal(s.hook.enabled, false); assert.equal(s.timers.size, 0); assert.equal(s.collectionListeners(), 0);
     await s.tick(60000); await s.hook.flush(); assert.equal(s.posts().length, 1);
   }
 });

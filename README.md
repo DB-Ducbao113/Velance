@@ -9,7 +9,10 @@ performance claim in this repository is backed by measured evidence from `tools/
 
 Rendering uses Three.js r187 WebGPU with automatic WebGL2 fallback and a standalone TSL
 car-paint package. Libraries (Three.js, GSAP 3.14 + ScrollTrigger, Lenis 1.3), models and
-images are vendored locally; Google Fonts remains an optional network typography resource.
+images are vendored locally. Typography uses installed Playfair Display, DM Sans and DM Mono
+when available, with Georgia/Times New Roman, Arial and system monospace fallbacks respectively.
+No font downloads, third-party CSS or preconnects are required; no font files are redistributed.
+Fallback font metrics and appearance may vary across operating systems.
 
 ## Project goals
 
@@ -27,30 +30,55 @@ images are vendored locally; Google Fonts remains an optional network typography
 
 ## Run
 
+Node.js 24+ on PATH is required. Start the local visitor preview:
+
 ```bash
-python3 -m http.server 8090     # or ./start.sh (serves on 8080)
-node tools/ops/server.mjs       # static + telemetry API + Fleet Operations dashboard on 8090
+sh start.sh                    # macOS/Linux, default port 8080
+sh start.sh --port 8082         # optional alternate loopback port
 ```
 
-Visit `http://localhost:8090`. Any static file server works; ES modules require HTTP (not `file://`).
+On Windows, run `start.bat` or `start.bat --port 8082` from Command Prompt.
+Visit `http://127.0.0.1:8080` (or the URL printed by the launcher).
+The launcher creates an allowlisted, immutable snapshot in a temporary directory,
+binds only to `127.0.0.1`, and never opens the telemetry database. Private files,
+Ops routes and source masters are excluded. Stop with Ctrl+C; restart to see
+source changes. The equivalent direct command is
+`node tools/p7/free-staging.mjs --mode review --port 8080`.
+
+For explicitly requested diagnostics only, run the separate Ops server:
+
+```bash
+node tools/ops/server.mjs --port 8090 --db /tmp/velance-review.db
+```
+
+Use a separate disposable database path (on Windows choose a path in your temp
+folder), and visit `http://127.0.0.1:8090/?diagnostics=1` to opt in through the UI.
+Do not serve the repository with an unrestricted static server; ES modules require HTTP.
 
 ## Architecture
 
 ```
 index.html               markup + importmap (three -> vendor/three)
-styles/main.css          all styling (data-URI textures only, no relative url())
+styles/main.css          showroom, selected machine, archive and motion styling
+styles/landing.css       black/champagne Portal layout, illuminated headlights and entrance transition
+assets/hero/             generated Portal scene plate and responsive WebP derivatives; archived photograph
+src/motion/portal.js     procedural Canvas fog, ignition control and lifecycle
 src/ui/app.js            DOM journey: gate, home controls, selected panel, reviews, board
+src/ui/archive.js        unified editorial gallery and native full-screen image viewer
+src/data/archive-catalog.js  verified photographic manifests and responsive variants
+styles/archive.css       warm-dark editorial gallery and accessible viewer
 src/engine/showroom.js   Three.js engine: hall, bays, GLB stream, camera flights, orbit, paint
 src/motion/motion.js     GSAP / ScrollTrigger / Lenis timelines + scroll reveals
 src/data/vehicles.js     the sixteen machines: specs, finishes, asset ids
-src/telemetry/collector.js  default-off, explicit opt-in/revoke: milestones, 1 Hz stats, events, errors
+src/telemetry/preview.js    loopback-only explicit diagnostics preview; absent in normal visitor UI
+src/telemetry/collector.js  preview opt-in/revoke: milestones, 1 Hz stats, events, errors
 packages/tsl-carpaint/   independent node material, API, demo and GPU property tests
 tools/optimize/          static GLB/skin bake + meshopt + texture pipeline + budget tests
 tools/perf/              cold-load lab benchmark and full GPU journey checks
 tools/ops/               zero-dependency Node server: static + telemetry API + SQLite
 ops/                     Fleet Operations dashboard (VÉLANCE-styled, hand-rolled SVG charts)
 .github/workflows/       asset/source CI + opt-in self-hosted GPU validation
-assets/                  models/ (optimized), models_original/ (source), images/, environment/
+assets/                  models/ (optimized), models_original/ (source), images/, archive/, environment/
 vendor/                  three/, motion/ (gsap, ScrollTrigger, lenis)
 ```
 
@@ -59,23 +87,61 @@ under `src/` without touching asset paths.
 
 ## The journey
 
-1. **Entrance gate** — a luxurious landing veil; `Enter the gallery` cranes the camera down
-   into the hall. Auto-skipped for `?nointro` or automated (`navigator.webdriver`) probes.
+1. **Entrance** — The Portal: a black/champagne architectural scene with a
+   photorealistic, AI-generated McLaren P1-inspired car. The wordmark and
+   `ENTER` are real HTML. Canvas fog moves independently over the scene, and
+   registered SVG headlights automatically cycle (4.2 s on, 1.8 s off).
+   The scene fades and moves forward on ENTER. No wheel sprites or car cutouts
+   are used. Mobile uses a composed full-car view; reduced motion presents a
+   stable scene with steady headlights. Details: `docs/frontend-portal.md`.
+   The landing starts bounded parallel GLB preloading in bay-light order.
+   ENTER opens a wide gallery shot; each bay lights only when its real 3D
+   model is ready. The first entrance stays in ALL 16 so visitors choose
+   their car. `CLOSE` returns to row browsing; `LIGHTS` there replays the crane.
+   Auto-skipped for `?nointro` or automated (`navigator.webdriver`) probes.
 2. **Discover** — drag horizontally with a one-car detent (or arrows / prev-next) to move between
-   bays. The focused car gets a light pool + nameplate; `REAR ROW ⇅` switches to bays 09–16.
-   `FULL GALLERY ⛶` opens an aerial overview of all sixteen machines; tap a bay to enter it.
+   bays. Arrow navigation stops at row edges to avoid a 45 m camera jump.
+   The focused car gets a light pool + nameplate; `REAR ROW ⇅` switches to bays 09–16.
+   `ALL 16 ⛶` opens an aerial overview; tap a bay to enter it.
 3. **Select a machine** — others fade, the camera flies in, the model takes the left stage over a
    halo + metallic wordmark backdrop; name, specs and BODY FINISH swatches stagger in on the right.
-   Drag to orbit, `FIT` resets the view (no zoom). Normal scroll continues the page.
-4. **Five cinematic angles** — scroll-driven crossfade through five static 4K alpha renders per car;
-   chapter numbers/titles reveal in stagger; scrolling backwards reverses the sequence.
-5. **Visual archive** — editorial board of the same five renders; hover lifts a frame, click returns
-   to that chapter. The two nav tabs appear only once a machine is selected.
+   The 2.8–5.2-second camera timeline follows a curved crane/dolly arc with
+   film-style letterbox, marquee typography, a sweeping highlight and a controlled
+   lighting crescendo. Framing smoothly shifts into the detail panel before orbit
+   takes control, avoiding the former final-frame projection jump. The path uses
+   arc-length sampling, a continuous target-tracking quaternion, a subtle lens
+   change and eased framing. Outer bays use an inward-facing hero angle. Floor
+   reflections return only after the camera settles: in one local Chrome WebGL2
+   trial this removed a 100.1 ms mid-flight spike (new max 16.8 ms; device-specific).
+   The responsive editorial archive is prepared after the camera lands. An automatic 360-degree
+   camera track then films the sides and rear with gentle radius and elevation changes.
+   A short dark dissolve introduces a fixed circular detail studio with full orbit
+   clearance; the car stays at its original coordinates, and the wall logo never
+   follows the lens. Recessed stone wall panels, brushed-metal relief and fixed
+   warm wall washes support every orbit angle. The ALL 16 view rests on a
+   continuous museum plinth with a recessed light edge and no extra parking
+   markings. An enclosed exhibition atrium surrounds the sixteen physical
+   display cells with four continuous arcades, walls and an overhead enclosure.
+   Low bay partitions and integrated practicals remain clear of the cars.
+   The atrium is restored with the plinth on BACK.
+   Drag interrupts the
+   automatic track immediately, `AUTO` resumes or pauses it, and `FIT` restores the
+   hero view and restarts the track. Reduced motion disables the automatic track.
+   Normal scroll continues the page. BACK restores the original
+   ALL 16 pan or the chosen row, eases the lens to its normal projection and
+   cancels pending editorial work; BACK also works during the approach.
+4. **Visual archive** — a single editorial photographic gallery, distinct from the live GLB and
+   technical 3D render inventory. Tap an image for the native full-screen viewer with source,
+   author/license, modification notice and exact dimensions, keyboard arrows, swipe and Escape.
+   The album uses 640/1600px variants and 2560px only where a verified high-resolution source exists;
+   the largest viewer file is fetched on opening. Missing albums explicitly fall back to labeled
+   3D renders. [Photo sources](docs/frontend-photo-sources.md), [A](docs/frontend-photo-sources-a.md),
+   [B](docs/frontend-photo-sources-b.md), [high-DPI derivatives](docs/frontend-photo-large.md).
 
 ## Interaction & motion
 
 - GSAP + ScrollTrigger timelines, Lenis smooth scroll synced to the triggers.
-- `prefers-reduced-motion`: Lenis/scroll animation off, chapters stack statically, flights instant.
+- `prefers-reduced-motion`: Lenis/scroll animation off, gallery static, flights instant.
 - Keyboard: arrows browse bays, Enter/Space activate, Escape exits detail/overview.
 - Fallbacks: without WebGPU, the same TSL scene uses WebGL2. If both backends are unavailable,
   the journey uses editorial images. `?backend=webgl` forces WebGL2 for comparison.
@@ -88,6 +154,12 @@ npm --prefix tools/optimize ci
 
 node tools/perf/speed_insights.mjs 4
 node tools/perf/gpu_smoke.mjs
+node tools/perf/frontend_cinematic_smoke.mjs  # replay button, 16 lights, camera, reduced motion
+QA_BACKEND=webgpu QA_GATE=1 node tools/perf/frontend_cinematic_smoke.mjs  # full entrance
+node tools/perf/frontend_landing_smoke.mjs  # McLaren landing desktop / mobile / reduced motion
+node tools/perf/frontend_selection_smoke.mjs  # selected-car flight, projection/orbit continuity
+QA_BACKEND=webgpu QA_ROW=rear node tools/perf/frontend_selection_smoke.mjs  # rear-row approach
+node tools/perf/frontend_motion_profile.mjs  # frame-gap P50/P95/P99/max + camera velocity
 node packages/tsl-carpaint/test/gpu.mjs
 npm --prefix tools/optimize test
 node tools/optimize/budget.mjs
@@ -322,8 +394,9 @@ QA_SHOTS=/tmp/velance-ops-shots node tools/perf/ops_smoke.mjs
   cross-site Fetch Metadata are rejected. This is not authentication against other local apps.
 - Static delivery has a path/type allowlist: showroom HTML, dashboard HTML/CSS/JS, `src` JS,
   `styles` CSS, `vendor` JS/WASM, car-paint source/demo, optimized GLB, images/environment WEBP,
+  plus prepared numeric-width Archive WebPs, the two exact active Portal WebPs,
   and the exact render harness HTML. Canonical paths must remain both in-root and public.
-  Dotfiles, `.git`, `node_modules`, originals/prepared assets, PNG masters, the configured DB
+  Dotfiles, `.git`, `node_modules`, originals/prepared assets, Archive staging, hero PNG masters, the configured DB
   and its sidecars/backups are not served, including through symlinks. `/ops` redirects to `/ops/`.
 - `tools/ops/telemetry.db*` is local and gitignored. A legacy-schema migration writes a
   native SQLite backup with a `.pre-v2-<timestamp>-<uuid>.bak` suffix before upgrading to
@@ -375,8 +448,8 @@ QA_SHOTS=/tmp/velance-ops-shots node tools/perf/ops_smoke.mjs
   and shortened error messages. No collector fields for account/contact, IP, cookies, request
   headers or page URL/query. Obvious URLs, queries and token-like text are redacted from errors;
   this is not an exhaustive PII filter. UA/device/error text may identify a user. Local storage
-  is not encrypted and there is no scheduled telemetry retention job. Optional Google Fonts
-  is separate network activity.
+  is not encrypted and there is no scheduled telemetry retention job. Typography uses local
+  installed fonts and does not send requests to a font provider.
 
 ### Dashboard and regression coverage
 

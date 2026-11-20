@@ -47,6 +47,8 @@ async function browser({
     head: browserAvailable ? element('head') : null,
     hidden: false,
     createElement: browserAvailable ? element : undefined,
+    // The fixture has no showroom navigation, so the collector mounts in body.
+    querySelector(selector) { assert.equal(selector, '.topnav'); return null; },
     getElementById(id) {
       const visit = parent => {
         if (!parent) return null;

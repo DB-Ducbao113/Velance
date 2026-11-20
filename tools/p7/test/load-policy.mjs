@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { loadOrder } from '../../../src/engine/load-policy.js';
+import { loadOrder, gpuPowerPreference } from '../../../src/engine/load-policy.js';
 
 test('cold page loads only explicitly focused machine, never all models', () => {
   for (const focus of [0, 4, 7, 8, 15]) assert.deepEqual(loadOrder(focus, 16), [focus]);
@@ -21,4 +21,9 @@ test('invalid indices fail closed', () => {
   for (const [center, count] of [[-1, 16], [16, 16], [2.1, 16], [0, 0], [0, -1]]) {
     assert.throws(() => loadOrder(center, count), { name: 'RangeError', message: 'BAD_MODEL_INDEX' });
   }
+});
+
+test('constrained devices request a valid WebGPU power preference, not WebGL default', () => {
+  assert.equal(gpuPowerPreference(true), 'low-power');
+  assert.equal(gpuPowerPreference(false), 'high-performance');
 });

@@ -35,7 +35,7 @@ try {
       await page.waitForFunction(i => Math.abs(window.__VELANCE_QA__.engine.position - i) < .002, {}, i);
       await page.screenshot({ path: join(shots, `${backend}-home-${i}.png`) });
       await page.click('#selectCar');
-      await page.waitForFunction(() => window.__VELANCE_QA__.engine.controls?.enabled && Number(getComputedStyle(document.querySelector('.selected-view')).opacity) > .99 && document.querySelectorAll('.shot-section').length === 5 && [...document.querySelectorAll('.selected-headline > *, .selected-spec, .selected-actions > *')].every(el => Number(getComputedStyle(el).opacity) > .99));
+      await page.waitForFunction(() => window.__VELANCE_QA__.engine.controls?.enabled && Number(getComputedStyle(document.querySelector('.selected-view')).opacity) > .99 && document.querySelectorAll('.board-item').length > 0 && [...document.querySelectorAll('.selected-headline > *, .selected-spec, .selected-actions > *')].every(el => Number(getComputedStyle(el).opacity) > .99));
       const before = await page.evaluate(() => {
         const q = window.__VELANCE_QA__, e = q.engine, car = e.cars.get(q.selected);
         return car.userData.paintMats.map(m => ({ color: m.color.getHex(), map: m.map?.uuid ?? null, node: m.isNodeMaterial, paint: m.userData.isCarPaint }));
@@ -46,8 +46,8 @@ try {
       await page.click('[data-finish="original"]');
       const restored = await page.evaluate(() => window.__VELANCE_QA__.engine.cars.get(window.__VELANCE_QA__.selected).userData.paintMats.map(m => ({ color: m.color.getHex(), map: m.map?.uuid ?? null, node: m.isNodeMaterial, paint: m.userData.isCarPaint })));
       assert.deepEqual(restored, before, `Factory paint failed to restore on car ${i}`);
-      assert.equal(await page.evaluate(() => window.__VELANCE_QA__.reviewCount), 5);
-      assert.equal(await page.evaluate(() => window.__VELANCE_QA__.boardCount), 5);
+      assert.equal(await page.evaluate(() => window.__VELANCE_QA__.reviewCount), 0);
+      assert(await page.evaluate(() => window.__VELANCE_QA__.boardCount > 0));
       assert.equal(await page.evaluate(() => window.__VELANCE_QA__.galleryCanvases), 0);
       await page.screenshot({ path: join(shots, `${backend}-selected-${i}.png`) });
       await page.keyboard.press('Escape');

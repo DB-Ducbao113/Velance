@@ -14,7 +14,7 @@ const HASH = /^[a-f0-9]{64}$/;
 const MANIFEST_FILE = 'manifest.json';
 const POINTER_FILE = 'active.json';
 const PRIVATE_TOP_LEVEL = new Set(['.git', '.github', 'ops', 'docs', 'tools']);
-const PUBLIC_TREES = ['src', 'styles', 'vendor', 'assets/models', 'assets/images', 'assets/environment', 'packages/tsl-carpaint'];
+const PUBLIC_TREES = ['src', 'styles', 'vendor', 'assets/models', 'assets/images', 'assets/environment', 'assets/archive', 'assets/hero', 'packages/tsl-carpaint'];
 
 function reject(code) { throw Object.assign(new Error(code), { code }); }
 function requiredDirectory(path, name) {

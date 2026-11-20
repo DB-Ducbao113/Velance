@@ -126,11 +126,16 @@ test('legitimate manual GPU run, defaults.run mapping and comment-only publish a
     '    defaults:', '      run:', '        shell: bash',
     '    steps:', '      - uses: actions/checkout@v7', '        with:',
     '          persist-credentials: false',
+    '      - run: node tools/perf/gpu-ci.mjs',
     '      - run: node tools/p7/browser_lazy.mjs', ''
   ].join('\n'));
   assert.equal(result.localSecurity, 'PASS_LOCAL', JSON.stringify(result.violations));
   fail('CI_GPU_BROWSER_NOT_MANUAL', f =>
     f.workflowFiles[0].source += '      - run: node tools/p7/browser_lazy.mjs\n');
+  fail('CI_GPU_BROWSER_NOT_MANUAL', f =>
+    f.workflowFiles[0].source += '      - run: node tools/perf/gpu-ci.mjs\n');
+  fail('CI_COMMAND_UNREVIEWED', f =>
+    f.workflowFiles[0].source += '      - run: python3 -m http.server 8095 --bind 127.0.0.1 >/dev/null 2>&1 &\n');
   fail('UNTRUSTED_SELF_HOSTED_RUNNER', f => f.workflowFiles[0].source += [
     '  gpu:',
     "    if: github.event_name == 'workflow_dispatch' && inputs.gpu",

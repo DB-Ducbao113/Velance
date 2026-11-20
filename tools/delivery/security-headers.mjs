@@ -43,10 +43,12 @@ export function htmlCsp(html) {
     // WebAssembly.compile for vendored meshopt needs wasm-unsafe-eval, not
     // unsafe-eval (which would permit arbitrary JavaScript evaluation).
     ["script-src 'self' 'wasm-unsafe-eval'", ...tokens].join(' '),
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com",
+    "style-src 'self' 'unsafe-inline'",
+    "font-src 'none'",
     "img-src 'self' data: blob:",
-    "connect-src 'self'",
+    // GLTFLoader creates local blob URLs for embedded GLB textures and fetches
+    // them through ImageBitmapLoader. Keep remote connections and blob scripts denied.
+    "connect-src 'self' blob:",
     "worker-src 'self' blob:",
     "media-src 'self'",
     "manifest-src 'self'"

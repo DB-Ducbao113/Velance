@@ -2,9 +2,11 @@
 assets/models_original/
 assets/models_prepared/
 assets/images/**/*.png
+assets/archive/**/.stage-*/
 
 # Dependencies & scratch
 node_modules/
+__pycache__/
 *.log
 .DS_Store
 

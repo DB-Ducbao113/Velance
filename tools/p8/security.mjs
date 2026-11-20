@@ -53,17 +53,12 @@ const SAFE_CI_COMMANDS = [
   /^node tools\/p8\/release-dry-run\.mjs$/,
   /^node --test(?: --test-concurrency=\d+)? tools\/p8\/test\/(?:security|headers)\.mjs$/,
   /^node --check (?:src\/(?:engine\/[a-zA-Z0-9_-]+|ui\/[a-zA-Z0-9_-]+|telemetry\/[a-zA-Z0-9_-]+)\.js|packages\/tsl-carpaint\/(?:src\/index|demo\/app)\.js|tools\/p8\/(?:security|test\/(?:security|headers))\.mjs)$/,
-  /^node packages\/tsl-carpaint\/test\/gpu\.mjs$/,
-  /^node tools\/perf\/gpu_smoke\.mjs$/,
+  /^node tools\/perf\/gpu-ci\.mjs$/,
   /^node tools\/p7\/browser_lazy\.mjs$/,
   /^node --version$/,
   /^node -e 'if \(Number\(process\.versions\.node\.split\("\."\)\[0\]\) !== 24\) process\.exit\(1\)'$/,
   /^test -f tools\/p8\/security\.mjs \|\| \{ echo '::error::P8 security gate missing'; exit 1; \}$/,
-  /^set -euo pipefail$/,
-  /^mkdir -p "\$QA_SHOTS"$/,
-  /^python3 -m http\.server \d{2,5} --bind 127\.0\.0\.1 >\/dev\/null 2>&1 &$/,
-  /^server=\$!$/,
-  /^trap 'kill "\$server" 2>\/dev\/null \|\| true; rm -rf "\$QA_SHOTS"' EXIT$/
+  /^set -euo pipefail$/
 ];
 const SECRET_PATTERNS = Object.freeze({
   privateKeyMaterial: /-----BEGIN (?:(?:RSA|EC|DSA|OPENSSH) )?PRIVATE KEY-----/,
@@ -256,7 +251,7 @@ export function inspectSecurity({
       inspected.ciCommands++;
       if (/\$\{\{/.test(command.command) || !SAFE_CI_COMMANDS.some(rule => rule.test(command.command)))
         add('CI_COMMAND_UNREVIEWED', name + ':' + command.line, command.command);
-      if (command.command === 'node tools/p7/browser_lazy.mjs'
+      if (['node tools/p7/browser_lazy.mjs', 'node tools/perf/gpu-ci.mjs'].includes(command.command)
         && !(command.job === 'gpu' && parsed.jobs.some(job => job.name === 'gpu'
           && /^github\.event_name == 'workflow_dispatch' && inputs\.gpu(?: == true)?$/.test(job.if)
           && /\bself-hosted\b/.test(job.runner))))

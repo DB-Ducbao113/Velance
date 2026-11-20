@@ -18,7 +18,8 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { createCarPaintMaterial } from 'tsl-carpaint';
-import { loadOrder } from './load-policy.js';
+import { loadOrder, gpuPowerPreference } from './load-policy.js';
+import { modelResources, disposeModel, disposeResources, inputLifetime } from './resource-lifecycle.js';
 
 const BAY_W = 6.4;
 const CAR_LEN = 4.6;
@@ -33,6 +34,54 @@ const NOSE_BACK = new Set(['mclarenp1', 'aventador']);
 const HALL_W = 8 * BAY_W + 5;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+// The legacy cubic ease reached 3x average speed halfway through each flight.
+// Smoothstep peaks at 1.5x and has zero velocity at both ends.
+const cameraEase = t => t * t * (3 - 2 * t);
+// C2 easing: both velocity AND acceleration are zero at the endpoints.
+// The ordinary cubic easing joins with a nonzero acceleration and can feel
+// abrupt when a virtual dolly is near a car.
+const cinemaEase = t => t * t * t * (t * (t * 6 - 15) + 10);
+const FLIGHT_SECONDS = Object.freeze({
+  row: 1.6, overview: 1.9, select: 2.8, return: 1.65,
+  entrance: 8.6, entranceHold: 4.2
+});
+const bayRevealOrder = i => (i % 8) * 2 + rowOf(i);
+const flightSeconds = (from, to, minimum) => Math.max(minimum, from.distanceTo(to) / 9);
+// Smooth spatial arc with zero velocity at the endpoints; avoids turning a
+// direct linear dolly into a hard stop when the hero framing takes over.
+function cubicPoint(out, a, b, c, d, t) {
+  const s = 1 - t;
+  return out.copy(a).multiplyScalar(s * s * s)
+    .addScaledVector(b, 3 * s * s * t)
+    .addScaledVector(c, 3 * s * t * t)
+    .addScaledVector(d, t * t * t);
+}
+// Bézier's parameter is not distance: equal parameter steps can cross very
+// different distances. Precompute cumulative arc lengths once per flight.
+function cameraArcLut(a, b, c, d, samples = 72) {
+  const positions = new Float32Array(samples + 1);
+  const prev = a.clone(), current = new THREE.Vector3();
+  let length = 0;
+  for (let i = 1; i <= samples; i++) {
+    cubicPoint(current, a, b, c, d, i / samples);
+    length += prev.distanceTo(current);
+    positions[i] = length;
+    prev.copy(current);
+  }
+  return { positions, length, samples };
+}
+function arcParameter(lut, fraction) {
+  if (fraction <= 0 || lut.length < 1e-6) return 0;
+  if (fraction >= 1) return 1;
+  const distance = fraction * lut.length;
+  let lo = 0, hi = lut.samples;
+  while (lo + 1 < hi) {
+    const mid = (lo + hi) >> 1;
+    if (lut.positions[mid] < distance) lo = mid; else hi = mid;
+  }
+  return (lo + (distance - lut.positions[lo]) /
+    Math.max(1e-8, lut.positions[hi] - lut.positions[lo])) / lut.samples;
+}
 
 const EXPOSURE = 1.12;
 // HDR blending precedes tone mapping, so translucent layers need lower weights.
@@ -196,13 +245,14 @@ export class GarageShowroom {
   /* WebGPU first; three.js drops to WebGL2 by itself, or on ?backend=webgl. */
   static async create(options) {
     const showroom = new GarageShowroom(options);
-    try { await showroom.init(); } catch (error) { showroom.dispose(); throw error; }
+    try { await showroom.init(); } catch (error) { await showroom.dispose(); throw error; }
     return showroom;
   }
-  constructor({ stage, labelHost, vehicles, focus = 0, reduced = false, onProgress = () => {}, onReady = () => {}, onError = () => {}, onFocus = () => {}, onSelect = () => {}, onOverview = () => {} }) {
+  constructor({ stage, labelHost, vehicles, focus = 0, reduced = false, preloadEntrance = false, onProgress = () => {}, onReady = () => {}, onError = () => {}, onFocus = () => {}, onSelect = () => {}, onOverview = () => {}, onDetailReady = () => {}, onDetailError = () => {} }) {
     this.stage = stage; this.labelHost = labelHost; this.vehicles = vehicles;
     this.reduced = reduced; this.onProgress = onProgress; this.onReady = onReady;
     this.onError = onError; this.onFocus = onFocus; this.onSelect = onSelect; this.onOverview = onOverview;
+    this.onDetailReady=onDetailReady;this.onDetailError=onDetailError;
     this.mobile = matchMedia('(max-width:620px)').matches;
     this.mode = 'home';
     this.bayCount = 16;
@@ -218,26 +268,38 @@ export class GarageShowroom {
     this.cars = new Map(); this.fades = new Map(); this.labels = []; this.placeholders = new Map();
     this.paintChoice = new Map();
     this.queue = []; this.queued = new Set(); this.loading = false;
-    // P7: bounded transfers; navigation requests a machine on demand. All
-    // sixteen GLBs are NOT prefetched during cold page load.
+    this.activeLoad = null; this.loadFailures = new Set();
+    this.preloadEntrance = preloadEntrance; this.entrancePrepared = false;
+    // The actual landing anticipates the sixteen-bay reveal. Direct gallery
+    // visits still request only the focused model until an explicit overview.
     this.buffers = new Map(); this.dlControllers = new Set();
-    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = this.mobile ? 2 : 4;
+    this.dlActive = 0; this.dlWaiters = []; this.dlLimit = 2;
+    this.detailEpoch=0;this.detailTask=Promise.resolve();this.detailResident=null;this.pendingDetail=null;this.detailAbort=null;
     this.initialReady = false;
     this.loader = new GLTFLoader(); this.loader.setMeshoptDecoder(MeshoptDecoder);
     this.loadTimes = {}; this.t0 = performance.now(); this.firstFrameAt = null;
     this.flight = null; this.selected = null;
+    this.cinema = false; this.lightReveal = null;
     this.frameTimes = []; this.cadence = []; this.fps = null; this.lastDraw = 0; this.lastNow = 0;
     this.disposed = false;
+    this.inputLifetime = inputLifetime();
+    this.queueTask = Promise.resolve();
     this.compileQueue = Promise.resolve();
     this.reflectOn = true; this.reflectorDraws = 0; this.lastDrawCalls = 0; this.lastTriangles = 0;
-    this.basePixelRatio = Math.min(devicePixelRatio || 1, this.mobile ? 1.5 : 2);
+    const ua=navigator.userAgent||'';
+    this.memoryConstrained=this.mobile||(/AppleWebKit/.test(ua)&&!/(Chrome|Chromium|Edg|OPR)/.test(ua))||(navigator.deviceMemory>0&&navigator.deviceMemory<=4);
+    this.pixelBudget=this.memoryConstrained?1500000:2500000;
+    this.basePixelRatio = Math.min(devicePixelRatio || 1, this.memoryConstrained ? 1.25 : 1.5);
+    this.maxPixelRatio=this.basePixelRatio;
     this.pixelRatio = this.basePixelRatio; this.ratioCooldown = 0;
     this.reflCam = null; this.reflSkip = false; this.reflDirty = true;
     this.lastOrbitAt = 0; this.lastSize = { w: 0, h: 0, pr: 0 };
-    this.texQueue = []; this.uploaded = new Set();
+    this.autoShot = null;
+    this.studioActive = false;
+    this.uploaded = new WeakSet();
 
     this.renderer = new THREE.WebGPURenderer({
-      antialias: true, alpha: false, powerPreference: 'high-performance',
+      antialias: !this.memoryConstrained, alpha: false, powerPreference: gpuPowerPreference(this.memoryConstrained),
       forceWebGL: new URLSearchParams(location.search).get('backend') === 'webgl'
     });
     this.renderer.setPixelRatio(this.basePixelRatio);
@@ -260,7 +322,7 @@ export class GarageShowroom {
       this.pixelRatio = this.basePixelRatio;
       this.renderer.setPixelRatio(this.basePixelRatio);
     }
-    MeshoptDecoder.useWorkers(this.mobile ? 1 : Math.min(4, navigator.hardwareConcurrency || 2));
+    MeshoptDecoder.useWorkers(this.memoryConstrained ? 1 : 2);
     this.ktx2 = new KTX2Loader().setTranscoderPath(new URL('../../vendor/three/addons/libs/basis/', import.meta.url).href).setWorkerLimit(this.mobile ? 1 : 2).detectSupport(this.renderer);
     this.loader.setKTX2Loader(this.ktx2);
     this.stage.prepend(this.canvas);
@@ -273,13 +335,18 @@ export class GarageShowroom {
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     const room = new RoomEnvironment();
     room.position.y = 0;
-    this.env = pmrem.fromScene(room, .04).texture;
+    this.envTarget=pmrem.fromScene(room, .04);this.env=this.envTarget.texture;
     room.dispose();
     pmrem.dispose();
     this.scene.environment = this.env;
-    this.scene.environmentIntensity = .32;
+    this.scene.environmentIntensity = .29;
 
     this.buildArchitecture();
+    this.buildStudio();
+    this.studioCurtain = document.createElement('div');
+    this.studioCurtain.className = 'studio-curtain';
+    this.studioCurtain.setAttribute('aria-hidden', 'true');
+    this.stage.append(this.studioCurtain);
     this.buildLights();
     this.buildAtmosphere();
     this.buildDetailSet();
@@ -290,10 +357,10 @@ export class GarageShowroom {
     this.bindInput();
     this.resize();
     this.applyHomeCamera();
-    // Only the current machine transfers on a cold visit. Empty bays retain
-    // their interactive placeholders until the visitor navigates to them.
-    this.prioritize(this.focus);
-    await this.warmScene().catch(error => console.warn('[VÉLANCE] pipeline warm-up failed:', error));
+    const warm = this.warmScene().catch(error => console.warn('[VÉLANCE] pipeline warm-up failed:', error));
+    if (this.preloadEntrance) this.prepareEntrance();
+    else this.prioritize(this.focus);
+    await warm;
     if (this.disposed) return;
     this.refreshShadow();
     this.frame = this.frame.bind(this);
@@ -302,8 +369,10 @@ export class GarageShowroom {
 
   /* ---------------------------------------------------------- architecture */
   buildArchitecture() {
-    const S = this.scene;
+    const S = this.hallArchitecture = new THREE.Group();
+    this.scene.add(S);
     const marbleFloor = marbleTexture('#171c21', 'rgba(210,220,230,.5)', [10, 3]);
+    this.marbleFloor = marbleFloor; // Also used by a TSL node, not always material.map.
     const marbleWall = marbleTexture('#1b2126', 'rgba(214,224,234,.55)', [1.6, 1]);
     const bronze = new THREE.MeshStandardMaterial({ color: 0x2a2622, roughness: .42, metalness: .85 });
     const darkMetal = new THREE.MeshStandardMaterial({ color: 0x14181c, roughness: .5, metalness: .6 });
@@ -312,7 +381,7 @@ export class GarageShowroom {
     // Polished floor: a real planar reflection under a marble veil, mixed in
     // display space exactly as the WebGL build layered them, in one opaque draw.
     let floorMat;
-    if (!this.mobile) {
+    if (!this.memoryConstrained) {
       this.refl = reflector({ resolutionScale: .5, samples: this.backend === 'webgpu' ? 2 : 0, bounces: false });
       this.refl.target.rotation.x = -Math.PI / 2;
       S.add(this.refl.target);
@@ -329,6 +398,7 @@ export class GarageShowroom {
     this.floor = new THREE.Mesh(new THREE.PlaneGeometry(HALL_W, HALL_DEPTH), floorMat);
     this.floor.rotation.x = -Math.PI / 2;
     S.add(this.floor);
+    this.buildOverviewApron();
 
     const shadowCatcher = new THREE.Mesh(new THREE.PlaneGeometry(HALL_W, HALL_DEPTH), floorDecal(new THREE.ShadowMaterial({ opacity: SHADOW_OPACITY })));
     shadowCatcher.rotation.x = -Math.PI / 2; shadowCatcher.position.set(0, .004, 0);
@@ -337,15 +407,17 @@ export class GarageShowroom {
 
     // Two facing walls of the rectangle: one marble panel per bay + wall-wash.
     // The south group hides in overview so the aerial camera sees the rear row.
-    this.washes = [];
+    this.washes = []; this.bayFixtures = []; this.bayLowFixtures = [];
     this.southGroup = new THREE.Group();
-    S.add(this.southGroup);
+    this.northGroup = new THREE.Group();
+    S.add(this.southGroup, this.northGroup);
     const washTex = washTexture();
+    const fixtureGeo = new THREE.BoxGeometry(2.65, .075, .12);
     for (let i = 0; i < this.bayCount; i++) {
       const rear = i >= 8;
       const wz = rear ? -WALL_Z : WALL_Z;
       const inward = rear ? -1 : 1;
-      const parent = rear ? this.southGroup : S;
+      const parent = rear ? this.southGroup : this.northGroup;
       const panel = new THREE.Mesh(new THREE.PlaneGeometry(BAY_W - .5, 4.5), new THREE.MeshStandardMaterial({ map: marbleWall, roughness: .34, metalness: .12, color: 0xb9c2c9 }));
       panel.position.set(bayX(i), 2.45, wz + inward * .02);
       if (rear) panel.rotation.y = Math.PI;
@@ -358,11 +430,24 @@ export class GarageShowroom {
       const sconce = new THREE.Mesh(new THREE.CylinderGeometry(.07, .09, .22, 12), darkMetal);
       sconce.position.set(bayX(i), 4.62, wz + inward * .22); sconce.rotation.x = inward * .5;
       parent.add(sconce);
+      // Each bay has its own emissive practical fixture. The light sequence
+      // changes material intensity, avoiding sixteen extra real-time lights.
+      const fixture = new THREE.Mesh(
+        fixtureGeo,
+        new THREE.MeshStandardMaterial({ color: 0x35281a, emissive: 0xffd7a2, emissiveIntensity: .05, roughness: .32 })
+      );
+      fixture.position.set(bayX(i), 4.57, wz + inward * .3);
+      parent.add(fixture); this.bayFixtures.push(fixture);
+      // The cutaway exposes a real floor-level practical instead of leaving
+      // the upper fixture floating when its supporting wall is hidden.
+      const lowFixture=new THREE.Mesh(new THREE.BoxGeometry(1.85,.032,.10),fixture.material);
+      lowFixture.position.set(bayX(i),.13,wz+inward*.48);lowFixture.visible=false;
+      S.add(lowFixture);this.bayLowFixtures.push(lowFixture);
     }
     for (const rear of [false, true]) {
       const wz = rear ? -WALL_Z : WALL_Z;
       const inward = rear ? -1 : 1;
-      const parent = rear ? this.southGroup : S;
+      const parent = rear ? this.southGroup : this.northGroup;
       const wallBase = new THREE.Mesh(new THREE.BoxGeometry(HALL_W, .22, .3), bronze);
       wallBase.position.set(0, .11, wz + inward * .12); parent.add(wallBase);
       const wallHead = new THREE.Mesh(new THREE.BoxGeometry(HALL_W, .5, .34), darkMetal);
@@ -380,18 +465,20 @@ export class GarageShowroom {
 
     // Side walls close the rectangle; the brand sign lives on the west wall.
     const sideMat = new THREE.MeshStandardMaterial({ color: 0x10151a, roughness: .6, metalness: .3 });
+    this.sideGroups = new Map();
     for (const sx of [-1, 1]) {
+      const side = new THREE.Group(); this.sideGroups.set(sx, side); S.add(side);
       const wall = new THREE.Mesh(new THREE.PlaneGeometry(HALL_DEPTH - .8, CEIL_Y), sideMat);
       wall.rotation.y = sx * -Math.PI / 2; wall.position.set(sx * HALL_W / 2, CEIL_Y / 2, 0);
-      S.add(wall);
+      side.add(wall);
       for (let k = 0; k < 4; k++) {
         const strip = new THREE.Mesh(new THREE.BoxGeometry(.03, 4.4, .05), led);
         strip.position.set(sx * (HALL_W / 2 - .05), 2.4, -5.6 + k * 4.2);
-        S.add(strip);
+        side.add(strip);
       }
     }
     const sign = new THREE.Mesh(new THREE.PlaneGeometry(9, 2.2), new THREE.MeshBasicMaterial({ map: textTexture('VÉLANCE', { size: 512, font: '500 92px Georgia, serif', metallic: true }), transparent: true, depthWrite: false }));
-    sign.rotation.y = Math.PI / 2; sign.position.set(-HALL_W / 2 + .06, 2.6, 0); S.add(sign);
+    sign.rotation.y = Math.PI / 2; sign.position.set(-HALL_W / 2 + .06, 2.6, 0); this.sideGroups.get(-1).add(sign);
 
     // Slatted ceiling + LED coves (one group, lifted away in overview).
     this.ceilGroup = new THREE.Group();
@@ -413,8 +500,26 @@ export class GarageShowroom {
     ringMesh.rotation.x = Math.PI / 2; ringMesh.position.set(0, CEIL_Y - .16, 0);
     this.ceilGroup.add(ringMesh);
 
-    // Bay markings, wheel stops, floor numbers, contact shadows, light pools.
-    const lineMat = floorDecal(new THREE.MeshBasicMaterial({ color: 0xe8eef2, opacity: .75 * K_LINE }));
+    // Each bay is a physical architectural cell, open toward the centre
+    // aisle. Shared low partitions align with the existing rear wall piers.
+    // They never enter a car's footprint or obstruct the aerial view.
+    this.bayArchitecture = new THREE.Group(); S.add(this.bayArchitecture);
+    const dividerMat = new THREE.MeshStandardMaterial({color:0x293139,roughness:.62,metalness:.22,emissive:0x151a1e,emissiveIntensity:.35});
+    const dividerCap = new THREE.MeshStandardMaterial({color:0x615340,roughness:.46,metalness:.54});
+    const partitionGeo = new THREE.BoxGeometry(.24,.78,2.65);
+    const capGeo = new THREE.BoxGeometry(.27,.055,2.65);
+    const sillGeo = new THREE.BoxGeometry(.24,.12,2.55);
+    const cells = new THREE.InstancedMesh(partitionGeo,dividerMat,18);
+    const caps = new THREE.InstancedMesh(capGeo,dividerCap,18);
+    const sills = new THREE.InstancedMesh(sillGeo,dividerMat,18);
+    for(let r=0;r<2;r++) for(let j=0;j<=8;j++){
+      const i=r*9+j,x=bayX(0)-BAY_W/2+j*BAY_W,sign=r===0?-1:1;
+      m4.makeTranslation(x,.39,sign*6.48);cells.setMatrixAt(i,m4);
+      m4.makeTranslation(x,.807,sign*6.48);caps.setMatrixAt(i,m4);
+      m4.makeTranslation(x,.06,sign*3.88);sills.setMatrixAt(i,m4);
+    }
+    this.bayArchitecture.add(cells,caps,sills);
+    // Wheel stops, floor numbers, contact shadows, and light pools.
     const poolTex = radialTexture('rgba(255,205,150,.5)', 'rgba(255,190,120,0)');
     // Darkening also happens before tone mapping now: lift the alpha curve.
     const contactTex = radialTexture('rgba(0,0,0,.5)', 'rgba(0,0,0,0)', a => 1 - Math.pow(1 - a, 2.2));
@@ -424,11 +529,6 @@ export class GarageShowroom {
       const cz = carZ(i);
       const inward = rear ? -1 : 1;
       const wz = rear ? -WALL_Z : WALL_Z;
-      for (const sx of [-1, 1]) {
-        const line = new THREE.Mesh(new THREE.PlaneGeometry(.07, 5.9), lineMat);
-        line.rotation.x = -Math.PI / 2; line.position.set(bayX(i) + sx * (BAY_W / 2 - .12), .006, cz + inward * .35);
-        line.renderOrder = 4; S.add(line);
-      }
       const stop = new THREE.Mesh(new THREE.BoxGeometry(2.1, .11, .26), darkMetal);
       stop.position.set(bayX(i), .055, wz + inward * .48); S.add(stop);
       const num = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 1.15), floorDecal(new THREE.MeshBasicMaterial({ map: textTexture(String(i + 1).padStart(2, '0'), { font: '500 118px Georgia, serif', color: 'rgba(226,205,170,.6)' }), opacity: K_LINE })));
@@ -442,6 +542,183 @@ export class GarageShowroom {
       contact.visible = false;
       S.add(contact); this.contacts.push(contact);
     }
+  }
+  buildOverviewApron() {
+    const group = this.overviewApron = new THREE.Group();
+    const stone = new THREE.MeshStandardMaterial({ map: marbleTexture('#20262b','rgba(158,168,178,.22)',[26,22]), color: 0x8d969d, roughness: .88 });
+    const basalt = new THREE.MeshStandardMaterial({ color: 0x20272d, metalness: .12, roughness: .72 });
+    const bevel = new THREE.MeshStandardMaterial({ color: 0x555450, metalness: .52, roughness: .43 });
+    const reveal = new THREE.MeshBasicMaterial({ color: 0x080a0c });
+    const cove = new THREE.MeshBasicMaterial({ color: 0xa58b67, toneMapped: false });
+    const base = new THREE.Mesh(new THREE.PlaneGeometry(94, 72), stone);
+    base.rotation.x = -Math.PI / 2; base.position.y = -.92; group.add(base);
+    const box = (w,h,d,x,y,z,material) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material); m.position.set(x,y,z); group.add(m); return m; };
+    // One continuous museum plinth. The recessed illuminated fascia explains
+    // the change of floor level; no extra parking bays or decorative grid.
+    box(HALL_W + 3.4,.30,HALL_DEPTH + 3.4,0,-.76,0,basalt);
+    box(HALL_W + 2.5,.12,HALL_DEPTH + 2.5,0,-.53,0,bevel);
+    box(HALL_W + 1.16,.16,HALL_DEPTH + 1.16,0,-.39,0,reveal);
+    box(HALL_W + 1.8,.07,HALL_DEPTH + 1.8,0,-.30,0,cove);
+    box(HALL_W + 1.9,.25,HALL_DEPTH + 1.9,0,-.135,0,basalt);
+    // Soft contact light under the island, baked into a floor decal instead
+    // of adding moving spotlights or bright lines across the foreground.
+    const pool = new THREE.Mesh(new THREE.PlaneGeometry(HALL_W+18,HALL_DEPTH+16),new THREE.MeshBasicMaterial({map:radialTexture('rgba(194,154,102,.16)','rgba(194,154,102,0)'),transparent:true,depthWrite:false,opacity:.66}));
+    pool.rotation.x=-Math.PI/2;pool.position.y=-.91;group.add(pool);
+    this.buildOverviewGallery(group);
+    group.visible=false; this.scene.add(group);
+  }
+  buildOverviewGallery(parent) {
+    // An enclosed exhibition atrium around the sixteen-bay island. Unlike
+    // the old north-only facade, both the room shell and the inner arcade
+    // continue around every side. The aerial crane is inside the atrium.
+    const g = this.overviewGallery = new THREE.Group();
+    parent.add(g);
+    const stone = new THREE.MeshStandardMaterial({color:0x343b40,emissive:0x171c20,emissiveIntensity:.65,roughness:.78,metalness:.12});
+    const dark = new THREE.MeshStandardMaterial({color:0x20272c,emissive:0x161c21,emissiveIntensity:.50,roughness:.72});
+    const bronze = new THREE.MeshStandardMaterial({color:0x554c40,emissive:0x2a241b,emissiveIntensity:.32,metalness:.55,roughness:.46});
+    const light = new THREE.MeshBasicMaterial({color:0xbda482,toneMapped:false});
+    const recessMap = canvasTexture(512,(ctx,s)=>{
+      ctx.fillStyle='#20272c';ctx.fillRect(0,0,s,s);
+      const wash=ctx.createRadialGradient(s*.5,s*.08,0,s*.5,s*.25,s*.8);
+      wash.addColorStop(0,'rgba(220,194,151,.65)');wash.addColorStop(.42,'rgba(160,135,101,.22)');wash.addColorStop(1,'rgba(160,135,101,0)');
+      ctx.fillStyle=wash;ctx.fillRect(0,0,s,s);
+      ctx.fillStyle='rgba(200,205,210,.055)';
+      for(let i=1;i<5;i++)ctx.fillRect(0,i*s/5,s,1);
+    });
+    const recess = new THREE.MeshBasicMaterial({map:recessMap,toneMapped:false});
+    // Reuse a unit box/plane and instance each material. Four-sided detail
+    // stays cheap instead of multiplying small draw calls for each bay.
+    const buckets=new Map(), unitBox=new THREE.BoxGeometry(1,1,1),unitPlane=new THREE.PlaneGeometry(1,1);
+    const pos=new THREE.Vector3(),scale=new THREE.Vector3(),q=new THREE.Quaternion(),axis=new THREE.Vector3(0,1,0);
+    const add=(root,mat,w,h,d,x,y,z,plane=false)=>{
+      const a=root.yaw,c=Math.cos(a),s=Math.sin(a);
+      pos.set(root.x+c*x+s*z,y,root.z-s*x+c*z);scale.set(w,h,d);q.setFromAxisAngle(axis,a);
+      const key=mat.uuid+(plane?'p':'b');if(!buckets.has(key))buckets.set(key,{mat,geo:plane?unitPlane:unitBox,matrices:[]});
+      buckets.get(key).matrices.push(new THREE.Matrix4().compose(pos,q,scale));
+    };
+    const shell=(x,z,yaw,width,count)=>{
+      const root={x,z,yaw},b=(w,h,d,lx,y,lz,m)=>add(root,m,w,h,d,lx,y,lz);
+      const height=58, moduleW=width/count;
+      b(width,height,.50,0,height/2-.9,-.25,dark);
+      // A tall, continuous interior wall with structural pilasters and
+      // horizontal galleries; its top is above the highest aerial camera.
+      for(const y of [7.4,15.8,29.2,43.0,56.5]){
+        b(width,.38,.80,0,y,.20,stone);b(width,.055,.06,0,y-.24,.62,bronze);
+      }
+      for(let i=0;i<=count;i++) b(.42,height,.7,(i-count/2)*moduleW,height/2-.9,.12,stone);
+      for(let i=0;i<count;i++){
+        const lx=(i-(count-1)/2)*moduleW;
+        add(root,recess,moduleW-.65,6.6,1,lx,3.25,.055,true);
+        b(moduleW-.78,.08,.12,lx,6.7,.30,light);
+      }
+    };
+    this.exhibitionBounds={halfX:46,halfZ:35,floor:-.92,ceiling:57.1};
+    shell(0,-35,0,92,12);shell(0,35,Math.PI,92,12);
+    shell(-46,0,Math.PI/2,70,10);shell(46,0,-Math.PI/2,70,10);
+    add({x:0,z:0,yaw:0},dark,92,.4,70,0,57.3,0);
+    // Inner arcade connected at the corners. The opening above the parking
+    // island is intentional: the camera can descend without hiding its roof.
+    const arcade=(x,z,yaw,width,count)=>{
+      const root={x,z,yaw},b=(w,h,d,lx,y,lz,m)=>add(root,m,w,h,d,lx,y,lz);
+      const moduleW=width/count;
+      b(width,.28,5.4,0,-.75,.5,stone); // continuous promenade
+      b(width,4.8,.42,0,2.25,-1.3,dark);
+      b(width,.34,3.1,0,5.00,.05,stone); // deep canopy
+      b(width,.09,3.15,0,5.22,.05,dark);
+      b(width,.055,.075,0,4.80,1.58,light);
+      b(width,.30,.55,0,.0,-1.0,stone);
+      for(let i=0;i<count;i++){
+        const lx=(i-(count-1)/2)*moduleW;
+        add(root,recess,moduleW-.77,4.12,1,lx,2.21,-1.065,true);
+        b(moduleW-.80,.18,.70,lx,4.48,-.70,stone);
+        b(moduleW-1.0,.065,.10,lx,4.34,-.31,light);
+      }
+      for(let i=0;i<=count;i++){
+        const lx=(i-count/2)*moduleW;
+        b(.44,4.77,1.20,lx,2.38,.75,stone);
+        b(.07,4.10,.07,lx,2.4,1.37,bronze);
+      }
+    };
+    arcade(0,-17.9,0,70.6,10);arcade(0,17.9,Math.PI,70.6,10);
+    arcade(-35.3,0,Math.PI/2,35.8,5);arcade(35.3,0,-Math.PI/2,35.8,5);
+    for(const {mat,geo,matrices} of buckets.values()){
+      const mesh=new THREE.InstancedMesh(geo,mat,matrices.length);
+      matrices.forEach((m,i)=>mesh.setMatrixAt(i,m));mesh.computeBoundingSphere();g.add(mesh);
+    }
+    g.userData.sides=4;
+  }
+  buildStudio() {
+    // The detail room is a separate architectural set, sharing the renderer
+    // and original GLB. Its walls are outside every allowed orbit radius.
+    const g = this.studioGroup = new THREE.Group();
+    this.studioRadius = 13.2;
+    const wall = new THREE.MeshStandardMaterial({ color:0x22292d, emissive:0x151a1d, emissiveIntensity:.6, roughness:.86, metalness:.17, side:THREE.BackSide });
+    const floor = new THREE.MeshStandardMaterial({ map:marbleTexture('#1c2228','rgba(180,180,170,.25)',[5,5]), color:0x657078, roughness:.66, metalness:.22 });
+    const trim = new THREE.MeshStandardMaterial({color:0x51483b,emissive:0x271d13,emissiveIntensity:.38,roughness:.43,metalness:.55});
+    const light = new THREE.MeshBasicMaterial({color:0xcdb38b});
+    const frame = new THREE.MeshStandardMaterial({color:0x252c32,emissive:0x14191d,emissiveIntensity:.48,roughness:.62,metalness:.25});
+    const dark = new THREE.MeshStandardMaterial({color:0x151b20,roughness:.8,metalness:.12});
+    // Textured, indirectly lit architectural panels. A baked wash provides
+    // stable photographic-looking illumination at every orbit angle without
+    // increasing the number of scene lights or tracking the camera.
+    const panelTex = canvasTexture(512,(ctx,s)=>{
+      ctx.fillStyle='#30363a';ctx.fillRect(0,0,s,s);
+      let seed=193;const rnd=()=>((seed=seed*16807%2147483647)/2147483647);
+      for(let i=0;i<16000;i++){
+        const x=rnd()*s,y=rnd()*s;ctx.fillStyle=i%2?'rgba(205,207,198,.025)':'rgba(0,0,0,.035)';ctx.fillRect(x,y,1+rnd()*2,1+rnd()*2);
+      }
+      for(let i=0;i<26;i++){
+        ctx.strokeStyle='rgba(185,181,168,.045)';ctx.lineWidth=.5+rnd()*1.2;ctx.beginPath();let x=rnd()*s,y=rnd()*s;ctx.moveTo(x,y);
+        for(let j=0;j<5;j++){x+=(rnd()-.5)*s*.35;y+=(rnd()-.4)*s*.27;ctx.lineTo(x,y);}ctx.stroke();
+      }
+      const wash=ctx.createRadialGradient(s*.5,s*.05,0,s*.5,s*.25,s*.84);wash.addColorStop(0,'rgba(218,187,144,.68)');wash.addColorStop(.32,'rgba(165,137,106,.40)');wash.addColorStop(1,'rgba(165,137,106,0)');ctx.fillStyle=wash;ctx.fillRect(0,0,s,s);
+      const low=ctx.createLinearGradient(0,s*.68,0,s);low.addColorStop(0,'rgba(0,0,0,0)');low.addColorStop(1,'rgba(0,0,0,.38)');ctx.fillStyle=low;ctx.fillRect(0,0,s,s);
+    });
+    const panel = new THREE.MeshBasicMaterial({map:panelTex,toneMapped:false});
+    const finMat = new THREE.MeshStandardMaterial({color:0x414344,emissive:0x211d17,emissiveIntensity:.36,roughness:.44,metalness:.65});
+    const finEdge = new THREE.MeshBasicMaterial({color:0x86745a,toneMapped:false});
+    const room = new THREE.Mesh(new THREE.CylinderGeometry(this.studioRadius,this.studioRadius,7.6,64,1,true),wall); room.position.y=3.8; g.add(room);
+    const ground = new THREE.Mesh(new THREE.CircleGeometry(this.studioRadius,64),floor); ground.rotation.x=-Math.PI/2; ground.position.y=-.14;g.add(ground);
+    const podium = new THREE.Mesh(new THREE.CylinderGeometry(3.35,3.48,.14,96),floor);podium.position.y=-.07;g.add(podium);
+    const podiumEdge = new THREE.Mesh(new THREE.TorusGeometry(3.42,.022,6,96),trim);podiumEdge.rotation.x=Math.PI/2;podiumEdge.position.y=-.055;g.add(podiumEdge);
+    const shadow = new THREE.Mesh(new THREE.CircleGeometry(3.34,64),floorDecal(new THREE.ShadowMaterial({opacity:.42}))); shadow.rotation.x=-Math.PI/2;shadow.position.y=.004;shadow.receiveShadow=true; shadow.renderOrder=2;g.add(shadow);
+    const contact = new THREE.Mesh(new THREE.PlaneGeometry(5.8,5.8),floorDecal(new THREE.MeshBasicMaterial({map:radialTexture('rgba(0,0,0,.65)','rgba(0,0,0,0)')}))); contact.rotation.x=-Math.PI/2;contact.position.y=.009;g.add(contact);
+    // Twelve fixed architectural recesses with depth, thick pilasters, dark
+    // fluted sides and concealed overhead light. There are no moving props.
+    const slots=12, moduleW=5.9, radius=12.42;
+    const place=(mesh,a,x,y,z)=>{mesh.position.set(Math.cos(a)*x+Math.sin(a)*z,y,-Math.sin(a)*x+Math.cos(a)*z);mesh.rotation.y=a;g.add(mesh);};
+    const box=(w,h,d,mat,a,x,y,z)=>place(new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat),a,x,y,z);
+    for(let i=0;i<slots;i++){
+      const a=i*Math.PI*2/slots;
+      box(moduleW,6.65,.22,frame,a,0,3.37,radius+.14);
+      const inset = new THREE.Mesh(new THREE.PlaneGeometry(4.72,5.17),panel);
+      place(inset,a,0,3.47,radius-.005);inset.rotation.y+=Math.PI;
+      for(const side of [-1,1]){
+        box(.31,6.78,.56,trim,a,side*2.69,3.39,radius-.16);
+        for(let j=0;j<3;j++) box(.065,5.25,.10,dark,a,side*(2.24+j*.13),3.45,radius-.20);
+      }
+      box(5.10,.35,.54,frame,a,0,6.29,radius-.14);
+      box(4.55,.065,.10,light,a,0,6.07,radius-.43);
+      box(5.10,.22,.37,dark,a,0,.78,radius-.10);
+      // Alternate stone display bays with sculpted, brushed-metal fins. Their
+      // differing depths give the orbit genuine parallax instead of a flat
+      // repeating cylinder; leave the fixed brand panel unobstructed.
+      if(i%3===1){
+        for(let j=0;j<9;j++){
+          const depth=.17+.22*Math.sin(Math.PI*j/8);
+          box(.28,4.80,depth,finMat,a,(j-4)*.49,3.33,radius-.08-depth/2);
+          box(.024,4.80,.024,finEdge,a,(j-4)*.49-.13,3.33,radius-.095-depth);
+        }
+      }
+    }
+    // Architectural soffit and base molding stay outside camera clearance.
+    for(const y of [.24,6.72]){
+      const ring=new THREE.Mesh(new THREE.TorusGeometry(12.48,.11,6,96),trim);ring.rotation.x=Math.PI/2;ring.position.y=y;g.add(ring);
+    }
+    // Single fixed wall-mounted mark, readable only from its front face.
+    this.studioMark=new THREE.Mesh(new THREE.PlaneGeometry(5.6,1.1),new THREE.MeshBasicMaterial({map:textTexture('VÉLANCE',{size:512,font:'500 92px Georgia, serif',metallic:true}),transparent:true,depthWrite:false}));
+    this.studioMark.position.set(0,3.65,-radius+.045);this.studioMark.scale.setScalar(.74);g.add(this.studioMark);
+    g.visible=false;this.scene.add(g);
   }
   // Nested reflection renders during compilation would force synchronous builds.
   patchReflector() {
@@ -477,7 +754,7 @@ export class GarageShowroom {
 
   // Light visibility changes rebuild lit pipelines; switch intensities instead.
   buildLights() {
-    this.scene.add(new THREE.HemisphereLight(0xf3e6d0, 0x2c343c, .5));
+    this.scene.add(new THREE.HemisphereLight(0xf3e6d0, 0x343538, .5));
     this.spots = [];
     // Mobile fragments pay for every light in the scene: four travelling spots
     // cover the visible neighbourhood instead of eight fixed ones.
@@ -499,12 +776,12 @@ export class GarageShowroom {
     shadow.camera.near = 1; shadow.camera.far = 14;
     shadow.autoUpdate = false;
     this.scene.add(this.keyShadow, this.keyShadow.target);
-    const fill = new THREE.DirectionalLight(0xbccddd, .35);
+    const fill = new THREE.DirectionalLight(0xd6d5d0, .35);
     fill.position.set(4, 6, 8); this.scene.add(fill);
     // Overview trades the bay spots for two directionals: the aerial map view
     // stays cheap enough to pan at full frame rate.
     const oKey = new THREE.DirectionalLight(0xffe0b0, 0); oKey.position.set(6, 14, 8); oKey.userData.on = 2.4;
-    const oFill = new THREE.DirectionalLight(0xbccddd, 0); oFill.position.set(-8, 10, -6); oFill.userData.on = .9;
+    const oFill = new THREE.DirectionalLight(0xd6d5d0, 0); oFill.position.set(-8, 10, -6); oFill.userData.on = .9;
     this.overviewLights = [oKey, oFill];
     this.scene.add(oKey, oFill);
   }
@@ -591,7 +868,7 @@ export class GarageShowroom {
     this.ovHoverRing.visible = false; S.add(this.ovHoverRing);
   }
   updateAtmosphere(now, dt) {
-    const on = !this.overview;
+    const on = !this.overview || this.cinema;
     const t = now / 1000;
     for (const sp of this.smoke) {
       sp.visible = true;
@@ -603,12 +880,12 @@ export class GarageShowroom {
     }
     for (let i = 0; i < this.shafts.length; i++) {
       const cone = this.shafts[i];
-      const focused = i === this.focus && this.mode === 'home' && on;
-      const target = K_ADD * (!on ? 0 : this.mode === 'selected' ? (i === this.selected ? .22 : .05) : focused ? .26 : .1);
+      const focused = i === this.focus && this.mode === 'home' && !this.overview;
+      const target = K_ADD * (this.cinema ? .34 * this.bayLightLevel(i) : !on ? 0 : this.mode === 'selected' ? (i === this.selected ? .22 : .05) : focused ? .26 : .1);
       cone.material.opacity += (target - cone.material.opacity) * Math.min(1, dt * 4);
-      cone.visible = on && cone.material.opacity > .01 * K_ADD;
+      cone.visible = on && !(this.cinema && this.mobile) && cone.material.opacity > .01 * K_ADD;
     }
-    this.motes.visible = on && this.mode === 'home';
+    this.motes.visible = on && !this.cinema && this.mode === 'home';
     this.motes.position.set(bayX(this.focus), 0, carZ(this.focus));
     if (!this.reduced && this.motes.visible) this.uMoteTime.value = t;
   }
@@ -648,12 +925,13 @@ export class GarageShowroom {
   placeDetailSet(index) {
     if (!this.detailSet) return;
     this.detailSet.position.set(bayX(index), 0, carZ(index));
+    this.detailSet.rotation.y = 0;
     // Counter orbit-yaw parallax per element so the halo rings the car and the
     // wordmark sits centred above it, clear of the wall pillars. Rear row mirrors
     // the dressing depth so it stays behind the machine from the rear camera.
     const sz = index < this.perRow ? 1 : -1;
     for (const c of this.detailSet.children) c.position.z = (c.userData.bz || 0) * sz;
-    const t = Math.tan(this.mobile ? 1.05 : .62);
+    const t = Math.tan(this.heroYaw(index));
     if (this.detailHalo) this.detailHalo.position.x = -2.4 * t * sz;
     if (this.detailGlow) this.detailGlow.position.x = -2.5 * t * sz;
     if (this.detailMark) {
@@ -681,7 +959,7 @@ export class GarageShowroom {
   }
   warmScene() {
     return this.compile(this.scene, () => {
-      const hidden = [this.detailSet, ...this.contacts].filter(o => !o.visible);
+      const hidden = [this.detailSet, this.studioGroup, this.overviewApron, ...this.contacts].filter(o => !o.visible);
       for (const o of hidden) o.visible = true;
       const restoreCulling = cullOff(this.scene);
       return () => { for (const o of hidden) o.visible = false; restoreCulling(); };
@@ -694,19 +972,44 @@ export class GarageShowroom {
       const v = this.vehicles[i];
       const el = document.createElement('button');
       el.type = 'button'; el.className = 'bay-label'; el.dataset.index = i;
+      el.setAttribute('aria-label', `View bay ${i + 1}: ${v.make} ${v.name}`);
       el.innerHTML = `<span class="bay-label-no">BAY ${String(i + 1).padStart(2, '0')}</span><strong>${v.make} <em>${v.name}</em></strong><span class="bay-label-tag">${v.tag}</span><span class="bay-label-cta">VIEW THIS MACHINE ↗</span>`;
-      el.addEventListener('click', () => {
+      this.inputLifetime.listen(el, 'click', () => {
         if (performance.now() < this.suppressUntil || this.dragged) return;
-        if (this.mode !== 'home') return;
-        this.setFocus(i); this.onSelect(i);
+        if (this.mode !== 'home' || this.cinema || this.returning) return;
+        this.onSelect(i);
       });
       this.labelHost.appendChild(el);
       this.labels.push(el);
     }
+    // The portrait overview cannot fit sixteen model names next to the cars.
+    // Keep numbered scene controls and provide a full collection picker that
+    // reaches every vehicle, even while its model is still being prepared.
+    const picker = document.createElement('div');
+    picker.className = 'overview-picker'; picker.hidden = true;
+    this.inputLifetime.listen(picker, 'keydown', e => { if (e.target.matches('select')) e.stopPropagation(); });
+    const model = document.createElement('select');
+    model.setAttribute('aria-label', 'Choose a vehicle from all sixteen bays');
+    for (const [i, v] of this.vehicles.entries()) {
+      const option = document.createElement('option');
+      option.value = String(i);
+      option.textContent = `${String(i + 1).padStart(2, '0')} · ${v.make} ${v.name}`;
+      model.append(option);
+    }
+    model.value = String(this.focus);
+    const view = document.createElement('button');
+    view.type = 'button'; view.textContent = 'VIEW ↗';
+    view.setAttribute('aria-label', 'View chosen vehicle');
+    this.inputLifetime.listen(view, 'click', () => {
+      if (this.mode === 'home' && this.overview && !this.cinema && !this.returning) this.onSelect(Number(model.value));
+    });
+    picker.append(model, view); this.stage.append(picker);
+    this.overviewPicker = picker; this.overviewChoice = model;
   }
 
   /* ------------------------------------------------------------- loading */
-  /* Downloads are on-demand; GPU compilation remains serialized. */
+  /* Only two compressed downloads are prefetched. Decode one GLB at a time;
+     never keep an entire queue of parsed scenes/decoded textures. */
   async acquireDL() { while (this.dlActive >= this.dlLimit) await new Promise(r => this.dlWaiters.push(r)); this.dlActive++; }
   releaseDL() { this.dlActive--; (this.dlWaiters.shift() || (() => {}))(); }
   prefetch(index) {
@@ -717,19 +1020,19 @@ export class GarageShowroom {
     const task = (async () => {
       await this.acquireDL();
       try {
-        const url = new URL(`./assets/models/${encodeURIComponent(vehicle.file)}`, location.href);
+        const url = new URL(`./assets/models/gallery/${encodeURIComponent(vehicle.file)}`, location.href);
         const res = await fetch(url, { signal: controller.signal, cache: 'force-cache' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const buffer = await res.arrayBuffer();
-        return await new Promise((ok, no) => this.loader.parse(buffer, new URL('./assets/models/', location.href).href, ok, no));
+        return await res.arrayBuffer();
       } finally { this.dlControllers.delete(controller); this.releaseDL(); }
     })();
     task.catch(() => {});
     this.buffers.set(index, task);
   }
+  prefetchAhead(){for(const i of this.queue.slice(0,1))this.prefetch(i);}
   prioritize(index) {
     index %= this.vehicles.length;
-    if (this.cars.has(index) || this.disposed) return;
+    if (this.cars.has(index) || this.activeLoad === index || this.disposed) return;
     this.queue = this.queue.filter(i => i !== index);
     this.queue.unshift(index); this.queued.add(index);
     this.prefetch(index);
@@ -740,58 +1043,61 @@ export class GarageShowroom {
     center %= this.vehicles.length;
     // Explicit full-gallery gesture only. Never call this at initial boot.
     const order = loadOrder(center, this.vehicles.length, { all: true });
-    for (const i of order) if (!this.cars.has(i) && !this.queued.has(i)) { this.queue.push(i); this.queued.add(i); }
+    for (const i of order) if (!this.cars.has(i) && i !== this.activeLoad && !this.queued.has(i)) { this.queue.push(i); this.queued.add(i); }
     this.runQueue();
   }
-  async runQueue() {
-    if (this.loading || this.disposed) return;
+  prepareEntrance() {
+    if (this.entrancePrepared || this.disposed) return;
+    this.entrancePrepared = true;
+    this.revealOrder = Array.from({ length: this.vehicles.length }, (_, i) => i).sort((a, b) => bayRevealOrder(a) - bayRevealOrder(b));
+    this.queue = this.revealOrder.filter(i => !this.cars.has(i) && i !== this.activeLoad);
+    this.queued = new Set(this.queue);
+    this.runQueue();
+  }
+  runQueue() {
+    if (this.loading || this.disposed) return this.queueTask;
+    this.queueTask = this.drainQueue();
+    return this.queueTask;
+  }
+  async drainQueue() {
     this.loading = true;
     try {
       while (this.queue.length) {
         if (this.disposed) return;
         const index = this.queue.shift(); this.queued.delete(index);
         if (this.cars.has(index)) continue;
+        this.activeLoad = index;
+        this.loadFailures.delete(index);
+        this.labels[index].classList.remove('is-error');
         const vehicle = this.vehicles[index];
         const started = performance.now();
+        let holder=null,rawScene=null;
         try {
           this.prefetch(index);
-          const gltf = await this.buffers.get(index);
+          this.prefetchAhead();
+          const buffer = await this.buffers.get(index);
           this.buffers.delete(index);
           if (this.disposed) return;
-          const holder = normalise(gltf.scene, vehicle);
-          holder.rotation.y += .3 + (index >= this.perRow ? Math.PI : 0) + (NOSE_BACK.has(vehicle.id) ? Math.PI : 0);
-          holder.position.set(bayX(index), 0, carZ(index));
-          this.finishMaterials(holder);
-          this.collectPaint(holder);
-          const choice = this.paintChoice.get(index);
-          if (choice) this.applyPaint(holder, choice);
+          rawScene=(await this.loader.parseAsync(buffer,new URL('./assets/models/gallery/',location.href).href)).scene;
+          if(this.disposed)return;
+          holder=this.prepareModel(rawScene,index,'gallery');
           const casts = this.mode === 'selected' && index === this.selected;
           holder.traverse(n => { if (n.isMesh) n.castShadow = casts; });
-          holder.userData.index = index;
-          holder.userData.triangles = 0;
-          holder.traverse(n => { if (n.isMesh) holder.userData.triangles += (n.geometry.index?.count ?? n.geometry.attributes.position.count) / 3; });
           // Never compile a new machine mid-drag: the pipeline build would
           // hitch the very motion the visitor is steering.
           while (!this.disposed && this.drag?.moved) await new Promise(r => setTimeout(r, 80));
           if (this.disposed) return;
-          await this.compile(holder, () => cullOff(holder)).catch(error => console.warn('[VÉLANCE] compile', vehicle.id, error));
+          await this.compile(holder, () => cullOff(holder));
           if (this.disposed) return;
           if (this.mode === 'selected' && index !== this.selected) { this.setCarAlpha(holder, 0); holder.visible = false; }
           holder.traverse(n => { if (n.isMesh) n.castShadow = this.mode === 'selected' && index === this.selected; });
-          this.scene.add(holder);
-          this.cars.set(index, holder);
           // Home culling never renders distant cars, so their textures would
           // all lazy-upload in one stall the first time overview reveals them.
-          holder.traverse(n => {
-            if (!n.isMesh) return;
-            for (const m of Array.isArray(n.material) ? n.material : [n.material]) {
-              if (!m) continue;
-              for (const key of ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'aoMap', 'alphaMap']) {
-                const t = m[key];
-                if (t && !this.uploaded.has(t)) { this.uploaded.add(t); this.texQueue.push(t); }
-              }
-            }
-          });
+          this.uploadModel(holder);
+          if (this.cinema) holder.visible = false;
+          this.scene.add(holder);
+          this.cars.set(index, holder);
+          this.installDetail();
           this.parked++;
           this.contacts[index].visible = true;
           const ph = this.placeholders.get(index);
@@ -802,13 +1108,76 @@ export class GarageShowroom {
           this.onProgress(this.parked, this.vehicles.length, index);
           if (!this.initialReady) { this.initialReady = true; this.onReady(); }
         } catch (err) {
-          if (err?.name !== 'AbortError') { this.labels[index].classList.add('is-error'); this.onError(index, err.message || String(err)); }
+          if (!this.disposed) { this.loadFailures.add(index); this.labels[index].classList.add('is-error'); this.onError(index, err.message || String(err)); }
+        } finally {
+          if(holder&&holder!==this.cars.get(index)&&holder!==this.detailResident?.gallery)disposeModel(holder);
+          else if(!holder&&rawScene)disposeModel(rawScene);
+          this.buffers.delete(index);
+          this.activeLoad = null;
         }
       }
     } finally {
       this.loading = false;
-      if (this.queue.length) queueMicrotask(() => this.runQueue());
+      if (!this.disposed && this.queue.length) queueMicrotask(() => this.runQueue());
     }
+  }
+  prepareModel(scene,index,tier){
+    const vehicle=this.vehicles[index],holder=normalise(scene,vehicle);
+    holder.rotation.y+=.3+(index>=this.perRow?Math.PI:0)+(NOSE_BACK.has(vehicle.id)?Math.PI:0);
+    holder.position.set(bayX(index),0,carZ(index));
+    this.finishMaterials(holder);this.collectPaint(holder);
+    this.applyPaint(holder,this.paintChoice.get(index));
+    holder.userData.index=index;holder.userData.tier=tier;holder.userData.triangles=0;
+    holder.traverse(n=>{if(n.isMesh)holder.userData.triangles+=(n.geometry.index?.count??n.geometry.attributes.position.count)/3;});
+    return holder;
+  }
+  uploadModel(holder){for(const t of modelResources(holder).textures)if(!this.uploaded.has(t)){this.renderer.initTexture?.(t);this.uploaded.add(t);}}
+  requestDetail(index){
+    this.cancelDetail();const epoch=this.detailEpoch,controller=new AbortController();this.detailAbort=controller;
+    const current=()=>!this.disposed&&epoch===this.detailEpoch&&this.mode==='selected'&&this.selected===index;
+    // Wait for older canceled decodes to finish before starting another high
+    // tier. Abort fetch immediately, release a late parse deterministically.
+    const run=async()=>{
+      if(!current())return;
+      let raw=null,holder=null,retained=false;
+      try{
+        const url=new URL(`./assets/models/detail/${encodeURIComponent(this.vehicles[index].file)}`,location.href);
+        const res=await fetch(url,{signal:controller.signal,cache:'force-cache'});
+        if(!res.ok)throw new Error(`HTTP ${res.status}`);
+        const buffer=await res.arrayBuffer();if(!current())return;
+        raw=(await this.loader.parseAsync(buffer,new URL('./assets/models/detail/',location.href).href)).scene;
+        if(!current())return;
+        holder=this.prepareModel(raw,index,'detail');
+        holder.traverse(n=>{if(n.isMesh)n.castShadow=true;});
+        await this.compile(holder,()=>cullOff(holder));if(!current())return;
+        this.uploadModel(holder);if(!current())return;
+        this.pendingDetail={index,holder};retained=true;this.installDetail();
+      }catch(error){if(current())this.onDetailError(index,error.message||String(error));}
+      finally{if(!retained)disposeModel(holder||raw);if(this.detailAbort===controller)this.detailAbort=null;}
+    };
+    this.detailTask=this.detailTask.then(run,run);
+  }
+  installDetail(){
+    const pending=this.pendingDetail;
+    if(!pending||!this.studioActive||this.mode!=='selected'||this.selected!==pending.index||!this.cars.has(pending.index))return;
+    const {index,holder}=pending,gallery=this.cars.get(index);
+    this.pendingDetail=null;gallery.removeFromParent();
+    holder.visible=true;this.applyPaint(holder,this.paintChoice.get(index));this.setCarAlpha(holder,1);
+    this.scene.add(holder);this.cars.set(index,holder);this.detailResident={index,holder,gallery};
+    this.refreshShadow();this.onDetailReady(index);
+  }
+  cancelDetail(){
+    this.detailEpoch++;this.detailAbort?.abort();this.detailAbort=null;
+    if(this.pendingDetail){disposeModel(this.pendingDetail.holder);this.pendingDetail=null;}
+  }
+  releaseDetail(){
+    const d=this.detailResident;if(!d)return;
+    this.detailResident=null;const visible=d.holder.visible;
+    this.cars.set(d.index,d.gallery);d.gallery.visible=visible;
+    this.applyPaint(d.gallery,this.paintChoice.get(d.index));this.setCarAlpha(d.gallery,1);
+    d.gallery.traverse(n=>{if(n.isMesh)n.castShadow=false;});
+    if(!this.disposed)this.scene.add(d.gallery);
+    disposeModel(d.holder);
   }
   /* Glossy showroom paint: clearcoat on body materials, stronger env response
    * on metals/chrome, anisotropic filtering on every texture. */
@@ -839,6 +1208,7 @@ export class GarageShowroom {
    * the decals with depth intact (no x-ray); cutouts switch at the midpoint. */
   setCarAlpha(car, alpha) {
     const u = car.userData;
+    u.displayAlpha = alpha;
     for (const m of u.fadeMats) m.opacity = m.userData.baseOpacity * alpha;
     const order = alpha < .999 ? 10 : 0;
     for (const n of u.opaqueMeshes) n.renderOrder = order;
@@ -847,10 +1217,13 @@ export class GarageShowroom {
   tuneMaterial(mat) {
     const name = (mat.name || '').toLowerCase();
     if (/glass|window|light|lamp|emissive|tyre|tire|rubber|tread/.test(name) || mat.transmission > 0 || mat.opacity < .99) {
-      mat.envMapIntensity = /glass|window/.test(name) ? 1.15 : .8;
+      mat.envMapIntensity = /glass|window/.test(name) ? 1.0 : .8;
       return mat;
     }
-    const paint = /paint|carpaint|body_color|coloured|_spec_|siny/.test(name) || (!mat.map && mat.roughness <= .28);
+    // Leave physically authored trim and carbon alone; only broaden paint
+    // highlights, keeping existing roughness textures and the base colour.
+    const trim = /wheel|carbon|interior|intor|seat|engine|brake|caliper|calliper|disk|mirror|grill|badge|plate|speaker|susp|chrome/.test(name);
+    const paint = !trim && (/paint|carpaint|body_color|coloured|_spec_|siny/.test(name) || (!mat.map && mat.roughness <= .28));
     if (paint) {
       let m = mat;
       if (!mat.isMeshPhysicalMaterial) {
@@ -864,8 +1237,9 @@ export class GarageShowroom {
         m.name = mat.name;
       }
       m.clearcoat = Math.max(m.clearcoat || 0, .9);
-      m.clearcoatRoughness = .06;
-      m.envMapIntensity = 1.3;
+      m.clearcoatRoughness = Math.max(m.clearcoatRoughness || 0, .12);
+      if (!m.roughnessMap) m.roughness = Math.max(m.roughness ?? .16, .16);
+      m.envMapIntensity = 1.1;
       return m;
     }
     mat.envMapIntensity = mat.metalness > .6 && mat.roughness < .45 ? 1.05 : .8;
@@ -912,7 +1286,15 @@ export class GarageShowroom {
         paint = [m];
       }
     }
-    const converted = new Map(paint.map(m => [m, createCarPaintMaterial(m, { coordinateScale: holder.scale.x })]));
+    const converted = new Map(paint.map(m => {
+      const finish = createCarPaintMaterial(m, { coordinateScale: holder.scale.x });
+      // The shader factory defaults to a very sharp .06 clearcoat. Broaden
+      // this lobe locally for the showroom; keep the standalone package intact.
+      finish.clearcoatRoughness = Math.max(m.clearcoatRoughness || 0, .12);
+      if (!finish.roughnessMap) finish.roughness = Math.max(finish.roughness ?? .16, .16);
+      finish.envMapIntensity = Math.min(finish.envMapIntensity ?? 1, 1.1);
+      return [m, finish];
+    }));
     holder.traverse(n => { if (n.isMesh && converted.has(n.material)) n.material = converted.get(n.material); });
     holder.userData.paintMats = [...converted.values()];
     holder.userData.fadeMats = holder.userData.fadeMats.map(m => converted.get(m) || m);
@@ -956,14 +1338,15 @@ export class GarageShowroom {
   /* --------------------------------------------------------------- input */
   bindInput() {
     const stage = this.stage;
-    stage.addEventListener('pointerdown', e => {
-      if (this.mode !== 'home' || e.button !== 0) return;
+    const listen = (type, handler, options) => this.inputLifetime.listen(stage, type, handler, options);
+    listen('pointerdown', e => {
+      if (this.mode !== 'home' || this.cinema || this.returning || e.target.closest('button,.overview-picker') || e.button !== 0) return;
       this.drag = { id: e.pointerId, x: e.clientX, y: e.clientY, initial: this.position, base: Math.round(this.position), initialPan: this.ovPan, moved: false, lastVal: this.overview ? this.ovPan : this.position, lastT: performance.now(), vel: 0 };
       this.dragged = false; stage.style.cursor = '';
     });
-    stage.addEventListener('pointermove', e => {
+    listen('pointermove', e => {
       const p = this.drag;
-      if (!p || p.id !== e.pointerId || this.mode !== 'home') return;
+      if (!p || p.id !== e.pointerId || this.mode !== 'home' || this.cinema) return;
       const dx = e.clientX - p.x, dy = e.clientY - p.y;
       if (!p.moved && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 12) { this.drag = null; return; }
       if (!p.moved && Math.abs(dx) < 8) return;
@@ -1002,28 +1385,29 @@ export class GarageShowroom {
         // to the UI only once after the gesture ends.
         this.onFocus(this.focus);
       }
-      setTimeout(() => { this.dragged = false; }, 40);
+      clearTimeout(this.dragResetTimer);
+      this.dragResetTimer = setTimeout(() => { this.dragged = false; }, 40);
     };
-    stage.addEventListener('pointerup', e => {
+    listen('pointerup', e => {
       const wasDrag = this.drag?.moved;
       end(e);
-      if (!wasDrag && this.mode === 'home' && performance.now() > this.suppressUntil) {
+      if (!wasDrag && this.mode === 'home' && !this.cinema && !this.returning && !e.target.closest('button,.overview-picker') && performance.now() > this.suppressUntil) {
         const hit = this.pickCar(e.clientX, e.clientY);
-        if (hit !== null) { this.setFocus(hit); this.onSelect(hit); }
+        if (hit !== null) this.onSelect(hit);
       }
     });
-    stage.addEventListener('pointercancel', end);
+    listen('pointercancel', end);
     // Overview hover: cheap floor-plane pick (no per-mesh raycast) lights a ring
     // under the pointed bay and glows its label.
-    stage.addEventListener('pointermove', e => {
-      if (this.mode !== 'home' || !this.overview || this.drag?.moved) return;
+    listen('pointermove', e => {
+      if (this.mode !== 'home' || !this.overview || this.drag?.moved || e.target.closest('.overview-picker')) return;
       this.ovHover = this.pickBay(e.clientX, e.clientY);
       stage.style.cursor = this.ovHover !== null ? 'pointer' : '';
     });
-    stage.addEventListener('pointerleave', () => { this.ovHover = null; stage.style.cursor = ''; });
-    stage.addEventListener('dragstart', e => e.preventDefault());
-    stage.addEventListener('wheel', e => {
-      if (this.mode !== 'home' || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    listen('pointerleave', () => { this.ovHover = null; stage.style.cursor = ''; });
+    listen('dragstart', e => e.preventDefault());
+    listen('wheel', e => {
+      if (this.mode !== 'home' || this.returning || this.cinema || e.target.closest('.overview-picker') || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
       if (this.overview) { this.ovTarget = clamp(this.ovTarget + (e.deltaX > 0 ? 2.5 : -2.5), -this.ovLimit, this.ovLimit); return; }
       // Touchpad: one car per swipe, then a short lock so it cannot chain.
@@ -1032,17 +1416,18 @@ export class GarageShowroom {
       this.wheelLock = now + 420;
       if (e.deltaX > 0) this.next(); else this.prev();
     }, { passive: false });
-    addEventListener('resize', () => this.resize(), { passive: true });
+    this.inputLifetime.listen(window, 'resize', () => this.resize(), { passive: true });
   }
   /* Screen-right / screen-left: the rear row faces the other way, so its
    * index order runs opposite to the front row on screen. */
-  next() { const [lo] = this.rowBounds(); const step = this.row === 1 ? -1 : 1; this.setFocus(lo + ((this.focus - lo + step + this.perRow) % this.perRow)); }
-  prev() { const [lo] = this.rowBounds(); const step = this.row === 1 ? 1 : -1; this.setFocus(lo + ((this.focus - lo + step + this.perRow) % this.perRow)); }
+  // Do not sweep 45 meters across the entire hall when an arrow wraps a row.
+  next() { if (this.cinema || this.returning || this.overview || this.mode !== 'home') return; const [lo, hi] = this.rowBounds(); this.setFocus(clamp(this.focus + (this.row === 1 ? -1 : 1), lo, hi)); }
+  prev() { if (this.cinema || this.returning || this.overview || this.mode !== 'home') return; const [lo, hi] = this.rowBounds(); this.setFocus(clamp(this.focus + (this.row === 1 ? 1 : -1), lo, hi)); }
   pickCar(cx, cy) {
     const r = this.canvas.getBoundingClientRect();
     const ndc = new THREE.Vector2(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
     this.raycaster.setFromCamera(ndc, this.camera);
-    const groups = [...this.cars.values(), ...this.placeholders.values()];
+    const groups = [...this.cars.values(), ...this.placeholders.values()].filter(o => o.visible);
     const hits = this.raycaster.intersectObjects(groups, true);
     if (!hits.length) return null;
     let node = hits[0].object;
@@ -1065,6 +1450,7 @@ export class GarageShowroom {
     return (z > 0 ? 1 : 0) * this.perRow + col;
   }
   setFocus(i, silent = false) {
+    if (this.returning) return;
     const [lo, hi] = this.rowBounds(rowOf(clamp(i, 0, this.bayCount - 1)));
     const next = clamp(i, lo, hi);
     this.target = next;
@@ -1083,7 +1469,7 @@ export class GarageShowroom {
     this.layoutSpots(row);
     this.prioritize(index);
     const { pos, look } = this.homePose(index);
-    this.flight = { t: 0, start: performance.now(), dur: this.reduced ? 0 : .6, fromPos: this.camera.position.clone(), fromLook: this.currentLook(), toPos: pos, toLook: look, done: null };
+    this.flight = { t: 0, dur: this.reduced ? 0 : flightSeconds(this.camera.position, pos, FLIGHT_SECONDS.row), fromPos: this.camera.position.clone(), fromLook: this.currentLook(), toPos: pos, toLook: look, done: null };
     this.onFocus(index);
     return row;
   }
@@ -1099,18 +1485,20 @@ export class GarageShowroom {
     const { pos, look } = this.homePose(this.position);
     this.camera.position.copy(pos); this.camera.lookAt(look);
   }
-  overviewPose() {
-    const aspect = this.camera.aspect || 1;
-    const vFov = this.camera.fov * Math.PI / 180;
+  overviewPose(fov = this.mobile ? 60 : 50) {
+    // setViewOffset mutates camera.aspect. Overview always uses the physical
+    // viewport, even when returning from a cropped detail projection.
+    const aspect = this.stage.clientWidth / Math.max(1, this.stage.clientHeight) || 1;
+    const vFov = fov * Math.PI / 180;
     const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
     const halfW = HALL_W / 2 + 2;
-    if (this.mobile) {
+    if (this.mobile || aspect < 1.1) {
       // Portrait: look down the long axis so the whole rectangle fits.
       const dist = clamp(Math.max((HALL_W / 2 + 2) / Math.tan(vFov / 2), (HALL_DEPTH / 2 + 2) / Math.tan(hFov / 2)) * 1.08, 26, 62);
       this.ovLimit = Math.max(2, HALL_DEPTH / 2 + 2 - Math.tan(hFov / 2) * dist * .92);
       return { pos: new THREE.Vector3(-dist * .62, dist * .78, this.ovPan), look: new THREE.Vector3(-.4, -1.5, this.ovPan) };
     }
-    const dist = clamp(Math.max(halfW / Math.tan(hFov / 2), 12 / Math.tan(vFov / 2)), 26, 46);
+    const dist = clamp(Math.max((halfW+.8) / Math.tan(hFov / 2)+3.3, 12 / Math.tan(vFov / 2)), 26, 50);
     this.ovLimit = Math.max(3, halfW - Math.tan(hFov / 2) * dist * .92);
     return { pos: new THREE.Vector3(this.ovPan, dist * .78, dist * .62), look: new THREE.Vector3(this.ovPan, .4, -.4) };
   }
@@ -1129,10 +1517,13 @@ export class GarageShowroom {
     }
     this.camera.position.copy(pos); this.camera.lookAt(look);
   }
-  applyOverviewState(on) {
+  applyOverviewState(on, resize = true) {
     this.overview = on;
     this.stage.classList.toggle('is-overview', on);
-    if (on) this.ovOpenAt = performance.now(); else this.ovHover = null;
+    if (on) {
+      this.ovOpenAt = performance.now();
+      if (!this.returning && this.overviewChoice) this.overviewChoice.value = String(this.focus);
+    } else this.ovHover = null;
     this.ovSweep.visible = on;
     this.ceilGroup.visible = !on;
     this.southGroup.visible = !on;
@@ -1148,124 +1539,313 @@ export class GarageShowroom {
       for (const [i, car] of this.cars) if (!this.fades.has(i)) car.visible = true;
       for (const [i, ph] of this.placeholders) if (!this.fades.has(i)) ph.visible = !this.cars.has(i);
     }
-    this.resize();
+    if (resize) this.resize();
     this.reflDirty = true;
     if (!on) { this.ovPan = 0; this.ovTarget = 0; }
     this.onOverview(on);
   }
   toggleOverview() {
-    if (this.mode !== 'home') return;
+    if (this.mode !== 'home' || this.returning || this.flight?.cinema) return;
     const on = !this.overview;
-    this.applyOverviewState(on);
+    this.applyOverviewState(on, false);
     if (on) this.enqueueAround(this.focus);
     const to = on ? this.overviewPose() : this.homePose(this.position);
-    this.flight = { t: 0, start: performance.now(), dur: this.reduced ? 0 : .7, fromPos: this.camera.position.clone(), fromLook: this.currentLook(), toPos: to.pos, toLook: to.look, done: null };
+    this.flight = { t: 0, dur: this.reduced ? 0 : flightSeconds(this.camera.position, to.pos, FLIGHT_SECONDS.overview), fromPos: this.camera.position.clone(), fromLook: this.currentLook(), toPos: to.pos, toLook: to.look, done: null };
   }
-  select(index, hostEl) {
-    if (this.mode !== 'home') return;
-    if (this.overview) this.applyOverviewState(false);
+  heroYaw(index) {
+    const yaw = this.mobile ? 1.05 : .62;
+    const sz = index < this.perRow ? 1 : -1;
+    const dist = this.mobile ? 9.6 : 6.6;
+    // The outer bays must be filmed from inside the hall, never through a wall.
+    return Math.abs(bayX(index) + Math.sin(yaw) * dist * sz) > HALL_W / 2 - 1.5 ? -yaw : yaw;
+  }
+  heroPose(index) {
+    const look = new THREE.Vector3(bayX(index), .78, carZ(index));
+    const yaw = this.heroYaw(index), dist = this.mobile ? 9.6 : 6.6;
+    const sz = index < this.perRow ? 1 : -1;
+    return { look, pos: look.clone().add(new THREE.Vector3(Math.sin(yaw) * dist * sz, 1.42, Math.cos(yaw) * dist * sz)) };
+  }
+  setAutoShot(on) {
+    this.autoShot = null;
+    if (on && !this.reduced && this.mode === 'selected' && this.studioActive && this.controls?.enabled) {
+      const offset = this.camera.position.clone().sub(this.controls.target);
+      this.autoShot = { elapsed: 0, yaw: Math.atan2(offset.x, offset.z), radius: Math.hypot(offset.x, offset.z), height: offset.y, direction: this.heroYaw(this.selected) < 0 ? -1 : 1 };
+      this.reflectOn = false; this.pendingReflectRestore = 0;
+    } else if (this.mode === 'selected' && !this.flight && !this.studioActive) this.pendingReflectRestore = 1.15;
+    this.stage.dispatchEvent(new CustomEvent('velance:auto-shot', { detail: !!this.autoShot }));
+  }
+  advanceAutoShot(dt) {
+    const shot = this.autoShot;
+    if (!shot || !this.controls?.enabled || !this.cars.has(this.selected)) return;
+    shot.elapsed += Math.min(dt, .034);
+    // A short settling beat, then a continuous 360-degree track. Vary the
+    // radius and elevation slowly instead of spinning the model or hard-cutting.
+    const t = Math.max(0, shot.elapsed - 1.25);
+    const ramp = 1.1;
+    const travel = t < ramp ? t * t / (2 * ramp) : t - ramp / 2;
+    const phase = travel * Math.PI * 2 / 14;
+    const yaw = shot.yaw + shot.direction * (phase + .16 * Math.sin(phase * 2));
+    const amount = (1 - Math.cos(phase)) / 2;
+    const radius = shot.radius * (1 - .045 * amount);
+    const height = shot.height + (this.mobile ? .35 : .55) * Math.sin(phase) ** 2;
+    this.camera.position.copy(this.controls.target).add(new THREE.Vector3(Math.sin(yaw) * radius, height, Math.cos(yaw) * radius));
+    this.camera.lookAt(this.controls.target);
+  }
+  setStudio(on) {
+    this.studioActive = on;
+    this.studioGroup.visible = on;
+    this.hallArchitecture.visible = !on;
+    if (on) {
+      this.studioGroup.position.set(bayX(this.selected), 0, carZ(this.selected));
+      this.overviewApron.visible = false;
+      this.reflectOn = false; this.pendingReflectRestore = 0;
+      this.detailSet.visible = false;
+      for (const [i, car] of this.cars) car.visible = i === this.selected;
+      for (const ph of this.placeholders.values()) ph.visible = false;
+      this.installDetail();
+    } else this.releaseDetail();
+    this.refreshShadow();
+  }
+  studioFade(value) {
+    this.studioCurtain.style.opacity = String(clamp(value, 0, 1));
+  }
+  select(index, hostEl, onReveal = () => {}, onLanded = () => {}) {
+    if (this.mode !== 'home' || this.cinema || this.returning) return;
+    const fromPos = this.camera.position.clone(), fromQuat = this.camera.quaternion.clone();
+    const fromLook = this.currentLook(), fromFov = this.camera.fov;
+    const wasOverview = this.overview;
+    if (wasOverview && this.overviewChoice) this.overviewChoice.value = String(index);
+    this.selectionOrigin = { overview: wasOverview, pan: this.ovPan, focus: this.focus, row: this.row, fov: fromFov };
+    if (wasOverview) this.applyOverviewState(false, false);
     if (this.refl) { this.reflectOn = false; this.uReflect.value = 0; }
     this.mode = 'selected'; this.selected = index; this.row = rowOf(index);
+    this.focus = this.target = this.position = index; this.onFocus(index);
+    this.drag = null; this.dragged = false; this.stage.classList.remove('dragging');
     this.prioritize(index);
+    this.requestDetail(index);
     this.stage.classList.add('is-selected');
-    for (const [i] of this.cars) if (i !== index) this.fades.set(i, { from: 1, to: 0, start: performance.now() });
+    this.fades.clear();
+    for (const [i, car] of this.cars) {
+      this.setCarAlpha(car, 1);
+      car.visible = i === index || wasOverview || car.visible;
+    }
     for (const [i, ph] of this.placeholders) ph.visible = i === index;
-    const center = new THREE.Vector3(bayX(index), .78, carZ(index));
-    const yaw = this.mobile ? 1.05 : .62, dist = this.mobile ? 9.6 : 6.6;
+    const { look: center, pos: endPos } = this.heroPose(index);
     this.detailHost = hostEl;
     const sz = index < this.perRow ? 1 : -1;
-    // Mirror the approach side on the rear row so the nose always reads left,
-    // matching the front row (the rear camera faces +Z).
-    const endPos = center.clone().add(new THREE.Vector3(Math.sin(yaw) * dist * sz, 1.42, Math.cos(yaw) * dist * sz));
+    const side = Math.sign(endPos.x - center.x);
+    const high = fromPos.y > CEIL_Y;
+    // Crane across the hall above the roof, then swing around the car from
+    // the central aisle. The final tangent is lower and more lateral.
+    const c1 = high
+      ? new THREE.Vector3(THREE.MathUtils.lerp(fromPos.x, center.x, .72), Math.max(8, fromPos.y * .82), fromPos.z * .28)
+      : new THREE.Vector3(THREE.MathUtils.lerp(fromPos.x, center.x, .45) - side * 1.6, 3.5, clamp(fromPos.z, -2.8, 2.8));
+    const c2 = new THREE.Vector3(clamp(endPos.x - side * 3.2, -HALL_W / 2 + 2, HALL_W / 2 - 2), high ? 7.2 : 3.4, clamp(endPos.z + sz * 1.4, -3.4, 3.4));
+    const arcLut = cameraArcLut(fromPos, c1, c2, endPos);
+    // The artwork and spec panel start revealing late in the camera movement.
+    // Delay high-resolution editorial image work until the camera has landed.
     this.controls = new OrbitControls(this.camera, hostEl);
     this.controls.enabled = false;
     this.controls.addEventListener('change', () => { this.lastOrbitAt = performance.now(); });
+    this.controls.addEventListener('start', () => this.setAutoShot(false));
     this.controls.enableDamping = true; this.controls.dampingFactor = .07;
     this.controls.enablePan = false; this.controls.enableZoom = false;
     this.controls.rotateSpeed = .55;
     this.controls.minDistance = 4.4; this.controls.maxDistance = 10.5;
-    this.controls.minPolarAngle = .32; this.controls.maxPolarAngle = 1.46;
+    // The camera remains below the fixed studio wall even after manual orbit
+    // and restarting AUTO from the highest permitted viewpoint.
+    this.controls.minPolarAngle = 1.0; this.controls.maxPolarAngle = 1.46;
     hostEl.style.touchAction = 'none';
-    this.flight = {
-      t: 0, start: performance.now(), dur: this.reduced ? 0 : .62,
-      fromPos: this.camera.position.clone(), fromLook: this.currentLook(),
-      toPos: endPos, toLook: center,
-      done: () => {
-        this.reflectOn = true;
-        this.reflDirty = true;
-        this.refreshShadow();
-        this.controls.target.copy(center);
-        this.controls.enabled = true;
-        this.controls.update();
-        this.frameViewOffset();
-      }
-    };
+    this.controls.target.copy(center);
+    // OrbitControls' constructor calls update() with its default origin.
+    // Restore the actual opening frame until the intentional handoff.
+    this.camera.position.copy(fromPos); this.camera.quaternion.copy(fromQuat);
+    this.pendingReflectRestore = 0;
+    // The car casts its first shadow well before landing so the last frame
+    // does not force a new shadow-map pass just as orbit is enabled.
     const car = this.cars.get(index);
     if (car) car.traverse(n => { if (n.isMesh) n.castShadow = true; });
     this.keyShadow.position.set(bayX(index) + 2.5 * sz, CEIL_Y - .3, index < this.perRow ? -2.4 : 2.4);
     this.keyShadow.target.position.copy(center);
-    this.keyShadow.intensity = 240;
+    this.keyShadow.intensity = 0;
+    this.refreshShadow();
     this.placeDetailSet(index);
+    // Prewarm the scene dressing now; reveal it through opacity instead of
+    // toggling it on for the first time halfway through a GPU-heavy flight.
+    this.detailSet.visible = true;
+    for (const piece of this.detailSet.children) {
+      if (piece.userData.originalOpacity === undefined) piece.userData.originalOpacity = piece.material.opacity;
+      piece.material.opacity = 0;
+    }
+    this.flight = {
+      t: 0, dur: this.reduced ? 0 : clamp(arcLut.length / 10.5, FLIGHT_SECONDS.select, 5.2),
+      selection: true, fromPos, fromLook,
+      c1, c2, toPos: endPos, toLook: center, framing: 0,
+      fromQuat, fromFov, arcLut, wasOverview, aimQuat: new THREE.Quaternion(), aimMatrix: new THREE.Matrix4(),
+      onReveal,
+      done: () => {
+        this.camera.fov = fromFov;
+        this.frameViewOffset(1);
+        this.controls.enabled = true;
+        this.controls.update();
+        // Rebuild the expensive mirror only after the final camera frame and
+        // the selected UI have settled. A mirror pass mid-flight caused a
+        // measured ~100 ms WebGL2 stall on the first cold enable.
+        this.setStudio(true); this.studioFade(0);
+        onLanded();
+        this.setAutoShot(true);
+      }
+    };
   }
-  frameViewOffset() {
+  frameViewOffset(amount = 1) {
     const w = this.stage.clientWidth, h = this.stage.clientHeight;
+    const progress = clamp(amount, 0, 1);
+    this.framing = progress;
+    if (progress <= 0) {
+      this.camera.clearViewOffset();
+      this.camera.aspect = w / Math.max(1, h);
+      this.camera.updateProjectionMatrix();
+      return;
+    }
     if (this.mobile) {
       // Fit the car's projected span to the detail host width, then centre the
       // look-at point in that host instead of the full-height stage.
-      const sr = this.stage.getBoundingClientRect();
-      const hr = this.detailHost ? this.detailHost.getBoundingClientRect() : null;
-      const hostW = hr && hr.width > 40 ? hr.width : w * .9;
-      const centerY = hr ? hr.top - sr.top + hr.height / 2 : h * .29;
+      const host = this.detailHost;
+      const hostW = host?.offsetWidth > 40 ? host.offsetWidth : w * .9;
+      let centerY = host ? host.offsetHeight / 2 : h * .29;
+      // Layout coordinates exclude the panel's reveal/exit CSS transform.
+      for (let el = host; el && el !== this.stage.parentElement; el = el.offsetParent) centerY += el.offsetTop;
       const fullH = 2 * 9.6 * Math.tan(this.camera.fov * Math.PI / 360) * hostW / 4.6;
-      this.camera.setViewOffset(w, fullH, 0, fullH / 2 - centerY, w, h);
-    } else this.camera.setViewOffset(w * 1.42, h, w * .42, 0, w, h);
+      const interpolatedH = h + (fullH - h) * progress;
+      this.camera.setViewOffset(w, interpolatedH, 0, (fullH / 2 - centerY) * progress, w, h);
+    } else this.camera.setViewOffset(w * (1 + .42 * progress), h, w * .42 * progress, 0, w, h);
     this.camera.updateProjectionMatrix();
   }
   clearSelection() {
     if (this.mode !== 'selected') return;
     const index = this.selected;
-    const look = this.controls ? this.controls.target.clone() : this.currentLook();
+    const origin = this.selectionOrigin || { overview: false, pan: 0, focus: index, row: rowOf(index), fov: this.mobile ? 60 : 50 };
+    const fromPos = this.camera.position.clone(), fromQuat = this.camera.quaternion.clone();
+    const fromFraming = this.framing || 0, fromFov = this.camera.fov;
+    const look = this.currentLook();
+    const fromStudio = this.studioActive;
+    this.cancelDetail();
+    this.setAutoShot(false);
     this.controls?.dispose(); this.controls = null;
+    if (this.detailHost) this.detailHost.style.touchAction = '';
     this.mode = 'home'; this.selected = null;
-    if (this.detailSet) this.detailSet.visible = false;
-    this.ceilGroup.visible = true;
-    this.camera.clearViewOffset(); this.camera.updateProjectionMatrix();
+    this.returning = true;
+    this.stage.classList.add('is-returning');
+    this.drag = null; this.dragged = false; this.ovHover = null;
+    this.stage.classList.remove('dragging'); this.stage.style.cursor = '';
+    const detailAlpha = this.detailSet.children[0].material.opacity / this.detailSet.children[0].userData.originalOpacity;
+    const shadowIntensity = this.keyShadow.intensity;
     this.stage.classList.remove('is-selected');
-    for (const [i] of this.cars) if (i !== index) this.fades.set(i, { from: 0, to: 1, start: performance.now() });
-    for (const [, ph] of this.placeholders) ph.visible = true;
+    this.fades.clear();
+    this.focus = origin.overview ? origin.focus : index;
+    this.row = origin.overview ? origin.row : rowOf(index);
+    this.position = this.target = this.focus;
+    this.ovPan = this.ovTarget = origin.pan; this.ovDrift = 0;
+    this.applyOverviewState(origin.overview, false);
+    this.onFocus(this.focus);
+    const restoreAlpha = new Map([...this.cars].map(([i, car]) => [i, car.userData.displayAlpha ?? 1]));
+    for (const [i, ph] of this.placeholders) ph.visible = !this.cars.has(i) && (origin.overview || rowOf(i) === this.row);
     const car = this.cars.get(index);
     if (car) car.traverse(n => { if (n.isMesh) n.castShadow = false; });
-    this.keyShadow.intensity = 0;
-    this.reflectOn = true;
+    this.pendingReflectRestore = 0;
+    this.reflectOn = false;
     this.refreshShadow();
-    const { pos, look: homeLook } = this.homePose(this.position);
-    this.flight = { t: 0, start: performance.now(), dur: this.reduced ? 0 : .55, fromPos: this.camera.position.clone(), fromLook: look, toPos: pos, toLook: homeLook, done: null };
+    const { pos, look: homeLook } = origin.overview ? this.overviewPose(origin.fov) : this.homePose(this.position);
+    const c1 = fromPos.clone().lerp(pos, .24); c1.y = Math.max(c1.y, fromStudio ? 9.5 : origin.overview ? 7.5 : 2.8);
+    if (origin.overview) c1.z = clamp(fromPos.z, -3.5, 3.5);
+    const c2 = fromPos.clone().lerp(pos, .76); if (origin.overview || fromStudio) c2.y = Math.max(origin.overview ? 8 : 5.8, c2.y);
+    const arcLut = cameraArcLut(fromPos, c1, c2, pos);
+    const toQuat = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().lookAt(pos, homeLook, this.camera.up));
+    this.flight = { t: 0, returning: true, dur: this.reduced ? 0 : clamp(arcLut.length / 11, FLIGHT_SECONDS.return, 4.6),
+      fromPos, fromLook: look, toPos: pos, toLook: homeLook, c1, c2, arcLut, fromQuat, toQuat,
+      fromFov, toFov: origin.fov, fromFraming, framing: fromFraming, restoreAlpha, detailAlpha, shadowIntensity, fromStudio, index,
+      done: () => {
+        this.returning = false; this.selectionOrigin = null;
+        this.setStudio(false); this.studioFade(0);
+        this.stage.classList.remove('is-returning');
+        this.detailSet.visible = false; this.keyShadow.intensity = 0;
+        this.camera.fov = origin.fov; this.frameViewOffset(0); this.detailHost = null;
+        for (const car of this.cars.values()) this.setCarAlpha(car, 1);
+        this.reflectOn = !origin.overview; this.reflDirty = true;
+      } };
   }
   currentLook() {
     const dir = new THREE.Vector3(); this.camera.getWorldDirection(dir);
     return this.camera.position.clone().add(dir.multiplyScalar(10));
   }
-  /* Cinematic entrance: crane down from the ceiling onto the focused machine. */
-  entrance() {
-    if (this.mode !== 'home' || this.overview || this.flight) return;
+  bayLightLevel(i) {
+    if (!this.lightReveal) return 1;
+    if (!this.cars.has(i)) return 0;
+    if (this.reduced) return 1;
+    return cameraEase(clamp((this.lightReveal.elapsed - bayRevealOrder(i) * .16) / .68, 0, 1));
+  }
+  finishCinema(stayOverview = false) {
+    this.cinema = false;
+    this.lightReveal = null;
+    if (this.overview && !stayOverview) this.applyOverviewState(false);
+    else if (stayOverview) {
+      for (const car of this.cars.values()) car.visible = true;
+      this.ovSweep.visible = true;
+      this.onOverview(true);
+    }
+    this.stage.classList.remove('is-cinema-descending');
+    this.reflectOn = !stayOverview;
+    this.reflDirty = true;
+  }
+  /* Reveal real cars in order; the first visit stays at the collection view. */
+  entrance({ stayOverview = false } = {}) {
+    if ((this.reduced && !stayOverview) || this.mode !== 'home' || this.overview || this.flight) return false;
+    this.prepareEntrance();
     const { pos, look } = this.homePose(this.position);
-    const center = new THREE.Vector3(bayX(this.position), .8, carZ(this.position));
-    const fromPos = new THREE.Vector3(center.x + .4, CEIL_Y - .45, center.z + .4);
-    // The mirror pass is the heaviest GPU cost; drop it for the crane and fade
-    // it back once the camera lands, keeping headroom for streaming uploads.
-    if (this.refl && this.backend === 'webgpu') { this.reflectOn = false; this.uReflect.value = 0; }
-    this.flight = { t: 0, start: performance.now(), dur: this.reduced ? 0 : 1.9, cinema: true, fromPos, fromLook: center, toPos: pos, toLook: look, done: () => { this.reflectOn = true; this.reflDirty = true; } };
+    this.cinema = true;
+    this.stage.classList.remove('is-cinema-descending');
+    // Start after the entrance gate has lifted so the first bay is visible.
+    this.lightReveal = { elapsed: -.95 };
+    this.applyOverviewState(true);
+    for (const car of this.cars.values()) car.visible = false;
+    for (const ph of this.placeholders.values()) ph.visible = false;
+    this.ovSweep.visible = false;
+    for (const spot of this.spots) spot.intensity = 0;
+    for (const light of this.overviewLights) light.intensity = 0;
+    for (const fixture of this.bayFixtures) fixture.material.emissiveIntensity = .05;
+    for (const wash of this.washes) wash.material.opacity = 0;
+    for (const pool of this.pools) pool.material.opacity = 0;
+    for (const shaft of this.shafts) shaft.material.opacity = 0;
+    // Reflections remain off throughout the overhead reveal, then ramp in.
+    this.reflectOn = false;
+    if (this.refl) this.uReflect.value = 0;
+    const from = this.overviewPose();
+    this.camera.position.copy(from.pos);
+    this.camera.lookAt(from.look);
+    this.flight = {
+      t: 0, dur: stayOverview ? 4.55 : FLIGHT_SECONDS.entrance, hold: FLIGHT_SECONDS.entranceHold,
+      cinema: true, stayOverview, fromPos: from.pos, fromLook: from.look,
+      toPos: stayOverview ? from.pos : pos, toLook: stayOverview ? from.look : look,
+      done: () => this.finishCinema(stayOverview)
+    };
+    return true;
   }
   resetView() {
-    if (this.mode !== 'selected') return;
-    const center = this.controls.target.clone();
-    const yaw = this.mobile ? 1.05 : .62, dist = this.mobile ? 10.2 : 7.4;
-    const sz = this.selected < this.perRow ? 1 : -1;
-    this.camera.position.copy(center).add(new THREE.Vector3(Math.sin(yaw) * dist * sz, 1.55, Math.cos(yaw) * dist * sz));
+    if (this.mode !== 'selected' || !this.controls?.enabled || this.flight) return;
+    this.setAutoShot(false);
+    const { pos, look } = this.heroPose(this.selected);
+    this.camera.position.copy(pos); this.controls.target.copy(look);
     this.controls.update();
+    this.setAutoShot(true);
   }
   resize() {
     const w = Math.max(1, this.stage.clientWidth), h = Math.max(1, this.stage.clientHeight);
+    // A pixel budget matters more than DPR on a large Retina display.
+    // Safari also avoids adaptive framebuffer reallocations during orbit.
+    if(w!==this.lastSize.w||h!==this.lastSize.h){
+      this.basePixelRatio=Math.min(this.maxPixelRatio,Math.sqrt(this.pixelBudget/(w*h)));
+      this.pixelRatio=this.basePixelRatio;this.renderer.setPixelRatio(this.pixelRatio);
+    }
     const pr = this.renderer.getPixelRatio();
     // Reallocating the drawing buffer stalls ~90ms; only do it on real changes.
     if (w !== this.lastSize.w || h !== this.lastSize.h || pr !== this.lastSize.pr) {
@@ -1276,24 +1856,22 @@ export class GarageShowroom {
     }
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
-    if (this.mode === 'selected') this.frameViewOffset();
+    if (this.returning) this.frameViewOffset(this.flight?.framing ?? this.framing ?? 0);
+    else if (this.mode === 'selected') this.frameViewOffset(this.flight?.selection ? this.flight.framing : 1);
     else if (this.overview && !this.flight) this.applyOverviewCamera();
   }
 
   /* ---------------------------------------------------------------- loop */
   frame(now) {
-    if (this.disposed || document.hidden) return;
+    // Compile and upload during the portal, but do not draw a second scene
+    // behind its opaque animated overlay. The first visible frame is ENTER.
+    if (this.disposed || document.hidden || document.body.classList.contains('gate-open')) return;
     const rect = this.stage.getBoundingClientRect();
     if (rect.bottom <= 0 || rect.top >= innerHeight) return;
     const settling = this.mode === 'home' && !this.flight && (this.overview ? Math.abs(this.ovTarget - this.ovPan) > .001 : Math.abs(this.target - this.position) > .002);
-    const orbitActive = !!this.controls?.enabled && now - this.lastOrbitAt < 160;
+    const orbitActive = !!this.controls?.enabled && (!!this.autoShot || now - this.lastOrbitAt < 160);
     const interacting = !!this.drag?.moved || !!this.flight || orbitActive || settling || this.fades.size > 0;
     const idleInterval = this.mobile ? 1000 / 24 : 1000 / 30;
-    // Trickle a few texture uploads per idle frame so first reveal of a culled
-    // machine never pays a bulk GPU upload; gestures always preempt it.
-    if (!interacting && this.texQueue.length) {
-      for (let i = 0; i < 3 && this.texQueue.length; i++) this.renderer.initTexture?.(this.texQueue.shift());
-    }
     if (!interacting && now - this.lastDraw < idleInterval) return;
     const dt = Math.min(.05, (now - (this.lastNow || now)) / 1000) || .016;
     if (interacting && this.lastNow) {
@@ -1307,7 +1885,7 @@ export class GarageShowroom {
     if (this.mode === 'home' && !this.flight) {
       if (this.overview) {
         const d = this.ovTarget - this.ovPan;
-        if (Math.abs(d) > .001) this.ovPan += d * (1 - Math.exp(-dt / .14));
+        if (Math.abs(d) > .001) this.ovPan += d * (1 - Math.exp(-dt / .3));
         this.applyOverviewCamera();
       } else {
         // While dragging, the camera follows the finger directly (no snap-fight);
@@ -1315,7 +1893,8 @@ export class GarageShowroom {
         if (!this.drag?.moved) {
           const diff = this.target - this.position;
           if (Math.abs(diff) > .0005) {
-            this.position += diff * (1 - Math.exp(-dt / .16));
+            // Cap the maximum distance per second for far-away bay jumps too.
+            this.position += clamp(diff * (1 - Math.exp(-dt / .34)), -dt * 1.6, dt * 1.6);
             if (Math.abs(this.target - this.position) < .002) this.position = this.target;
             const [lo, hi] = this.rowBounds();
             this.focus = clamp(Math.round(this.position), lo, hi);
@@ -1324,17 +1903,90 @@ export class GarageShowroom {
         this.applyHomeCamera();
       }
     }
-    // camera flight (wall-clock so heavy frames never slow the choreography)
+    // Cap elapsed time per rendered frame: a slow shader/texture upload cannot
+    // teleport the camera forward by several meters after one missed frame.
     if (this.flight) {
       const f = this.flight;
-      f.t = f.dur === 0 ? 1 : Math.min(1, (now - f.start) / (f.dur * 1000));
-      const k = easeInOut(f.t);
-      this.camera.position.lerpVectors(f.fromPos, f.toPos, k);
-      const look = new THREE.Vector3().lerpVectors(f.fromLook, f.toLook, k);
-      this.camera.lookAt(look);
+      let elapsed = (f.elapsed || 0) + Math.min(dt, .034);
+      if (f.cinema) {
+        const waiting = this.revealOrder.find(i => !this.cars.has(i) && !this.loadFailures.has(i));
+        // Never advance past an unprepared bay. Previously lit cars remain lit
+        // while the bounded background queue catches up; a failed bay stays dark.
+        if (waiting !== undefined) elapsed = Math.min(elapsed, .95 + bayRevealOrder(waiting) * .16);
+        else if (this.reduced) elapsed = f.dur;
+        this.lightReveal.elapsed = elapsed - .95;
+      }
+      f.elapsed = elapsed;
+      f.t = f.dur === 0 ? 1 : Math.min(1, f.elapsed / f.dur);
+      if (f.cinema && !f.stayOverview && f.elapsed >= f.hold) this.stage.classList.add('is-cinema-descending');
+      const k = cameraEase(f.hold ? clamp((f.elapsed - f.hold) / (f.dur - f.hold), 0, 1) : f.t);
+      if (f.selection) {
+        const progress = cameraEase(f.t);
+        const bezierT = arcParameter(f.arcLut, progress);
+        cubicPoint(this.camera.position, f.fromPos, f.c1, f.c2, f.toPos, bezierT);
+        // Acquire the subject early, then keep the lens on it throughout the
+        // crane and lateral dolly instead of rotating toward a static endpoint.
+        f.aimQuat.setFromRotationMatrix(f.aimMatrix.lookAt(this.camera.position, f.toLook, this.camera.up));
+        this.camera.quaternion.slerpQuaternions(f.fromQuat, f.aimQuat, cameraEase(clamp(f.t / .34, 0, 1)));
+        this.camera.fov = f.fromFov - 5 * Math.sin(Math.PI * f.t) ** 2;
+        f.framing = cinemaEase(clamp((f.t - .48) / .49, 0, 1));
+        this.frameViewOffset(f.framing);
+        const otherAlpha = 1 - cameraEase(clamp((f.t - .20) / .38, 0, 1));
+        for (const [i, car] of this.cars) if (i !== this.selected && car.visible) {
+          this.setCarAlpha(car, otherAlpha); car.visible = otherAlpha > .01;
+        }
+        // Build the highlight from near-dark to warm gold, then a final rim.
+        // Both camera projection and light levels are settled before orbit.
+        const light = cameraEase(clamp((f.t - .2) / .43, 0, 1));
+        const detail = cameraEase(clamp((f.t - .34) / .43, 0, 1));
+        this.keyShadow.intensity = 195 * light;
+        for (const piece of this.detailSet.children) {
+          piece.material.opacity = piece.userData.originalOpacity * detail;
+        }
+        if (f.t >= .79 && !f.revealed) { f.revealed = true; f.onReveal(); }
+        if (f.t >= .87 && !this.studioActive) this.setStudio(true);
+        this.studioFade(this.reduced ? 0 : f.t < .87 ? cameraEase(clamp((f.t-.76)/.11,0,1)) : 1-cameraEase(clamp((f.t-.87)/.13,0,1)));
+      } else if (f.returning) {
+        cubicPoint(this.camera.position, f.fromPos, f.c1, f.c2, f.toPos, arcParameter(f.arcLut, k));
+        this.camera.quaternion.slerpQuaternions(f.fromQuat, f.toQuat, k);
+        this.camera.fov = THREE.MathUtils.lerp(f.fromFov, f.toFov, k);
+        f.framing = f.fromFraming * (1 - cameraEase(clamp(f.t / .65, 0, 1)));
+        this.frameViewOffset(f.framing);
+        const reveal = cameraEase(clamp((f.t - .12) / .60, 0, 1));
+        for (const [i, car] of this.cars) {
+          const a = THREE.MathUtils.lerp(f.restoreAlpha.get(i) ?? 1, 1, reveal);
+          this.setCarAlpha(car, a);
+          car.visible = a > .01 && (this.overview || (rowOf(i) === this.row && Math.abs(i - this.focus) <= (this.mobile ? 1 : 2)));
+        }
+        this.keyShadow.intensity = f.shadowIntensity * (1 - reveal);
+        for (const piece of this.detailSet.children) piece.material.opacity = piece.userData.originalOpacity * f.detailAlpha * (1 - reveal);
+        if (f.fromStudio) {
+          if (f.t >= .20 && this.studioActive) this.setStudio(false);
+          this.studioFade(this.reduced ? 0 : f.t < .20 ? cameraEase(clamp(f.t/.20,0,1)) : 1-cameraEase(clamp((f.t-.20)/.17,0,1)));
+          if (this.studioActive) for (const [i, car] of this.cars) car.visible = i === f.index;
+        } else this.studioFade(0);
+      } else {
+        this.camera.position.lerpVectors(f.fromPos, f.toPos, k);
+        const look = new THREE.Vector3().lerpVectors(f.fromLook, f.toLook, k);
+        this.camera.lookAt(look);
+      }
       if (f.t >= 1) { this.flight = null; this.cadence.length = 0; f.done?.(); }
     }
-    if (this.controls?.enabled) this.controls.update();
+    if (this.pendingReflectRestore > 0 && !this.flight) {
+      // Never re-enable a costly mirror pass while the visitor is orbiting.
+      // The reflection can catch up only after the view has been idle.
+      if (now - this.lastOrbitAt > 650) {
+        this.pendingReflectRestore = Math.max(0, this.pendingReflectRestore - dt);
+      }
+      if (this.pendingReflectRestore === 0 && this.mode === 'selected') {
+        this.reflectOn = true;
+        this.reflDirty = true;
+      }
+    }
+    if (this.controls?.enabled) {
+      this.advanceAutoShot(dt);
+      this.controls.update();
+    }
 
     // whole-car fades for non-selected machines
     for (const [i, fade] of this.fades) {
@@ -1368,26 +2020,32 @@ export class GarageShowroom {
     const breathe = this.reduced ? 0 : Math.sin(now / 1700) * .05;
     const litRow = this.mode === 'selected' ? rowOf(this.selected) : this.row;
     this.layoutSpots(litRow);
+    const selectionLight = this.flight?.selection
+      ? cameraEase(clamp((this.flight.t - .2) / .43, 0, 1)) : 1;
     for (const spot of this.spots) {
       const i = spot.userData.bay ?? litRow * this.perRow;
       const focused = i === this.focus && this.mode === 'home' && !this.overview;
-      const base = this.mode === 'selected' ? (i === this.selected ? 200 : 26) : this.overview ? 0 : (focused ? 250 : 95);
+      const base = this.mode === 'selected' ? (i === this.selected ? 48 + 117 * selectionLight : 11 + 15 * selectionLight) : this.cinema ? 210 * this.bayLightLevel(i) : this.overview ? 0 : (focused ? 250 : 95);
       spot.intensity += (base * (1 + (focused ? breathe : 0)) - spot.intensity) * ease;
       spot.position.lerp(spot.userData.gp, ease);
       spot.target.position.lerp(spot.userData.gt, ease);
     }
     // Overview: a slow champagne band crosses the floor; each bay brightens as
     // it passes, bays cascade alight on open, and the hovered bay gets a ring.
-    if (this.overview) {
+    if (this.overview && !this.cinema) {
       this.ovSweepX = ((now / 1000 * 3.2) % (HALL_W + 10)) - HALL_W / 2 - 5;
       this.ovSweep.position.x = this.ovSweepX;
       this.ovSweep.material.opacity += (.12 * K_ADD - this.ovSweep.material.opacity) * ease;
     }
     for (let i = 0; i < this.bayCount; i++) {
       const focused = i === this.focus && this.mode === 'home' && !this.overview;
-      let washTarget = K_ADD * (this.overview ? .5 : focused ? .8 : .38);
-      let poolTarget = K_ADD * (this.overview ? .3 : focused ? .5 : .22);
-      if (this.overview) {
+      let washTarget = K_ADD * (this.mode === 'selected' ? (i === this.selected ? .2 + .8 * selectionLight : .06) : this.overview ? .5 : focused ? .8 : .38);
+      let poolTarget = K_ADD * (this.mode === 'selected' ? (i === this.selected ? .1 + .64 * selectionLight : .04) : this.overview ? .3 : focused ? .5 : .22);
+      if (this.cinema) {
+        const reveal = this.bayLightLevel(i);
+        washTarget = K_ADD * 1.3 * reveal;
+        poolTarget = K_ADD * .85 * reveal;
+      } else if (this.overview) {
         const reveal = this.reduced ? 1 : easeInOut(clamp((now - this.ovOpenAt - i * 45) / 600, 0, 1));
         const d = bayX(i) - this.ovSweepX;
         const pulse = Math.exp(-(d * d) / 24);
@@ -1395,8 +2053,14 @@ export class GarageShowroom {
         washTarget = K_ADD * (.5 + .35 * pulse + hov) * reveal;
         poolTarget = K_ADD * (.3 + .4 * pulse + hov) * reveal;
       }
+      // A genuinely unavailable model must not look like a successfully lit bay
+      // when the entrance hands off to the steady collection view.
+      const missing = this.overview && this.loadFailures.has(i) && !this.cars.has(i);
+      if (missing) { washTarget = 0; poolTarget = 0; }
       this.washes[i].material.opacity += (washTarget - this.washes[i].material.opacity) * ease;
       this.pools[i].material.opacity += (poolTarget - this.pools[i].material.opacity) * ease;
+      const fixtureTarget = missing ? .05 : this.cinema ? .05 + 5 * this.bayLightLevel(i) : this.mode === 'selected' ? (i === this.selected ? .5 + 4.2 * selectionLight : .35) : focused ? 3.1 : 1.25;
+      this.bayFixtures[i].material.emissiveIntensity += (fixtureTarget - this.bayFixtures[i].material.emissiveIntensity) * ease;
     }
     if (this.ovHoverRing) {
       const on = this.overview && this.ovHover !== null;
@@ -1405,7 +2069,7 @@ export class GarageShowroom {
       this.ovHoverRing.material.opacity += (target - this.ovHoverRing.material.opacity) * ease;
       this.ovHoverRing.visible = this.ovHoverRing.material.opacity > .01 * K_ADD;
     }
-    for (const light of this.overviewLights) light.intensity += ((this.overview ? light.userData.on : 0) - light.intensity) * ease;
+    for (const light of this.overviewLights) light.intensity += ((this.overview ? light.userData.on * (this.cinema ? .13 : 1) : 0) - light.intensity) * ease;
     if (this.refl) this.uReflect.value += ((this.reflectOn ? 1 : 0) - this.uReflect.value) * Math.min(1, dt * 6);
 
     // Home only renders the focused neighbourhood; distant machines stay culled.
@@ -1413,26 +2077,51 @@ export class GarageShowroom {
     // so mobile never pays full-hall additive overdraw.
     const hood = this.mobile ? 1 : 2;
     const lowCam = this.camera.position.y < CEIL_Y - .5;
-    if (this.mode === 'selected') this.ceilGroup.visible = lowCam;
+    const filming = this.mode === 'selected' || this.returning;
+    const cameraPos = this.camera.position;
+    this.northGroup.visible = !filming || cameraPos.z > WALL_Z + .85;
+    for (const [side, group] of this.sideGroups) group.visible = !filming || side * cameraPos.x < HALL_W / 2 - .85;
+    this.overviewApron.visible = !this.studioActive && (this.overview || !!this.flight || cameraPos.y > CEIL_Y + 1);
+    if (this.mode === 'selected' || this.returning || this.flight) {
+      const inside = Math.abs(this.camera.position.z) < 7 && Math.abs(this.camera.position.x) < HALL_W / 2 - .5;
+      this.ceilGroup.visible = lowCam && inside;
+      this.southGroup.visible = filming ? lowCam && cameraPos.z < -WALL_Z - .85 : lowCam && inside;
+    } else { this.ceilGroup.visible = !this.overview; this.southGroup.visible = !this.overview; }
     for (let i = 0; i < this.bayCount; i++) {
-      const on = this.overview ? true : this.mode === 'selected' ? i === this.selected : Math.abs(i - this.focus) <= hood;
+      this.bayLowFixtures[i].visible = i < this.perRow ? !this.northGroup.visible : !this.southGroup.visible;
+      const on = this.overview ? true : this.mode === 'selected' ? i === this.selected || (!!this.flight?.selection && this.flight.t < .58 && !!this.cars.get(i)?.visible) : rowOf(i) === this.row && Math.abs(i - this.focus) <= hood;
       this.washes[i].visible = on;
       this.pools[i].visible = on;
       this.shafts[i].visible = on && (this.mode !== 'selected' || lowCam);
-      this.contacts[i].visible = on && this.cars.has(i);
+      const revealed = !this.cinema || this.bayLightLevel(i) > 0;
+      this.contacts[i].visible = on && this.cars.has(i) && revealed;
+      if (this.cinema) {
+        const car = this.cars.get(i);
+        if (car) car.visible = revealed;
+        const ph = this.placeholders.get(i);
+        if (ph) ph.visible = false;
+      }
     }
-    if (this.mode === 'home' && !this.overview) {
-      for (const [i, car] of this.cars) { const near = Math.abs(i - this.focus) <= hood; if (!near) car.visible = false; else if (!this.fades.has(i)) car.visible = true; }
-      for (const [i, ph] of this.placeholders) { const near = Math.abs(i - this.focus) <= hood; if (!near) ph.visible = false; else if (!this.fades.has(i)) ph.visible = true; }
+    if (this.mode === 'home' && !this.overview && !this.returning) {
+      for (const [i, car] of this.cars) { const near = rowOf(i) === this.row && Math.abs(i - this.focus) <= hood; if (!near) car.visible = false; else if (!this.fades.has(i)) car.visible = true; }
+      for (const [i, ph] of this.placeholders) { const near = rowOf(i) === this.row && Math.abs(i - this.focus) <= hood; if (!near) ph.visible = false; else if (!this.fades.has(i)) ph.visible = !this.cars.has(i); }
     }
     this.updateAtmosphere(now, dt);
+    if (this.studioActive) {
+      for (const cone of this.shafts) cone.visible = false;
+      for (const smoke of this.smoke) smoke.visible = false;
+      this.ovSweep.visible = false; this.ovHoverRing.visible = false;
+    } else this.ovSweep.visible = this.overview && !this.cinema;
     this.renderer.render(this.scene, this.camera);
     // info resets every animation frame: read the totals for this one now
     this.lastDrawCalls = this.renderer.info.render.drawCalls;
     this.lastTriangles = this.renderer.info.render.triangles;
     if (this.firstFrameAt === null) this.firstFrameAt = performance.now();
 
-    // labels projected from world anchors (front row only; rear bays stay empty)
+    const pickerVisible = this.mobile && this.mode === 'home' && this.overview && !this.cinema && !this.returning;
+    if (this.overviewPicker && this.overviewPicker.hidden === pickerVisible) this.overviewPicker.hidden = !pickerVisible;
+    const picked = pickerVisible ? Number(this.overviewChoice.value) : -1;
+    // Labels projected from world anchors; portrait overview uses bay numbers.
     if (this.mode === 'home') {
       const w = rect.width, h = rect.height;
       const v = new THREE.Vector3();
@@ -1445,13 +2134,22 @@ export class GarageShowroom {
         const el = this.labels[i];
         const x = (v.x * .5 + .5) * w, y = (-v.y * .5 + .5) * h;
         xs[i] = x;
-        const onScreen = v.z < 1 && x > -160 && x < w + 160 && (this.overview || rowOf(i) === this.row);
+        const inPortraitOverview = this.mobile && this.overview;
+        const onScreen = v.z < 1 && (inPortraitOverview
+          ? x > 0 && x < w && y > 0 && y < h
+          : x > -160 && x < w + 160) && (this.overview || rowOf(i) === this.row);
         el.style.transform = `translate(-50%,-100%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
-        el.classList.toggle('is-off', !onScreen);
+        const off = !onScreen || (this.cinema && this.bayLightLevel(i) < .5);
+        el.classList.toggle('is-off', off);
+        // The native picker is the complete keyboard route on portrait; the
+        // densely placed scene markers remain available to pointer users.
+        const tabIndex = off || this.cinema || this.returning || inPortraitOverview ? -1 : 0;
+        if (el.tabIndex !== tabIndex) el.tabIndex = tabIndex;
         el.classList.toggle('is-focused', i === this.focus && !this.overview);
         el.classList.toggle('is-hover', this.overview && i === this.ovHover);
+        el.classList.toggle('is-picked', picked === i);
       }
-      if (this.overview) {
+      if (this.overview && !this.mobile) {
         // Fit each label to the on-screen bay spacing so long names never overlap.
         const sorted = xs.filter((x, i) => !this.labels[i].classList.contains('is-off')).sort((a, b) => a - b);
         let gap = Infinity;
@@ -1472,7 +2170,7 @@ export class GarageShowroom {
     }
     // Adaptive resolution for weak GPUs: steps only between gestures (never
     // mid-drag or mid-flight) so steering always keeps the current quality.
-    if (!this.drag?.moved && !this.flight && this.cadence.length >= 60 && now > this.ratioCooldown) {
+    if (!this.memoryConstrained && !this.drag?.moved && !this.flight && this.cadence.length >= 60 && now > this.ratioCooldown) {
       const avg = this.cadence.reduce((a, b) => a + b, 0) / this.cadence.length;
       const min = this.basePixelRatio * .75;
       let next = this.pixelRatio;
@@ -1498,20 +2196,50 @@ export class GarageShowroom {
       drawCalls: this.lastDrawCalls, reflectorDraws: this.reflectorDraws, triangles: this.lastTriangles,
       pixelRatio: this.pixelRatio,
       geometries: info.memory.geometries, textures: info.memory.textures, programs: info.memory.programs,
+      memoryConstrained:this.memoryConstrained, canvasPixels:this.canvas.width*this.canvas.height,
+      detailResident:this.detailResident?1:0,detailPending:this.pendingDetail?1:0,prefetchBuffers:this.buffers.size,
       loadTimes: this.loadTimes,
       firstFrameMs: this.firstFrameAt === null ? null : Math.round(this.firstFrameAt - this.t0),
       heapMB: performance.memory ? +(performance.memory.usedJSHeapSize / 1048576).toFixed(1) : null
     };
   }
   dispose() {
+    if (this.disposeTask) return this.disposeTask;
     this.disposed = true;
+    this.inputLifetime.close();
+    clearTimeout(this.dragResetTimer);
+    if (this.drag && this.stage.hasPointerCapture?.(this.drag.id)) {
+      try { this.stage.releasePointerCapture(this.drag.id); } catch { /* pointer ended concurrently */ }
+    }
+    this.drag = null;
+    this.stage.classList.remove('dragging');
+    this.stage.style.cursor = '';
+    this.cancelDetail();this.releaseDetail();
     for (const c of this.dlControllers) c.abort();
+    const downloads = [...this.buffers.values()];
     this.dlControllers.clear();
+    this.buffers.clear();this.queue.length=0;this.queued.clear();
     this.controls?.dispose();
-    this.ktx2?.dispose();
     if (this.renderer.hasInitialized()) this.renderer.setAnimationLoop(null);
-    this.renderer.dispose().catch(() => {});
+    this.overviewPicker?.remove();
+    this.studioCurtain?.remove();
+    this.labels.forEach(label => label.remove());
     this.canvas.remove();
+    // Leave the renderer and decoders alive until an already-started parse or
+    // compile settles. Late holders are disposed by their owning queue's finally.
+    this.disposeTask = (async () => {
+      await Promise.allSettled([this.queueTask, this.detailTask, this.compileQueue, ...downloads]);
+      this.ktx2?.dispose();
+      for (const car of this.cars.values()) disposeModel(car);
+      this.cars.clear();
+      this.scene?.traverse(node => { if (node.isLight) node.shadow?.dispose?.(); });
+      disposeResources(this.scene, [this.marbleFloor]);
+      this.refl?.dispose?.();
+      this.envTarget?.dispose();
+      this.scene?.clear();
+      await this.renderer.dispose().catch(() => {});
+    })();
+    return this.disposeTask;
   }
 }
 

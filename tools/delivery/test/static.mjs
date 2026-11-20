@@ -81,6 +81,13 @@ test('allowlist preserves P2 mutable routes while excluding hidden, source maps 
     '/src\\app.js', '//src/app.js', '/src//app.js', '/assets/models_original/a.glb',
     '/assets/images/car/a.png', '/ops/api.js', '/favicon.ico']) assert.equal(publicPath(path), false, path);
   assert.equal(publicPath('/assets/images/car/a.webp', { release: true }), true);
+  for (const release of [false, true]) {
+    for(const tier of ['gallery','detail'])assert(publicPath(`/assets/models/${tier}/car.glb`,{release}));
+    assert(!publicPath('/assets/models/gallery/manifest.json',{release}));
+    assert(!publicPath('/assets/models/private/car.glb',{release}));
+    for (const path of ['/assets/archive/mclarenp1/night-3200.webp','/assets/hero/portal-2560.webp']) assert.equal(publicPath(path,{release}),true,path);
+    for (const path of ['/assets/archive/mclarenp1/.stage-a/photo-1920.webp','/assets/archive/mclarenp1/source.jpg','/assets/hero/portal-source.png','/assets/hero/mclaren-p1-photo-desktop.webp']) assert.equal(publicPath(path,{release}),false,path);
+  }
   assert.equal(publicPath('/assets/images/car/a.png'), false);
   for (const path of ['/ops/index.html', '/tools/render/render.html', '/.git/HEAD', '/tools/ops/server.mjs', '/src/app.js.map',
     '/assets/models_original/secret.glb', '/assets/models_prepared/a.glb', '/assets/images/car/a.png',

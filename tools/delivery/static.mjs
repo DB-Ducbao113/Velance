@@ -37,6 +37,10 @@ function safePath(path) {
 export function publicPath(path, { release = false } = {}) {
   if (!safePath(path)) return false;
   if (['/', '/index.html'].includes(path)) return true;
+  // Prepared frontend media only; raw source/staging files stay excluded.
+  if (/^\/assets\/archive\/[a-z0-9]+\/[a-z0-9-]+-[0-9]+\.webp$/.test(path)
+    || /^\/assets\/hero\/portal-(1600|2560)\.webp$/.test(path)) return true;
+  if (/^\/assets\/models\/(gallery|detail)\/[^/]+\.glb$/.test(path)) return true;
   if (release) {
     // Publish only the prepared runtime subset. Never expose original masters,
     // alternate image formats, Ops UI, render tooling or repository internals.

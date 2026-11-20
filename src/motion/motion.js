@@ -4,6 +4,7 @@
  * Vehicle image transforms are deliberately forbidden (no scale/rotation/translation).
  */
 const lowMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const nativeWebKit = /AppleWebKit/.test(navigator.userAgent) && !/(Chrome|Chromium|Edg|OPR)/.test(navigator.userAgent);
 const clamp = x => Math.min(1, Math.max(0, x));
 const smooth = x => { const p=clamp(x); return p*p*(3-2*p); };
 let lenis = null;
@@ -26,7 +27,7 @@ function setupLenis() {
   initialized=true;
   const gsap=window.gsap;
   const ScrollTrigger=window.ScrollTrigger;
-  if(reduce() || !gsap || !ScrollTrigger || !window.Lenis) return;
+  if(reduce() || nativeWebKit || !gsap || !ScrollTrigger || !window.Lenis) return;
   try {
     gsap.registerPlugin(ScrollTrigger);
     lenis = new window.Lenis({autoRaf:false, duration:1.05, smoothWheel:true, syncTouch:false, touchMultiplier:1, wheelMultiplier:.85});
@@ -46,10 +47,20 @@ function initializeMotion() {
   setupLenis();
   setupMicroInteractions();
 }
-export function motionScrollTo(target) {
+export function motionScrollTo(target, immediate = false) {
   const element=typeof target==='string'?document.querySelector(target):target;
   if(!element)return;
-  if(lenis&&!reduce())lenis.scrollTo(element,{offset:-12,duration:1.08});
+  if(immediate){
+    if(lenis){lenis.resize();lenis.scrollTo(element,{offset:0,immediate:true,force:true});}
+    element.scrollIntoView({behavior:'instant',block:'start'});
+    return;
+  }
+  if(lenis&&!reduce()){
+    // Review chapters are inserted asynchronously. Refresh the scroll limit
+    // before requesting an offset; ResizeObserver may not have fired yet.
+    lenis.resize();
+    lenis.scrollTo(element,{offset:-12,duration:1.08});
+  }
   else element.scrollIntoView({behavior:reduce()?'instant':'smooth',block:'start'});
 }
 
@@ -88,7 +99,9 @@ function setupTextReveals() {
   const targets=[
     ...document.querySelectorAll('.review-intro > .eyebrow,.review-intro h2,.review-intro p'),
     ...document.querySelectorAll('.shot-copy > .shot-label,.shot-copy h3,.shot-copy > p,.shot-copy dl,.shot-caption'),
-    ...document.querySelectorAll('.board-topline,.board-heading,.board-closing')
+    // Keep the final BACK control visible. Near the document bottom the
+    // closing row may never cross the scroll-trigger's start threshold.
+    ...document.querySelectorAll('.board-topline,.board-heading')
   ];
   motionStage.reveals=targets.length;
   if(reduce())return;
@@ -144,14 +157,26 @@ export function refreshVelanceMotion() {
     requestAnimationFrame(()=>window.ScrollTrigger.refresh());
   }
 }
+let selectedTween = null;
+let selectedAnimations = [];
+export function resetSelectedMotion() {
+  selectedTween?.kill(); selectedTween = null;
+  for(const animation of selectedAnimations) animation.cancel();
+  selectedAnimations = [];
+  const elements=document.querySelectorAll('.selected-headline > *, .selected-metadata, .selected-spec, .selected-actions > *');
+  for(const el of elements){el.style.removeProperty('opacity');el.style.removeProperty('visibility');el.style.removeProperty('transform');}
+}
 export function playSelectedMotion() {
+  resetSelectedMotion();
   if(reduce())return;
   const elements=[...document.querySelectorAll('.selected-headline > *, .selected-metadata, .selected-spec, .selected-actions > *')];
   if(window.gsap){
-    window.gsap.fromTo(elements,{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.7,ease:'power3.out',stagger:.075,overwrite:true,clearProps:'transform,opacity,visibility'});
+    selectedTween=window.gsap.fromTo(elements,{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.7,ease:'power3.out',stagger:.075,overwrite:true,clearProps:'transform,opacity,visibility'});
   } else {
     elements.forEach((el,i)=>{
-      el.animate([{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],{duration:620,delay:80+i*55,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'}).onfinish=()=>{el.style.opacity='';el.style.transform='';};
+      const animation=el.animate([{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],{duration:620,delay:80+i*55,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});
+      selectedAnimations.push(animation);
+      animation.onfinish=()=>{animation.cancel();el.style.opacity='';el.style.transform='';};
     });
   }
 }
